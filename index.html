@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A1-A2 English Grammar Mastery - 50 Interactive MCQs</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#2563eb',
+                            600: '#1d4ed8',
+                            700: '#1e40af',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .underline-error {
+            text-decoration: underline;
+            text-decoration-color: #ef4444;
+            text-underline-offset: 4px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="h-full flex flex-col font-sans text-slate-800 antialiased selection:bg-blue-100 selection:text-blue-700">
+
+    <!-- Top Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- App Title -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-xl shadow-md shadow-blue-500/20">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-lg leading-tight text-slate-900">English Grammar Practice</h1>
+                        <p class="text-xs text-slate-500">Level A1-A2 • 50 Interactive MCQs</p>
+                    </div>
+                </div>
+
+                <!-- Mode & Actions -->
+                <div class="flex items-center gap-3">
+                    <div class="hidden md:flex items-center bg-slate-100 p-1 rounded-lg text-xs font-medium">
+                        <button id="mode-practice-btn" onclick="setMode('practice')" class="px-3 py-1.5 rounded-md bg-white text-blue-700 shadow-sm transition-all">Practice Mode</button>
+                        <button id="mode-exam-btn" onclick="setMode('exam')" class="px-3 py-1.5 rounded-md text-slate-600 hover:text-slate-900 transition-all">Exam Mode</button>
+                    </div>
+                    <button onclick="resetQuiz()" class="text-xs font-medium px-3 py-2 text-slate-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-rotate-right"></i> Reset
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Progress Bar -->
+        <div class="w-full bg-slate-100 h-1.5">
+            <div id="progress-bar-fill" class="bg-blue-600 h-1.5 transition-all duration-300 w-0"></div>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <div class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col lg:flex-row gap-6">
+
+        <!-- Left Sidebar: Filters & Navigation Map -->
+        <aside class="lg:w-80 flex-shrink-0 flex flex-col gap-5">
+            <!-- Score & Stats Card -->
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Your Progress</h3>
+                <div class="grid grid-cols-3 gap-2 text-center">
+                    <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                        <span id="stat-answered" class="block font-bold text-lg text-slate-800">0/50</span>
+                        <span class="text-[11px] text-slate-500">Answered</span>
+                    </div>
+                    <div class="bg-emerald-50 p-2.5 rounded-xl border border-emerald-100">
+                        <span id="stat-correct" class="block font-bold text-lg text-emerald-600">0</span>
+                        <span class="text-[11px] text-emerald-600 font-medium">Correct</span>
+                    </div>
+                    <div class="bg-rose-50 p-2.5 rounded-xl border border-rose-100">
+                        <span id="stat-incorrect" class="block font-bold text-lg text-rose-600">0</span>
+                        <span class="text-[11px] text-rose-600 font-medium">Incorrect</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter Controls -->
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col gap-4">
+                <div>
+                    <label class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-2">Question Type</label>
+                    <div class="flex flex-col gap-1">
+                        <button onclick="setFilterType('all')" id="filter-type-all" class="filter-type-btn text-left text-xs px-3 py-2 rounded-lg font-medium bg-blue-50 text-blue-700">
+                            All Questions (50)
+                        </button>
+                        <button onclick="setFilterType('completion')" id="filter-type-completion" class="filter-type-btn text-left text-xs px-3 py-2 rounded-lg font-medium text-slate-600 hover:bg-slate-50">
+                            Sentence Completion (35)
+                        </button>
+                        <button onclick="setFilterType('error')" id="filter-type-error" class="filter-type-btn text-left text-xs px-3 py-2 rounded-lg font-medium text-slate-600 hover:bg-slate-50">
+                            Error Identification (15)
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-2">Filter by Topic</label>
+                    <select id="topic-select" onchange="setTopicFilter(this.value)" class="w-full text-xs bg-slate-50 border border-slate-200 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium text-slate-700">
+                        <option value="all">All Grammar Topics</option>
+                        <!-- Topics populated via JS -->
+                    </select>
+                </div>
+            </div>
+
+            <!-- Question Palette Grid -->
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex-1">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Question Map</h3>
+                    <span class="text-xs text-slate-400" id="palette-count-label">1 - 50</span>
+                </div>
+                <div id="question-palette" class="grid grid-cols-5 sm:grid-cols-10 lg:grid-cols-5 gap-2 max-h-64 lg:max-h-80 overflow-y-auto custom-scrollbar p-1">
+                    <!-- Palette items generated by JS -->
+                </div>
+            </div>
+        </aside>
+
+        <!-- Center / Right Content: Main Question Container -->
+        <main class="flex-1 flex flex-col gap-4">
+            <!-- Main Question Display Card -->
+            <div id="question-card" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 flex-1 flex flex-col justify-between">
+                <div>
+                    <!-- Question Header Badge -->
+                    <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-slate-100 mb-6">
+                        <div class="flex items-center gap-2">
+                            <span id="q-number-badge" class="px-3 py-1 bg-blue-100 text-blue-700 font-bold text-xs rounded-full">Question 1 of 50</span>
+                            <span id="q-type-badge" class="px-3 py-1 bg-slate-100 text-slate-600 font-medium text-xs rounded-full">Sentence Completion</span>
+                        </div>
+                        <span id="q-topic-badge" class="text-xs font-medium text-slate-400 bg-slate-50 px-2.5 py-1 rounded-md border border-slate-100">Verb BE & Possessives</span>
+                    </div>
+
+                    <!-- Question Text Prompt -->
+                    <div class="mb-8">
+                        <h2 id="q-text" class="text-lg sm:text-xl font-semibold text-slate-800 leading-relaxed">
+                            Loading question...
+                        </h2>
+                    </div>
+
+                    <!-- Options Container -->
+                    <div id="options-container" class="space-y-3">
+                        <!-- Options generated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Explanation Box (Appears after answer in Practice mode, or after exam submit) -->
+                <div id="explanation-box" class="hidden mt-6 p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-sm">
+                    <div class="flex items-start gap-2.5">
+                        <i class="fa-solid fa-lightbulb text-amber-600 mt-0.5 text-base"></i>
+                        <div>
+                            <span class="font-bold text-amber-950 block mb-1">Giải thích chi tiết (Explanation):</span>
+                            <p id="explanation-text" class="leading-relaxed text-slate-700 text-xs sm:text-sm">
+                                Explanations will appear here...
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Action Buttons -->
+                <div class="flex items-center justify-between pt-6 border-t border-slate-100 mt-8">
+                    <button id="prev-btn" onclick="navigateQuestion(-1)" class="px-4 py-2.5 bg-slate-100 text-slate-700 font-medium text-sm rounded-xl hover:bg-slate-200 transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed">
+                        <i class="fa-solid fa-arrow-left"></i> Previous
+                    </button>
+                    
+                    <div class="flex items-center gap-2">
+                        <button id="submit-exam-btn" onclick="submitExam()" class="hidden px-5 py-2.5 bg-emerald-600 text-white font-semibold text-sm rounded-xl hover:bg-emerald-700 transition-all shadow-md shadow-emerald-600/20 flex items-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Submit Exam
+                        </button>
+                        <button id="next-btn" onclick="navigateQuestion(1)" class="px-5 py-2.5 bg-blue-600 text-white font-semibold text-sm rounded-xl hover:bg-blue-700 transition-all shadow-md shadow-blue-600/20 flex items-center gap-2">
+                            Next <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Result Summary Modal -->
+    <div id="result-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-100 flex flex-col gap-6">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-3">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-900">Quiz Completed!</h2>
+                <p class="text-slate-500 text-sm mt-1">Here is how you performed on this exercise</p>
+            </div>
+
+            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200/80 grid grid-cols-2 gap-4 text-center">
+                <div>
+                    <span class="text-xs text-slate-500 uppercase font-bold tracking-wider">Score</span>
+                    <span id="final-score" class="block font-extrabold text-3xl text-blue-600 mt-1">0%</span>
+                </div>
+                <div>
+                    <span class="text-xs text-slate-500 uppercase font-bold tracking-wider">Accuracy</span>
+                    <span id="final-accuracy" class="block font-extrabold text-3xl text-emerald-600 mt-1">0/50</span>
+                </div>
+            </div>
+
+            <div class="space-y-2 text-xs text-slate-600">
+                <div class="flex justify-between py-1 border-b border-slate-100">
+                    <span>Sentence Completion Score:</span>
+                    <span id="final-completion-score" class="font-semibold text-slate-800">0/35</span>
+                </div>
+                <div class="flex justify-between py-1 border-b border-slate-100">
+                    <span>Error Identification Score:</span>
+                    <span id="final-error-score" class="font-semibold text-slate-800">0/15</span>
+                </div>
+            </div>
+
+            <div class="flex gap-3">
+                <button onclick="closeModal(); setMode('practice');" class="flex-1 py-3 bg-slate-100 text-slate-700 font-semibold text-sm rounded-xl hover:bg-slate-200 transition-all">
+                    Review Answers
+                </button>
+                <button onclick="closeModal(); resetQuiz();" class="flex-1 py-3 bg-blue-600 text-white font-semibold text-sm rounded-xl hover:bg-blue-700 transition-all shadow-md shadow-blue-600/20">
+                    Try Again
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questionsData = [
+            // TOPIC 1: Verb Be, Contractions, Information Questions & Possessives (1-6)
+            {
+                id: 1,
+                type: "completion",
+                category: "Verb BE & Possessives",
+                question: "Where ______ your new English teacher from?",
+                options: ["is", "are", "am", "be"],
+                answer: 0,
+                explanation: "Chủ ngữ 'your new English teacher' là ngôi thứ 3 số ít (tương đương 'he' hoặc 'she'), do đó động từ 'be' ở thì hiện tại đơn phải dùng 'is'."
+            },
+            {
+                id: 2,
+                type: "completion",
+                category: "Verb BE & Possessives",
+                question: "A: Are you and Peter university students? <br>B: Yes, ______.",
+                options: ["I am", "you are", "we are", "they are"],
+                answer: 2,
+                explanation: "Câu hỏi 'Are you and Peter...?' hỏi về 'bạn và Peter' (chúng tôi/chúng ta), nên câu trả lời ngắn khẳng định là 'Yes, we are'."
+            },
+            {
+                id: 3,
+                type: "completion",
+                category: "Verb BE & Possessives",
+                question: "______ jacket is this on the chair? Is it John's?",
+                options: ["Who", "Whose", "What", "Where"],
+                answer: 1,
+                explanation: "'Whose' được dùng để hỏi về sở hữu (Cái áo khoác này của ai?). 'Who' hỏi về người, 'What' hỏi cái gì, 'Where' hỏi ở đâu."
+            },
+            {
+                id: 4,
+                type: "error",
+                category: "Verb BE & Possessives",
+                question: "Find the incorrect part: <br><u>Her</u> (A) brother <u>is</u> (B) very tall, but <u>he's</u> (C) feet <u>are</u> (D) big.",
+                options: ["Her", "is", "he's", "are"],
+                answer: 2,
+                explanation: "Sai ở (C) 'he's'. Đứng trước danh từ 'feet' cần một tính từ sở hữu 'his' (chân của anh ấy) chứ không dùng đại từ + be 'he's'."
+            },
+            {
+                id: 5,
+                type: "completion",
+                category: "Verb BE & Possessives",
+                question: "This is ______ textbook, and that one over there is yours.",
+                options: ["my", "mine", "me", "I"],
+                answer: 0,
+                explanation: "Trước danh từ 'textbook' cần một tính từ sở hữu 'my'. 'Mine' là đại từ sở hữu (không đứng trước danh từ)."
+            },
+            {
+                id: 6,
+                type: "completion",
+                category: "Verb BE & Possessives",
+                question: "Mr. and Mrs. Smith live in Hanoi. ______ children go to an international school.",
+                options: ["His", "Her", "Their", "Our"],
+                answer: 2,
+                explanation: "Chủ ngữ là 'Mr. and Mrs. Smith' (số nhiều, họ), nên tính từ sở hữu tương ứng là 'Their' (của họ)."
+            },
+
+            // TOPIC 2: Prepositions of Time & Place, Would like (7-12)
+            {
+                id: 7,
+                type: "completion",
+                category: "Prepositions & Would Like",
+                question: "Our English class starts ______ 8:00 AM ______ Monday morning.",
+                options: ["at / on", "in / at", "on / in", "at / in"],
+                answer: 0,
+                explanation: "Dùng giới từ 'at' cho thời gian cụ thể (at 8:00 AM) và 'on' cho thứ/ngày trong tuần (on Monday morning)."
+            },
+            {
+                id: 8,
+                type: "completion",
+                category: "Prepositions & Would Like",
+                question: "The library is located ______ the second floor of the main building.",
+                options: ["at", "in", "on", "to"],
+                answer: 2,
+                explanation: "Đối với tầng nhà (floors), ta dùng giới từ 'on' (on the second floor)."
+            },
+            {
+                id: 9,
+                type: "completion",
+                category: "Prepositions & Would Like",
+                question: "Would you like ______ some hot tea after class?",
+                options: ["drink", "to drink", "drinking", "drank"],
+                answer: 1,
+                explanation: "Cấu trúc 'would like' đòi hỏi động từ nguyên mẫu có 'to' (would like + to-V) để diễn tả lời mời hoặc mong muốn lịch sự."
+            },
+            {
+                id: 10,
+                type: "error",
+                category: "Prepositions & Would Like",
+                question: "Find the incorrect part: <br>We usually <u>have</u> (A) lunch <u>at</u> (B) noon, but <u>in</u> (C) Sundays we eat <u>later</u> (D).",
+                options: ["have", "at", "in", "later"],
+                answer: 2,
+                explanation: "Sai ở (C) 'in'. Với các ngày trong tuần (Sundays), phải dùng giới từ 'on' (on Sundays)."
+            },
+            {
+                id: 11,
+                type: "completion",
+                category: "Prepositions & Would Like",
+                question: "A: What time is the concert? <br>B: It is ______ 7:30 PM ______ the evening.",
+                options: ["at / in", "on / at", "in / on", "at / at"],
+                answer: 0,
+                explanation: "'at' đi với giờ cụ thể (at 7:30 PM) và 'in' đi với các buổi trong ngày (in the evening)."
+            },
+            {
+                id: 12,
+                type: "completion",
+                category: "Prepositions & Would Like",
+                question: "My parents ______ like to travel to Japan next summer.",
+                options: ["would", "will", "do", "are"],
+                answer: 0,
+                explanation: "Cấu trúc 'would like to + V' dùng để diễn đạt ý muốn trong tương lai một cách lịch sự."
+            },
+
+            // TOPIC 3: Simple Present Tense & Frequency Adverbs (13-17)
+            {
+                id: 13,
+                type: "completion",
+                category: "Simple Present Tense",
+                question: "David ______ computer science at the university every afternoon.",
+                options: ["study", "studies", "studying", "is study"],
+                answer: 1,
+                explanation: "Hiện tại đơn với chủ ngữ số ít 'David': Động từ 'study' kết thúc bằng phụ âm + 'y', đổi 'y' thành 'i' rồi thêm '-es' -> 'studies'."
+            },
+            {
+                id: 14,
+                type: "completion",
+                category: "Simple Present Tense",
+                question: "My roommate ______ eat meat because she is a vegetarian.",
+                options: ["don't", "doesn't", "isn't", "not"],
+                answer: 1,
+                explanation: "Thì hiện tại đơn dạng phủ định với chủ ngữ số ít 'My roommate' sử dụng trợ động từ 'doesn't + V-bare'."
+            },
+            {
+                id: 15,
+                type: "completion",
+                category: "Simple Present Tense",
+                question: "She ______ late for her morning lectures.",
+                options: ["is usually", "usually is", "is usually not", "usually isn't"],
+                answer: 0,
+                explanation: "Trạng từ chỉ tần suất (usually) đứng SAU động từ to be ('is usually')."
+            },
+            {
+                id: 16,
+                type: "error",
+                category: "Simple Present Tense",
+                question: "Find the incorrect part: <br><u>Who</u> (A) <u>do</u> (B) <u>teaches</u> (C) English grammar to <u>your</u> (D) class?",
+                options: ["Who", "do", "teaches", "your"],
+                answer: 1,
+                explanation: "Sai ở (B) 'do'. Khi 'Who' đóng vai trò làm chủ ngữ trong câu hỏi hiện tại đơn, ta chia động từ trực tiếp (Who teaches...?) chứ không dùng trợ động từ 'do/does'."
+            },
+            {
+                id: 17,
+                type: "completion",
+                category: "Simple Present Tense",
+                question: "How often ______ your brother go to the fitness gym?",
+                options: ["do", "does", "is", "are"],
+                answer: 1,
+                explanation: "Câu hỏi thì hiện tại đơn với chủ ngữ số ít 'your brother' cần trợ động từ 'does'."
+            },
+
+            // TOPIC 4: There is / There are, Articles & Quantifiers (18-25)
+            {
+                id: 18,
+                type: "completion",
+                category: "Nouns & Quantifiers",
+                question: "______ a lot of fresh fruit in the fridge.",
+                options: ["There is", "There are", "There be", "Is there"],
+                answer: 0,
+                explanation: "'Fruit' là danh từ không đếm được, do đó ta dùng cấu trúc số ít 'There is'."
+            },
+            {
+                id: 19,
+                type: "completion",
+                category: "Nouns & Quantifiers",
+                question: "Are there ______ student apartments available near the campus?",
+                options: ["some", "any", "much", "an"],
+                answer: 1,
+                explanation: "Trong câu hỏi (interrogative sentence) với danh từ đếm được số nhiều 'apartments', ta dùng 'any'."
+            },
+            {
+                id: 20,
+                type: "completion",
+                category: "Nouns & Quantifiers",
+                question: "How ______ water should we drink every single day?",
+                options: ["many", "much", "few", "some"],
+                answer: 1,
+                explanation: "'Water' là danh từ không đếm được, dùng cấu trúc hỏi số lượng 'How much'."
+            },
+            {
+                id: 21,
+                type: "error",
+                category: "Nouns & Quantifiers",
+                question: "Find the incorrect part: <br>There <u>are</u> (A) <u>some</u> (B) <u>informations</u> (C) on the student <u>noticeboard</u> (D).",
+                options: ["are", "some", "informations", "noticeboard"],
+                answer: 2,
+                explanation: "Sai ở (C) 'informations'. 'Information' là danh từ không đếm được, không có dạng số nhiều thêm '-s'. (Cũng kéo theo A phải dùng 'is')."
+            },
+            {
+                id: 22,
+                type: "completion",
+                category: "Nouns & Quantifiers",
+                question: "I need to buy ______ apple and ______ loaf of bread.",
+                options: ["a / a", "an / a", "an / the", "a / an"],
+                answer: 1,
+                explanation: "'apple' bắt đầu bằng nguyên âm /æ/ nên dùng mạo từ 'an'. 'loaf' bắt đầu bằng phụ âm /l/ nên dùng mạo từ 'a'."
+            },
+            {
+                id: 23,
+                type: "completion",
+                category: "Nouns & Quantifiers",
+                question: "There is ______ in the classroom. All the students went home.",
+                options: ["anything", "something", "nothing", "nobody"],
+                answer: 3,
+                explanation: "Ngữ cảnh 'tất cả sinh viên đã về nhà' nghĩa là 'không có ai' trong lớp học -> dùng đại từ bất định chỉ người 'nobody'."
+            },
+            {
+                id: 24,
+                type: "completion",
+                category: "Nouns & Quantifiers",
+                question: "How ______ cups of coffee do you usually drink in the morning?",
+                options: ["much", "many", "some", "any"],
+                answer: 1,
+                explanation: "'cups' là danh từ đếm được số nhiều, nên dùng 'How many' để hỏi số lượng."
+            },
+            {
+                id: 25,
+                type: "error",
+                category: "Nouns & Quantifiers",
+                question: "Find the incorrect part: <br>She <u>doesn't</u> (A) have <u>some</u> (B) money left to <u>buy</u> (C) that expensive <u>book</u> (D).",
+                options: ["doesn't", "some", "buy", "book"],
+                answer: 1,
+                explanation: "Sai ở (B) 'some'. Trong câu phủ định (doesn't have), ta dùng 'any' thay vì 'some' khi nói về số lượng không xác định."
+            },
+
+            // TOPIC 5: Present Continuous & Non-Action Verbs (26-29)
+            {
+                id: 26,
+                type: "completion",
+                category: "Present Continuous",
+                question: "Listen! The professor ______ the main lesson right now.",
+                options: ["explains", "is explaining", "are explaining", "explained"],
+                answer: 1,
+                explanation: "Dấu hiệu 'Listen!' và 'right now' cho thấy hành động đang diễn ra tại thời điểm nói -> Dùng thì Hiện tại tiếp diễn: 'is explaining'."
+            },
+            {
+                id: 27,
+                type: "completion",
+                category: "Present Continuous",
+                question: "Look at those dark clouds! It ______ to rain heavily.",
+                options: ["starts", "is starting", "start", "are starting"],
+                answer: 1,
+                explanation: "Dấu hiệu 'Look at...' diễn tả sự việc đang xảy ra hoặc bắt đầu xảy ra ngay lúc này -> Hiện tại tiếp diễn 'is starting'."
+            },
+            {
+                id: 28,
+                type: "completion",
+                category: "Present Continuous",
+                question: "I ______ the correct answer to this grammar question right now.",
+                options: ["am knowing", "know", "knows", "are knowing"],
+                answer: 1,
+                explanation: "'know' là động từ chỉ trạng thái (non-action / stative verb), KHÔNG dùng ở dạng tiếp diễn (-ing) dù có 'right now'. Dùng hiện tại đơn 'know'."
+            },
+            {
+                id: 29,
+                type: "error",
+                category: "Present Continuous",
+                question: "Find the incorrect part: <br>Why <u>are</u> (A) you <u>standing</u> (B) here? What <u>do</u> (C) you <u>looking for</u> (D)?",
+                options: ["are", "standing", "do", "looking for"],
+                answer: 2,
+                explanation: "Sai ở (C) 'do'. Câu hỏi hành động đang diễn ra với 'looking for' cần dùng trợ động từ của to be: 'What ARE you looking for?'."
+            },
+
+            // TOPIC 6: Modals: Can, Have to, Should, Could (30-34)
+            {
+                id: 30,
+                type: "completion",
+                category: "Modal Verbs",
+                question: "Students ______ wear their university ID cards when entering the exam room. It's strict rule.",
+                options: ["can", "have to", "could", "should"],
+                answer: 1,
+                explanation: "'have to' diễn tả sự bắt buộc, quy định bắt buộc (rule). 'can' chỉ khả năng, 'should' chỉ lời khuyên."
+            },
+            {
+                id: 31,
+                type: "completion",
+                category: "Modal Verbs",
+                question: "You look exhausted. You ______ go to bed earlier tonight.",
+                options: ["have to", "should", "could", "can"],
+                answer: 1,
+                explanation: "'should' dùng để đưa ra lời khuyên nên làm gì (You should go to bed earlier)."
+            },
+            {
+                id: 32,
+                type: "completion",
+                category: "Modal Verbs",
+                question: "When he was five years old, he ______ already swim very well.",
+                options: ["can", "could", "should", "has to"],
+                answer: 1,
+                explanation: "'could' là dạng quá khứ của 'can', dùng để chỉ khả năng trong quá khứ ('When he was five')."
+            },
+            {
+                id: 33,
+                type: "error",
+                category: "Modal Verbs",
+                question: "Find the incorrect part: <br>She <u>has to</u> (A) <u>finishes</u> (B) her project <u>before</u> (C) 5:00 PM <u>today</u> (D).",
+                options: ["has to", "finishes", "before", "today"],
+                answer: 1,
+                explanation: "Sai ở (B) 'finishes'. Sau động từ khuyết thiếu / cấu trúc 'has to', động từ phải ở dạng nguyên thể không chia (V-bare): 'has to finish'."
+            },
+            {
+                id: 34,
+                type: "error",
+                category: "Modal Verbs",
+                question: "Find the incorrect part: <br>You <u>shouldn't</u> (A) <u>to drive</u> (B) so fast <u>on</u> (C) this crowded <u>street</u> (D).",
+                options: ["shouldn't", "to drive", "on", "street"],
+                answer: 1,
+                explanation: "Sai ở (B) 'to drive'. Sau động từ khuyết thiếu 'should/shouldn't' là động từ nguyên thể KHÔNG có 'to' (V-bare): 'shouldn't drive'."
+            },
+
+            // TOPIC 7: Simple Past Tense (35-39)
+            {
+                id: 35,
+                type: "completion",
+                category: "Simple Past Tense",
+                question: "Where ______ you go for your summer vacation last year?",
+                options: ["do", "did", "was", "were"],
+                answer: 1,
+                explanation: "Câu hỏi thì quá khứ đơn (có 'last year') sử dụng trợ động từ 'did' cho tất cả các ngôi."
+            },
+            {
+                id: 36,
+                type: "completion",
+                category: "Simple Past Tense",
+                question: "They ______ at home yesterday evening; they went to the cinema.",
+                options: ["weren't", "wasn't", "didn't", "don't"],
+                answer: 0,
+                explanation: "Chủ ngữ 'They' số nhiều trong quá khứ đơn đi với 'were/weren't'. Ngữ cảnh mang nghĩa phủ định: 'Họ không ở nhà...'"
+            },
+            {
+                id: 37,
+                type: "completion",
+                category: "Simple Past Tense",
+                question: "She ______ a detailed email to her academic advisor yesterday.",
+                options: ["write", "wrote", "written", "writing"],
+                answer: 1,
+                explanation: "Dấu hiệu 'yesterday' -> Thì Quá khứ đơn. Động từ bất quy tắc 'write' có dạng quá khứ là 'wrote'."
+            },
+            {
+                id: 38,
+                type: "error",
+                category: "Simple Past Tense",
+                question: "Find the incorrect part: <br>We <u>didn't</u> (A) <u>enjoyed</u> (B) the movie <u>because</u> (C) it was too <u>boring</u> (D).",
+                options: ["didn't", "enjoyed", "because", "boring"],
+                answer: 1,
+                explanation: "Sai ở (B) 'enjoyed'. Trong câu phủ định quá khứ đơn, sau trợ động từ 'didn't' động từ phải trở về dạng nguyên thể 'enjoy'."
+            },
+            {
+                id: 39,
+                type: "error",
+                category: "Simple Past Tense",
+                question: "Find the incorrect part: <br>He <u>stoppes</u> (A) the car <u>and</u> (B) <u>bought</u> (C) some snacks at <u>the</u> (D) gas station.",
+                options: ["stoppes", "and", "bought", "gas station"],
+                answer: 0,
+                explanation: "Sai ở (A) 'stoppes'. Quá khứ đơn của 'stop' là 'stopped' (gấp đôi phụ âm p rồi thêm -ed)."
+            },
+
+            // TOPIC 8: Object Pronouns & Future with 'Be going to' (40-44)
+            {
+                id: 40,
+                type: "completion",
+                category: "Pronouns & Future",
+                question: "I saw Mary at the bus stop, so I gave ______ a lift home.",
+                options: ["she", "her", "hers", "him"],
+                answer: 1,
+                explanation: "Sau động từ 'gave' cần một đại từ nhân xưng làm tân ngữ (Object pronoun). 'Mary' là nữ -> tân ngữ là 'her'."
+            },
+            {
+                id: 41,
+                type: "completion",
+                category: "Pronouns & Future",
+                question: "Look at those clouds! It ______ rain in a few minutes.",
+                options: ["is going to", "will going to", "goes to", "is going"],
+                answer: 0,
+                explanation: "Cấu trúc 'Be going to + V' dùng để dự đoán tương lai dựa trên bằng chứng hiện tại (mây đen)."
+            },
+            {
+                id: 42,
+                type: "error",
+                category: "Pronouns & Future",
+                question: "Find the incorrect part: <br>They <u>are</u> (A) going to <u>visiting</u> (B) their <u>grandparents</u> (C) next <u>weekend</u> (D).",
+                options: ["are", "visiting", "their", "weekend"],
+                answer: 1,
+                explanation: "Sai ở (B) 'visiting'. Cấu trúc tương lai gần là 'be going to + V-bare' (nguyên thể), nên chuyển 'visiting' thành 'visit'."
+            },
+            {
+                id: 43,
+                type: "completion",
+                category: "Pronouns & Future",
+                question: "Our teacher gave ______ a lot of homework for the weekend.",
+                options: ["we", "us", "our", "ours"],
+                answer: 1,
+                explanation: "Đứng sau động từ 'gave' đóng vai trò tân ngữ gián tiếp chỉ người là đại từ tân ngữ 'us' (chúng tôi)."
+            },
+            {
+                id: 44,
+                type: "error",
+                category: "Pronouns & Future",
+                question: "Find the incorrect part: <br>Please <u>give</u> (A) the notebook to <u>he</u> (B) <u>after</u> (C) you finish <u>reading</u> (D) it.",
+                options: ["give", "he", "after", "reading"],
+                answer: 1,
+                explanation: "Sai ở (B) 'he'. Sau giới từ 'to' phải dùng đại từ tân ngữ 'him' chứ không dùng đại từ chủ ngữ 'he'."
+            },
+
+            // TOPIC 9: Comparatives, Superlatives, Too & Enough (45-50)
+            {
+                id: 45,
+                type: "completion",
+                category: "Comparatives & Superlatives",
+                question: "This new laptop is much ______ than my old one.",
+                options: ["fast", "faster", "fastest", "more fast"],
+                answer: 1,
+                explanation: "So sánh hơn với tính từ ngắn 'fast' có từ nhận biết 'than': ta thêm đuôi '-er' -> 'faster'."
+            },
+            {
+                id: 46,
+                type: "completion",
+                category: "Comparatives & Superlatives",
+                question: "Tokyo is one of the ______ cities in the world.",
+                options: ["more expensive", "most expensive", "expensivest", "expensive"],
+                answer: 1,
+                explanation: "So sánh nhất với tính từ dài 'expensive': dùng cấu trúc 'the most expensive'."
+            },
+            {
+                id: 47,
+                type: "error",
+                category: "Comparatives & Superlatives",
+                question: "Find the incorrect part: <br>My <u>health</u> (A) is much <u>gooder</u> (B) now <u>than</u> (C) it was <u>last month</u> (D).",
+                options: ["health", "gooder", "than", "last month"],
+                answer: 1,
+                explanation: "Sai ở (B) 'gooder'. Tính từ 'good' có dạng so sánh hơn bất quy tắc là 'better' (không dùng 'gooder')."
+            },
+            {
+                id: 48,
+                type: "completion",
+                category: "Comparatives & Superlatives",
+                question: "The soup is ______ hot for me to drink right now.",
+                options: ["too", "enough", "very much", "more"],
+                answer: 0,
+                explanation: "Cấu trúc 'too + Adj + (for sb) + to-V' diễn tả cái gì đó quá... đến mức không thể làm gì ('quá nóng để uống')."
+            },
+            {
+                id: 49,
+                type: "error",
+                category: "Comparatives & Superlatives",
+                question: "Find the incorrect part: <br>He is <u>not</u> (A) <u>enough tall</u> (B) to <u>play</u> (C) in the professional <u>basketball</u> (D) team.",
+                options: ["not", "enough tall", "play", "basketball"],
+                answer: 1,
+                explanation: "Sai ở (B) 'enough tall'. Vị trí của 'enough': 'enough' đứng SAU tính từ/trạng từ -> Phải sửa lại thành 'tall enough'."
+            },
+            {
+                id: 50,
+                type: "error",
+                category: "Comparatives & Superlatives",
+                question: "Find the incorrect part: <br>This <u>exercise</u> (A) is <u>the most easiest</u> (B) <u>one</u> (C) in this <u>unit</u> (D).",
+                options: ["exercise", "the most easiest", "one", "unit"],
+                answer: 1,
+                explanation: "Sai ở (B) 'the most easiest'. 'easy' là tính từ ngắn đổi thành 'easiest'. Không dùng cả 'most' lẫn '-est' cùng lúc. Sửa thành 'the easiest'."
+            }
+        ];
+
+        let userAnswers = new Array(questionsData.length).fill(null);
+        let currentQuestionIndex = 0;
+        let activeMode = 'practice'; // 'practice' or 'exam'
+        let activeTypeFilter = 'all'; // 'all', 'completion', 'error'
+        let activeTopicFilter = 'all';
+        let examSubmitted = false;
+
+        // Initialize App
+        window.onload = function() {
+            populateTopicDropdown();
+            renderPalette();
+            loadQuestion(0);
+            updateStats();
+        };
+
+        function populateTopicDropdown() {
+            const topicSelect = document.getElementById('topic-select');
+            const topics = [...new Set(questionsData.map(q => q.category))];
+            topics.forEach(topic => {
+                const opt = document.createElement('option');
+                opt.value = topic;
+                opt.textContent = topic;
+                topicSelect.appendChild(opt);
+            });
+        }
+
+        function getFilteredQuestions() {
+            return questionsData.filter((q) => {
+                const typeMatch = (activeTypeFilter === 'all') ||
+                                 (activeTypeFilter === 'completion' && q.type === 'completion') ||
+                                 (activeTypeFilter === 'error' && q.type === 'error');
+                const topicMatch = (activeTopicFilter === 'all') || (q.category === activeTopicFilter);
+                return typeMatch && topicMatch;
+            });
+        }
+
+        function setMode(mode) {
+            activeMode = mode;
+            document.getElementById('mode-practice-btn').className = mode === 'practice' 
+                ? "px-3 py-1.5 rounded-md bg-white text-blue-700 shadow-sm transition-all" 
+                : "px-3 py-1.5 rounded-md text-slate-600 hover:text-slate-900 transition-all";
+            
+            document.getElementById('mode-exam-btn').className = mode === 'exam' 
+                ? "px-3 py-1.5 rounded-md bg-white text-blue-700 shadow-sm transition-all" 
+                : "px-3 py-1.5 rounded-md text-slate-600 hover:text-slate-900 transition-all";
+
+            const submitBtn = document.getElementById('submit-exam-btn');
+            if (mode === 'exam' && !examSubmitted) {
+                submitBtn.classList.remove('hidden');
+            } else {
+                submitBtn.classList.add('hidden');
+            }
+
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function setFilterType(type) {
+            activeTypeFilter = type;
+            document.querySelectorAll('.filter-type-btn').forEach(btn => {
+                btn.className = "filter-type-btn text-left text-xs px-3 py-2 rounded-lg font-medium text-slate-600 hover:bg-slate-50";
+            });
+            document.getElementById(`filter-type-${type}`).className = "filter-type-btn text-left text-xs px-3 py-2 rounded-lg font-medium bg-blue-50 text-blue-700";
+
+            renderPalette();
+            // Jump to first question of filtered list
+            const filtered = getFilteredQuestions();
+            if (filtered.length > 0) {
+                const realIdx = questionsData.findIndex(q => q.id === filtered[0].id);
+                loadQuestion(realIdx);
+            }
+        }
+
+        function setTopicFilter(topic) {
+            activeTopicFilter = topic;
+            renderPalette();
+            const filtered = getFilteredQuestions();
+            if (filtered.length > 0) {
+                const realIdx = questionsData.findIndex(q => q.id === filtered[0].id);
+                loadQuestion(realIdx);
+            }
+        }
+
+        function renderPalette() {
+            const paletteContainer = document.getElementById('question-palette');
+            paletteContainer.innerHTML = '';
+
+            const filtered = getFilteredQuestions();
+            document.getElementById('palette-count-label').textContent = `${filtered.length} Question${filtered.length > 1 ? 's' : ''}`;
+
+            questionsData.forEach((q, index) => {
+                // Check if included in current filter
+                const isFiltered = filtered.some(fq => fq.id === q.id);
+
+                const btn = document.createElement('button');
+                btn.textContent = index + 1;
+                btn.onclick = () => loadQuestion(index);
+
+                let statusClasses = "w-full aspect-square rounded-lg text-xs font-semibold flex items-center justify-center transition-all border ";
+                
+                if (!isFiltered) {
+                    statusClasses += "opacity-25 bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed";
+                } else if (index === currentQuestionIndex) {
+                    statusClasses += "ring-2 ring-blue-600 ring-offset-1 ";
+                    if (userAnswers[index] !== null) {
+                        if (activeMode === 'practice' || examSubmitted) {
+                            statusClasses += userAnswers[index] === q.answer 
+                                ? "bg-emerald-600 text-white border-emerald-600" 
+                                : "bg-rose-600 text-white border-rose-600";
+                        } else {
+                            statusClasses += "bg-blue-600 text-white border-blue-600";
+                        }
+                    } else {
+                        statusClasses += "bg-blue-50 text-blue-700 border-blue-300";
+                    }
+                } else if (userAnswers[index] !== null) {
+                    if (activeMode === 'practice' || examSubmitted) {
+                        statusClasses += userAnswers[index] === q.answer 
+                            ? "bg-emerald-100 text-emerald-800 border-emerald-300 hover:bg-emerald-200" 
+                            : "bg-rose-100 text-rose-800 border-rose-300 hover:bg-rose-200";
+                    } else {
+                        statusClasses += "bg-blue-100 text-blue-800 border-blue-300 hover:bg-blue-200";
+                    }
+                } else {
+                    statusClasses += "bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100";
+                }
+
+                btn.className = statusClasses;
+                paletteContainer.appendChild(btn);
+            });
+        }
+
+        function loadQuestion(index) {
+            currentQuestionIndex = index;
+            const q = questionsData[index];
+
+            // Badges & Info
+            document.getElementById('q-number-badge').textContent = `Question ${index + 1} of 50`;
+            document.getElementById('q-type-badge').textContent = q.type === 'completion' ? 'Sentence Completion' : 'Error Identification';
+            document.getElementById('q-topic-badge').textContent = q.category;
+
+            // Question Text
+            document.getElementById('q-text').innerHTML = q.question;
+
+            // Options container
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            const letters = ['A', 'B', 'C', 'D'];
+            const userAnswer = userAnswers[index];
+            const isAnswered = userAnswer !== null;
+            const showFeedback = (activeMode === 'practice' && isAnswered) || examSubmitted;
+
+            q.options.forEach((optText, optIdx) => {
+                const optBtn = document.createElement('button');
+                optBtn.onclick = () => selectOption(index, optIdx);
+                
+                let baseStyle = "w-full text-left p-4 rounded-xl border font-medium text-sm transition-all flex items-start gap-3.5 ";
+                
+                if (showFeedback) {
+                    if (optIdx === q.answer) {
+                        // Correct option
+                        baseStyle += "bg-emerald-50 border-emerald-300 text-emerald-900 shadow-sm";
+                    } else if (userAnswer === optIdx) {
+                        // Wrong user pick
+                        baseStyle += "bg-rose-50 border-rose-300 text-rose-900 shadow-sm";
+                    } else {
+                        // Neutral muted
+                        baseStyle += "bg-white border-slate-200 text-slate-400 opacity-60";
+                    }
+                } else if (userAnswer === optIdx) {
+                    // Selected in exam mode before submit
+                    baseStyle += "bg-blue-50 border-blue-500 text-blue-900 ring-2 ring-blue-500/20";
+                } else {
+                    // Unselected state
+                    baseStyle += "bg-white border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-slate-300";
+                }
+
+                optBtn.className = baseStyle;
+
+                // Letter circle
+                let circleStyle = "w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs flex-shrink-0 transition-colors ";
+                if (showFeedback && optIdx === q.answer) {
+                    circleStyle += "bg-emerald-600 text-white";
+                } else if (showFeedback && userAnswer === optIdx) {
+                    circleStyle += "bg-rose-600 text-white";
+                } else if (userAnswer === optIdx) {
+                    circleStyle += "bg-blue-600 text-white";
+                } else {
+                    circleStyle += "bg-slate-100 text-slate-600";
+                }
+
+                let iconHtml = '';
+                if (showFeedback) {
+                    if (optIdx === q.answer) {
+                        iconHtml = '<i class="fa-solid fa-circle-check text-emerald-600 text-lg ml-auto my-auto"></i>';
+                    } else if (userAnswer === optIdx) {
+                        iconHtml = '<i class="fa-solid fa-circle-xmark text-rose-600 text-lg ml-auto my-auto"></i>';
+                    }
+                }
+
+                optBtn.innerHTML = `
+                    <span class="${circleStyle}">${letters[optIdx]}</span>
+                    <span class="mt-0.5 leading-relaxed flex-1">${optText}</span>
+                    ${iconHtml}
+                `;
+
+                optionsContainer.appendChild(optBtn);
+            });
+
+            // Explanation box
+            const expBox = document.getElementById('explanation-box');
+            if (showFeedback) {
+                expBox.classList.remove('hidden');
+                document.getElementById('explanation-text').textContent = q.explanation;
+            } else {
+                expBox.classList.add('hidden');
+            }
+
+            // Prev/Next buttons
+            document.getElementById('prev-btn').disabled = index === 0;
+            document.getElementById('next-btn').disabled = index === questionsData.length - 1;
+
+            renderPalette();
+            updateStats();
+        }
+
+        function selectOption(qIdx, optIdx) {
+            if (examSubmitted) return; // Freeze after exam submission
+
+            userAnswers[qIdx] = optIdx;
+            loadQuestion(qIdx);
+            updateStats();
+        }
+
+        function navigateQuestion(step) {
+            const newIdx = currentQuestionIndex + step;
+            if (newIdx >= 0 && newIdx < questionsData.length) {
+                loadQuestion(newIdx);
+            }
+        }
+
+        function updateStats() {
+            const answeredCount = userAnswers.filter(a => a !== null).length;
+            let correctCount = 0;
+            let incorrectCount = 0;
+
+            userAnswers.forEach((ans, idx) => {
+                if (ans !== null) {
+                    if (ans === questionsData[idx].answer) {
+                        correctCount++;
+                    } else {
+                        incorrectCount++;
+                    }
+                }
+            });
+
+            document.getElementById('stat-answered').textContent = `${answeredCount}/50`;
+            document.getElementById('stat-correct').textContent = correctCount;
+            document.getElementById('stat-incorrect').textContent = incorrectCount;
+
+            const progressPct = (answeredCount / 50) * 100;
+            document.getElementById('progress-bar-fill').style.width = `${progressPct}%`;
+        }
+
+        function submitExam() {
+            const answeredCount = userAnswers.filter(a => a !== null).length;
+            if (answeredCount < 50) {
+                if (!confirm(`You have only answered ${answeredCount} of 50 questions. Are you sure you want to submit?`)) {
+                    return;
+                }
+            }
+
+            examSubmitted = true;
+            document.getElementById('submit-exam-btn').classList.add('hidden');
+
+            // Calculate metrics
+            let totalCorrect = 0;
+            let completionCorrect = 0;
+            let errorCorrect = 0;
+
+            questionsData.forEach((q, idx) => {
+                if (userAnswers[idx] === q.answer) {
+                    totalCorrect++;
+                    if (q.type === 'completion') completionCorrect++;
+                    if (q.type === 'error') errorCorrect++;
+                }
+            });
+
+            const scorePct = Math.round((totalCorrect / 50) * 100);
+
+            document.getElementById('final-score').textContent = `${scorePct}%`;
+            document.getElementById('final-accuracy').textContent = `${totalCorrect}/50`;
+            document.getElementById('final-completion-score').textContent = `${completionCorrect}/35`;
+            document.getElementById('final-error-score').textContent = `${errorCorrect}/15`;
+
+            document.getElementById('result-modal').classList.remove('hidden');
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function closeModal() {
+            document.getElementById('result-modal').classList.add('hidden');
+        }
+
+        function resetQuiz() {
+            userAnswers = new Array(questionsData.length).fill(null);
+            examSubmitted = false;
+            currentQuestionIndex = 0;
+            if (activeMode === 'exam') {
+                document.getElementById('submit-exam-btn').classList.remove('hidden');
+            }
+            renderPalette();
+            loadQuestion(0);
+            updateStats();
+        }
+    </script>
+</body>
+</html>
