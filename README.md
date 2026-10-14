@@ -36,8 +36,8 @@ GitHub Pages chỉ phục vụ file tĩnh nên không chạy được backend, v
 
 1. Lấy khoá Gemini miễn phí tại [Google AI Studio](https://aistudio.google.com/) (*Get API key*).
 2. Tạo tài khoản [Cloudflare](https://dash.cloudflare.com/sign-up) (miễn phí).
-3. Kiểm tra `worker/wrangler.toml`: `ALLOWED_ORIGINS` là domain GitHub Pages (chỉ phần domain, không có tên repo – hiện là `https://trngnguyn.github.io`). Có thể đổi `AI_MODEL`, `AI_FALLBACK_MODELS` và các giới hạn ở đây.
-4. Trong thư mục `worker/`, chạy:
+3. Kiểm tra `wrangler.toml` (ở thư mục gốc): `ALLOWED_ORIGINS` là domain GitHub Pages (chỉ phần domain, không có tên repo – hiện là `https://trngnguyn.github.io`). Có thể đổi `AI_MODEL`, `AI_FALLBACK_MODELS` và các giới hạn ở đây.
+4. Trong thư mục gốc của dự án, chạy:
 
    ```bash
    npx wrangler login                    # mở trình duyệt để đăng nhập Cloudflare
@@ -51,7 +51,8 @@ GitHub Pages chỉ phục vụ file tĩnh nên không chạy được backend, v
 Lưu ý:
 - Sửa đề trong `data/writing-tasks.json` thì phải chạy lại `npx wrangler deploy` (Worker đóng gói đề lúc deploy để tự kiểm tra `taskId`).
 - Đổi khoá: chạy lại `npx wrangler secret put AI_API_KEY`. Xem log lỗi chấm bài: `npx wrangler tail`.
-- Lần đầu deploy, wrangler yêu cầu đăng ký subdomain `workers.dev` (miễn phí) – phải chạy `npx wrangler deploy` trong terminal và trả lời `y`. Chạy lệnh trong thư mục `worker/`, không phải thư mục gốc.
+- Lần đầu deploy, wrangler yêu cầu đăng ký subdomain `workers.dev` (miễn phí) – phải chạy `npx wrangler deploy` trong terminal và trả lời `y`.
+- Tự deploy khi `git push`: trên Cloudflare, mở Worker `ent104-writing` → **Settings → Build** → kết nối repo GitHub, branch `main`, **Root directory để trống**, Build command để trống, Deploy command `npx wrangler deploy`. Nhờ `wrangler.toml` ở thư mục gốc, bản build chỉ deploy Worker chấm bài (không đưa cả repo lên thành site tĩnh); secret `AI_API_KEY` giữ nguyên.
 - Lỗi `User location is not supported` từ Gemini: Worker đang chạy ở khu vực Google chặn (vd. Hong Kong). `wrangler.toml` đã ghim Worker chạy ở Mỹ bằng `[placement] region`.
 - `js/app-config.js` chỉ dùng URL Worker khi trang chạy trên `*.github.io`; chạy `npm start` ở máy vẫn dùng API cùng máy chủ.
 - Giới hạn tần suất trên Worker được đếm trong bộ nhớ của từng phiên bản Worker nên chỉ mang tính tương đối; hạn mức thật sự do Gemini áp dụng cho khoá. CORS chỉ ngăn **trang web khác** dùng API qua trình duyệt, không ngăn người cố tình gọi trực tiếp bằng công cụ – vì vậy đừng dùng khoá có gắn thanh toán nếu không cần.
@@ -113,7 +114,7 @@ server/ai-client.js             Gọi API dạng OpenAI Chat Completions
 server/rate-limit.js            Giới hạn số lần chấm
 server/config.js, server/env.js Cấu hình từ biến môi trường / .env
 server/load-tasks.js            Đọc đề Writing từ file (Node)
-worker/index.js, wrangler.toml  Cloudflare Worker cho bản GitHub Pages
+worker/index.js, wrangler.toml  Cloudflare Worker cho bản GitHub Pages (wrangler.toml ở thư mục gốc)
 .env.example                    Mẫu cấu hình (sao chép thành .env)
 data/question-bank.bundle.js    Bản đóng gói tự sinh từ 2 file JSON (dùng khi mở bằng file://)
 scripts/validate-questions.js   Kiểm tra dữ liệu

@@ -1,6 +1,8 @@
 # Cloudflare Worker chấm Writing – xem hướng dẫn trong README (mục "Triển khai Writing với GitHub Pages").
+# Đặt ở thư mục gốc để `npx wrangler deploy` (chạy ở gốc hoặc trong worker/) và Cloudflare Workers Builds
+# (Root directory để trống) đều deploy đúng Worker này, không nhận nhầm repo là site tĩnh.
 name = "ent104-writing"
-main = "index.js"
+main = "worker/index.js"
 compatibility_date = "2025-09-01"
 
 # Gemini API chặn một số khu vực (vd. data center Hong Kong gần Việt Nam: "User location is not supported").
@@ -22,5 +24,5 @@ WRITING_RATE_PER_MINUTE = "5"
 WRITING_RATE_PER_DAY = "50"
 WRITING_GLOBAL_DAILY_LIMIT = "500"
 
-# KHÔNG ghi khoá ở đây. Đặt bằng lệnh (chạy trong thư mục worker/):
+# KHÔNG ghi khoá ở đây. Đặt bằng lệnh:
 #   npx wrangler secret put AI_API_KEY
