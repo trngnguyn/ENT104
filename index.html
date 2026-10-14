@@ -4,21 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <title>English A1–A2 Practice – Question Bank</title>
+    <title>English A1–B1 Practice – Question Bank</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="js/tailwind-config.js"></script>
-    <style type="text/tailwindcss">
-        @layer components {
-            .card { background-color: rgb(var(--surface)); @apply rounded-2xl border border-slate-200/80 shadow-card; }
-            .eyebrow { @apply text-[11px] font-semibold uppercase tracking-wider text-slate-500; }
-            .icon-btn { @apply inline-flex items-center justify-center gap-2 h-9 min-w-[2.25rem] px-2.5 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors; }
-            .field { @apply w-full text-sm bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-shadow; }
-            .btn { @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all disabled:opacity-40 disabled:cursor-not-allowed; }
-            .btn-primary { @apply btn bg-blue-600 text-white hover:bg-blue-700 shadow-sm shadow-blue-600/25; }
-            .btn-secondary { @apply btn bg-slate-100 text-slate-700 hover:bg-slate-200; }
-        }
-    </style>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
@@ -37,7 +26,7 @@
                         <i class="fa-solid fa-graduation-cap"></i>
                     </div>
                     <div class="min-w-0">
-                        <h1 class="font-semibold text-[15px] leading-tight text-slate-900 truncate">English A1–A2 Practice</h1>
+                        <h1 class="font-semibold text-[15px] leading-tight text-slate-900 truncate">English A1–B1 Practice</h1>
                         <p id="app-subtitle" class="text-[11px] text-slate-500 truncate">Loading question bank...</p>
                     </div>
                 </div>
@@ -177,7 +166,7 @@
                 </div>
                 <div>
                     <span class="eyebrow block mb-2">Level</span>
-                    <div id="level-filter" class="grid grid-cols-4 gap-1"></div>
+                    <div id="level-filter" class="grid grid-cols-5 gap-1"></div>
                 </div>
                 <div>
                     <label for="category-select" class="eyebrow block mb-2">Topic</label>
@@ -371,7 +360,7 @@
     <footer class="border-t border-slate-200/80 mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col md:flex-row md:justify-between gap-2 text-[11px] text-slate-500 leading-relaxed">
             <p class="max-w-3xl">
-                Ngân hàng câu hỏi tiếng Anh tổng quát trình độ A1–A2 (nguồn: <code>general_a1_a2</code>), dùng để tham khảo khi ôn tập.
+                Ngân hàng câu hỏi tiếng Anh tổng quát trình độ A1–B1 (nguồn: <code>general_a1_a2</code>, <code>general_b1</code>), dùng để tham khảo khi ôn tập.
                 Nội dung <strong class="text-slate-700">chưa được đối chiếu</strong> với đề cương chính thức của học phần ENT104 – Trường Đại học FPT.
             </p>
             <p id="data-source" class="md:text-right"></p>

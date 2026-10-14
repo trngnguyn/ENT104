@@ -21,6 +21,104 @@ body {
     backdrop-filter: blur(4px);
 }
 
+/* ---------------------------------------------------------------- Thành phần dùng chung
+ * Viết bằng CSS thường (không dùng @apply) để trình soạn thảo kiểm tra được.
+ * Tailwind CDN chèn CSS của nó sau file này, nên class tiện ích (text-xs, !py-2, hidden…) vẫn ghi đè được.
+ */
+.card {
+    background-color: rgb(var(--surface));
+    border: 1px solid rgb(var(--c-slate-200) / 0.8);
+    border-radius: 1rem;
+    box-shadow: 0 1px 2px rgb(15 23 42 / 0.04), 0 1px 3px rgb(15 23 42 / 0.06);
+}
+
+.eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgb(var(--c-slate-500));
+}
+
+.icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 2.25rem;
+    min-width: 2.25rem;
+    padding: 0 0.625rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    color: rgb(var(--c-slate-600));
+    transition: color 0.15s ease, background-color 0.15s ease;
+}
+.icon-btn:hover {
+    color: rgb(var(--c-slate-900));
+    background-color: rgb(var(--c-slate-100));
+}
+
+.field {
+    width: 100%;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: rgb(var(--c-slate-700));
+    background-color: rgb(var(--c-slate-50));
+    border: 1px solid rgb(var(--c-slate-200));
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.field::placeholder {
+    color: rgb(var(--c-slate-400));
+}
+.field:focus {
+    outline: none;
+    border-color: rgb(var(--c-blue-500));
+    box-shadow: 0 0 0 2px rgb(var(--c-blue-500) / 0.3);
+}
+
+.btn,
+.btn-primary,
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1rem;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+.btn:disabled,
+.btn-primary:disabled,
+.btn-secondary:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+.btn-primary {
+    background-color: rgb(var(--c-blue-600));
+    color: #fff;
+    box-shadow: 0 1px 2px 0 rgb(var(--c-blue-600) / 0.25);
+}
+.btn-primary:not(:disabled):hover {
+    background-color: rgb(var(--c-blue-700));
+}
+html.dark .btn-primary:not(:disabled):hover {
+    background-color: rgb(var(--c-blue-500));
+}
+.btn-secondary {
+    background-color: rgb(var(--c-slate-100));
+    color: rgb(var(--c-slate-700));
+}
+.btn-secondary:not(:disabled):hover {
+    background-color: rgb(var(--c-slate-200));
+}
+
 /* Tab chọn chế độ (class active do js/app.js gán) */
 .mode-btn {
     display: inline-flex;
@@ -150,6 +248,11 @@ html.dark .bg-white,
 html.dark .hover\:bg-white:hover {
     background-color: rgb(var(--surface));
 }
+/* Nút nền đậm chữ trắng: sắc độ 700 ở chế độ tối là màu sáng, nên dùng 500 khi rê chuột. */
+html.dark .hover\:bg-blue-700:hover { background-color: rgb(var(--c-blue-500)); }
+html.dark .hover\:bg-emerald-700:hover { background-color: rgb(var(--c-emerald-500)); }
+html.dark .hover\:bg-rose-700:hover { background-color: rgb(var(--c-rose-500)); }
+html.dark .hover\:bg-indigo-700:hover { background-color: rgb(var(--c-indigo-500)); }
 html.dark .bg-slate-100 > .bg-white {
     background-color: rgb(var(--c-slate-300));
 }

@@ -10,7 +10,7 @@
     const DRAFT_KEY = 'ent104.builderDraft.v1';
     const PAGE_SIZE = 30;
     const LETTERS = ['A', 'B', 'C', 'D'];
-    const LEVEL_LABELS = { A1: 'A1', A2: 'A2', 'A1-A2': 'A1–A2 (kết hợp)' };
+    const LEVEL_LABELS = { A1: 'A1', A2: 'A2', 'A1-A2': 'A1–A2 (kết hợp)', B1: 'B1' };
     const DIM_LABELS = {
         none: 'Không phân bổ – chọn ngẫu nhiên trong các câu phù hợp',
         skill: 'Theo kỹ năng / chủ đề lớn',
@@ -175,7 +175,7 @@
 
             const random = c.mode === 'random';
             $('builder-config').innerHTML = `<div class="flex flex-col gap-4">
-                ${field('Tên đề', `<input data-field="name" type="text" maxlength="120" value="${esc(c.name)}" placeholder="Ví dụ: Đề ôn tập A1–A2 số 1" class="${inputCls}">`)}
+                ${field('Tên đề', `<input data-field="name" type="text" maxlength="120" value="${esc(c.name)}" placeholder="Ví dụ: Đề ôn tập B1 số 1" class="${inputCls}">`)}
                 ${field('Cách chọn câu hỏi', `<div class="grid grid-cols-2 gap-2 text-xs font-semibold">
                     ${[['random', 'Ngẫu nhiên theo tiêu chí'], ['manual', 'Chọn thủ công']].map(([v, l]) => `
                     <label class="flex items-center gap-2 border rounded-lg px-3 py-2 cursor-pointer ${c.mode === v ? 'border-blue-400 bg-blue-50 text-blue-800' : 'border-slate-200 text-slate-600'}">

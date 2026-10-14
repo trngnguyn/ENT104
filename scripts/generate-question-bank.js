@@ -30,8 +30,9 @@ const SKILLS = [
     { skill: 'completion_error', prefix: 'CERR' },
     { skill: 'writing', prefix: 'WRIT' },
 ];
-const LEVEL_CODE = { 'A1': 'A1', 'A2': 'A2', 'A1-A2': 'A12' };
-const LEVEL_ORDER = ['A1', 'A2', 'A1-A2'];
+const LEVEL_CODE = { 'A1': 'A1', 'A2': 'A2', 'A1-A2': 'A12', 'B1': 'B1' };
+const LEVEL_ORDER = ['A1', 'A2', 'A1-A2', 'B1'];
+const sourceOf = level => (level === 'B1' ? 'general_b1' : 'general_a1_a2');
 const DIFFICULTY_ORDER = ['easy', 'medium', 'hard'];
 
 // Ngoài ngữ pháp và đọc hiểu (level gắn với điểm ngữ pháp / bài đọc), câu A1 có độ khó medium/hard
@@ -42,7 +43,8 @@ const boundaryLevel = q =>
 
 // Các bank đã được AI đọc rà soát từng câu (đáp án, phương án nhiễu, giải thích) — 10/2026.
 // Câu thuộc bank mới thêm sau này sẽ chỉ có trạng thái 'auto_validated' cho tới khi được rà soát.
-const AI_REVIEWED_BANKS = new Set(['original', 'grammar', 'vocabulary', 'communication', 'reading', 'completion-error', 'writing']);
+const AI_REVIEWED_BANKS = new Set(['original', 'grammar', 'vocabulary', 'communication', 'reading', 'completion-error', 'writing',
+    'b1-grammar', 'b1-vocabulary', 'b1-communication', 'b1-reading', 'b1-completion-error', 'b1-writing']);
 
 // Mỗi bank có seed riêng để sửa một bank không làm thay đổi thứ tự đáp án của bank khác.
 function load(name, seed) {
@@ -60,6 +62,7 @@ function collect() {
         return { ...q, options, answer: options.indexOf(correct) };
     });
     const reading = load('reading', 4);
+    const b1Reading = load('b1-reading', 11);
     return {
         questions: [
             ...original,
@@ -69,8 +72,14 @@ function collect() {
             ...reading.questions,
             ...load('completion-error', 6),
             ...load('writing', 7),
+            ...load('b1-grammar', 8),
+            ...load('b1-vocabulary', 9),
+            ...load('b1-communication', 10),
+            ...b1Reading.questions,
+            ...load('b1-completion-error', 12),
+            ...load('b1-writing', 13),
         ],
-        passages: reading.passages,
+        passages: [...reading.passages, ...b1Reading.passages],
     };
 }
 
@@ -110,7 +119,7 @@ function finalize(raw) {
                 level: q.level,
                 difficulty: q.difficulty,
                 unit: null,
-                source: 'general_a1_a2',
+                source: sourceOf(q.level),
                 ...(q.passageId ? { passageId: q.passageId } : {}),
                 question: q.question,
                 options: q.options,
@@ -139,7 +148,7 @@ function main() {
 
     const raw = collect();
     const questions = finalize(raw.questions);
-    const passages = raw.passages.map(p => ({ ...p, source: 'general_a1_a2', unit: null }));
+    const passages = raw.passages.map(p => ({ ...p, source: sourceOf(p.level), unit: null }));
 
     fs.mkdirSync(DATA, { recursive: true });
     fs.writeFileSync(QUESTIONS_FILE, JSON.stringify(questions, null, 2) + '\n', 'utf8');
@@ -154,4 +163,4 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { collect, finalize };
+module.exports = { collect, finalize, sourceOf };

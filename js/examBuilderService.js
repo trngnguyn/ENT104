@@ -9,7 +9,7 @@
 
     const PAPERS_KEY = 'ent104.savedPapers.v1';
     const SKILL_ORDER = ['grammar', 'vocabulary', 'communication', 'reading', 'completion_error', 'writing'];
-    const LEVELS = ['A1', 'A2', 'A1-A2'];
+    const LEVELS = ['A1', 'A2', 'A1-A2', 'B1'];
     const DIFFICULTIES = ['easy', 'medium', 'hard'];
     const TYPES = ['completion', 'error', 'choice', 'ordering'];
     const DIMENSIONS = ['none', 'skill', 'type', 'category'];

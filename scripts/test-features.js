@@ -241,13 +241,15 @@ test('7. Ngân hàng không đủ câu: báo số câu hiện có, gợi ý đi�
     assert.ok(!gen.ok && gen.ids.length === 0, 'không được tạo đề thiếu câu');
     assert.strictEqual(JSON.stringify(config), before, 'không được tự sửa cấu hình');
 
+    const readingTotal = qs.questions.filter(q => q.skill === 'reading').length;
+    const want = readingTotal + 10;
     const quota = {
         ...builder.defaultConfig(), total: 40, quotaBy: 'skill',
-        quotas: { skill: { grammar: 10, reading: 160 }, type: {}, category: {} },
+        quotas: { skill: { grammar: 10, reading: want }, type: {}, category: {} },
     };
     const qcheck = builder.check(quota);
-    assert.ok(qcheck.errors.some(e => /Reading: cần 160 câu nhưng chỉ có 150/.test(e.message)));
-    assert.ok(qcheck.errors.some(e => /Tổng số câu đã phân bổ \(170\) khác số câu của đề \(40\)/.test(e.message)));
+    assert.ok(qcheck.errors.some(e => e.message.includes(`Reading: cần ${want} câu nhưng chỉ có ${readingTotal}`)));
+    assert.ok(qcheck.errors.some(e => e.message.includes(`Tổng số câu đã phân bổ (${want + 10}) khác số câu của đề (40)`)));
     assert.ok(!builder.generate(quota).ok);
     const empty = builder.check({ ...builder.defaultConfig(), levels: [] });
     assert.ok(empty.errors.some(e => /trình độ/.test(e.message)));
@@ -314,12 +316,25 @@ test('9. Điểm và thống kê phản ánh đúng câu trả lời; hết gi�
 });
 
 // ---------------------------------------------------------------- 10. Whole bank
-test('10. Hoạt động với ngân hàng 1.000 câu, không ảnh hưởng chức năng cũ', () => {
-    assert.strictEqual(qs.questions.length, 1000);
+test('10. Hoạt động với ngân hàng 1.300 câu (A1–A2 + B1), không ảnh hưởng chức năng cũ', () => {
+    assert.strictEqual(qs.questions.length, 1300);
     assert.strictEqual(qs.skipped.length, 0);
     const builder = new ExamBuilderService(qs, { rand: seeded(10) });
-    const counts = Stats.countBy(qs.questions, q => q.skill);
-    assert.deepStrictEqual(counts, { grammar: 300, vocabulary: 200, communication: 150, reading: 150, completion_error: 100, writing: 100 });
+    const bySkill = list => Stats.countBy(list, q => q.skill);
+    const a12 = qs.questions.filter(q => q.level !== 'B1');
+    const b1 = qs.questions.filter(q => q.level === 'B1');
+    assert.deepStrictEqual(bySkill(a12), { grammar: 300, vocabulary: 200, communication: 150, reading: 150, completion_error: 100, writing: 100 });
+    assert.deepStrictEqual(bySkill(b1), { grammar: 90, vocabulary: 60, communication: 45, reading: 45, completion_error: 30, writing: 30 });
+    assert.ok(b1.every(q => q.source === 'general_b1' && q.unit === null && /-B1-\d{4}$/.test(q.id)));
+    assert.ok(a12.every(q => q.source === 'general_a1_a2'));
+    assert.ok(QuestionService.LEVELS.includes('B1') && ExamBuilderService.LEVELS.includes('B1'));
+    assert.strictEqual(qs.filter({ level: 'B1' }).length, 300);
+    const b1Paper = builder.generate({ ...builder.defaultConfig(), total: 40, levels: ['B1'] });
+    assert.ok(b1Paper.ok && b1Paper.ids.length === 40 && b1Paper.ids.every(id => qs.byId.get(id).level === 'B1'));
+    for (const id of b1Paper.ids) {
+        const q = qs.byId.get(id);
+        if (q.passageId) assert.strictEqual(qs.passages.get(q.passageId).level, 'B1');
+    }
     for (const size of [20, 40, 50]) {
         const ids = builder.quickPaper(qs.filter({ level: 'A1' }), size);
         assert.strictEqual(ids.length, size);
@@ -329,9 +344,9 @@ test('10. Hoạt động với ngân hàng 1.000 câu, không ảnh hưởng ch�
     assert.ok(small.length > 0 && small.length < 50);
     assert.strictEqual(builder.quickPaper(small, 50).length, small.length, 'đề nhanh không vượt quá số câu có thật');
     assert.ok(qs.filter({ query: 'GRAM-A1-0001' }).some(q => q.id === 'GRAM-A1-0001'));
-    const all = builder.generate({ ...builder.defaultConfig(), total: 1000 });
-    assert.ok(all.ok && all.ids.length === 1000 && unique(all.ids));
-    assert.ok(!builder.check({ ...builder.defaultConfig(), total: 1001 }).ok);
+    const all = builder.generate({ ...builder.defaultConfig(), total: 1300 });
+    assert.ok(all.ok && all.ids.length === 1300 && unique(all.ids));
+    assert.ok(!builder.check({ ...builder.defaultConfig(), total: 1301 }).ok);
     const quiz = freshQuiz();
     quiz.answerPractice('GRAM-A1-0001', 0);
     quiz.startExam([qs.byId.get('VOC-A1-0001')], {});

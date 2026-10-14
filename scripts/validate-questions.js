@@ -15,11 +15,14 @@ const SKILLS = {
     grammar: 'GRAM', vocabulary: 'VOC', communication: 'COMM',
     reading: 'READ', completion_error: 'CERR', writing: 'WRIT',
 };
-const LEVEL_CODE = { 'A1': 'A1', 'A2': 'A2', 'A1-A2': 'A12' };
+const LEVEL_CODE = { 'A1': 'A1', 'A2': 'A2', 'A1-A2': 'A12', 'B1': 'B1' };
 const TYPES = ['completion', 'error', 'choice', 'ordering'];
 const DIFFICULTIES = ['easy', 'medium', 'hard'];
 const STATUSES = ['auto_validated', 'ai_reviewed', 'needs_review', 'needs_ent104_verification', 'reviewed'];
-const SOURCES = ['general_a1_a2', 'ent104_verified'];
+const SOURCES = ['general_a1_a2', 'general_b1', 'ent104_verified'];
+// Nguồn tổng quát phải khớp trình độ; 'ent104_verified' không ràng buộc trình độ.
+const GENERAL_SOURCE_OF = level => (level === 'B1' ? 'general_b1' : 'general_a1_a2');
+const isGeneral = source => source === 'general_a1_a2' || source === 'general_b1';
 const REQUIRED = ['id', 'skill', 'type', 'category', 'level', 'difficulty', 'unit', 'source',
     'question', 'options', 'answer', 'explanation', 'tags', 'status'];
 const BLANK = '______';
@@ -51,6 +54,7 @@ function validate(questions, passages, { checkBundle = false } = {}) {
     const passageIds = new Set();
     for (const p of passages || []) {
         if (!p.id || !p.title || !p.text || !p.level) err(p.id || '(passage)', 'bài đọc thiếu id/title/text/level');
+        if (isGeneral(p.source) && p.source !== GENERAL_SOURCE_OF(p.level)) err(p.id, `bài đọc trình độ '${p.level}' phải có source '${GENERAL_SOURCE_OF(p.level)}'`);
         if (passageIds.has(p.id)) err(p.id, 'trùng ID bài đọc');
         passageIds.add(p.id);
     }
@@ -71,11 +75,12 @@ function validate(questions, passages, { checkBundle = false } = {}) {
         if (!DIFFICULTIES.includes(q.difficulty)) err(id, `difficulty không hợp lệ '${q.difficulty}'`);
         if (!STATUSES.includes(q.status)) err(id, `status không hợp lệ '${q.status}'`);
         if (!SOURCES.includes(q.source)) err(id, `source không hợp lệ '${q.source}'`);
-        if (q.source === 'general_a1_a2' && q.unit !== null) err(id, "câu nguồn 'general_a1_a2' phải có unit = null");
+        if (isGeneral(q.source) && q.unit !== null) err(id, `câu nguồn '${q.source}' phải có unit = null`);
+        if (isGeneral(q.source) && LEVEL_CODE[q.level] && q.source !== GENERAL_SOURCE_OF(q.level)) err(id, `câu trình độ '${q.level}' phải có source '${GENERAL_SOURCE_OF(q.level)}'`);
         if (!Array.isArray(q.tags)) err(id, 'tags phải là mảng');
         if (typeof q.category !== 'string' || !q.category.trim()) err(id, 'category rỗng');
 
-        const m = /^([A-Z]+)-(A1|A2|A12)-(\d{4})$/.exec(q.id || '');
+        const m = /^([A-Z]+)-(A1|A2|A12|B1)-(\d{4})$/.exec(q.id || '');
         if (!m) err(id, 'ID sai định dạng (VD: GRAM-A1-0001)');
         else {
             if (SKILLS[q.skill] && m[1] !== SKILLS[q.skill]) err(id, `tiền tố ID '${m[1]}' không khớp skill '${q.skill}'`);
@@ -92,7 +97,7 @@ function validate(questions, passages, { checkBundle = false } = {}) {
         if (!Number.isInteger(q.answer) || q.answer < 0 || q.answer > 3) err(id, `answer không hợp lệ '${q.answer}'`);
         if (typeof q.question !== 'string' || !q.question.trim()) err(id, 'nội dung câu hỏi rỗng');
         if (typeof q.explanation !== 'string' || q.explanation.trim().length < 15) err(id, 'giải thích quá ngắn hoặc rỗng');
-        else if (q.explanation.length > 400) warn(id, 'giải thích dài (>400 ký tự) – nên rút gọn cho trình độ A1–A2');
+        else if (q.explanation.length > 400) warn(id, 'giải thích dài (>400 ký tự) – nên rút gọn');
         if (q.status === 'needs_review' && !q.reviewNote) warn(id, "status 'needs_review' nhưng không có reviewNote");
 
         if (!Array.isArray(opts) || opts.length !== 4 || !Number.isInteger(q.answer)) continue;

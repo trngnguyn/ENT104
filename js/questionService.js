@@ -14,7 +14,7 @@
         { key: 'completion_error', label: 'Completion & Error', icon: 'fa-pen-to-square' },
         { key: 'writing', label: 'Ordering & Writing', icon: 'fa-list-ol' },
     ];
-    const LEVELS = ['A1', 'A2', 'A1-A2'];
+    const LEVELS = ['A1', 'A2', 'A1-A2', 'B1'];
     const TYPE_LABELS = {
         completion: 'Sentence Completion',
         error: 'Error Identification',
