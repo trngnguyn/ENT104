@@ -77,6 +77,8 @@ function getConfig(env = {}) {
         port: num(env.PORT, 8080, 0),
         trustProxy: env.TRUST_PROXY === 'true',
         allowedOrigins: parseOrigins(env.ALLOWED_ORIGINS),
+        /** Mật khẩu vào Writing; để trống = không yêu cầu. Trên Worker đặt bằng secret, không ghi vào wrangler.toml. */
+        accessCode: str('WRITING_ACCESS_CODE'),
         ai,
         limits: {
             perMinute: num(env.WRITING_RATE_PER_MINUTE, 5, 1),

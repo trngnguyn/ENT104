@@ -3,7 +3,8 @@
 /**
  * API Writing độc lập nền tảng – dùng chung cho máy chủ Node (server/app.js) và Cloudflare Worker (worker/index.js):
  *   GET  /api/writing/status
- *   POST /api/writing/feedback   { taskId, text }
+ *   POST /api/writing/unlock     (header X-Access-Code) – kiểm tra mật khẩu Writing
+ *   POST /api/writing/feedback   { taskId, text } (header X-Access-Code khi có WRITING_ACCESS_CODE)
  * Trang khác domain chỉ gọi được khi origin nằm trong ALLOWED_ORIGINS (vd. trang GitHub Pages).
  */
 
@@ -29,6 +30,19 @@ const AI_ERROR_RESPONSES = {
     unsupported: [500, 'Máy chủ cần Node.js 18 trở lên để gọi AI.'],
 };
 
+/** Sai mật khẩu quá ACCESS_MAX_FAILS lần trong ACCESS_WINDOW_MS thì khoá IP đó đến hết khoảng thời gian. */
+const ACCESS_MAX_FAILS = 10;
+const ACCESS_WINDOW_MS = 15 * 60 * 1000;
+
+/** So sánh không phụ thuộc vị trí ký tự sai đầu tiên (tránh đoán mật khẩu qua thời gian phản hồi). */
+function safeEqual(a, b) {
+    const x = String(a);
+    const y = String(b);
+    let diff = x.length ^ y.length;
+    for (let i = 0; i < Math.max(x.length, y.length); i++) diff |= (x.charCodeAt(i) || 0) ^ (y.charCodeAt(i) || 0);
+    return diff === 0;
+}
+
 class HttpError extends Error {
     constructor(status, code, message, headers) {
         super(message);
@@ -41,7 +55,29 @@ class HttpError extends Error {
 function createWritingApi({ config, tasks, fetchImpl = globalThis.fetch, log = console, now = Date.now }) {
     const limiter = createRateLimiter({ ...config.limits, now });
     const allowList = new Set(config.allowedOrigins || []);
+    const accessFails = new Map();
     let active = 0;
+
+    /** Bỏ qua nếu không đặt mật khẩu; sai → 401, sai quá nhiều → 429. */
+    function assertAccess(req) {
+        if (!config.accessCode) return;
+        const ip = req.clientIp || 'unknown';
+        const t = now();
+        let rec = accessFails.get(ip);
+        if (rec && t >= rec.resetAt) rec = null;
+        if (rec && rec.count >= ACCESS_MAX_FAILS) {
+            const wait = Math.ceil((rec.resetAt - t) / 60000);
+            throw new HttpError(429, 'access_locked', `Nhập sai mật khẩu quá nhiều lần. Vui lòng thử lại sau ${wait} phút.`,
+                { 'Retry-After': String(Math.ceil((rec.resetAt - t) / 1000)) });
+        }
+        const code = req.headers['x-access-code'];
+        if (typeof code === 'string' && code && safeEqual(code.trim(), config.accessCode)) return;
+        if (code) {
+            if (accessFails.size > 10000) accessFails.clear();
+            accessFails.set(ip, rec ? { ...rec, count: rec.count + 1 } : { count: 1, resetAt: t + ACCESS_WINDOW_MS });
+        }
+        throw new HttpError(401, 'access_denied', code ? 'Mật khẩu không đúng.' : 'Cần nhập mật khẩu để dùng Writing.');
+    }
 
     /** 'same' | 'allowed' | 'none' (không có Origin) | 'denied'. */
     function originKind(headers) {
@@ -73,6 +109,7 @@ function createWritingApi({ config, tasks, fetchImpl = globalThis.fetch, log = c
             provider: ai.enabled ? (ai.provider === 'mock' ? 'mock' : 'openai-compatible') : null,
             model: ai.enabled && ai.provider !== 'mock' ? ai.model : null,
             message: ai.message || null,
+            accessRequired: !!config.accessCode,
             limits: { ...W.LIMITS, perMinute: config.limits.perMinute, perDay: config.limits.perDay },
         };
     }
@@ -94,6 +131,7 @@ function createWritingApi({ config, tasks, fetchImpl = globalThis.fetch, log = c
             throw new HttpError(415, 'unsupported_media_type', 'Yêu cầu phải gửi dạng JSON.');
         }
         const raw = await req.readBody();
+        assertAccess(req);
         let body;
         try {
             body = JSON.parse(raw);
@@ -152,7 +190,7 @@ function createWritingApi({ config, tasks, fetchImpl = globalThis.fetch, log = c
                     ...SECURITY_HEADERS,
                     ...corsHeaders(headers),
                     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-                    'Access-Control-Allow-Headers': 'Content-Type',
+                    'Access-Control-Allow-Headers': 'Content-Type, X-Access-Code',
                     'Access-Control-Max-Age': '86400',
                 },
                 body: '',
@@ -161,6 +199,12 @@ function createWritingApi({ config, tasks, fetchImpl = globalThis.fetch, log = c
         if (pathname === '/api/writing/status') {
             if (method !== 'GET') throw new HttpError(405, 'method_not_allowed', 'Phương thức không được hỗ trợ.', { Allow: 'GET' });
             return json(200, status(), headers);
+        }
+        if (pathname === '/api/writing/unlock') {
+            if (method !== 'POST') throw new HttpError(405, 'method_not_allowed', 'Phương thức không được hỗ trợ.', { Allow: 'POST' });
+            assertOrigin(headers);
+            assertAccess(req);
+            return json(200, { ok: true }, headers);
         }
         if (pathname === '/api/writing/feedback') {
             if (method !== 'POST') throw new HttpError(405, 'method_not_allowed', 'Phương thức không được hỗ trợ.', { Allow: 'POST' });

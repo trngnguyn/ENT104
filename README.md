@@ -50,6 +50,7 @@ GitHub Pages chỉ phục vụ file tĩnh nên không chạy được backend, v
 
 Lưu ý:
 - Sửa đề trong `data/writing-tasks.json` thì phải chạy lại `npx wrangler deploy` (Worker đóng gói đề lúc deploy để tự kiểm tra `taskId`).
+- **Mật khẩu vào Writing:** đặt / đổi bằng `npx wrangler secret put WRITING_ACCESS_CODE` (xoá: `npx wrangler secret delete WRITING_ACCESS_CODE`). Máy chủ kiểm tra mật khẩu ở mọi lần chấm bài – trang web chỉ hiện ô nhập, mật khẩu không nằm trong mã nguồn công khai. Nhập đúng một lần thì trình duyệt nhớ; đổi mật khẩu thì học sinh phải nhập lại. Sai 10 lần trong 15 phút thì IP đó bị khoá tạm thời. Khi chạy `npm start`, đặt `WRITING_ACCESS_CODE` trong `.env`.
 - Đổi khoá: chạy lại `npx wrangler secret put AI_API_KEY`. Xem log lỗi chấm bài: `npx wrangler tail`.
 - Lần đầu deploy, wrangler yêu cầu đăng ký subdomain `workers.dev` (miễn phí) – phải chạy `npx wrangler deploy` trong terminal và trả lời `y`.
 - Tự deploy khi `git push`: trên Cloudflare, mở Worker `ent104-writing` → **Settings → Build** → kết nối repo GitHub, branch `main`, **Root directory để trống**, Build command để trống, Deploy command `npx wrangler deploy`. Nhờ `wrangler.toml` ở thư mục gốc, bản build chỉ deploy Worker chấm bài (không đưa cả repo lên thành site tĩnh); secret `AI_API_KEY` giữ nguyên.

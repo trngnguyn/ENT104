@@ -34,6 +34,7 @@
     /** Giới hạn cứng – server từ chối bài ngoài khoảng này (giới hạn chi phí gọi AI). */
     const LIMITS = { minWords: 20, maxWords: 400, maxChars: 3000 };
     const STORE_KEY = 'ent104.writing.v1';
+    const ACCESS_KEY = 'ent104.writing.access';
     const MAX_ATTEMPTS_PER_TASK = 5;
     const REQUEST_TIMEOUT_MS = 90000;
 
@@ -205,6 +206,36 @@
             }
         }
 
+        /** Mật khẩu Writing đã nhập đúng (lưu trên trình duyệt này), hoặc ''. */
+        get accessCode() {
+            return (this.storage && this.storage.get(ACCESS_KEY, '')) || '';
+        }
+
+        set accessCode(code) {
+            if (this.storage) this.storage.set(ACCESS_KEY, code || '');
+        }
+
+        _headers(extra = {}) {
+            return this.accessCode ? { ...extra, 'X-Access-Code': this.accessCode } : extra;
+        }
+
+        /** Kiểm tra mật khẩu với máy chủ; đúng thì lưu lại. Sai / bị khoá → ném lỗi kèm thông báo. */
+        async unlock(code) {
+            const value = String(code || '').trim();
+            if (!value) throw new Error('Hãy nhập mật khẩu.');
+            let res;
+            try {
+                res = await this.fetch(`${this.apiBase}api/writing/unlock`, { method: 'POST', headers: { 'X-Access-Code': value } });
+            } catch (e) {
+                throw new Error('Không kết nối được máy chủ chấm bài.');
+            }
+            let body = null;
+            try { body = await res.json(); } catch (e) { /* không phải JSON */ }
+            if (!res.ok) throw new Error((body && body.error && body.error.message) || `Máy chủ trả lỗi (HTTP ${res.status}).`);
+            this.accessCode = value;
+            return true;
+        }
+
         async requestFeedback(taskId, text, { signal } = {}) {
             const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
             const timer = controller ? setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS) : null;
@@ -213,7 +244,7 @@
             try {
                 res = await this.fetch(`${this.apiBase}api/writing/feedback`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: this._headers({ 'Content-Type': 'application/json' }),
                     body: JSON.stringify({ taskId, text }),
                     signal: controller ? controller.signal : undefined,
                 });
@@ -227,7 +258,12 @@
             try { body = await res.json(); } catch (e) { /* phản hồi không phải JSON */ }
             if (!res.ok || !body || !body.feedback) {
                 const msg = body && body.error && body.error.message;
-                throw new Error(msg || `Máy chủ trả lỗi (HTTP ${res.status}).`);
+                const err = new Error(msg || `Máy chủ trả lỗi (HTTP ${res.status}).`);
+                if (body && body.error && body.error.code === 'access_denied') {
+                    this.accessCode = '';
+                    err.locked = true;
+                }
+                throw err;
             }
             return body.feedback;
         }

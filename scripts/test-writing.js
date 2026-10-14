@@ -336,6 +336,64 @@ async function main() {
         }
     });
 
+    await test('14b. Mật khẩu Writing: thiếu / sai → 401, đúng → chấm được, sai quá 10 lần → khoá; trình duyệt lưu mật khẩu', async () => {
+        const CODE = 'test-code-42';
+        const app = createApp({ config: getConfig({ AI_PROVIDER: 'mock', ALLOWED_ORIGINS: PAGES, WRITING_ACCESS_CODE: CODE }), tasks, log: silent });
+        await new Promise(r => app.listen(0, '127.0.0.1', r));
+        const base = `http://127.0.0.1:${app.address().port}/`;
+        const post = (path, code, ip) => fetch(`${base}api/writing/${path}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', Origin: PAGES,
+                ...(code === undefined ? {} : { 'X-Access-Code': code }),
+                ...(ip ? { 'X-Forwarded-For': ip } : {}),
+            },
+            body: JSON.stringify({ taskId: taskA1.id, text: essay }),
+        });
+        try {
+            assert.strictEqual((await (await fetch(`${base}api/writing/status`)).json()).accessRequired, true);
+            const pre = await fetch(`${base}api/writing/feedback`, { method: 'OPTIONS', headers: { Origin: PAGES } });
+            assert.ok(/x-access-code/i.test(pre.headers.get('access-control-allow-headers')));
+
+            assert.strictEqual((await post('feedback')).status, 401);
+            const wrong = await post('feedback', '0000');
+            assert.strictEqual(wrong.status, 401);
+            assert.strictEqual((await wrong.json()).error.code, 'access_denied');
+            assert.strictEqual((await post('feedback', CODE)).status, 200);
+            assert.strictEqual((await post('unlock', CODE)).status, 200);
+
+            memory.clear();
+            const svc = new W({ storage: fakeStorage, apiBase: base, fetchImpl: (url, init = {}) => fetch(url, { ...init, headers: { Origin: PAGES, ...(init.headers || {}) } }) });
+            await assert.rejects(() => svc.requestFeedback(taskA1.id, essay), e => e.locked === true);
+            await assert.rejects(() => svc.unlock(''), /nhập mật khẩu/);
+
+            for (let i = 0; i < 9; i++) await post('unlock', `bad${i}`);
+            const blocked = await post('unlock', CODE);
+            assert.strictEqual(blocked.status, 429, 'sai 10 lần thì khoá kể cả khi nhập đúng');
+            assert.strictEqual((await blocked.json()).error.code, 'access_locked');
+
+            const open = getConfig({ AI_PROVIDER: 'mock' });
+            assert.strictEqual(open.accessCode, '');
+        } finally {
+            app.close();
+        }
+
+        const fresh = createApp({ config: getConfig({ AI_PROVIDER: 'mock', ALLOWED_ORIGINS: PAGES, WRITING_ACCESS_CODE: CODE }), tasks, log: silent });
+        await new Promise(r => fresh.listen(0, '127.0.0.1', r));
+        const freshBase = `http://127.0.0.1:${fresh.address().port}/`;
+        try {
+            memory.clear();
+            const svc = new W({ storage: fakeStorage, apiBase: freshBase, fetchImpl: (url, init = {}) => fetch(url, { ...init, headers: { Origin: PAGES, ...(init.headers || {}) } }) });
+            await assert.rejects(() => svc.unlock('sai'), /không đúng/);
+            assert.strictEqual(svc.accessCode, '');
+            assert.ok(await svc.unlock(` ${CODE} `));
+            assert.strictEqual(svc.accessCode, CODE);
+            assert.ok((await svc.requestFeedback(taskA1.id, essay)).meta.demo, 'gửi kèm mật khẩu đã lưu');
+        } finally {
+            fresh.close();
+        }
+    });
+
     await test('15. Cloudflare Worker: cùng API, khoá chỉ gửi tới AI, CORS, giới hạn kích thước', async () => {
         const { default: worker } = await import('../worker/index.js');
         const env = { AI_API_KEY: SECRET, AI_MODEL: 'gemini-test', AI_BASE_URL: 'https://ai.example/v1', ALLOWED_ORIGINS: PAGES };
