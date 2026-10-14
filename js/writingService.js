@@ -24,6 +24,12 @@
         word_order: 'Trật tự từ',
         style: 'Văn phong',
     };
+    /** Nhóm lỗi để hiển thị: ngữ pháp (cả dấu câu, trật tự từ) và từ vựng (cả chính tả, văn phong). */
+    const CORRECTION_GROUPS = {
+        grammar: { label: 'Lỗi ngữ pháp', types: ['grammar', 'word_order', 'punctuation'] },
+        vocabulary: { label: 'Lỗi từ vựng', types: ['vocabulary', 'spelling', 'style'] },
+    };
+    const correctionGroup = type => (CORRECTION_GROUPS.vocabulary.types.includes(type) ? 'vocabulary' : 'grammar');
     const MAX_SCORE = 10;
     /** Giới hạn cứng – server từ chối bài ngoài khoảng này (giới hạn chi phí gọi AI). */
     const LIMITS = { minWords: 20, maxWords: 400, maxChars: 3000 };
@@ -296,8 +302,8 @@
     }
 
     Object.assign(WritingService, {
-        LEVELS, TYPES, CRITERIA, CORRECTION_TYPES, MAX_SCORE, LIMITS, STORE_KEY,
-        countWords, checkSubmission, lengthCap, overallScore, locateCorrections, segments, validateTask,
+        LEVELS, TYPES, CRITERIA, CORRECTION_TYPES, CORRECTION_GROUPS, MAX_SCORE, LIMITS, STORE_KEY,
+        correctionGroup, countWords, checkSubmission, lengthCap, overallScore, locateCorrections, segments, validateTask,
     });
 
     global.WritingService = WritingService;

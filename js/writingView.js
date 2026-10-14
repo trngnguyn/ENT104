@@ -1,6 +1,7 @@
 /**
  * Giao diện Writing: chọn đề (đoạn văn miêu tả / kể chuyện ~150 từ), viết bài, gửi chấm qua backend,
- * xem điểm theo tiêu chí, lỗi được đánh dấu trong bài, bản đã sửa và bài viết tham khảo.
+ * xem kết quả chia hai cột: bài của học sinh (bản gốc tô lỗi / bản đã sửa) và nhận xét của AI
+ * (4 tiêu chí, lỗi ngữ pháp, lỗi từ vựng, gợi ý cải thiện, bài sửa hoàn chỉnh, bài tham khảo).
  * Mọi nội dung do AI trả về đều được escape trước khi hiển thị.
  */
 (function (global) {
@@ -40,6 +41,7 @@
             submitting: false,
             viewing: null,
             focus: null,
+            textMode: 'original',
         };
         let bound = false;
         let draftTimer = null;
@@ -98,6 +100,7 @@
             renderSummary();
             if (s.loadError) {
                 $('w-main').innerHTML = `<div class="card !border-rose-200 p-8 text-sm text-rose-700"><i class="fa-solid fa-triangle-exclamation mr-1"></i> ${esc(s.loadError)}</div>`;
+                $('w-feedback').innerHTML = '';
                 return;
             }
             renderMain();
@@ -161,6 +164,7 @@
             const t = task();
             if (!t) {
                 $('w-main').innerHTML = '<div class="card p-10 text-center text-sm text-slate-500">Chọn một đề ở cột bên trái.</div>';
+                $('w-feedback').innerHTML = '';
                 return;
             }
             const draft = service.draft(t.id);
@@ -183,7 +187,6 @@
                         </div>
                     </div>
                 </div>
-                <div id="w-feedback"></div>
                 <div id="w-history"></div>`;
             updateCounter();
             renderFeedback();
@@ -259,63 +262,149 @@
             const { text, feedback: f, createdAt } = s.viewing;
             const located = W.locateCorrections(text, f.corrections || [])
                 .filter(c => c.start !== null)
-                .sort((a, b) => a.start - b.start);
-            const segs = W.segments(text, located);
-            const marked = segs.map(seg => seg.index === null ? esc(seg.text)
-                : `<mark class="w-err${s.focus === seg.index ? ' is-focus' : ''}" data-w-corr="${seg.index}" title="→ ${esc(located[seg.index].corrected || '(bỏ)')}">${esc(seg.text)}<sup>${seg.index + 1}</sup></mark>`).join('');
+                .sort((a, b) => a.start - b.start)
+                .map((c, i) => ({ ...c, i, group: W.correctionGroup(c.type) }));
+            const groups = {
+                grammar: located.filter(c => c.group === 'grammar'),
+                vocabulary: located.filter(c => c.group === 'vocabulary'),
+            };
+            box.innerHTML = `<div class="grid gap-6 lg:grid-cols-2 items-start">
+                ${studentPane(text, f, located, groups)}
+                ${botPane(f, groups, createdAt)}
+            </div>`;
+        }
+
+        /** Cột trái: bài của học sinh – xem bản gốc (tô lỗi) hoặc bản đã sửa (gạch lỗi, chèn phần sửa). */
+        function studentPane(text, f, located, groups) {
+            const mode = s.textMode;
+            const body = W.segments(text, located).map(seg => {
+                if (seg.index === null) return esc(seg.text);
+                const c = located[seg.index];
+                const cls = `${c.group === 'vocabulary' ? ' w-v' : ''}${s.focus === c.i ? ' is-focus' : ''}`;
+                const attrs = `data-w-corr="${c.i}" title="${esc(`${c.i + 1}. ${W.CORRECTION_TYPES[c.type] || c.type}: ${c.original} → ${c.corrected || '(bỏ)'}`)}"`;
+                return mode === 'corrected'
+                    ? `<span class="w-fix${cls}" ${attrs}><del>${esc(seg.text)}</del>${c.corrected ? `<ins>${esc(c.corrected)}</ins>` : ''}<sup>${c.i + 1}</sup></span>`
+                    : `<mark class="w-err${cls}" ${attrs}>${esc(seg.text)}<sup>${c.i + 1}</sup></mark>`;
+            }).join('');
+            const tab = (key, label, icon) => `<button data-w-mode="${key}" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${mode === key
+                ? 'bg-white text-blue-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'}"><i class="fa-solid ${icon} mr-1"></i>${label}</button>`;
+            return `<div class="card overflow-hidden flex flex-col lg:sticky lg:top-[5.25rem] lg:max-h-[calc(100vh-6.5rem)]">
+                <div class="px-5 py-3.5 border-b border-slate-200/70 flex flex-wrap items-center justify-between gap-2">
+                    <h3 class="font-semibold text-slate-900"><i class="fa-solid fa-user-pen text-blue-600 mr-1.5"></i>Bài làm của bạn</h3>
+                    <div class="flex p-1 rounded-xl bg-slate-100">${tab('original', 'Bài gốc', 'fa-highlighter')}${tab('corrected', 'Bài đã sửa', 'fa-spell-check')}</div>
+                </div>
+                <div class="px-5 pt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-slate-500">
+                    <span><span class="inline-block w-2.5 h-2.5 rounded-sm bg-rose-200 mr-1 align-[-1px]"></span>Ngữ pháp (${groups.grammar.length})</span>
+                    <span><span class="inline-block w-2.5 h-2.5 rounded-sm bg-indigo-200 mr-1 align-[-1px]"></span>Từ vựng (${groups.vocabulary.length})</span>
+                    ${mode === 'corrected' ? '<span><del class="text-rose-600">lỗi</del> → <ins class="no-underline font-semibold text-emerald-700">sửa</ins></span>' : ''}
+                    <span class="ml-auto tabular-nums">${f.wordCount} từ</span>
+                </div>
+                <div class="flex-1 min-h-0 overflow-y-auto custom-scrollbar px-5 py-4">
+                    <div class="text-[15px] leading-loose text-slate-800 whitespace-pre-wrap">${body}</div>
+                    ${located.length ? '' : '<p class="text-xs text-emerald-700 mt-3"><i class="fa-solid fa-check mr-1"></i>Không phát hiện lỗi cần sửa.</p>'}
+                </div>
+                <div class="px-5 py-3 border-t border-slate-200/70 flex flex-wrap items-center justify-between gap-2">
+                    <p class="text-[11px] text-slate-400">${located.length ? 'Bấm vào chỗ được đánh dấu để xem giải thích.' : ''}</p>
+                    <button data-w-use="mine" class="btn-secondary !py-1.5 !text-xs"><i class="fa-solid fa-rotate-left"></i> Sửa tiếp bài này</button>
+                </div>
+            </div>`;
+        }
+
+        /** Cột phải: nhận xét và bài sửa của AI, theo 5 mục. */
+        function botPane(f, groups, createdAt) {
             const tone = scoreTone(f.score);
             const demo = f.meta && f.meta.demo;
+            const sug = f.suggestions || { grammar: [], vocabulary: [] };
+            const sections = [
+                ['overview', 'Tổng quan 4 tiêu chí'],
+                ['grammar', `Lỗi ngữ pháp & sửa sai (${groups.grammar.length})`],
+                ['vocabulary', `Lỗi từ vựng & sửa sai (${groups.vocabulary.length})`],
+                ['tips', 'Ngữ pháp & từ vựng gợi ý'],
+                ['final', 'Bài sửa hoàn chỉnh'],
+            ];
+            const head = id => {
+                const n = sections.findIndex(x => x[0] === id);
+                return `<h4 class="flex items-center gap-2 text-sm font-bold text-slate-900 mb-3">
+                    <span class="w-6 h-6 rounded-lg bg-blue-50 text-blue-700 text-xs flex items-center justify-center">${n + 1}</span>${esc(sections[n][1])}</h4>`;
+            };
+            const section = (id, content) => `<section id="w-sec-${id}" class="scroll-mt-24${id === 'overview' ? '' : ' border-t border-slate-200/70 pt-5'}">${head(id)}${content}</section>`;
 
-            box.innerHTML = `<div class="card overflow-hidden">
-                <div class="px-5 sm:px-6 py-4 border-b border-slate-200/70 flex flex-wrap items-center justify-between gap-2">
-                    <h3 class="font-semibold text-slate-900"><i class="fa-solid fa-clipboard-check text-blue-600 mr-1.5"></i>Kết quả chấm</h3>
+            return `<div class="card overflow-hidden">
+                <div class="px-5 py-3.5 border-b border-slate-200/70 flex flex-wrap items-center justify-between gap-2">
+                    <h3 class="font-semibold text-slate-900"><i class="fa-solid fa-robot text-blue-600 mr-1.5"></i>Nhận xét & bài sửa của AI</h3>
                     <span class="text-[11px] text-slate-400">${fmtDate(createdAt)}${f.meta && f.meta.model ? ` • ${esc(f.meta.model)}` : ''}</span>
                 </div>
-                <div class="p-5 sm:p-6 flex flex-col gap-6">
+                <nav class="px-5 pt-3 flex flex-wrap gap-1.5">${sections.map(([id, title], n) => `<button data-w-jump="w-sec-${id}"
+                    class="text-[11px] font-medium px-2 py-1 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50">${n + 1}. ${esc(title.replace(/ \(\d+\)$/, ''))}</button>`).join('')}</nav>
+                <div class="p-5 flex flex-col gap-5">
                     ${demo ? '<p class="text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-lg p-3"><i class="fa-solid fa-flask mr-1"></i><b>DEMO:</b> phản hồi tạo bằng quy tắc đơn giản để thử giao diện, không phải chấm bằng AI.</p>' : ''}
-                    <div class="grid gap-5 sm:grid-cols-[150px_minmax(0,1fr)] items-center">
-                        <div class="text-center rounded-2xl bg-${tone}-50 border border-${tone}-100 py-4">
-                            <span class="eyebrow">Điểm tổng</span>
-                            <span class="block font-extrabold text-4xl text-${tone}-600 tabular-nums mt-1">${fmtScore(f.score)}<span class="text-lg text-slate-400">/${f.maxScore}</span></span>
-                            <span class="text-[11px] text-slate-500">${f.wordCount} từ</span>
-                        </div>
-                        <div class="space-y-3">${W.CRITERIA.map(c => criterionRow(c, f.criteria[c.key], f)).join('')}</div>
-                    </div>
-                    ${f.summary ? `<p class="text-sm text-slate-700 leading-relaxed">${esc(f.summary)}</p>` : ''}
-                    ${f.lengthCapped ? `<p class="text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-lg p-3"><i class="fa-solid fa-ruler-horizontal mr-1"></i>Đoạn văn có ${f.wordCount} từ, chưa đạt yêu cầu khoảng ${f.targetWords} từ nên điểm "Hoàn thành yêu cầu" bị giới hạn tối đa ${f.lengthCap}/${f.maxScore}.</p>` : ''}
-                    ${(f.strengths.length || f.improvements.length) ? `<div class="grid gap-4 sm:grid-cols-2">
-                        ${listBlock('Điểm tốt', 'fa-thumbs-up', 'emerald', f.strengths)}
-                        ${listBlock('Cần cải thiện', 'fa-arrow-trend-up', 'amber', f.improvements)}
-                    </div>` : ''}
-                    <div>
-                        <p class="eyebrow mb-2">Bài của bạn – lỗi được đánh dấu (${located.length})</p>
-                        <div class="text-[15px] leading-loose text-slate-800 whitespace-pre-wrap rounded-xl border border-slate-200/70 bg-slate-50/60 p-4">${marked}</div>
-                        ${located.length ? '<p class="text-[11px] text-slate-400 mt-1">Bấm vào phần được đánh dấu để xem cách sửa và giải thích.</p>' : '<p class="text-xs text-emerald-700 mt-2"><i class="fa-solid fa-check mr-1"></i>Không phát hiện lỗi cần sửa.</p>'}
-                    </div>
-                    ${located.length ? `<div>
-                        <p class="eyebrow mb-2">Sửa lỗi & giải thích</p>
-                        <ol class="space-y-2">${located.map((c, i) => `<li id="w-corr-${i}" data-w-corr="${i}" class="cursor-pointer rounded-xl border px-4 py-3 text-sm transition-colors ${s.focus === i ? 'border-blue-300 bg-blue-50/60' : 'border-slate-200/70 hover:bg-slate-50'}">
-                            <div class="flex flex-wrap items-center gap-2">
-                                <span class="w-5 h-5 rounded-full bg-blue-600 text-white text-[10px] font-bold flex items-center justify-center">${i + 1}</span>
-                                <span class="text-[11px] font-semibold px-1.5 py-0.5 rounded-md ${CORRECTION_STYLE[c.type] || CORRECTION_STYLE.style}">${esc(W.CORRECTION_TYPES[c.type] || c.type)}</span>
-                                <del class="text-rose-600">${esc(c.original)}</del><i class="fa-solid fa-arrow-right text-[10px] text-slate-400"></i><ins class="no-underline font-semibold text-emerald-700">${esc(c.corrected || '(bỏ)')}</ins>
+                    ${section('overview', `
+                        <div class="grid gap-4 sm:grid-cols-[120px_minmax(0,1fr)] items-start">
+                            <div class="text-center rounded-2xl bg-${tone}-50 border border-${tone}-100 py-3">
+                                <span class="eyebrow">Điểm tổng</span>
+                                <span class="block font-extrabold text-3xl text-${tone}-600 tabular-nums mt-1">${fmtScore(f.score)}<span class="text-base text-slate-400">/${f.maxScore}</span></span>
+                                <span class="text-[11px] text-slate-500">${f.wordCount} từ</span>
                             </div>
-                            <p class="mt-1.5 text-slate-600">${esc(c.explanation)}</p>
-                        </li>`).join('')}</ol>
-                        ${f.meta && f.meta.unmatchedCorrections ? `<p class="text-[11px] text-slate-400 mt-2">Đã bỏ ${f.meta.unmatchedCorrections} góp ý của AI vì không khớp nguyên văn với bài viết.</p>` : ''}
-                    </div>` : ''}
-                    ${f.correctedText ? textBlock('Bản đã sửa', 'fa-spell-check', 'emerald', f.correctedText, `${W.countWords(f.correctedText)} từ • giữ nguyên ý của bạn, chỉ sửa lỗi`) : ''}
-                    ${f.modelAnswer ? textBlock('Bài viết tham khảo', 'fa-feather-pointed', 'indigo', f.modelAnswer,
-                        `${f.modelAnswerWords} từ${f.modelAnswerInRange ? '' : ' (độ dài chưa đúng yêu cầu)'} • do AI viết – để tham khảo cách diễn đạt, không phải đáp án duy nhất`) : ''}
-                    <div class="flex flex-wrap justify-end gap-2">
-                        ${f.correctedText ? '<button data-w-use="corrected" class="btn-secondary !py-2 !text-xs"><i class="fa-solid fa-pen"></i> Viết lại từ bản đã sửa</button>' : ''}
-                        <button data-w-use="mine" class="btn-secondary !py-2 !text-xs"><i class="fa-solid fa-rotate-left"></i> Sửa tiếp bài này</button>
-                    </div>
+                            <div class="space-y-3">${W.CRITERIA.map(c => criterionRow(c, f.criteria[c.key], f)).join('')}</div>
+                        </div>
+                        ${f.summary ? `<p class="mt-4 text-sm text-slate-700 leading-relaxed">${esc(f.summary)}</p>` : ''}
+                        ${f.lengthCapped ? `<p class="mt-3 text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-lg p-3"><i class="fa-solid fa-ruler-horizontal mr-1"></i>Đoạn văn có ${f.wordCount} từ, chưa đạt yêu cầu khoảng ${f.targetWords} từ nên điểm "Hoàn thành yêu cầu" bị giới hạn tối đa ${f.lengthCap}/${f.maxScore}.</p>` : ''}
+                        ${f.strengths.length ? `<div class="mt-3">${listBlock('Điểm tốt', 'fa-thumbs-up', 'emerald', f.strengths)}</div>` : ''}`)}
+                    ${section('grammar', correctionList(groups.grammar, 'grammar'))}
+                    ${section('vocabulary', correctionList(groups.vocabulary, 'vocabulary'))}
+                    ${section('tips', tipsBlock(sug, f.improvements))}
+                    ${section('final', f.correctedText ? `
+                        <div class="text-[15px] leading-relaxed text-slate-800 whitespace-pre-wrap rounded-xl border border-emerald-100 bg-emerald-50/40 p-4">${esc(f.correctedText)}</div>
+                        <div class="flex flex-wrap items-center justify-between gap-2 mt-2">
+                            <p class="text-[11px] text-slate-400">${W.countWords(f.correctedText)} từ • giữ nguyên ý của bạn, chỉ sửa lỗi</p>
+                            <button data-w-use="corrected" class="btn-secondary !py-1.5 !text-xs"><i class="fa-solid fa-pen"></i> Viết lại từ bài sửa</button>
+                        </div>` : '<p class="text-sm text-slate-500">AI chưa trả về bài sửa hoàn chỉnh – xem chế độ "Bài đã sửa" ở cột bên trái.</p>')}
+                    ${f.modelAnswer ? `<details class="rounded-xl border border-indigo-100 bg-indigo-50/30">
+                        <summary class="cursor-pointer px-4 py-2.5 text-sm font-semibold text-slate-700"><i class="fa-solid fa-feather-pointed text-indigo-600 mr-1.5"></i>Bài viết tham khảo (${f.modelAnswerWords} từ)</summary>
+                        <div class="px-4 pb-4">
+                            <p class="text-[15px] leading-relaxed text-slate-800 whitespace-pre-wrap">${esc(f.modelAnswer)}</p>
+                            <p class="text-[11px] text-slate-400 mt-2">Do AI viết mới${f.modelAnswerInRange ? '' : ' (độ dài chưa đúng yêu cầu)'} – để tham khảo cách diễn đạt, không phải đáp án duy nhất.</p>
+                        </div>
+                    </details>` : ''}
+                    ${f.meta && f.meta.unmatchedCorrections ? `<p class="text-[11px] text-slate-400">Đã bỏ ${f.meta.unmatchedCorrections} góp ý của AI vì không khớp nguyên văn với bài viết.</p>` : ''}
                     <p class="text-[11px] text-slate-400 leading-relaxed border-t border-slate-200/70 pt-3">
                         Điểm do AI ước lượng theo thang tham khảo của ứng dụng (4 tiêu chí, mỗi tiêu chí 0–10; điểm tổng là trung bình). Đây không phải tiêu chí hay điểm chính thức của học phần ENT104.
                         AI có thể chấm hoặc sửa chưa chính xác – hãy hỏi giáo viên khi chưa chắc chắn.
                     </p>
                 </div>
+            </div>`;
+        }
+
+        function correctionList(list, group) {
+            if (!list.length) {
+                return `<p class="text-sm text-emerald-700"><i class="fa-solid fa-check mr-1"></i>Không phát hiện ${group === 'grammar' ? 'lỗi ngữ pháp' : 'lỗi từ vựng'} đáng kể.</p>`;
+            }
+            const badge = group === 'vocabulary' ? 'bg-indigo-600' : 'bg-rose-600';
+            return `<ol class="space-y-2">${list.map(c => `<li id="w-corr-${c.i}" data-w-corr="${c.i}" class="w-item${s.focus === c.i ? ' is-focus' : ''} cursor-pointer rounded-xl border border-slate-200/70 px-4 py-3 text-sm transition-colors hover:bg-slate-50">
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="w-5 h-5 rounded-full ${badge} text-white text-[10px] font-bold flex items-center justify-center">${c.i + 1}</span>
+                    <span class="text-[11px] font-semibold px-1.5 py-0.5 rounded-md ${CORRECTION_STYLE[c.type] || CORRECTION_STYLE.style}">${esc(W.CORRECTION_TYPES[c.type] || c.type)}</span>
+                    <del class="text-rose-600">${esc(c.original)}</del><i class="fa-solid fa-arrow-right text-[10px] text-slate-400"></i><ins class="no-underline font-semibold text-emerald-700">${esc(c.corrected || '(bỏ)')}</ins>
+                </div>
+                <p class="mt-1.5 text-slate-600">${esc(c.explanation)}</p>
+            </li>`).join('')}</ol>`;
+        }
+
+        function tipsBlock(sug, improvements) {
+            const grammar = sug.grammar.length ? `<ul class="space-y-2">${sug.grammar.map(g => `<li class="rounded-xl border border-rose-100 bg-rose-50/40 px-4 py-3 text-sm">
+                    <p class="font-semibold text-slate-900">${esc(g.point)}</p>
+                    ${g.example ? `<p class="mt-1 italic text-slate-700">“${esc(g.example)}”</p>` : ''}
+                    ${g.note ? `<p class="mt-1 text-xs text-slate-500">${esc(g.note)}</p>` : ''}
+                </li>`).join('')}</ul>` : '';
+            const vocabulary = sug.vocabulary.length ? `<div class="grid sm:grid-cols-2 gap-2">${sug.vocabulary.map(v => `<div class="rounded-xl border border-indigo-100 bg-indigo-50/40 px-3 py-2.5 text-sm">
+                    <p><b class="text-indigo-700">${esc(v.item)}</b>${v.meaning ? ` <span class="text-slate-600">– ${esc(v.meaning)}</span>` : ''}</p>
+                    ${v.example ? `<p class="mt-1 text-xs italic text-slate-500">“${esc(v.example)}”</p>` : ''}
+                </div>`).join('')}</div>` : '';
+            return `<div class="flex flex-col gap-4">
+                ${improvements.length ? listBlock('Cần cải thiện', 'fa-arrow-trend-up', 'amber', improvements) : ''}
+                ${grammar ? `<div><p class="eyebrow mb-2"><i class="fa-solid fa-language text-rose-600 mr-1"></i>Cấu trúc ngữ pháp nên dùng</p>${grammar}</div>` : ''}
+                ${vocabulary ? `<div><p class="eyebrow mb-2"><i class="fa-solid fa-book-open text-indigo-600 mr-1"></i>Từ vựng nên dùng</p>${vocabulary}</div>` : ''}
+                ${grammar || vocabulary ? '' : '<p class="text-xs text-slate-500">Lần chấm này chưa có gợi ý ngữ pháp & từ vựng – chấm lại bài để nhận gợi ý.</p>'}
             </div>`;
         }
 
@@ -337,14 +426,6 @@
             return `<div class="rounded-xl border border-${tone}-100 bg-${tone}-50/50 p-4">
                 <p class="text-xs font-bold text-${tone}-700 mb-2"><i class="fa-solid ${icon} mr-1"></i>${title}</p>
                 <ul class="space-y-1.5 text-sm text-slate-700 list-disc list-inside">${items.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
-            </div>`;
-        }
-
-        function textBlock(title, icon, tone, text, note) {
-            return `<div>
-                <p class="eyebrow mb-2"><i class="fa-solid ${icon} text-${tone}-600 mr-1"></i>${title}</p>
-                <div class="text-[15px] leading-relaxed text-slate-800 whitespace-pre-wrap rounded-xl border border-${tone}-100 bg-${tone}-50/40 p-4">${esc(text)}</div>
-                <p class="text-[11px] text-slate-400 mt-1">${esc(note)}</p>
             </div>`;
         }
 
@@ -427,10 +508,11 @@
             }
         }
 
+        /** Đánh dấu lỗi i ở cả hai cột (không vẽ lại để giữ vị trí cuộn) và cuộn tới cột còn lại. */
         function focusCorrection(i, scroll) {
             s.focus = i;
-            renderFeedback();
-            const target = scroll === 'list' ? $(`w-corr-${i}`) : document.querySelector(`mark[data-w-corr="${i}"]`);
+            document.querySelectorAll('#w-feedback [data-w-corr]').forEach(el => el.classList.toggle('is-focus', Number(el.dataset.wCorr) === i));
+            const target = scroll === 'list' ? $(`w-corr-${i}`) : document.querySelector(`#w-feedback :is(mark, .w-fix)[data-w-corr="${i}"]`);
             if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
@@ -468,7 +550,7 @@
                     submit();
                 }
             });
-            main.addEventListener('click', e => {
+            const onClick = e => {
                 if (e.target.closest('#w-submit')) return submit();
                 if (e.target.closest('#w-clear')) {
                     const area = $('w-text');
@@ -478,8 +560,18 @@
                     updateCounter();
                     return area.focus();
                 }
+                const mode = e.target.closest('[data-w-mode]');
+                if (mode) {
+                    s.textMode = mode.dataset.wMode;
+                    return renderFeedback();
+                }
+                const jump = e.target.closest('[data-w-jump]');
+                if (jump) {
+                    const target = $(jump.dataset.wJump);
+                    return target && target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
                 const corr = e.target.closest('[data-w-corr]');
-                if (corr) return focusCorrection(Number(corr.dataset.wCorr), corr.tagName === 'MARK' ? 'list' : 'mark');
+                if (corr) return focusCorrection(Number(corr.dataset.wCorr), corr.classList.contains('w-item') ? 'mark' : 'list');
                 const use = e.target.closest('[data-w-use]');
                 if (use && s.viewing) {
                     const area = $('w-text');
@@ -504,7 +596,9 @@
                     s.viewing = null;
                     render();
                 }
-            });
+            };
+            main.addEventListener('click', onClick);
+            $('w-feedback').addEventListener('click', onClick);
             global.addEventListener('beforeunload', saveDraftNow);
         }
 

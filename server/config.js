@@ -44,7 +44,7 @@ function getConfig(env = {}) {
         model,
         jsonMode: env.AI_JSON_MODE !== 'false',
         timeoutMs: num(env.AI_TIMEOUT_MS, 60000, 1000),
-        maxTokens: num(env.AI_MAX_TOKENS, 3000, 256),
+        maxTokens: num(env.AI_MAX_TOKENS, 6000, 256),
         maxTokensField: ['max_tokens', 'max_completion_tokens', 'none'].includes(env.AI_MAX_TOKENS_FIELD)
             ? env.AI_MAX_TOKENS_FIELD : 'max_tokens',
         temperature: env.AI_TEMPERATURE === undefined || env.AI_TEMPERATURE === '' ? null : num(env.AI_TEMPERATURE, null),

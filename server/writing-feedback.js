@@ -21,7 +21,10 @@ const GENRE_EXPECTATIONS = {
         + 'with past tenses and time connectors (first, then, suddenly, after that, finally); a high point; a concluding sentence with the ending, feeling or lesson.',
 };
 
-const MAX = { comment: 600, summary: 900, listItem: 400, listCount: 5, corrections: 20, phrase: 200, explanation: 500, longText: 5000 };
+const MAX = {
+    comment: 600, summary: 900, listItem: 400, listCount: 5, corrections: 20, phrase: 200, explanation: 500, longText: 5000,
+    grammarTips: 6, vocabularyTips: 10,
+};
 
 /** Kiểm tra danh sách đề và trả về Map id → đề; ném lỗi liệt kê mọi đề không hợp lệ. */
 function parseTasks(list) {
@@ -69,7 +72,9 @@ function buildMessages(task, text) {
         '- "original" MUST be copied character-for-character from the student text (same spelling, case and punctuation).',
         '  Keep it short (one word or a short phrase, at most about 10 words) but long enough to be unambiguous.',
         '- "corrected" is the replacement for exactly that part.',
-        '- "type" is one of: grammar, vocabulary, spelling, punctuation, word_order, style.',
+        '- "type" is one of: grammar (tense, verb form, agreement, articles, prepositions, plurals), word_order,',
+        '  punctuation (incl. capitalization), vocabulary (wrong word, word form, collocation), spelling, style.',
+        '- Find BOTH grammar and vocabulary errors; do not skip wrong word choices or word forms.',
         '- "explanation" is in Vietnamese, 1-2 short sentences, naming the rule simply (e.g. "Sau he/she/it, động từ ở thì hiện tại đơn thêm -s.").',
         '- Do not mark correct alternatives (British vs American spelling, contractions, optional commas) as errors.',
         '',
@@ -79,13 +84,23 @@ function buildMessages(task, text) {
         `  about ${task.targetWords} words (never fewer than ${task.minWords} or more than ${task.maxWords}), natural, covering every required point,`,
         '  with a clear topic sentence and concluding sentence.',
         '',
-        'FEEDBACK LANGUAGE: "comment", "summary", "strengths", "improvements" and "explanation" are written in Vietnamese,',
+        'SUGGESTIONS (REQUIRED, never empty, even for a good text – to help the student write a better version of THIS paragraph,',
+        'at or slightly above the level):',
+        '- "suggestions.grammar": 3-5 grammar structures the student did not use or used incorrectly.',
+        '  "point" = the structure with its form in English (e.g. "Past continuous: was/were + V-ing");',
+        '  "example" = one English sentence about the student\'s own topic using it; "note" = when/why to use it, in Vietnamese.',
+        '- "suggestions.vocabulary": 5-8 words, collocations or linking phrases that could replace weak or repeated words in the text.',
+        '  "item" = the English word/phrase; "meaning" = Vietnamese meaning (mention the word it can replace, if any);',
+        '  "example" = one English sentence about the student\'s topic.',
+        '',
+        'FEEDBACK LANGUAGE: "comment", "summary", "strengths", "improvements", "explanation", "note" and "meaning" are written in Vietnamese,',
         'specific to this text and kind. English examples inside them are fine.',
         '',
         'OUTPUT FORMAT (exact keys):',
         '{"criteria":{"task":{"score":0,"comment":""},"grammar":{"score":0,"comment":""},"vocabulary":{"score":0,"comment":""},"organization":{"score":0,"comment":""}},',
         '"summary":"","strengths":[""],"improvements":[""],',
         '"corrections":[{"original":"","corrected":"","type":"grammar","explanation":""}],',
+        '"suggestions":{"grammar":[{"point":"","example":"","note":""}],"vocabulary":[{"item":"","meaning":"","example":""}]},',
         '"correctedText":"","modelAnswer":""}',
     ].join('\n');
 
@@ -116,6 +131,22 @@ const clean = (value, max) => {
 
 const cleanList = value => (Array.isArray(value) ? value : [])
     .map(x => clean(x, MAX.listItem)).filter(Boolean).slice(0, MAX.listCount);
+
+/** Danh sách object { field: chuỗi }; bỏ mục thiếu trường đầu tiên (trường chính). */
+const cleanItems = (value, fields, max) => (Array.isArray(value) ? value : [])
+    .map(x => (typeof x === 'string' ? { [fields[0]]: x } : x))
+    .filter(x => x && typeof x === 'object')
+    .map(x => Object.fromEntries(fields.map(f => [f, clean(x[f], f === fields[0] ? MAX.phrase : MAX.explanation)])))
+    .filter(x => x[fields[0]])
+    .slice(0, max);
+
+function cleanSuggestions(raw) {
+    const src = raw && typeof raw === 'object' ? raw : {};
+    return {
+        grammar: cleanItems(src.grammar, ['point', 'example', 'note'], MAX.grammarTips),
+        vocabulary: cleanItems(src.vocabulary, ['item', 'meaning', 'example'], MAX.vocabularyTips),
+    };
+}
 
 /** Kiểm tra cấu trúc phản hồi của AI; ném AiError nếu thiếu phần bắt buộc (điểm các tiêu chí). */
 function sanitizeFeedback(raw, { task, text, provider, model }) {
@@ -173,6 +204,7 @@ function sanitizeFeedback(raw, { task, text, provider, model }) {
         strengths: cleanList(raw.strengths),
         improvements: cleanList(raw.improvements),
         corrections,
+        suggestions: cleanSuggestions(raw.suggestions),
         correctedText: clean(raw.correctedText, MAX.longText),
         modelAnswer,
         modelAnswerWords,
@@ -237,9 +269,39 @@ function mockFeedback(task, text) {
         strengths: [lengthNote],
         improvements: ['Cấu hình AI để nhận nhận xét chi tiết về ngữ pháp, từ vựng và nội dung.'],
         corrections,
-        correctedText: '',
+        suggestions: MOCK_SUGGESTIONS[task.type],
+        correctedText: applyCorrections(text, corrections),
         modelAnswer: '',
     };
+}
+
+const MOCK_SUGGESTIONS = {
+    descriptive: {
+        grammar: [
+            { point: 'There is / There are + noun + place', example: 'There is a small desk next to my bed.', note: 'Giới thiệu đồ vật và vị trí của chúng.' },
+            { point: 'Adjective order: opinion + size + color + noun', example: 'It is a lovely big blue room.', note: 'Thứ tự tính từ khi dùng nhiều tính từ trước danh từ.' },
+        ],
+        vocabulary: [
+            { item: 'cozy', meaning: 'ấm cúng (thay cho "nice")', example: 'My bedroom is small but cozy.' },
+            { item: 'next to / opposite', meaning: 'bên cạnh / đối diện', example: 'The bookshelf is opposite the window.' },
+        ],
+    },
+    narrative: {
+        grammar: [
+            { point: 'Past simple: V-ed / irregular verbs', example: 'We went to the park and took many photos.', note: 'Kể lại sự việc đã xảy ra và kết thúc trong quá khứ.' },
+            { point: 'Past continuous: was/were + V-ing', example: 'We were playing games when it started to rain.', note: 'Hành động đang diễn ra thì bị một sự việc khác xen vào.' },
+        ],
+        vocabulary: [
+            { item: 'after that / finally', meaning: 'sau đó / cuối cùng (từ nối thời gian)', example: 'After that, we had lunch together.' },
+            { item: 'delighted', meaning: 'rất vui (thay cho "very happy")', example: 'I was delighted with my present.' },
+        ],
+    },
+};
+
+/** Áp các lỗi đã định vị vào bài để có bản đã sửa (dùng cho chế độ demo). */
+function applyCorrections(text, corrections) {
+    const located = W.locateCorrections(text, corrections).filter(c => c.start !== null);
+    return W.segments(text, located).map(seg => (seg.index === null ? seg.text : located[seg.index].corrected)).join('');
 }
 
 // ---------------------------------------------------------------- điểm vào

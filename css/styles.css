@@ -229,16 +229,55 @@ mark.w-err {
     text-underline-offset: 4px;
     transition: background-color 0.15s ease, box-shadow 0.15s ease;
 }
+mark.w-err.w-v {
+    background: rgb(var(--c-indigo-100));
+    text-decoration-color: rgb(var(--c-indigo-500));
+}
 mark.w-err:hover,
-mark.w-err.is-focus {
+mark.w-err.is-focus,
+.w-fix:hover,
+.w-fix.is-focus {
     background: rgb(var(--c-amber-200));
     box-shadow: 0 0 0 1px rgb(var(--c-amber-500)) inset;
 }
-mark.w-err sup {
+mark.w-err sup,
+.w-fix sup {
     font-size: 0.6rem;
     font-weight: 700;
     color: rgb(var(--c-rose-600));
     margin-left: 1px;
+}
+mark.w-err.w-v sup,
+.w-fix.w-v sup {
+    color: rgb(var(--c-indigo-600));
+}
+
+/* Writing – chế độ "bài đã sửa": phần sai gạch bỏ, phần sửa chèn ngay sau */
+.w-fix {
+    border-radius: 3px;
+    padding: 1px 2px;
+    cursor: pointer;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+.w-fix del {
+    color: rgb(var(--c-rose-600));
+    text-decoration-thickness: 1.5px;
+    opacity: 0.85;
+}
+.w-fix ins {
+    text-decoration: none;
+    font-weight: 600;
+    color: rgb(var(--c-emerald-700));
+    background: rgb(var(--c-emerald-100));
+    border-radius: 3px;
+    padding: 0 2px;
+    margin-left: 2px;
+}
+
+/* Writing – mục lỗi ở cột nhận xét */
+.w-item.is-focus {
+    border-color: rgb(var(--c-blue-300));
+    background: rgb(var(--c-blue-50));
 }
 
 summary::-webkit-details-marker {

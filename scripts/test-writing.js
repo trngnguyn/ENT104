@@ -117,6 +117,27 @@ async function main() {
         assert.strictEqual(f.summary, '<b>Khá tốt</b>', 'giữ nguyên văn bản – giao diện escape khi hiển thị');
         assert.ok(f.modelAnswerInRange && !f.lengthCapped);
         assert.throws(() => sanitizeFeedback({ criteria: { task: 5 } }, { task: taskA1, text, provider: 'x' }), /grammar/);
+        assert.deepStrictEqual(f.suggestions, { grammar: [], vocabulary: [] }, 'thiếu gợi ý → danh sách rỗng');
+
+        const withTips = sanitizeFeedback({
+            ...goodAi,
+            suggestions: {
+                grammar: [{ point: 'Past simple', example: 'I went home.', note: 'Kể chuyện quá khứ.', extra: 'x' }, { example: 'thiếu point' }, 'chuỗi'],
+                vocabulary: Array.from({ length: 15 }, (_, i) => ({ item: `word${i}`, meaning: 'nghĩa', example: '' })),
+            },
+        }, { task: taskA1, text, provider: 'x' });
+        assert.deepStrictEqual(withTips.suggestions.grammar, [
+            { point: 'Past simple', example: 'I went home.', note: 'Kể chuyện quá khứ.' },
+            { point: 'chuỗi', example: '', note: '' },
+        ]);
+        assert.strictEqual(withTips.suggestions.vocabulary.length, 10);
+    });
+
+    await test('4b. Nhóm lỗi: ngữ pháp (cả dấu câu, trật tự từ) / từ vựng (cả chính tả, văn phong)', () => {
+        assert.deepStrictEqual(Object.keys(W.CORRECTION_TYPES).map(W.correctionGroup),
+            ['grammar', 'vocabulary', 'vocabulary', 'grammar', 'grammar', 'vocabulary']);
+        const [system] = buildMessages(taskA1, 'text');
+        assert.ok(/"suggestions":\{"grammar"/.test(system.content));
     });
 
     await test('5. Đoạn văn quá ngắn: điểm "Hoàn thành yêu cầu" bị giới hạn ở server', () => {
@@ -255,6 +276,8 @@ async function main() {
             assert.strictEqual((await svc.status()).provider, 'mock');
             const fb = await svc.requestFeedback(taskA1.id, essay);
             assert.ok(fb.meta.demo && fb.corrections.some(c => c.corrected.startsWith('Yesterday')));
+            assert.ok(fb.suggestions.grammar.length && fb.suggestions.vocabulary.length);
+            assert.ok(fb.correctedText.startsWith('Yesterday'), 'demo trả bài đã sửa');
         } finally {
             off.close();
             mock.close();

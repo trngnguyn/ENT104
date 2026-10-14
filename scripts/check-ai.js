@@ -37,7 +37,9 @@ async function main() {
             console.log(`✔ ${label}: ${((Date.now() - t0) / 1000).toFixed(1)} giây, model trả lời: ${f.meta.model}, điểm ${f.score}/10, ${f.corrections.length} lỗi (bỏ ${f.meta.unmatchedCorrections}), bài mẫu ${f.modelAnswerWords} từ`);
             if (verbose) {
                 for (const [k, v] of Object.entries(f.criteria)) console.log(`   ${k}: ${v.score} – ${v.comment}`);
-                f.corrections.forEach((c, i) => console.log(`   ${i + 1}. "${c.original}" → "${c.corrected}": ${c.explanation}`));
+                f.corrections.forEach((c, i) => console.log(`   ${i + 1}. [${c.type}] "${c.original}" → "${c.corrected}": ${c.explanation}`));
+                f.suggestions.grammar.forEach(g => console.log(`   + NP: ${g.point} – ${g.example}`));
+                f.suggestions.vocabulary.forEach(v => console.log(`   + TV: ${v.item} – ${v.meaning}`));
                 console.log(`   Bài tham khảo:\n   ${f.modelAnswer}`);
             }
         } catch (e) {
