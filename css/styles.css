@@ -1,0 +1,169 @@
+/* Nền trang và thanh tiêu đề (màu lấy từ css/theme.css) */
+html,
+body {
+    background-color: rgb(var(--app-bg));
+}
+
+body {
+    accent-color: rgb(var(--c-blue-600));
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.app-header {
+    background-color: rgb(var(--header-bg) / 0.85);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    backdrop-filter: saturate(180%) blur(12px);
+}
+
+.modal-backdrop {
+    background-color: rgb(2 6 23 / 0.55);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+
+/* Tab chọn chế độ (class active do js/app.js gán) */
+.mode-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 0.5rem;
+    color: rgb(var(--c-slate-600));
+    transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+.mode-btn:hover {
+    color: rgb(var(--c-slate-900));
+}
+.mode-btn.is-active {
+    background-color: rgb(var(--surface));
+    color: rgb(var(--c-blue-700));
+    box-shadow: 0 1px 2px rgb(15 23 42 / 0.08), 0 0 0 1px rgb(var(--c-slate-200) / 0.7);
+}
+
+/* Menu chọn giao diện */
+.theme-option {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    color: rgb(var(--c-slate-700));
+}
+.theme-option:hover {
+    background-color: rgb(var(--c-slate-100));
+}
+.theme-option .fa-check {
+    visibility: hidden;
+}
+.theme-option[aria-checked="true"] {
+    color: rgb(var(--c-blue-700));
+    font-weight: 600;
+}
+.theme-option[aria-checked="true"] .fa-check {
+    visibility: visible;
+}
+
+/* Thanh cuộn */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgb(var(--c-slate-300));
+    border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--c-slate-400));
+}
+.sidebar::-webkit-scrollbar-thumb {
+    background: transparent;
+}
+.sidebar:hover::-webkit-scrollbar-thumb {
+    background: rgb(var(--c-slate-300));
+}
+
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+    transition: none !important;
+}
+
+/* Phần gạch chân trong câu "Find the incorrect part" */
+.question-html u {
+    text-decoration: underline;
+    text-decoration-color: rgb(var(--c-rose-500));
+    text-underline-offset: 4px;
+    font-weight: 600;
+}
+.question-html i {
+    font-style: normal;
+    font-weight: 500;
+    color: rgb(var(--c-blue-700));
+}
+
+.passage-text {
+    white-space: pre-line;
+}
+
+/* Căn cứ cho đáp án trong bài đọc (chỉ hiện sau khi có phản hồi) */
+mark.evidence {
+    background: rgb(var(--c-amber-200));
+    color: inherit;
+    border-radius: 3px;
+    padding: 0 2px;
+    box-shadow: 0 0 0 1px rgb(var(--c-amber-500)) inset;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+kbd {
+    display: inline-block;
+    min-width: 1.4em;
+    padding: 0 0.3em;
+    border: 1px solid rgb(var(--c-slate-300));
+    border-bottom-width: 2px;
+    border-radius: 4px;
+    background: rgb(var(--surface));
+    font-family: inherit;
+    font-size: 0.7rem;
+    line-height: 1.4;
+    text-align: center;
+    color: rgb(var(--c-slate-600));
+}
+
+.hidden-important {
+    display: none !important;
+}
+
+/* ---------------------------------------------------------------- Chế độ tối
+ * Phần lớn màu tự đổi qua biến trong css/theme.css. Riêng `white` giữ nguyên (chữ trắng trên nút),
+ * nên các nền trắng do JS sinh ra được đổi sang màu bề mặt ở đây.
+ */
+html.dark .bg-white,
+html.dark .hover\:bg-white:hover {
+    background-color: rgb(var(--surface));
+}
+html.dark .bg-slate-100 > .bg-white {
+    background-color: rgb(var(--c-slate-300));
+}
+html.dark *,
+html.dark ::before,
+html.dark ::after {
+    --tw-ring-offset-color: rgb(var(--surface));
+}
+html.dark .card,
+html.dark .shadow-sm,
+html.dark .shadow-card {
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.3);
+}
+html.dark ::selection {
+    background-color: rgb(var(--c-blue-300));
+    color: rgb(var(--c-blue-950));
+}

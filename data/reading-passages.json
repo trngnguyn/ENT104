@@ -1,0 +1,272 @@
+[
+  {
+    "id": "RP01",
+    "level": "A1",
+    "genre": "Personal profile",
+    "title": "Meet Minh Anh",
+    "text": "Hello! My name is Minh Anh. I am nineteen years old and I am a first-year student at a university in Can Tho. I study business. I live in a small apartment near the university with my cousin, Thu.\n\nEvery morning, I get up at six o'clock and ride my bike to school. My classes start at seven. In the afternoon, I work part-time at a bookstore. I love reading, so it is a great job for me.\n\nOn weekends, I visit my parents in Vinh Long. My mother is a teacher and my father is a farmer. I have one younger brother. His name is Bao and he is in grade 8.",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP02",
+    "level": "A1",
+    "genre": "Email",
+    "title": "Nam's email from Da Lat",
+    "text": "Hi Huy,\n\nI'm in Da Lat with my family now. We arrived yesterday afternoon. The weather here is cool and sunny, but it is cold at night, so I always wear a jacket. Our hotel is small but very clean, and it is near Xuan Huong Lake.\n\nThis morning, we walked around the lake and had breakfast at a market. The strawberries here are delicious! Tomorrow we are going to visit a flower garden. We are going home on Sunday.\n\nSee you soon,\nNam",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP03",
+    "level": "A1",
+    "genre": "Notice",
+    "title": "City Library notice",
+    "text": "CITY LIBRARY – NOTICE\n\nOpening hours:\nMonday to Friday: 8:00 a.m. – 8:00 p.m.\nSaturday: 8:00 a.m. – 5:00 p.m.\nSunday: Closed\n\nRules:\n- Please be quiet in the reading room.\n- Do not eat or drink inside the library. You can use the café on the first floor.\n- You can borrow up to 5 books for 2 weeks.\n- You need a library card to borrow books. A new card costs 20,000 dong.\n- Please return books on time. If a book is late, you pay 2,000 dong per day.",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP04",
+    "level": "A1",
+    "genre": "Text messages",
+    "title": "Mai and Linh",
+    "text": "Mai (4:15 p.m.): Hi Linh! Are you free this evening? Do you want to go to the night market with me?\nLinh (4:20 p.m.): Hi Mai! I'd love to, but I have an English class until 7.\nMai (4:22 p.m.): No problem. Let's meet at 7:30, then.\nLinh (4:25 p.m.): OK! Where should we meet?\nMai (4:26 p.m.): In front of the cinema on Hoa Binh Street. It's near the market.\nLinh (4:27 p.m.): Great. See you there!",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP05",
+    "level": "A1",
+    "genre": "Description",
+    "title": "Mr. Tam, the bus driver",
+    "text": "Mr. Tam is a bus driver in Can Tho. He is forty-five years old. He gets up at 4:30 every morning because his first bus leaves at 5:30. He drives bus number 7 from the city center to the university. He drives the same route eight times a day.\n\nMr. Tam likes his job because he meets a lot of people. Many students know him and say hello every morning. But his job is not easy. The traffic is often heavy, and he sometimes works on weekends.\n\nHe finishes work at 3 p.m. Then he picks up his daughter from school.",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP06",
+    "level": "A1",
+    "genre": "Advertisement",
+    "title": "Sunshine English Center",
+    "text": "SUNSHINE ENGLISH CENTER\nLearn English with friendly teachers!\n\n- Classes for adults and children\n- Small classes: only 12 students in each class\n- Speaking practice with native teachers every Friday\n- Morning classes: 8:00 – 10:00\n- Evening classes: 6:00 – 8:00 p.m. (Monday, Wednesday, Friday)\n- Price: 1,500,000 dong per month\n- Special offer: Sign up before June 1st and get 10% off!\n\nAddress: 25 Nguyen Trai Street. Phone: 0292 3888 999",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP07",
+    "level": "A1",
+    "genre": "Menu",
+    "title": "Green Leaf Café menu",
+    "text": "GREEN LEAF CAFÉ – MENU\n\nDrinks\nBlack coffee ............ 20,000 dong\nMilk coffee ............. 25,000 dong\nOrange juice ............ 30,000 dong\nGreen tea ............... 15,000 dong\n\nFood\nBanh mi with egg ........ 20,000 dong\nBanh mi with chicken .... 30,000 dong\nChicken salad ........... 45,000 dong\nFried rice .............. 40,000 dong\n\nOpen every day: 6:30 a.m. – 10:00 p.m.\nFree Wi-Fi. Students get a free green tea with any food!",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP08",
+    "level": "A1",
+    "genre": "Description",
+    "title": "Thao's family",
+    "text": "My name is Thao. There are five people in my family: my parents, my grandmother, my older brother and me.\n\nMy father, Mr. Hai, is an engineer. He works for a big company in Ho Chi Minh City, so he is often away from home. My mother is a nurse at a hospital near our house. My grandmother is seventy years old. She cooks very well, and she makes lunch for us every day.\n\nMy brother, Khoa, is twenty-two. He is a computer programmer. He is very tall and funny. I am eighteen and I am a student. In the evening, we often have dinner together and watch TV.",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP09",
+    "level": "A1",
+    "genre": "Timetable",
+    "title": "Class EN01 timetable",
+    "text": "CLASS EN01 – WEEKLY TIMETABLE\n\nMonday: 7:30 – 9:30 Listening & Speaking (Room 201, Ms. Hoa)\nTuesday: 13:00 – 15:00 Grammar (Room 105, Mr. Long)\nWednesday: 7:30 – 9:30 Reading (Room 201, Ms. Hoa)\nThursday: No class\nFriday: 9:45 – 11:45 Writing (Room 303, Mr. Long)\n\nNote: Please bring your student card to every class.",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP10",
+    "level": "A1",
+    "genre": "Article",
+    "title": "Hoi An",
+    "text": "Hoi An is a small old town in central Vietnam. It is about 30 kilometers from Da Nang. Many tourists visit Hoi An every year.\n\nThe town has old yellow houses, small streets and a famous bridge called the Japanese Bridge. In the evening, people put colorful lanterns on the river, and the town looks very beautiful. You can also eat many local dishes, such as cao lau and banh mi.\n\nThe best time to visit is from February to April because the weather is not too hot and it does not rain much. Hoi An is very busy in the summer, so hotels are more expensive then.",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP11",
+    "level": "A2",
+    "genre": "Email",
+    "title": "A job application",
+    "text": "Dear Ms. Trang,\n\nI am writing to apply for the part-time sales assistant job at Sun Bookstore. I saw your advertisement on the store's Facebook page last week.\n\nMy name is Le Hoang Phuc, and I am a second-year student at Can Tho University. I am studying marketing. Last summer, I worked at a clothes shop for three months, so I have some experience with customers. I am friendly and hard-working, and I can speak English quite well.\n\nI have classes every morning, but I am free in the afternoons from Monday to Friday and all day on weekends.\n\nI have attached my CV. I look forward to hearing from you.\n\nYours sincerely,\nLe Hoang Phuc",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP12",
+    "level": "A2",
+    "genre": "Notice",
+    "title": "Green Campus Day",
+    "text": "GREEN CAMPUS DAY – Saturday, March 15th\nLet's make our campus cleaner and greener!\n\nActivities:\n- 7:00 – 9:00: Picking up rubbish around the campus\n- 9:00 – 10:30: Planting trees near the library\n- 10:30 – 11:30: Workshop: \"How to Use Less Plastic\"\n\nWhat to bring: a hat, a water bottle and gloves. Please do not bring plastic bags.\nAll volunteers will get a free T-shirt and lunch.\n\nHow to join: Register with the Student Union in Room A102 before March 10th.",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP13",
+    "level": "A2",
+    "genre": "Story",
+    "title": "Grandma's smartphone",
+    "text": "Last month, my grandmother turned seventy, and my parents gave her a smartphone. At first, she didn't like it. The screen was too small for her, and she didn't know how to use the apps. She said, \"My old phone was better!\"\n\nSo every evening, I sat with her and taught her one new thing. First, she learned how to make video calls. Then she learned how to take photos and send messages. I also made the letters on the screen bigger.\n\nNow she loves her phone. She video-calls my aunt in Australia every Sunday and sends photos of her garden to our family group. Yesterday, she even sent me a funny sticker!",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP14",
+    "level": "A2",
+    "genre": "Story",
+    "title": "A trip to Ha Giang",
+    "text": "Last October, my friends and I went on a four-day motorbike trip in Ha Giang, in the north of Vietnam. We flew from Can Tho to Hanoi and then took an overnight bus to Ha Giang city. There, we rented motorbikes and hired a local guide named Sung.\n\nThe roads were narrow and there were many mountains, so we drove slowly. The views were amazing, especially at Ma Pi Leng Pass. At night, we stayed in homestays and ate dinner with local families. On the third day, it rained heavily and we couldn't drive, so we stayed in the village and learned how to weave cloth from the local women.\n\nIt was a tiring trip, but it was the best trip of my life. I want to go back next year.",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP15",
+    "level": "A2",
+    "genre": "Email",
+    "title": "Email to a teacher",
+    "text": "Dear Ms. Thu,\n\nI am sorry, but I cannot come to class tomorrow, Thursday. I have a high fever, and the doctor told me to stay at home for two days.\n\nCould you please tell me what homework we have? I don't want to fall behind. Also, I know we have a speaking test next Monday. Is it still on Monday? I will be ready for it.\n\nMy classmate, Vinh, will hand in my essay for me tomorrow morning.\n\nThank you for your understanding.\n\nBest regards,\nTran Minh Khanh\nClass EN02",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP16",
+    "level": "A2",
+    "genre": "Report",
+    "title": "Student sleep survey",
+    "text": "STUDENT SLEEP SURVEY\n\nLast month, the Student Union asked 200 students at our college about their sleep. Here are the results:\n\n- 40% of students sleep less than 6 hours a night.\n- 45% sleep 6 to 8 hours.\n- Only 15% sleep more than 8 hours.\n- 70% of students use their phones in bed before sleeping.\n- The most common reasons for going to bed late are homework (35%), social media (30%) and part-time jobs (20%).\n\nDoctors say young adults need 7 to 9 hours of sleep a night, so many students at our college do not get enough sleep. The Student Union suggests turning off phones 30 minutes before bedtime.",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP17",
+    "level": "A2",
+    "genre": "Advertisement",
+    "title": "Room for rent",
+    "text": "ROOM FOR RENT\n\nA large room in a quiet house on 30/4 Street, Ninh Kieu District.\n\n- A 10-minute walk to Can Tho University\n- 25 m², with a private bathroom and a balcony\n- Air conditioner, bed and desk included\n- Free Wi-Fi; electricity and water are not included\n- Rent: 2,500,000 dong per month. Pay 2 months in advance.\n- Only for female students. No pets. No smoking.\n\nContact Mrs. Nga: 0939 456 789 (please call after 5 p.m.)",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP18",
+    "level": "A2",
+    "genre": "Story",
+    "title": "Tuan's first job interview",
+    "text": "Last Tuesday, I had my first job interview. It was for a receptionist job at a hotel. I was very nervous, so I prepared carefully. The night before, I read about the hotel on its website and practiced answering questions with my sister.\n\nOn the day of the interview, I wore a white shirt and black trousers, and I arrived fifteen minutes early. The manager, Ms. Lien, asked me about my studies, my English and my experience. I couldn't answer one question about computer software, but I was honest and said I could learn quickly.\n\nYesterday, Ms. Lien called me. I got the job! I start next Monday.",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP19",
+    "level": "A2",
+    "genre": "Timetable",
+    "title": "Bus timetable: Can Tho – Ho Chi Minh City",
+    "text": "MEKONG EXPRESS – CAN THO TO HO CHI MINH CITY\n\nLeaves Can Tho | Arrives in Ho Chi Minh City | Ticket price\n05:00 | 08:30 | 165,000 dong\n08:00 | 11:30 | 165,000 dong\n12:30 | 16:00 | 165,000 dong\n18:00 | 21:30 | 165,000 dong\n23:00 | 02:30 | 190,000 dong (sleeper bus)\n\n- Students with a student card get 10% off (not on the sleeper bus).\n- Free water and Wi-Fi on all buses.\n- Please arrive at the station 20 minutes before your bus leaves.",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP20",
+    "level": "A2",
+    "genre": "Article",
+    "title": "How Long improved his English",
+    "text": "Hoang Long is a 21-year-old IT student. Two years ago, his English was very weak. He could read a little, but he couldn't speak at all. He wanted to work for an international company, so he decided to change.\n\nFirst, he watched English videos about technology every day with English subtitles. Then he joined an English speaking club at his university. At the beginning, he was shy and only listened. After a few months, he started to talk more. He also practiced with a free app for 15 minutes before bed.\n\nNow Long can have simple conversations in English, and last month he gave a short presentation in English in front of 50 people. His advice is: \"Practice a little every day, and don't be afraid of making mistakes.\"",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP21",
+    "level": "A1-A2",
+    "genre": "Message",
+    "title": "Vy's housewarming party",
+    "text": "Hi everyone!\n\nI've finally moved into my new apartment! I'm having a small housewarming party on Saturday, November 8th, from 6 p.m. to 10 p.m. My new address is Apartment 1205, Block B, Sky Garden Building, 15 Ly Tu Trong Street.\n\nI'm going to make Vietnamese spring rolls and hot pot, so please don't bring any food – but drinks are welcome!\n\nThere is free parking for motorbikes in the basement. Please take the lift to the 12th floor.\n\nCan you let me know by Wednesday if you can come?\n\nLove,\nVy",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP22",
+    "level": "A1-A2",
+    "genre": "Notice",
+    "title": "Swimming pool rules",
+    "text": "BLUE WAVE SWIMMING POOL – RULES\n\nOpening hours: 6:00 a.m. – 8:00 p.m. every day\n(Closed for cleaning on Monday mornings until 11:00 a.m.)\n\n1. Take a shower before you swim.\n2. Wear a swimming cap.\n3. Children under 10 must swim with an adult.\n4. No running near the pool.\n5. No food or glass bottles in the pool area.\n6. Do not swim if you feel sick.\n\nTickets: Adults 40,000 dong; children under 12: 20,000 dong",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP23",
+    "level": "A1-A2",
+    "genre": "Article",
+    "title": "Tet in Vietnam",
+    "text": "Tet, or Lunar New Year, is the most important holiday in Vietnam. It usually happens in late January or February.\n\nBefore Tet, people clean and decorate their houses with peach blossoms in the north or yellow apricot blossoms in the south. They also buy new clothes and cook special food such as banh chung or banh tet.\n\nDuring Tet, families get together. Children wear new clothes and wish their grandparents good health. Then adults give them lucky money in red envelopes. People also visit relatives, friends and temples.\n\nMany people who work in big cities travel back to their hometowns for Tet, so buses and trains are very crowded at this time.",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP24",
+    "level": "A1-A2",
+    "genre": "Group messages",
+    "title": "Class EN03 group chat",
+    "text": "Ms. Hoa (7:05 a.m.): Good morning, class EN03. Today's class is in Room 405, not Room 204. The projector in Room 204 is broken.\nMs. Hoa (7:06 a.m.): We will start at 9:30 instead of 9:00 because I have a meeting.\nBao (7:15 a.m.): Thank you, Ms. Hoa. Do we need to bring the textbook today?\nMs. Hoa (7:20 a.m.): Yes, please. We will do the exercises on page 45. Also, don't forget to hand in your writing homework.\nNgan (7:32 a.m.): Ms. Hoa, I am sick today. Can I send my homework by email?\nMs. Hoa (7:40 a.m.): Sure, Ngan. Get well soon!",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP25",
+    "level": "A1-A2",
+    "genre": "Interview",
+    "title": "An interview with a chef",
+    "text": "Interviewer: Chef Minh, how did you become a chef?\nChef Minh: When I was a child, I often helped my mother in her small restaurant. I loved watching her cook. After high school, I studied at a cooking school in Ho Chi Minh City for two years.\nInterviewer: What is a normal day like for you?\nChef Minh: I go to the market at 5 a.m. to buy fresh fish and vegetables. Then I prepare the food with my team. The restaurant opens at 11, and we finish at about 10 p.m. It's a long day!\nInterviewer: What's your favorite dish to cook?\nChef Minh: Canh chua – sour fish soup. It's simple, but it reminds me of my mother.\nInterviewer: Do you have any advice for young people who want to be chefs?\nChef Minh: Be patient and work hard. And always use fresh ingredients.",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP26",
+    "level": "A1-A2",
+    "genre": "Diary",
+    "title": "A Saturday diary",
+    "text": "Saturday, May 10th\n\nToday was a busy but fun day. In the morning, I got up late, at 9 o'clock. After breakfast, I cleaned my room and washed my clothes. At 11, my best friend, Ha, came to my house, and we cooked lunch together. We made fried noodles, but we put too much salt in them!\n\nIn the afternoon, we went to the bookstore. Ha bought a novel, and I bought a dictionary for my English class. Then it started to rain, so we stayed in a café for two hours and talked.\n\nIn the evening, I watched a movie with my family. Now I'm tired, but I'm happy. Tomorrow I have to do my homework.",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP27",
+    "level": "A1-A2",
+    "genre": "Notice",
+    "title": "Lost backpack",
+    "text": "LOST: BLACK BACKPACK\n\nI lost my backpack on Wednesday afternoon, October 8th, in the canteen of Building C.\n\nIt is a black backpack with a small red star on the front. Inside, there is a silver laptop, two English textbooks, a blue water bottle and my student card (name: Pham Gia Bao).\n\nThe laptop is very important to me because all my thesis work is on it.\n\nIf you find it, please call or text me at 0901 222 333, or bring it to the Student Office in Room C105.\n\nReward: 500,000 dong. Thank you!",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP28",
+    "level": "A1-A2",
+    "genre": "Personal essay",
+    "title": "Ca Mau and Ho Chi Minh City",
+    "text": "I'm Duy. I grew up in Ca Mau, a small city in the far south of Vietnam, but now I study in Ho Chi Minh City. The two places are very different.\n\nHo Chi Minh City is much bigger and busier than Ca Mau. There are more shopping malls, more restaurants and more jobs. However, the traffic is worse and the air is more polluted. Life there is also more expensive: my small room costs three times more than a big room in Ca Mau.\n\nCa Mau is quieter and greener. People there are very friendly, and the seafood is the freshest I have ever eaten.\n\nI like the big city because there are more opportunities, but after I graduate, I want to go back to Ca Mau and open a small business.",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP29",
+    "level": "A1-A2",
+    "genre": "Email",
+    "title": "Order confirmation",
+    "text": "From: TechZone Online Store\nTo: Nguyen Thi Hong\nSubject: Your order #TZ5821\n\nDear Ms. Hong,\n\nThank you for shopping with TechZone! We have received your order:\n- 1 wireless mouse – 250,000 dong\n- 1 laptop bag – 400,000 dong\nDelivery: free\nTotal: 650,000 dong (pay on delivery)\n\nYour order will arrive in 2–3 working days. Our delivery person will call you before arriving. If you are not happy with a product, you can return it within 7 days.\n\nBest wishes,\nTechZone Customer Service",
+    "source": "general_a1_a2",
+    "unit": null
+  },
+  {
+    "id": "RP30",
+    "level": "A1-A2",
+    "genre": "Article",
+    "title": "Quynh, the hospital volunteer",
+    "text": "Every Sunday morning, Quynh, a 20-year-old nursing student, volunteers at a children's hospital in Can Tho. She started two years ago because her little brother stayed in this hospital for a month when he was sick. She remembers that he was often bored and sad.\n\nAt the hospital, Quynh and the other volunteers read stories, draw pictures and play games with the children. Sometimes they sing songs together. The children call her \"Sister Quynh\".\n\nVolunteering is not always easy. Some children are very sick, and Quynh feels sad. But she says the children's smiles make her happy. She also thinks the experience will help her become a better nurse in the future.",
+    "source": "general_a1_a2",
+    "unit": null
+  }
+]

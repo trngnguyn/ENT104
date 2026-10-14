@@ -1,0 +1,16 @@
+{
+  "name": "ent104-english-practice",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ngân hàng câu hỏi tiếng Anh A1-A2 và ứng dụng luyện tập / thi thử chạy trên trình duyệt.",
+  "scripts": {
+    "start": "node scripts/serve.js",
+    "validate": "node scripts/validate-questions.js",
+    "build": "node scripts/build-bundle.js && node scripts/validate-questions.js",
+    "generate": "node scripts/generate-question-bank.js",
+    "test": "node scripts/test-features.js"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}
