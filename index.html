@@ -35,6 +35,7 @@
                     <button id="mode-practice-btn" data-mode="practice" class="mode-btn"><i class="fa-solid fa-pen-to-square text-xs"></i>Practice</button>
                     <button id="mode-exam-btn" data-mode="exam" class="mode-btn"><i class="fa-solid fa-stopwatch text-xs"></i>Exam</button>
                     <button id="mode-builder-btn" data-mode="builder" class="mode-btn"><i class="fa-solid fa-layer-group text-xs"></i>Exam Builder</button>
+                    <button id="mode-writing-btn" data-mode="writing" class="mode-btn"><i class="fa-solid fa-feather-pointed text-xs"></i>Writing</button>
                 </nav>
 
                 <div class="flex items-center gap-1">
@@ -59,10 +60,11 @@
                 </div>
             </div>
 
-            <nav class="md:hidden grid grid-cols-3 gap-1 bg-slate-100 p-1 rounded-xl text-xs font-medium mb-3" aria-label="Chế độ">
-                <button data-mode="practice" class="mode-btn"><i class="fa-solid fa-pen-to-square"></i>Practice</button>
-                <button data-mode="exam" class="mode-btn"><i class="fa-solid fa-stopwatch"></i>Exam</button>
-                <button data-mode="builder" class="mode-btn"><i class="fa-solid fa-layer-group"></i>Builder</button>
+            <nav class="md:hidden grid grid-cols-4 gap-1 bg-slate-100 p-1 rounded-xl text-xs font-medium mb-3" aria-label="Chế độ">
+                <button data-mode="practice" class="mode-btn !px-1"><i class="fa-solid fa-pen-to-square"></i>Practice</button>
+                <button data-mode="exam" class="mode-btn !px-1"><i class="fa-solid fa-stopwatch"></i>Exam</button>
+                <button data-mode="builder" class="mode-btn !px-1"><i class="fa-solid fa-layer-group"></i>Builder</button>
+                <button data-mode="writing" class="mode-btn !px-1"><i class="fa-solid fa-feather-pointed"></i>Writing</button>
             </nav>
         </div>
         <div class="h-0.5 bg-slate-200/60">
@@ -113,6 +115,33 @@
                     <div id="builder-results"></div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Writing -->
+    <section id="writing-view" class="hidden flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+        <div class="flex flex-wrap items-end justify-between gap-3 mb-6">
+            <div>
+                <p class="eyebrow text-blue-600 mb-1">Writing</p>
+                <h2 class="text-2xl font-bold tracking-tight text-slate-900">Luyện viết đoạn văn</h2>
+                <p class="text-sm text-slate-500 mt-1">Đoạn văn miêu tả (descriptive) và kể chuyện (narrative) khoảng 150 từ. Bài được AI chấm điểm, sửa lỗi, giải thích và đưa bài viết tham khảo.</p>
+            </div>
+            <div id="w-status"></div>
+        </div>
+        <div id="w-flash" class="hidden mb-4 text-sm rounded-xl border px-4 py-3"></div>
+        <div class="grid gap-6 lg:grid-cols-[300px_minmax(0,1fr)] items-start">
+            <aside class="flex flex-col gap-4 lg:sticky lg:top-[5.25rem] lg:max-h-[calc(100vh-6.5rem)] lg:overflow-y-auto custom-scrollbar lg:pr-1 lg:-mr-1">
+                <div class="card p-4">
+                    <h3 class="eyebrow mb-3">Đề bài</h3>
+                    <div id="w-levels" class="grid grid-cols-4 gap-1 mb-3"></div>
+                    <div id="w-task-list" class="flex flex-col gap-0.5 max-h-80 lg:max-h-none overflow-y-auto custom-scrollbar"></div>
+                </div>
+                <div class="card p-4">
+                    <h3 class="eyebrow mb-3">Tiến độ Writing</h3>
+                    <div id="w-summary"></div>
+                </div>
+            </aside>
+            <div id="w-main" class="flex flex-col gap-6 min-w-0"></div>
         </div>
     </section>
 
@@ -436,6 +465,9 @@
     <script src="js/statisticsService.js"></script>
     <script src="js/examBuilderService.js"></script>
     <script src="js/examBuilderView.js"></script>
+    <script src="js/app-config.js"></script>
+    <script src="js/writingService.js"></script>
+    <script src="js/writingView.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

@@ -7,14 +7,56 @@
 
 ## Chạy ứng dụng
 
-Cách 1 – qua web server (khuyến nghị, cần Node.js ≥ 16, không cần cài thêm gói):
+Cách 1 – qua web server (khuyến nghị, cần Node.js ≥ 18, không cần cài thêm gói):
 
 ```bash
 npm start            # hoặc: node scripts/serve.js
 # mở http://localhost:8080
+npm run start:demo   # như trên nhưng Writing chạy chế độ DEMO (không gọi AI, không cần khoá)
 ```
 
-Cách 2 – mở trực tiếp `index.html` bằng trình duyệt (file://). Khi đó trình duyệt không cho đọc file JSON nên ứng dụng tự chuyển sang dùng `data/question-bank.bundle.js`.
+Máy chủ mặc định chỉ nghe trên `127.0.0.1`. Muốn máy khác trong mạng truy cập: đặt `HOST=0.0.0.0` trong `.env`.
+
+Cách 2 – mở trực tiếp `index.html` bằng trình duyệt (file://). Khi đó trình duyệt không cho đọc file JSON nên ứng dụng tự chuyển sang dùng `data/question-bank.bundle.js`. Tính năng **Writing không dùng được** ở cách này vì cần máy chủ để gọi AI.
+
+### Bật chấm Writing bằng AI
+
+1. Sao chép `.env.example` thành `.env` (file `.env` đã nằm trong `.gitignore`).
+2. Điền `AI_API_KEY` và `AI_MODEL`. `AI_BASE_URL` mặc định là OpenAI; có thể đổi sang dịch vụ có API tương thích OpenAI Chat Completions (Google Gemini, OpenRouter, Groq, Ollama chạy trên máy – Ollama không cần khoá). Ví dụ trong `.env.example`.
+3. Kiểm tra cấu hình bằng `npm run check-ai` (chấm thử một bài mẫu, không in khoá). Thử nhanh nhiều model: `npm run check-ai -- gemini-3.5-flash:low gemini-3.5-flash-lite:low`.
+4. Chạy lại `npm start`. Dòng log `Writing: chấm bằng <model> …` cho biết đã bật; trong tab Writing có nhãn *AI sẵn sàng*.
+
+Model miễn phí hay bị quá tải (HTTP 503) hoặc ngừng hỗ trợ (vd. `gemini-2.5-flash` không còn cho người dùng mới). Vì vậy nên khai báo `AI_FALLBACK_MODELS`: khi model chính quá tải / không tồn tại / quá thời gian, máy chủ tự chuyển sang model dự phòng (tối đa 4 lượt gọi cho một bài). Với Gemini, đặt `AI_REASONING_EFFORT=low` để chấm nhanh (~7–25 giây).
+
+Nếu nhà cung cấp không hỗ trợ `response_format: json_object`, đặt `AI_JSON_MODE=false`; nếu model yêu cầu `max_completion_tokens`, đặt `AI_MAX_TOKENS_FIELD=max_completion_tokens`.
+
+### Triển khai Writing với GitHub Pages (Cloudflare Worker)
+
+GitHub Pages chỉ phục vụ file tĩnh nên không chạy được backend, và **không được đặt khoá AI trong mã frontend** (mọi file trên Pages ai cũng tải được). Cách triển khai: trang vẫn ở GitHub Pages, phần chấm bài chạy trên **Cloudflare Workers** (gói miễn phí), khoá AI lưu dạng secret của Cloudflare.
+
+1. Lấy khoá Gemini miễn phí tại [Google AI Studio](https://aistudio.google.com/) (*Get API key*).
+2. Tạo tài khoản [Cloudflare](https://dash.cloudflare.com/sign-up) (miễn phí).
+3. Kiểm tra `worker/wrangler.toml`: `ALLOWED_ORIGINS` là domain GitHub Pages (chỉ phần domain, không có tên repo – hiện là `https://trngnguyn.github.io`). Có thể đổi `AI_MODEL`, `AI_FALLBACK_MODELS` và các giới hạn ở đây.
+4. Trong thư mục `worker/`, chạy:
+
+   ```bash
+   npx wrangler login                    # mở trình duyệt để đăng nhập Cloudflare
+   npx wrangler secret put AI_API_KEY    # dán khoá Gemini khi được hỏi
+   npx wrangler deploy                   # in ra địa chỉ dạng https://ent104-writing.<tài-khoản>.workers.dev
+   ```
+
+5. Mở `js/app-config.js`, điền địa chỉ vừa nhận (hiện là `https://ent104-writing.super-heart-6433.workers.dev/`), rồi commit và push lên GitHub như bình thường.
+6. Kiểm tra: mở trang GitHub Pages → tab **Writing** phải hiện nhãn *AI sẵn sàng • gemini-…*. Mở `https://ent104-writing.<tài-khoản>.workers.dev/api/writing/status` cũng phải thấy `"enabled": true`.
+
+Lưu ý:
+- Sửa đề trong `data/writing-tasks.json` thì phải chạy lại `npx wrangler deploy` (Worker đóng gói đề lúc deploy để tự kiểm tra `taskId`).
+- Đổi khoá: chạy lại `npx wrangler secret put AI_API_KEY`. Xem log lỗi chấm bài: `npx wrangler tail`.
+- Lần đầu deploy, wrangler yêu cầu đăng ký subdomain `workers.dev` (miễn phí) – phải chạy `npx wrangler deploy` trong terminal và trả lời `y`. Chạy lệnh trong thư mục `worker/`, không phải thư mục gốc.
+- Lỗi `User location is not supported` từ Gemini: Worker đang chạy ở khu vực Google chặn (vd. Hong Kong). `wrangler.toml` đã ghim Worker chạy ở Mỹ bằng `[placement] region`.
+- `js/app-config.js` chỉ dùng URL Worker khi trang chạy trên `*.github.io`; chạy `npm start` ở máy vẫn dùng API cùng máy chủ.
+- Giới hạn tần suất trên Worker được đếm trong bộ nhớ của từng phiên bản Worker nên chỉ mang tính tương đối; hạn mức thật sự do Gemini áp dụng cho khoá. CORS chỉ ngăn **trang web khác** dùng API qua trình duyệt, không ngăn người cố tình gọi trực tiếp bằng công cụ – vì vậy đừng dùng khoá có gắn thanh toán nếu không cần.
+- Gói miễn phí của Gemini có thể dùng dữ liệu gửi lên để cải thiện sản phẩm – nhắc học sinh không viết thông tin cá nhân nhạy cảm.
+- Chạy thử Worker trên máy (không cần khoá): `npx wrangler dev --var AI_PROVIDER:mock --var ALLOWED_ORIGINS:http://localhost:8080`.
 
 Ứng dụng dùng Tailwind CSS, Font Awesome và font Inter qua CDN nên cần kết nối Internet để hiển thị đúng giao diện.
 
@@ -28,6 +70,12 @@ Cách 2 – mở trực tiếp `index.html` bằng trình duyệt (file://). Khi
   - Câu đọc hiểu được chọn theo cụm cùng bài đọc và luôn xếp liền nhau, kèm bài đọc khi làm bài.
   - Xem trước đề (bấm vào câu để xem đáp án, giải thích), cơ cấu theo kỹ năng / trình độ / độ khó / chủ đề / loại câu; xoá, thay thế (cùng kỹ năng, ưu tiên cùng chủ đề), thêm câu từ ngân hàng (tìm theo ID, nội dung, chủ đề, trình độ) hoặc thêm cả bài đọc. Không thể thêm một câu hai lần.
   - Lưu đề để dùng lại; mở / sửa, lưu thành đề mới, nhân bản, xoá đề đã lưu. Đề đã lưu (`ent104.savedPapers.v1`) tách biệt với kết quả làm bài (`ent104.examHistory.v1`).
+- **Writing (luyện viết đoạn văn):** 24 đề (`data/writing-tasks.json`) – mỗi trình độ A1 / A2 / B1 có 4 đoạn văn miêu tả (*descriptive*) và 4 đoạn văn kể chuyện (*narrative*). Yêu cầu chung: **một đoạn văn khoảng 150 từ** (chấp nhận 130–180 từ).
+  - Viết bài: bộ đếm từ so với mục tiêu 150 từ, cảnh báo khi thiếu từ / tách nhiều đoạn, bản nháp tự lưu theo từng đề, `Ctrl + Enter` để gửi.
+  - Phản hồi gồm: **điểm** theo 4 tiêu chí (Hoàn thành yêu cầu, Ngữ pháp, Từ vựng, Bố cục & liên kết; mỗi tiêu chí 0–10, điểm tổng là trung bình làm tròn 0,5) kèm nhận xét; **sửa lỗi** – lỗi được đánh dấu ngay trong bài, bấm vào để xem cách sửa và **giải thích** tiếng Việt; điểm tốt / cần cải thiện; **bản đã sửa** (giữ ý của người học); **bài viết tham khảo** ~150 từ cho cùng đề.
+  - Độ dài được kiểm soát ở máy chủ: đoạn văn dưới 130 từ bị giới hạn điểm *Hoàn thành yêu cầu* (≥ 111 từ: tối đa 7; ≥ 78 từ: tối đa 5; ít hơn: tối đa 3), dài hơn 180 từ: tối đa 8.
+  - Lưu 5 lần chấm gần nhất mỗi đề (`localStorage`, khoá `ent104.writing.v1`), xem lại, viết lại từ bài cũ hoặc bản đã sửa. Lịch sử Writing tách biệt với nút *Reset* của Practice / Exam.
+  - Điểm là ước lượng của AI theo thang tham khảo của ứng dụng, **không phải tiêu chí hay điểm chính thức của ENT104**; đề Writing cũng là nội dung tổng quát (`general_a1_a2` / `general_b1`, `unit: null`).
 - **Bộ lọc:** kỹ năng, trình độ (A1 / A2 / A1-A2 / B1), chủ đề, trạng thái làm bài (chưa làm / đúng / sai); nút *Review wrong answers* để ôn lại câu sai.
 - **Tìm kiếm** theo nội dung (câu hỏi, đáp án, giải thích, tên bài đọc) hoặc theo ID (vd. `GRAM-A1-0001`).
 - **Bài đọc** hiển thị ở khung riêng phía trên câu hỏi (có thể thu gọn); mỗi bài đọc chỉ lưu một lần trong `data/reading-passages.json`.
@@ -49,14 +97,28 @@ js/quizService.js               Trạng thái luyện tập / bài thi (giới h
 js/statisticsService.js         Tính thống kê
 js/examBuilderService.js        Soạn đề: kiểm tra cấu hình, chọn câu, thêm / xoá / thay, lưu đề
 js/examBuilderView.js           Giao diện Exam Builder
-js/app.js                       Hiển thị Practice / Exam và xử lý sự kiện
+js/writingService.js            Writing: đếm từ, giới hạn, định vị lỗi, gọi API, bản nháp / lịch sử (dùng chung với server)
+js/writingView.js               Giao diện Writing
+js/app.js                       Hiển thị Practice / Exam và xử lý sự kiện, chuyển chế độ
 data/questions.json             Ngân hàng câu hỏi (nguồn dữ liệu chính)
 data/reading-passages.json      Các bài đọc
+data/writing-tasks.json         Đề Writing (đoạn văn miêu tả / kể chuyện ~150 từ)
+js/app-config.js                Cấu hình frontend: địa chỉ backend Writing (writingApiBase)
+server/app.js                   Máy chủ HTTP Node: file tĩnh theo danh sách cho phép + API Writing
+server/writing-api.js           API Writing dùng chung cho Node và Cloudflare Worker (kiểm tra đầu vào, CORS, giới hạn)
+server/writing-feedback.js      Prompt chấm bài, kiểm tra / làm sạch kết quả AI, chế độ demo
+server/ai-client.js             Gọi API dạng OpenAI Chat Completions
+server/rate-limit.js            Giới hạn số lần chấm
+server/config.js, server/env.js Cấu hình từ biến môi trường / .env
+server/load-tasks.js            Đọc đề Writing từ file (Node)
+worker/index.js, wrangler.toml  Cloudflare Worker cho bản GitHub Pages
+.env.example                    Mẫu cấu hình (sao chép thành .env)
 data/question-bank.bundle.js    Bản đóng gói tự sinh từ 2 file JSON (dùng khi mở bằng file://)
 scripts/validate-questions.js   Kiểm tra dữ liệu
 scripts/test-features.js        Kiểm thử logic Practice / Exam / Exam Builder (npm test)
+scripts/test-writing.js         Kiểm thử Writing và máy chủ (npm test, dùng AI giả lập)
 scripts/build-bundle.js         Tạo lại bundle từ JSON
-scripts/serve.js                Web server tĩnh
+scripts/serve.js                Khởi động máy chủ (npm start)
 scripts/generate-question-bank.js, scripts/bank/*, scripts/lib/*
                                 Mã nguồn đã dùng để soạn ngân hàng câu hỏi ban đầu
                                 (câu B1 nằm trong scripts/bank/b1-*.js)
@@ -129,9 +191,26 @@ Lỗi thêm cho `optionNotes`: khoá không phải phương án, trỏ vào đá
 
 Cảnh báo: gần trùng 70–85%, giải thích ngắn không nhắc tới đáp án, bài đọc không có câu hỏi, câu đọc hiểu chi tiết (Detail) mà giải thích không trích nguyên văn được đoạn nào trong bài đọc.
 
+## Writing – API và bảo mật
+
+| API | Mô tả |
+|---|---|
+| `GET /api/writing/status` | `{ enabled, provider, model, message, limits }` – không bao giờ chứa khoá |
+| `POST /api/writing/feedback` | Body `{ "taskId": "WT-A1-05", "text": "…" }` → `{ "feedback": { score, maxScore, criteria, corrections, correctedText, modelAnswer, … } }`; lỗi: `{ "error": { code, message } }` |
+
+- **Khoá API chỉ nằm ở máy chủ** (`.env` / biến môi trường); trình duyệt chỉ gửi mã đề và bài viết. Máy chủ chỉ phục vụ `index.html`, `css/`, `js/`, `data/` – mọi file bắt đầu bằng dấu chấm (`.env`, `.git`), mã server, `scripts/`, `package.json` đều trả 404.
+- Prompt được dựng ở máy chủ từ đề trong `data/writing-tasks.json` (người dùng không gửi được chỉ dẫn riêng). Bài viết được đặt trong thẻ phân cách và AI được dặn coi đó là dữ liệu cần chấm, không phải lệnh.
+- Kiểm tra đầu vào: chỉ nhận JSON (≤ 16 KB), đề phải tồn tại, bài 20–400 từ và ≤ 3.000 ký tự; chặn yêu cầu từ trang khác (`Origin` / `Sec-Fetch-Site`), trừ các domain khai báo trong `ALLOWED_ORIGINS` (CORS – dùng cho trang GitHub Pages).
+- Giới hạn chi phí: mặc định 5 lần / phút và 50 lần / ngày mỗi IP, 500 lần / ngày toàn máy chủ, tối đa 4 bài chấm cùng lúc (đổi trong `.env`). Hết thời gian chờ AI sau 60 giây.
+- Kết quả AI được kiểm tra trước khi trả về: điểm từng tiêu chí bị kẹp 0–10, **điểm tổng do máy chủ tính**, góp ý sửa lỗi không khớp nguyên văn bài viết bị loại, độ dài chuỗi bị giới hạn; giao diện escape mọi nội dung khi hiển thị.
+- Lỗi từ dịch vụ AI chỉ ghi chi tiết ở log máy chủ; người dùng nhận thông báo chung (không lộ khoá hay nội dung lỗi gốc). Log không ghi nội dung bài viết.
+- Khi chạy sau reverse proxy, đặt `TRUST_PROXY=true` để giới hạn theo IP thật (`X-Forwarded-For`).
+
 ## Kiểm thử chức năng (`npm test`)
 
 `scripts/test-features.js` chạy trên ngân hàng 1.300 câu thật (localStorage giả lập), gồm 10 nhóm: phản hồi Practice đúng/sai và khoá đáp án; Exam không lộ kết quả trước khi nộp; xem lại đáp án và giải thích sau khi nộp; đề ngẫu nhiên đúng số câu / phân bổ / tiêu chí (lặp hàng trăm lần, gồm đề mẫu 40 câu = 15 Grammar + 10 Vocabulary + 5 Communication + 10 Reading); thêm / xoá / thay câu thủ công; không trùng câu; báo thiếu câu mà không tự sửa cấu hình; lưu – mở lại – sửa – nhân bản – xoá đề; điểm và thống kê, hết giờ tự nộp; tương thích ngân hàng 1.300 câu (cơ cấu A1–A2 giữ nguyên, 300 câu B1 đúng nguồn `general_b1`, tạo được đề chỉ gồm câu B1 và bài đọc B1). Phần hiển thị (ẩn đáp án trong Exam, tô căn cứ bài đọc, giao diện Exam Builder) được kiểm tra thủ công trên trình duyệt.
+
+`scripts/test-writing.js` (16 nhóm, gồm cả CORS và chạy thử mã Cloudflare Worker; không gọi AI thật – dùng dịch vụ AI giả lập): ngân hàng đề Writing; đếm từ, giới hạn gửi bài, điểm trần theo độ dài; định vị lỗi theo nguyên từ; làm sạch phản hồi AI và tự tính điểm tổng; prompt tách bài viết khỏi chỉ dẫn; giới hạn tần suất; cấu hình `.env`; máy chủ không lộ `.env` / mã nguồn; kiểm tra đầu vào, chặn gọi chéo trang, giới hạn kích thước; khoá chỉ gửi tới AI và không lộ trong phản hồi / lỗi; chế độ chưa cấu hình và demo; bản nháp và lịch sử.
 
 ## Thống kê hiện tại
 

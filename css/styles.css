@@ -217,6 +217,30 @@ mark.evidence {
     box-shadow: 0 0 0 1px rgb(var(--c-amber-500)) inset;
 }
 
+/* Writing: phần sai được đánh dấu trong bài viết */
+mark.w-err {
+    background: rgb(var(--c-rose-100));
+    color: inherit;
+    border-radius: 3px;
+    padding: 1px 2px;
+    cursor: pointer;
+    text-decoration: underline wavy rgb(var(--c-rose-500));
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+mark.w-err:hover,
+mark.w-err.is-focus {
+    background: rgb(var(--c-amber-200));
+    box-shadow: 0 0 0 1px rgb(var(--c-amber-500)) inset;
+}
+mark.w-err sup {
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: rgb(var(--c-rose-600));
+    margin-left: 1px;
+}
+
 summary::-webkit-details-marker {
     display: none;
 }

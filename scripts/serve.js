@@ -1,56 +1,36 @@
 'use strict';
 
 /**
- * Web server tĩnh tối giản (không cần cài thêm gói) để chạy ứng dụng qua http://
- * — khi đó trình duyệt đọc trực tiếp data/questions.json.
+ * Chạy ứng dụng (không cần cài thêm gói):
  *   node scripts/serve.js            → http://localhost:8080
  *   PORT=3000 node scripts/serve.js  → cổng khác
+ * Cấu hình AI cho tính năng Writing đặt trong file .env (xem .env.example).
+ * Mặc định chỉ nghe trên 127.0.0.1; đặt HOST=0.0.0.0 nếu muốn máy khác trong mạng truy cập.
  */
 
-const http = require('http');
-const fs = require('fs');
 const path = require('path');
+const { loadEnvFile, getConfig } = require('../server/env');
+const { createApp, ROOT } = require('../server/app');
+const { loadTasks } = require('../server/load-tasks');
 
-const ROOT = path.resolve(__dirname, '..');
-const PORT = Number(process.env.PORT) || 8080;
-const MIME = {
-    '.html': 'text/html; charset=utf-8',
-    '.js': 'text/javascript; charset=utf-8',
-    '.css': 'text/css; charset=utf-8',
-    '.json': 'application/json; charset=utf-8',
-    '.png': 'image/png',
-    '.jpg': 'image/jpeg',
-    '.svg': 'image/svg+xml',
-    '.ico': 'image/x-icon',
-};
+loadEnvFile(path.join(ROOT, '.env'));
+const config = getConfig();
 
-const server = http.createServer((req, res) => {
-    let pathname;
-    try {
-        pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
-    } catch (e) {
-        res.writeHead(400).end('Bad request');
-        return;
-    }
-    if (pathname.endsWith('/')) pathname += 'index.html';
-    const file = path.join(ROOT, pathname);
-    if (!file.startsWith(ROOT + path.sep)) {
-        res.writeHead(403).end('Forbidden');
-        return;
-    }
-    fs.readFile(file, (err, data) => {
-        if (err) {
-            res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' }).end('Not found');
-            return;
-        }
-        res.writeHead(200, {
-            'Content-Type': MIME[path.extname(file).toLowerCase()] || 'application/octet-stream',
-            'Cache-Control': 'no-cache',
-        });
-        res.end(data);
-    });
-});
+let tasks;
+try {
+    tasks = loadTasks();
+} catch (e) {
+    console.error(e.message);
+    process.exit(1);
+}
 
-server.listen(PORT, () => {
-    console.log(`Đang chạy tại http://localhost:${PORT}  (Ctrl+C để dừng)`);
+const server = createApp({ config, tasks });
+server.listen(config.port, config.host, () => {
+    const shown = ['0.0.0.0', '::', '127.0.0.1'].includes(config.host) ? 'localhost' : config.host;
+    console.log(`Đang chạy tại http://${shown}:${server.address().port}  (Ctrl+C để dừng)`);
+    const ai = config.ai;
+    if (!ai.enabled) console.log(`Writing: chưa bật chấm bằng AI – ${ai.message}`);
+    else if (ai.provider === 'mock') console.log('Writing: chế độ DEMO (AI_PROVIDER=mock) – phản hồi mẫu, không phải chấm bằng AI.');
+    else console.log(`Writing: chấm bằng ${ai.model} qua ${new URL(ai.baseUrl).host}.`);
+    if (typeof fetch !== 'function') console.log('Cảnh báo: cần Node.js ≥ 18 để gọi AI.');
 });

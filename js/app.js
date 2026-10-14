@@ -5,7 +5,8 @@
     const Stats = StatisticsService;
     const Storage = AppStorage;
     const SKILL_BY_KEY = Object.fromEntries(SKILLS.map(s => [s.key, s]));
-    const MODES = ['practice', 'exam', 'builder'];
+    const MODES = ['practice', 'exam', 'builder', 'writing'];
+    const PANEL_MODES = ['builder', 'writing'];
     const EXAM_SIZES = [20, 40, 50];
     const EXAM_TIMES = [0, 15, 30, 45, 60, 90];
     const LETTERS = ['A', 'B', 'C', 'D'];
@@ -35,6 +36,7 @@
     let quiz = null;
     let builder = null;
     let builderView = null;
+    let writingView = null;
 
     const state = {
         mode: 'practice',
@@ -127,7 +129,7 @@
             if (state.examFilter === 'wrong') return list.filter(q => quiz.examStatus(q) !== 'correct');
             return list.filter(q => quiz.examStatus(q) === state.examFilter);
         }
-        if (state.mode === 'builder') return [];
+        if (PANEL_MODES.includes(state.mode)) return [];
         return qs.filter(state.filters, practiceExtra());
     }
 
@@ -158,11 +160,13 @@
     function render() {
         renderHeader();
         const inBuilder = state.mode === 'builder';
-        show('quiz-workspace', !inBuilder);
+        const inWriting = state.mode === 'writing';
+        show('quiz-workspace', !inBuilder && !inWriting);
         show('builder-view', inBuilder);
-        if (inBuilder) {
+        show('writing-view', inWriting);
+        if (inBuilder || inWriting) {
             $('progress-bar-fill').style.width = '0%';
-            builderView.render();
+            (inBuilder ? builderView : writingView).render();
         } else {
             renderProgress();
             renderSidebar();
@@ -180,7 +184,7 @@
             if (active) btn.setAttribute('aria-current', 'page');
             else btn.removeAttribute('aria-current');
         });
-        show('reset-btn', state.mode !== 'builder');
+        show('reset-btn', !PANEL_MODES.includes(state.mode));
         const levelCounts = Stats.countBy(qs.questions, q => q.level);
         $('app-subtitle').textContent = `${qs.questions.length} questions • `
             + LEVELS.map(l => `${l}: ${levelCounts[l] || 0}`).join(' • ');
@@ -618,6 +622,7 @@
 
     function setMode(mode) {
         if (mode === state.mode || !MODES.includes(mode)) return;
+        if (state.mode === 'writing') writingView.saveDraft();
         state.mode = mode;
         state.examFilter = 'all';
         state.pending = null;
@@ -931,7 +936,7 @@
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape') return closeModals();
             const modalOpen = !$('result-modal').classList.contains('hidden') || !$('stats-modal').classList.contains('hidden');
-            if (modalOpen || state.mode === 'builder' || e.ctrlKey || e.metaKey || e.altKey) return;
+            if (modalOpen || PANEL_MODES.includes(state.mode) || e.ctrlKey || e.metaKey || e.altKey) return;
             const target = e.target instanceof Element ? e.target : null;
             if (target && target.closest('input, select, textarea')) return;
             if (e.key === 'Enter') {
@@ -975,6 +980,8 @@
             quiz,
             onStart: (questions, meta) => beginExam(questions, meta),
         });
+        const appConfig = window.APP_CONFIG || {};
+        writingView = WritingView.create({ service: new WritingService({ apiBase: appConfig.writingApiBase || '' }) });
         restoreUi();
         $('data-source').textContent = `Dữ liệu: ${qs.source === 'json' ? 'data/questions.json' : 'data/question-bank.bundle.js'}`
             + (qs.skipped.length ? ` (bỏ qua ${qs.skipped.length} câu không hợp lệ)` : '') + '.';

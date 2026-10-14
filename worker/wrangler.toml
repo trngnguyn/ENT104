@@ -1,0 +1,26 @@
+# Cloudflare Worker chấm Writing – xem hướng dẫn trong README (mục "Triển khai Writing với GitHub Pages").
+name = "ent104-writing"
+main = "index.js"
+compatibility_date = "2025-09-01"
+
+# Gemini API chặn một số khu vực (vd. data center Hong Kong gần Việt Nam: "User location is not supported").
+# Ghim Worker chạy ở Mỹ để luôn gọi Gemini từ khu vực được hỗ trợ.
+[placement]
+region = "gcp:us-central1"
+
+[vars]
+AI_PROVIDER = "openai"
+AI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai"
+AI_MODEL = "gemini-3.5-flash"
+# Thử lần lượt khi model chính quá tải / không còn hỗ trợ.
+AI_FALLBACK_MODELS = "gemini-3.5-flash-lite,gemini-flash-latest"
+AI_REASONING_EFFORT = "low"
+AI_TIMEOUT_MS = "60000"
+# Domain GitHub Pages được phép gọi API (chỉ phần origin, không có đường dẫn). Nhiều domain: ngăn cách bằng dấu phẩy.
+ALLOWED_ORIGINS = "https://trngnguyn.github.io"
+WRITING_RATE_PER_MINUTE = "5"
+WRITING_RATE_PER_DAY = "50"
+WRITING_GLOBAL_DAILY_LIMIT = "500"
+
+# KHÔNG ghi khoá ở đây. Đặt bằng lệnh (chạy trong thư mục worker/):
+#   npx wrangler secret put AI_API_KEY

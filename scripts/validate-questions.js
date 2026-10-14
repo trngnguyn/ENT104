@@ -293,7 +293,17 @@ function main() {
     }
     const report = validate(data.questions, data.passages, { checkBundle: true });
     printReport(report, { verbose: process.argv.includes('--verbose') });
-    process.exit(report.errors.length ? 1 : 0);
+
+    let writingOk = true;
+    try {
+        const { loadTasks } = require('../server/load-tasks');
+        const tasks = loadTasks();
+        console.log(`\nĐề Writing (data/writing-tasks.json): ${tasks.size} đề hợp lệ.`);
+    } catch (e) {
+        writingOk = false;
+        console.error(`\nĐề Writing: ${e.message}`);
+    }
+    process.exit(report.errors.length || !writingOk ? 1 : 0);
 }
 
 if (require.main === module) main();

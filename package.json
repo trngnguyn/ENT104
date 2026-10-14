@@ -1,16 +1,18 @@
 {
   "name": "ent104-english-practice",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
-  "description": "Ngân hàng câu hỏi tiếng Anh A1-B1 và ứng dụng luyện tập / thi thử chạy trên trình duyệt.",
+  "description": "Ngân hàng câu hỏi tiếng Anh A1-B1, luyện viết đoạn văn có AI chấm, và ứng dụng luyện tập / thi thử chạy trên trình duyệt.",
   "scripts": {
     "start": "node scripts/serve.js",
+    "start:demo": "node -e \"process.env.AI_PROVIDER='mock';require('./scripts/serve.js')\"",
     "validate": "node scripts/validate-questions.js",
     "build": "node scripts/build-bundle.js && node scripts/validate-questions.js",
     "generate": "node scripts/generate-question-bank.js",
-    "test": "node scripts/test-features.js"
+    "test": "node scripts/test-features.js && node scripts/test-writing.js",
+    "check-ai": "node scripts/check-ai.js"
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   }
 }
