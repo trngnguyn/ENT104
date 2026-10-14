@@ -1,0 +1,336 @@
+{
+  "note": "Các thì thường dạy ở trình độ A1–A2 theo khung CEFR (nội dung tiếng Anh tổng quát, chưa đối chiếu với đề cương chính thức của ENT104).",
+  "source": "general_a1_a2",
+  "tenses": [
+    {
+      "id": "present-simple",
+      "name": "Present Simple",
+      "vi": "Thì hiện tại đơn",
+      "level": "A1",
+      "summary": "Diễn tả thói quen, sự thật hiển nhiên, lịch trình cố định và sở thích / trạng thái.",
+      "forms": [
+        { "label": "Khẳng định", "pattern": "I / You / We / They + V\nHe / She / It + V-s/es", "examples": ["They live in Da Nang.", "She works at a hospital."] },
+        { "label": "Phủ định", "pattern": "S + don't / doesn't + V", "examples": ["I don't like coffee.", "He doesn't play football."] },
+        { "label": "Nghi vấn", "pattern": "Do / Does + S + V?", "examples": ["Do you speak English? – Yes, I do.", "Does she live near here? – No, she doesn't."] },
+        { "label": "Câu hỏi Wh-", "pattern": "Wh- + do / does + S + V?", "examples": ["Where does your father work?", "What time do you get up?"] }
+      ],
+      "uses": [
+        { "text": "Thói quen, hành động lặp lại", "example": "I get up at six every day." },
+        { "text": "Sự thật hiển nhiên", "example": "Water boils at 100°C." },
+        { "text": "Lịch trình cố định (tàu xe, lớp học, giờ mở cửa)", "example": "The bus leaves at 7:30." },
+        { "text": "Sở thích, cảm xúc, trạng thái", "example": "She likes music." }
+      ],
+      "signals": ["always", "usually", "often", "sometimes", "rarely", "never", "every day / week", "on Mondays", "once / twice a week"],
+      "notes": [
+        "Thêm -es sau động từ tận cùng -o, -s, -ss, -sh, -ch, -x: go → goes, watch → watches, miss → misses.",
+        "Phụ âm + y → -ies: study → studies; nguyên âm + y giữ nguyên và thêm -s: play → plays.",
+        "have → has với he / she / it.",
+        "Trạng từ tần suất đứng trước động từ thường nhưng sau động từ 'be': She often walks to school. / He is always late."
+      ],
+      "mistakes": [
+        { "wrong": "He go to school by bike.", "right": "He goes to school by bike.", "why": "Chủ ngữ ngôi thứ ba số ít → động từ thêm -s/-es." },
+        { "wrong": "Does she likes music?", "right": "Does she like music?", "why": "Sau does / doesn't, động từ trở về nguyên mẫu." },
+        { "wrong": "I am not like fish.", "right": "I don't like fish.", "why": "Phủ định của động từ thường dùng don't / doesn't, không dùng 'be'." }
+      ],
+      "bankTags": ["present-simple"],
+      "questions": [
+        { "id": "TNS-PS-01", "question": "My sister ______ English at a language center every weekend.", "options": ["study", "studies", "studys", "is study"], "answer": 1, "explanation": "Chủ ngữ 'My sister' là ngôi thứ ba số ít, hành động lặp lại (every weekend) → hiện tại đơn V-s/es. 'study' tận cùng phụ âm + y → 'studies'." },
+        { "id": "TNS-PS-02", "question": "We ______ to the cinema very often because the tickets are expensive.", "options": ["don't go", "doesn't go", "not go", "aren't go"], "answer": 0, "explanation": "Phủ định hiện tại đơn với 'we' dùng 'don't + V nguyên mẫu' → 'don't go'." },
+        { "id": "TNS-PS-03", "question": "______ your brother play the guitar?", "options": ["Do", "Does", "Is", "Are"], "answer": 1, "explanation": "Câu hỏi hiện tại đơn với chủ ngữ ngôi thứ ba số ít 'your brother' → 'Does + S + V'." },
+        { "id": "TNS-PS-04", "question": "The library ______ at 8 a.m. and closes at 5 p.m.", "options": ["open", "opens", "is opening", "opening"], "answer": 1, "explanation": "Giờ mở cửa là lịch trình cố định → hiện tại đơn; chủ ngữ 'The library' số ít → 'opens' (cùng dạng với 'closes')." },
+        { "id": "TNS-PS-05", "question": "Water ______ at 100 degrees Celsius.", "options": ["boil", "boils", "is boiling", "boiled"], "answer": 1, "explanation": "Sự thật hiển nhiên → hiện tại đơn; 'Water' là danh từ không đếm được (số ít) → 'boils'." },
+        { "id": "TNS-PS-06", "question": "Tom ______ coffee. He prefers tea.", "options": ["doesn't like", "don't like", "isn't like", "not likes"], "answer": 0, "explanation": "Phủ định hiện tại đơn với ngôi thứ ba số ít 'Tom' → 'doesn't + V nguyên mẫu' → 'doesn't like'." },
+        { "id": "TNS-PS-07", "question": "How often ______ you visit your grandparents? – Twice a month.", "options": ["do", "does", "are", "is"], "answer": 0, "explanation": "Câu hỏi về tần suất (How often) dùng hiện tại đơn; chủ ngữ 'you' → trợ động từ 'do'." },
+        { "id": "TNS-PS-08", "question": "She ______ late for class. She is a very punctual student.", "options": ["never is", "is never", "never be", "does never"], "answer": 1, "explanation": "Trạng từ tần suất (never) đứng SAU động từ 'be' → 'is never late'." }
+      ]
+    },
+    {
+      "id": "present-continuous",
+      "name": "Present Continuous",
+      "vi": "Thì hiện tại tiếp diễn",
+      "level": "A1",
+      "summary": "Diễn tả hành động đang xảy ra ngay lúc nói hoặc tạm thời trong khoảng thời gian hiện tại.",
+      "forms": [
+        { "label": "Khẳng định", "pattern": "S + am / is / are + V-ing", "examples": ["I am reading a book.", "They are playing football."] },
+        { "label": "Phủ định", "pattern": "S + am not / isn't / aren't + V-ing", "examples": ["She isn't watching TV.", "We aren't working today."] },
+        { "label": "Nghi vấn", "pattern": "Am / Is / Are + S + V-ing?", "examples": ["Are you listening? – Yes, I am.", "Is it raining? – No, it isn't."] },
+        { "label": "Câu hỏi Wh-", "pattern": "Wh- + am / is / are + S + V-ing?", "examples": ["What are you doing?", "Where is he going?"] }
+      ],
+      "uses": [
+        { "text": "Hành động đang xảy ra lúc nói", "example": "Look! It's raining." },
+        { "text": "Hành động tạm thời quanh thời điểm hiện tại", "example": "I'm staying with my aunt this week." },
+        { "text": "Sự thay đổi đang diễn ra", "example": "The weather is getting colder." }
+      ],
+      "signals": ["now", "right now", "at the moment", "at present", "Look!", "Listen!", "today", "this week"],
+      "notes": [
+        "Quy tắc thêm -ing: bỏ e câm (make → making); gấp đôi phụ âm cuối với từ một âm tiết có nguyên âm + phụ âm (run → running, swim → swimming); -ie → -ying (lie → lying).",
+        "Động từ chỉ trạng thái (like, love, want, know, understand, need, believe) thường KHÔNG dùng tiếp diễn: I know the answer (không nói: I am knowing).",
+        "So sánh: hiện tại đơn = thói quen (He usually walks); hiện tại tiếp diễn = đang / tạm thời (Today he is taking the bus)."
+      ],
+      "mistakes": [
+        { "wrong": "She watching TV now.", "right": "She is watching TV now.", "why": "Thiếu động từ 'be' (am / is / are) trước V-ing." },
+        { "wrong": "I am understanding the lesson.", "right": "I understand the lesson.", "why": "'understand' là động từ chỉ trạng thái, không dùng tiếp diễn." },
+        { "wrong": "He is swiming in the pool.", "right": "He is swimming in the pool.", "why": "swim: một âm tiết, kết thúc nguyên âm + phụ âm → gấp đôi m." }
+      ],
+      "bankTags": ["present-continuous"],
+      "questions": [
+        { "id": "TNS-PC-01", "question": "Please be quiet. The baby ______.", "options": ["sleeps", "is sleeping", "sleep", "are sleeping"], "answer": 1, "explanation": "'Please be quiet' cho thấy hành động đang diễn ra lúc nói → hiện tại tiếp diễn; 'The baby' số ít → 'is sleeping'." },
+        { "id": "TNS-PC-02", "question": "Look! Those boys ______ across the road.", "options": ["run", "are runing", "are running", "is running"], "answer": 2, "explanation": "'Look!' → hành động đang xảy ra; 'Those boys' số nhiều → 'are'; 'run' gấp đôi n → 'running'." },
+        { "id": "TNS-PC-03", "question": "______ you ______ to music right now?", "options": ["Do – listen", "Are – listening", "Is – listening", "Are – listen"], "answer": 1, "explanation": "'right now' → hiện tại tiếp diễn; câu hỏi: Are + you + V-ing → 'Are you listening'." },
+        { "id": "TNS-PC-04", "question": "I ______ the answer to this question.", "options": ["am knowing", "know", "knows", "am know"], "answer": 1, "explanation": "'know' là động từ chỉ trạng thái, không dùng tiếp diễn → hiện tại đơn 'I know'." },
+        { "id": "TNS-PC-05", "question": "My father usually drives to work, but today he ______ the bus.", "options": ["takes", "is taking", "take", "taking"], "answer": 1, "explanation": "'usually' là thói quen (hiện tại đơn), còn 'today' là việc tạm thời, khác thói quen → hiện tại tiếp diễn 'is taking'." },
+        { "id": "TNS-PC-06", "question": "What ______ Lan doing at the moment? – She's cooking dinner.", "options": ["is", "are", "does", "do"], "answer": 0, "explanation": "Câu hỏi hiện tại tiếp diễn: Wh- + is/are + S + V-ing; 'Lan' số ít → 'is'." },
+        { "id": "TNS-PC-07", "question": "We ______ for the bus at the moment. It's late again!", "options": ["wait", "are waiting", "waiting", "are wait"], "answer": 1, "explanation": "'at the moment' → hiện tại tiếp diễn: we + are + V-ing → 'are waiting'." },
+        { "id": "TNS-PC-08", "question": "My brother ______ at home this week because his school is closed.", "options": ["stays", "is staying", "stay", "are staying"], "answer": 1, "explanation": "Tình huống tạm thời (this week, vì trường đóng cửa) → hiện tại tiếp diễn; 'My brother' số ít → 'is staying'." }
+      ]
+    },
+    {
+      "id": "past-simple",
+      "name": "Past Simple",
+      "vi": "Thì quá khứ đơn",
+      "level": "A1–A2",
+      "summary": "Diễn tả hành động đã xảy ra và kết thúc tại một thời điểm xác định trong quá khứ (gồm cả was / were).",
+      "forms": [
+        { "label": "Động từ 'be'", "pattern": "I / He / She / It + was\nYou / We / They + were", "examples": ["I was tired yesterday.", "They were at home last night."] },
+        { "label": "Khẳng định (động từ thường)", "pattern": "S + V-ed / V2 (bất quy tắc)", "examples": ["We visited the museum.", "She went to Hue last summer."] },
+        { "label": "Phủ định", "pattern": "S + wasn't / weren't …\nS + didn't + V", "examples": ["He wasn't at school.", "He didn't call me."] },
+        { "label": "Nghi vấn", "pattern": "Was / Were + S …?\nDid + S + V?", "examples": ["Were you busy? – No, I wasn't.", "Did you see the film? – Yes, I did."] }
+      ],
+      "uses": [
+        { "text": "Hành động đã xảy ra và kết thúc ở thời điểm xác định", "example": "I met him two days ago." },
+        { "text": "Chuỗi hành động liên tiếp trong quá khứ", "example": "She got up, had breakfast and left." },
+        { "text": "Thói quen trong quá khứ (có mốc thời gian)", "example": "When I was a child, I walked to school." }
+      ],
+      "signals": ["yesterday", "last night / week / year", "… ago", "in 2020", "when I was young", "then"],
+      "notes": [
+        "Thêm -ed: dance → danced; study → studied; stop → stopped.",
+        "Bất quy tắc thường gặp: go → went, have → had, see → saw, buy → bought, eat → ate, come → came, take → took, make → made.",
+        "Sau did / didn't dùng động từ nguyên mẫu: Did you go? (không nói: Did you went?).",
+        "I / he / she / it + was; you / we / they + were."
+      ],
+      "mistakes": [
+        { "wrong": "I buyed a new bag.", "right": "I bought a new bag.", "why": "'buy' là động từ bất quy tắc: buy → bought." },
+        { "wrong": "Did she went to school?", "right": "Did she go to school?", "why": "Sau 'did' dùng động từ nguyên mẫu." },
+        { "wrong": "They was very happy.", "right": "They were very happy.", "why": "Chủ ngữ số nhiều 'they' dùng 'were'." }
+      ],
+      "bankTags": ["past-simple", "was-were"],
+      "questions": [
+        { "id": "TNS-PA-01", "question": "We ______ a great time at the beach last weekend.", "options": ["have", "had", "haved", "has"], "answer": 1, "explanation": "'last weekend' → quá khứ đơn; 'have' là động từ bất quy tắc → 'had'." },
+        { "id": "TNS-PA-02", "question": "I ______ my homework yesterday because I was ill.", "options": ["didn't finish", "don't finish", "didn't finished", "wasn't finish"], "answer": 0, "explanation": "Phủ định quá khứ đơn: didn't + V nguyên mẫu → 'didn't finish'." },
+        { "id": "TNS-PA-03", "question": "______ you ______ the football match last night?", "options": ["Did – watch", "Did – watched", "Do – watch", "Were – watch"], "answer": 0, "explanation": "Câu hỏi quá khứ đơn với động từ thường: Did + S + V nguyên mẫu → 'Did you watch'." },
+        { "id": "TNS-PA-04", "question": "My grandparents ______ very happy when we visited them.", "options": ["was", "were", "are", "did"], "answer": 1, "explanation": "Quá khứ của 'be' với chủ ngữ số nhiều 'My grandparents' → 'were'." },
+        { "id": "TNS-PA-05", "question": "Nam ______ his leg two years ago.", "options": ["breaks", "broke", "broken", "breaked"], "answer": 1, "explanation": "'two years ago' → quá khứ đơn; break → broke (bất quy tắc). 'broken' là quá khứ phân từ (V3)." },
+        { "id": "TNS-PA-06", "question": "Where ______ you last Sunday? – I was at my friend's house.", "options": ["did", "was", "were", "are"], "answer": 2, "explanation": "Câu trả lời 'I was…' cho thấy câu hỏi dùng 'be' ở quá khứ; chủ ngữ 'you' → 'were'." },
+        { "id": "TNS-PA-07", "question": "She ______ the bus, so she was late for school.", "options": ["missed", "misses", "was miss", "miss"], "answer": 0, "explanation": "Việc đã xảy ra (she was late) → quá khứ đơn; 'miss' có quy tắc → 'missed'." },
+        { "id": "TNS-PA-08", "question": "The children ______ to bed at 9 p.m. last night.", "options": ["go", "goes", "went", "gone"], "answer": 2, "explanation": "'last night' → quá khứ đơn; go → went (bất quy tắc)." }
+      ]
+    },
+    {
+      "id": "going-to",
+      "name": "Future with 'be going to'",
+      "vi": "Tương lai với 'be going to'",
+      "level": "A1–A2",
+      "summary": "Diễn tả dự định đã có từ trước và dự đoán dựa trên dấu hiệu ở hiện tại.",
+      "forms": [
+        { "label": "Khẳng định", "pattern": "S + am / is / are + going to + V", "examples": ["I'm going to visit my aunt next week.", "They are going to move house."] },
+        { "label": "Phủ định", "pattern": "S + am not / isn't / aren't + going to + V", "examples": ["We aren't going to buy a car.", "She isn't going to come."] },
+        { "label": "Nghi vấn", "pattern": "Am / Is / Are + S + going to + V?", "examples": ["Are you going to study tonight? – Yes, I am.", "What is he going to do?"] }
+      ],
+      "uses": [
+        { "text": "Dự định, kế hoạch đã quyết định trước khi nói", "example": "I'm going to learn to swim this summer." },
+        { "text": "Dự đoán dựa trên dấu hiệu nhìn thấy ở hiện tại", "example": "Look at those clouds! It's going to rain." }
+      ],
+      "signals": ["tonight", "tomorrow", "next week / month / year", "this weekend", "soon", "Look! (dấu hiệu)"],
+      "notes": [
+        "Sau 'going to' luôn là động từ nguyên mẫu: going to play (không nói: going to playing).",
+        "Không bỏ am / is / are: She is going to… (không nói: She going to…).",
+        "Không dùng 'will' cùng 'going to': I am going to… (không nói: I will going to…)."
+      ],
+      "mistakes": [
+        { "wrong": "I going to call you later.", "right": "I'm going to call you later.", "why": "Thiếu 'am / is / are' trước 'going to'." },
+        { "wrong": "They are going to visiting Hue.", "right": "They are going to visit Hue.", "why": "Sau 'going to' là động từ nguyên mẫu." },
+        { "wrong": "He are going to study abroad.", "right": "He is going to study abroad.", "why": "Chủ ngữ 'he' dùng 'is'." }
+      ],
+      "bankTags": ["going-to"],
+      "questions": [
+        { "id": "TNS-GT-01", "question": "I've saved enough money. I ______ a new laptop next month.", "options": ["am going to buy", "going to buy", "am going buy", "will going to buy"], "answer": 0, "explanation": "Kế hoạch đã có từ trước (đã để dành tiền) → be going to + V: 'am going to buy'." },
+        { "id": "TNS-GT-02", "question": "Look at the sky! It ______ rain.", "options": ["is going to", "will going to", "going to", "are going to"], "answer": 0, "explanation": "Dự đoán dựa trên dấu hiệu nhìn thấy (bầu trời) → 'is going to'; chủ ngữ 'It' → 'is'." },
+        { "id": "TNS-GT-03", "question": "______ your parents going to travel abroad this summer?", "options": ["Is", "Are", "Do", "Will"], "answer": 1, "explanation": "Câu hỏi với 'going to': Am/Is/Are + S + going to + V; 'your parents' số nhiều → 'Are'." },
+        { "id": "TNS-GT-04", "question": "We ______ going to watch TV tonight. We have a test tomorrow.", "options": ["aren't", "don't", "isn't", "won't"], "answer": 0, "explanation": "Phủ định của 'be going to' với 'we' → 'aren't going to'." },
+        { "id": "TNS-GT-05", "question": "My sister is going to ______ her friends at the weekend.", "options": ["meets", "meeting", "meet", "met"], "answer": 2, "explanation": "Sau 'going to' dùng động từ nguyên mẫu → 'meet'." },
+        { "id": "TNS-GT-06", "question": "Be careful! That glass ______ fall off the table.", "options": ["is going to", "are going to", "going to", "is going"], "answer": 0, "explanation": "Dự đoán dựa trên dấu hiệu ở hiện tại (cái cốc sắp rơi) → 'is going to'; 'That glass' số ít." },
+        { "id": "TNS-GT-07", "question": "What ______ you going to do after the exam?", "options": ["are", "do", "will", "is"], "answer": 0, "explanation": "Câu hỏi Wh- với 'going to': What + are + you + going to + V." },
+        { "id": "TNS-GT-08", "question": "Hoa has bought paint and brushes. She ______ her bedroom.", "options": ["is going to paint", "paints", "painted", "is going paint"], "answer": 0, "explanation": "Đã mua sơn và cọ → dự định đã có kế hoạch → 'is going to paint' (nhớ có 'to')." }
+      ]
+    },
+    {
+      "id": "will",
+      "name": "Future Simple ('will')",
+      "vi": "Thì tương lai đơn (will)",
+      "level": "A2",
+      "summary": "Diễn tả quyết định ngay lúc nói, dự đoán theo ý kiến, lời hứa, lời đề nghị và yêu cầu.",
+      "forms": [
+        { "label": "Khẳng định", "pattern": "S + will ('ll) + V", "examples": ["I'll help you.", "It will be sunny tomorrow."] },
+        { "label": "Phủ định", "pattern": "S + will not (won't) + V", "examples": ["It won't be cold tomorrow.", "I won't tell anyone."] },
+        { "label": "Nghi vấn", "pattern": "Will + S + V?", "examples": ["Will you come to my party? – Yes, I will.", "What will you do?"] }
+      ],
+      "uses": [
+        { "text": "Quyết định ngay lúc nói", "example": "It's hot in here. I'll open the window." },
+        { "text": "Dự đoán dựa trên ý kiến, niềm tin (think, hope, sure, probably)", "example": "I think Vietnam will win the match." },
+        { "text": "Lời hứa, lời đề nghị giúp đỡ, lời yêu cầu", "example": "I'll call you tonight, I promise. / Will you help me, please?" }
+      ],
+      "signals": ["I think / I hope / I'm sure", "probably", "maybe", "tomorrow", "next week", "in 2030", "soon"],
+      "notes": [
+        "'will' dùng chung cho mọi chủ ngữ; sau 'will' là động từ nguyên mẫu: She will come (không nói: She will comes).",
+        "Quyết định đã có từ trước → be going to; quyết định ngay lúc nói → will.",
+        "won't = will not."
+      ],
+      "mistakes": [
+        { "wrong": "He will goes to Ha Noi.", "right": "He will go to Ha Noi.", "why": "Sau 'will' là động từ nguyên mẫu." },
+        { "wrong": "I will to help you.", "right": "I will help you.", "why": "Không có 'to' sau 'will'." },
+        { "wrong": "The phone is ringing. – I'm going to answer it.", "right": "The phone is ringing. – I'll answer it.", "why": "Quyết định ngay lúc nói → dùng 'will'." }
+      ],
+      "bankTags": ["will"],
+      "questions": [
+        { "id": "TNS-WL-01", "question": "The phone is ringing. – OK, I ______ it.", "options": ["answer", "'ll answer", "am going to answering", "answered"], "answer": 1, "explanation": "Quyết định ngay lúc nói (nghe điện thoại reo) → 'will': 'I'll answer'." },
+        { "id": "TNS-WL-02", "question": "I think it ______ sunny tomorrow.", "options": ["will be", "will is", "is going be", "be"], "answer": 0, "explanation": "Dự đoán theo ý kiến (I think) → will + V nguyên mẫu → 'will be'." },
+        { "id": "TNS-WL-03", "question": "Don't worry. I ______ tell anyone your secret.", "options": ["won't", "don't", "willn't", "am not"], "answer": 0, "explanation": "Lời hứa → 'will'; phủ định của will là 'won't' (không có dạng 'willn't')." },
+        { "id": "TNS-WL-04", "question": "______ you help me carry these bags, please?", "options": ["Will", "Do", "Are", "Did"], "answer": 0, "explanation": "Lời yêu cầu lịch sự: 'Will you + V…, please?'." },
+        { "id": "TNS-WL-05", "question": "This box is really heavy. – Wait, I ______ you.", "options": ["help", "am helping", "'ll help", "helped"], "answer": 2, "explanation": "Lời đề nghị giúp đỡ, quyết định ngay lúc nói → 'I'll help'." },
+        { "id": "TNS-WL-06", "question": "Maybe my brother ______ to university next year.", "options": ["will go", "will goes", "will to go", "going"], "answer": 0, "explanation": "Dự đoán không chắc chắn (maybe) → will + V nguyên mẫu → 'will go'." },
+        { "id": "TNS-WL-07", "question": "I promise I ______ late again.", "options": ["won't be", "won't is", "don't be", "am not"], "answer": 0, "explanation": "Lời hứa (I promise) → 'will'; phủ định: won't + V nguyên mẫu → 'won't be'." },
+        { "id": "TNS-WL-08", "question": "Don't worry about your exam next week. I'm sure you ______ it.", "options": ["will pass", "passed", "pass", "are pass"], "answer": 0, "explanation": "Dự đoán về tương lai (next week) theo niềm tin (I'm sure) → 'will pass'." }
+      ]
+    },
+    {
+      "id": "present-continuous-future",
+      "name": "Present Continuous for Future",
+      "vi": "Hiện tại tiếp diễn chỉ kế hoạch tương lai",
+      "level": "A2",
+      "summary": "Diễn tả kế hoạch đã sắp xếp chắc chắn (đã hẹn, đã đặt vé), thường kèm thời gian cụ thể trong tương lai.",
+      "forms": [
+        { "label": "Khẳng định", "pattern": "S + am / is / are + V-ing + thời gian tương lai", "examples": ["I'm meeting Lan at 6 tonight.", "We're flying to Da Lat on Friday."] },
+        { "label": "Phủ định", "pattern": "S + am not / isn't / aren't + V-ing", "examples": ["We aren't having a party this weekend."] },
+        { "label": "Nghi vấn", "pattern": "Am / Is / Are + S + V-ing …?", "examples": ["What are you doing tomorrow evening?", "Are you doing anything this weekend?"] }
+      ],
+      "uses": [
+        { "text": "Lịch hẹn, kế hoạch đã sắp xếp chắc chắn", "example": "I'm seeing the dentist at 10 tomorrow." },
+        { "text": "Hỏi về kế hoạch của người khác", "example": "Are you doing anything this weekend?" }
+      ],
+      "signals": ["tonight", "tomorrow", "this weekend", "on Friday", "next Monday", "at 7 p.m."],
+      "notes": [
+        "Cần thời gian tương lai (hoặc ngữ cảnh rõ ràng) để không nhầm với nghĩa 'đang làm'.",
+        "So sánh các cách nói tương lai: hiện tại tiếp diễn = lịch hẹn đã sắp xếp; be going to = dự định; will = quyết định tức thì / dự đoán; hiện tại đơn = lịch trình cố định (tàu xe, giờ học)."
+      ],
+      "mistakes": [
+        { "wrong": "I meet my dentist tomorrow at 10.", "right": "I'm seeing my dentist tomorrow at 10.", "why": "Lịch hẹn cá nhân đã sắp xếp → hiện tại tiếp diễn." },
+        { "wrong": "Are you do anything tonight?", "right": "Are you doing anything tonight?", "why": "Sau am / is / are cần V-ing." },
+        { "wrong": "The train is leaving at 6:15 every morning.", "right": "The train leaves at 6:15 every morning.", "why": "Lịch trình cố định, lặp lại → hiện tại đơn." }
+      ],
+      "bankTags": [],
+      "questions": [
+        { "id": "TNS-CF-01", "question": "I ______ my grandparents this Sunday. I've already told them.", "options": ["am visiting", "visit", "visited", "am visit"], "answer": 0, "explanation": "Kế hoạch đã sắp xếp (đã báo cho ông bà) với thời gian cụ thể (this Sunday) → hiện tại tiếp diễn 'am visiting'." },
+        { "id": "TNS-CF-02", "question": "What ______ you ______ tomorrow evening? – I'm going to the cinema with Mai.", "options": ["are – doing", "do – do", "will – doing", "are – do"], "answer": 0, "explanation": "Hỏi về kế hoạch đã sắp xếp: What + are + you + V-ing → 'What are you doing'." },
+        { "id": "TNS-CF-03", "question": "My cousin ______ married next month. The wedding is in Hue.", "options": ["gets", "is getting", "get", "got"], "answer": 1, "explanation": "Đám cưới đã được sắp xếp (có thời gian, địa điểm) → hiện tại tiếp diễn 'is getting married'." },
+        { "id": "TNS-CF-04", "question": "We can't come to your party on Saturday. We ______ to Da Nang.", "options": ["fly", "are flying", "flew", "flies"], "answer": 1, "explanation": "Kế hoạch đã sắp xếp vào thứ Bảy (lý do không đến dự tiệc được) → 'are flying'." },
+        { "id": "TNS-CF-05", "question": "______ Minh ______ football with us after school today?", "options": ["Is – playing", "Does – playing", "Is – play", "Are – playing"], "answer": 0, "explanation": "Hỏi về kế hoạch chiều nay: Is + Minh + V-ing → 'Is Minh playing'." },
+        { "id": "TNS-CF-06", "question": "Sorry, I ______ for dinner tonight. I have a lot of homework.", "options": ["am not coming", "don't come", "not coming", "isn't coming"], "answer": 0, "explanation": "Báo trước một kế hoạch (tối nay không đến) → hiện tại tiếp diễn phủ định với 'I': 'am not coming'." },
+        { "id": "TNS-CF-07", "question": "The train ______ at 6:15 tomorrow morning, so don't be late.", "options": ["leaves", "is leave", "leaving", "left"], "answer": 0, "explanation": "Giờ tàu chạy là lịch trình cố định → hiện tại đơn 'leaves', dù nói về ngày mai." },
+        { "id": "TNS-CF-08", "question": "I ______ the doctor at 3 p.m. tomorrow. I made an appointment yesterday.", "options": ["see", "am seeing", "saw", "sees"], "answer": 1, "explanation": "Lịch hẹn đã đặt (made an appointment) → hiện tại tiếp diễn 'am seeing'." },
+        { "id": "TNS-CF-09", "question": "My friends ______ a party next Saturday. Would you like to come?", "options": ["have", "are having", "has", "had"], "answer": 1, "explanation": "Bữa tiệc đã lên kế hoạch cho thứ Bảy tới → 'are having' (chủ ngữ số nhiều)." },
+        { "id": "TNS-CF-10", "question": "She ______ to London on Monday. She has already booked her ticket.", "options": ["is flying", "fly", "flew", "is fly"], "answer": 0, "explanation": "Đã đặt vé → kế hoạch chắc chắn → hiện tại tiếp diễn 'is flying'." }
+      ]
+    },
+    {
+      "id": "past-continuous",
+      "name": "Past Continuous",
+      "vi": "Thì quá khứ tiếp diễn",
+      "level": "A2",
+      "summary": "Diễn tả hành động đang diễn ra tại một thời điểm trong quá khứ, hoặc đang diễn ra thì bị một hành động khác xen vào.",
+      "forms": [
+        { "label": "Khẳng định", "pattern": "I / He / She / It + was + V-ing\nYou / We / They + were + V-ing", "examples": ["I was watching TV at 8 p.m. yesterday.", "They were playing in the garden."] },
+        { "label": "Phủ định", "pattern": "S + wasn't / weren't + V-ing", "examples": ["She wasn't sleeping.", "They weren't listening."] },
+        { "label": "Nghi vấn", "pattern": "Was / Were + S + V-ing?", "examples": ["Were you studying? – Yes, I was.", "What were you doing at 9 o'clock last night?"] }
+      ],
+      "uses": [
+        { "text": "Đang diễn ra tại một thời điểm xác định trong quá khứ", "example": "At 7 a.m. yesterday, I was having breakfast." },
+        { "text": "Đang diễn ra thì bị hành động khác xen vào (when + quá khứ đơn)", "example": "I was walking home when it started to rain." },
+        { "text": "Hai hành động diễn ra song song (while)", "example": "While Mum was cooking, Dad was reading." },
+        { "text": "Tả bối cảnh trong câu chuyện", "example": "The sun was shining and the birds were singing." }
+      ],
+      "signals": ["at 8 p.m. yesterday", "at that time", "at this time last week", "when", "while", "all morning"],
+      "notes": [
+        "I / he / she / it + was; you / we / they + were.",
+        "when + quá khứ đơn (hành động ngắn xen vào); while + quá khứ tiếp diễn (hành động dài đang diễn ra).",
+        "Không dùng tiếp diễn với động từ chỉ trạng thái: I knew (không nói: I was knowing)."
+      ],
+      "mistakes": [
+        { "wrong": "I was sleep when you called.", "right": "I was sleeping when you called.", "why": "Sau was / were cần V-ing." },
+        { "wrong": "They was playing football.", "right": "They were playing football.", "why": "Chủ ngữ 'they' dùng 'were'." },
+        { "wrong": "While I watched TV, the phone was ringing.", "right": "While I was watching TV, the phone rang.", "why": "Hành động dài (đang xem TV) dùng quá khứ tiếp diễn; hành động ngắn xen vào (điện thoại reo) dùng quá khứ đơn." }
+      ],
+      "bankTags": [],
+      "questions": [
+        { "id": "TNS-PCO-01", "question": "At 8 o'clock last night, I ______ dinner with my family.", "options": ["was having", "had have", "am having", "were having"], "answer": 0, "explanation": "Hành động đang diễn ra tại một thời điểm xác định trong quá khứ (8 o'clock last night) → quá khứ tiếp diễn; 'I' → 'was having'." },
+        { "id": "TNS-PCO-02", "question": "We ______ football when it started to rain.", "options": ["were playing", "was playing", "are playing", "were play"], "answer": 0, "explanation": "Hành động đang diễn ra (chơi bóng) thì hành động khác xen vào (trời mưa) → quá khứ tiếp diễn; 'we' → 'were playing'." },
+        { "id": "TNS-PCO-03", "question": "What ______ you doing at 10 p.m. yesterday?", "options": ["was", "were", "did", "are"], "answer": 1, "explanation": "Câu hỏi quá khứ tiếp diễn: What + was/were + S + V-ing; 'you' → 'were'." },
+        { "id": "TNS-PCO-04", "question": "She ______ a shower when the phone rang.", "options": ["was taking", "were taking", "is taking", "was take"], "answer": 0, "explanation": "Hành động dài đang diễn ra (tắm) bị xen vào (điện thoại reo) → 'was taking' (she → was)." },
+        { "id": "TNS-PCO-05", "question": "While my mother was cooking, my father ______ the newspaper.", "options": ["was reading", "were reading", "is reading", "was read"], "answer": 0, "explanation": "Hai hành động diễn ra song song (while) → cả hai dùng quá khứ tiếp diễn; 'my father' → 'was reading'." },
+        { "id": "TNS-PCO-06", "question": "The students ______ to the teacher, so they didn't hear the question.", "options": ["weren't listening", "wasn't listening", "didn't listening", "aren't listening"], "answer": 0, "explanation": "Phủ định quá khứ tiếp diễn với chủ ngữ số nhiều 'The students' → 'weren't listening'." },
+        { "id": "TNS-PCO-07", "question": "I was walking to school when I ______ an old friend.", "options": ["was meeting", "met", "meet", "am meeting"], "answer": 1, "explanation": "Sau 'when', hành động ngắn xen vào hành động đang diễn ra → quá khứ đơn 'met'." },
+        { "id": "TNS-PCO-08", "question": "______ it raining when you left the house?", "options": ["Was", "Were", "Did", "Is"], "answer": 0, "explanation": "Câu hỏi quá khứ tiếp diễn: Was/Were + S + V-ing; 'it' → 'Was'." },
+        { "id": "TNS-PCO-09", "question": "At this time yesterday, they ______ on the beach.", "options": ["were lying", "was lying", "were lieing", "are lying"], "answer": 0, "explanation": "Thời điểm xác định trong quá khứ (at this time yesterday) → quá khứ tiếp diễn; 'they' → 'were'; lie → lying (-ie → -ying)." },
+        { "id": "TNS-PCO-10", "question": "When I arrived at the party, everyone ______.", "options": ["was dancing", "were dancing", "is dancing", "dance"], "answer": 0, "explanation": "Hành động đang diễn ra khi tôi đến → quá khứ tiếp diễn; 'everyone' là đại từ số ít → 'was dancing'." },
+        { "id": "TNS-PCO-11", "question": "Tom ______ his bike when he fell off.", "options": ["was riding", "were riding", "is riding", "was ride"], "answer": 0, "explanation": "Đang đạp xe thì bị ngã (hành động xen vào) → 'was riding' (Tom → was)." },
+        { "id": "TNS-PCO-12", "question": "I ______ the answer, so I didn't put my hand up.", "options": ["didn't know", "wasn't knowing", "weren't know", "don't know"], "answer": 0, "explanation": "'know' là động từ chỉ trạng thái, không dùng tiếp diễn → quá khứ đơn phủ định 'didn't know'." }
+      ]
+    },
+    {
+      "id": "present-perfect",
+      "name": "Present Perfect Simple",
+      "vi": "Thì hiện tại hoàn thành",
+      "level": "A2",
+      "summary": "Nối quá khứ với hiện tại: trải nghiệm đến nay, hành động vừa xảy ra / có kết quả ở hiện tại, việc bắt đầu trong quá khứ và kéo dài đến nay.",
+      "forms": [
+        { "label": "Khẳng định", "pattern": "I / You / We / They + have + V3\nHe / She / It + has + V3", "examples": ["I have finished my homework.", "She has visited Ha Long Bay."] },
+        { "label": "Phủ định", "pattern": "S + haven't / hasn't + V3", "examples": ["We haven't seen that film.", "He hasn't called yet."] },
+        { "label": "Nghi vấn", "pattern": "Have / Has + S + V3?", "examples": ["Have you ever eaten pho? – Yes, I have.", "How long has she lived here?"] }
+      ],
+      "uses": [
+        { "text": "Trải nghiệm tính đến hiện tại (ever, never, before)", "example": "I have never been to Japan." },
+        { "text": "Hành động vừa xảy ra hoặc có kết quả ở hiện tại (just, already, yet)", "example": "She has lost her keys, so she can't get in." },
+        { "text": "Bắt đầu trong quá khứ, kéo dài đến nay (for, since)", "example": "They have lived here since 2018." }
+      ],
+      "signals": ["ever", "never", "just", "already", "yet", "before", "so far", "recently", "for + khoảng thời gian", "since + mốc thời gian"],
+      "notes": [
+        "I / you / we / they + have; he / she / it + has.",
+        "V3 (quá khứ phân từ): có quy tắc = V-ed; bất quy tắc: be → been, go → gone / been, see → seen, eat → eaten, do → done, write → written, buy → bought.",
+        "'yet' dùng trong câu phủ định và câu hỏi, đứng cuối câu; 'already', 'just', 'ever', 'never' đứng giữa have/has và V3.",
+        "Có mốc thời gian quá khứ xác định (yesterday, last year, … ago, in 2019) → dùng quá khứ đơn, không dùng hiện tại hoàn thành.",
+        "for + khoảng thời gian (for ten years); since + mốc thời gian (since 2015, since Monday).",
+        "been / gone: He has been to Hue (đã đi và đã về); He has gone to Hue (đang ở Huế)."
+      ],
+      "mistakes": [
+        { "wrong": "I have saw this film.", "right": "I have seen this film.", "why": "Sau have / has dùng V3: see → seen." },
+        { "wrong": "She have finished her work.", "right": "She has finished her work.", "why": "Chủ ngữ 'she' dùng 'has'." },
+        { "wrong": "I have visited Hue last year.", "right": "I visited Hue last year.", "why": "Mốc thời gian xác định (last year) → quá khứ đơn." },
+        { "wrong": "I live here since 2020.", "right": "I have lived here since 2020.", "why": "Kéo dài từ quá khứ đến nay với 'since' → hiện tại hoàn thành." }
+      ],
+      "bankTags": [],
+      "questions": [
+        { "id": "TNS-PP-01", "question": "I ______ my homework. Can I go out now?", "options": ["have finished", "has finished", "have finish", "am finished"], "answer": 0, "explanation": "Hành động vừa xong và có kết quả ở hiện tại (giờ được đi chơi) → hiện tại hoàn thành; 'I' → 'have' + V3 'finished'." },
+        { "id": "TNS-PP-02", "question": "______ you ever ______ to Phu Quoc?", "options": ["Have – been", "Did – been", "Has – been", "Have – went"], "answer": 0, "explanation": "Hỏi về trải nghiệm (ever) → hiện tại hoàn thành: Have + you + ever + V3 → 'Have you ever been'." },
+        { "id": "TNS-PP-03", "question": "She ______ the Harry Potter books three times.", "options": ["has read", "have read", "has readed", "is read"], "answer": 0, "explanation": "Trải nghiệm tính đến nay (three times) → hiện tại hoàn thành; 'She' → 'has'; read → read (V3 bất quy tắc, đọc là /red/)." },
+        { "id": "TNS-PP-04", "question": "We have lived in this house ______ 2015.", "options": ["for", "since", "ago", "yet"], "answer": 1, "explanation": "'2015' là mốc thời gian → dùng 'since'." },
+        { "id": "TNS-PP-05", "question": "My father has worked at this company ______ ten years.", "options": ["since", "for", "ago", "already"], "answer": 1, "explanation": "'ten years' là khoảng thời gian → dùng 'for'." },
+        { "id": "TNS-PP-06", "question": "I haven't finished my project ______.", "options": ["already", "yet", "just", "since"], "answer": 1, "explanation": "Trong câu phủ định của hiện tại hoàn thành, 'yet' (chưa) đứng cuối câu." },
+        { "id": "TNS-PP-07", "question": "I ______ that film last weekend.", "options": ["have seen", "saw", "have saw", "seen"], "answer": 1, "explanation": "Có mốc thời gian xác định trong quá khứ (last weekend) → quá khứ đơn 'saw', không dùng hiện tại hoàn thành." },
+        { "id": "TNS-PP-08", "question": "Linh isn't here. She ______ to the supermarket.", "options": ["has gone", "has been", "have gone", "is gone"], "answer": 0, "explanation": "Linh đã đi và hiện đang ở siêu thị (không có mặt ở đây) → 'has gone'. 'has been' nghĩa là đã đi và đã quay về." },
+        { "id": "TNS-PP-09", "question": "They have ______ eaten lunch, so they aren't hungry.", "options": ["already", "yet", "ever", "since"], "answer": 0, "explanation": "'already' (đã … rồi) đứng giữa have và V3 trong câu khẳng định." },
+        { "id": "TNS-PP-10", "question": "I have never ______ sushi before.", "options": ["eat", "ate", "eaten", "eating"], "answer": 2, "explanation": "Sau have/has dùng V3: eat → ate → eaten." },
+        { "id": "TNS-PP-11", "question": "How long ______ you known your best friend?", "options": ["have", "has", "did", "are"], "answer": 0, "explanation": "'How long' + kéo dài đến nay → hiện tại hoàn thành; chủ ngữ 'you' → 'have'." },
+        { "id": "TNS-PP-12", "question": "Oh no! I ______ my keys. I can't open the door.", "options": ["have lost", "has lost", "lose", "have losted"], "answer": 0, "explanation": "Hành động trong quá khứ có kết quả ở hiện tại (không mở được cửa) → 'have lost' (lose → lost)." }
+      ]
+    }
+  ]
+}

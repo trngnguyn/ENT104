@@ -31,11 +31,12 @@
                     </div>
                 </div>
 
-                <nav class="hidden md:flex items-center gap-1 bg-slate-100 p-1 rounded-xl text-sm font-medium" aria-label="Chế độ">
+                <nav class="hidden md:flex items-center gap-1 bg-slate-100 p-1 rounded-xl text-sm font-medium whitespace-nowrap" aria-label="Chế độ">
                     <button id="mode-practice-btn" data-mode="practice" class="mode-btn"><i class="fa-solid fa-pen-to-square text-xs"></i>Practice</button>
                     <button id="mode-exam-btn" data-mode="exam" class="mode-btn"><i class="fa-solid fa-stopwatch text-xs"></i>Exam</button>
-                    <button id="mode-builder-btn" data-mode="builder" class="mode-btn"><i class="fa-solid fa-layer-group text-xs"></i>Exam Builder</button>
+                    <button id="mode-builder-btn" data-mode="builder" class="mode-btn"><i class="fa-solid fa-layer-group text-xs"></i><span><span class="hidden lg:inline">Exam </span>Builder</span></button>
                     <button id="mode-writing-btn" data-mode="writing" class="mode-btn"><i class="fa-solid fa-feather-pointed text-xs"></i>Writing</button>
+                    <button id="mode-tenses-btn" data-mode="tenses" class="mode-btn"><i class="fa-solid fa-clock-rotate-left text-xs"></i>Tenses</button>
                 </nav>
 
                 <div class="flex items-center gap-1">
@@ -60,11 +61,12 @@
                 </div>
             </div>
 
-            <nav class="md:hidden grid grid-cols-4 gap-1 bg-slate-100 p-1 rounded-xl text-xs font-medium mb-3" aria-label="Chế độ">
-                <button data-mode="practice" class="mode-btn !px-1"><i class="fa-solid fa-pen-to-square"></i>Practice</button>
-                <button data-mode="exam" class="mode-btn !px-1"><i class="fa-solid fa-stopwatch"></i>Exam</button>
-                <button data-mode="builder" class="mode-btn !px-1"><i class="fa-solid fa-layer-group"></i>Builder</button>
-                <button data-mode="writing" class="mode-btn !px-1"><i class="fa-solid fa-feather-pointed"></i>Writing</button>
+            <nav class="md:hidden grid grid-cols-5 gap-1 bg-slate-100 p-1 rounded-xl text-xs font-medium mb-3" aria-label="Chế độ">
+                <button data-mode="practice" class="mode-btn !px-1 !py-1.5 flex-col !gap-0.5 text-[11px]"><i class="fa-solid fa-pen-to-square"></i>Practice</button>
+                <button data-mode="exam" class="mode-btn !px-1 !py-1.5 flex-col !gap-0.5 text-[11px]"><i class="fa-solid fa-stopwatch"></i>Exam</button>
+                <button data-mode="builder" class="mode-btn !px-1 !py-1.5 flex-col !gap-0.5 text-[11px]"><i class="fa-solid fa-layer-group"></i>Builder</button>
+                <button data-mode="writing" class="mode-btn !px-1 !py-1.5 flex-col !gap-0.5 text-[11px]"><i class="fa-solid fa-feather-pointed"></i>Writing</button>
+                <button data-mode="tenses" class="mode-btn !px-1 !py-1.5 flex-col !gap-0.5 text-[11px]"><i class="fa-solid fa-clock-rotate-left"></i>Tenses</button>
             </nav>
         </div>
         <div class="h-0.5 bg-slate-200/60">
@@ -146,6 +148,23 @@
             <div id="w-main" class="flex flex-col gap-6 min-w-0"></div>
         </div>
         <div id="w-feedback" class="mt-6 scroll-mt-24 empty:hidden"></div>
+        </div>
+    </section>
+
+    <!-- Tenses -->
+    <section id="tenses-view" class="hidden flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 scroll-mt-20">
+        <div class="mb-6">
+            <p class="eyebrow text-blue-600 mb-1">Tenses</p>
+            <h2 class="text-2xl font-bold tracking-tight text-slate-900">Các thì A1–A2</h2>
+            <p class="text-sm text-slate-500 mt-1">Cấu trúc, cách dùng, dấu hiệu nhận biết và ví dụ của từng thì. Bấm “Luyện tập” để làm câu hỏi riêng cho thì đó.</p>
+        </div>
+        <div id="t-lock" class="hidden"></div>
+        <div id="t-body" class="grid gap-6 lg:grid-cols-[300px_minmax(0,1fr)] items-start">
+            <aside class="card p-4 lg:sticky lg:top-[5.25rem] lg:max-h-[calc(100vh-6.5rem)] lg:overflow-y-auto custom-scrollbar">
+                <h3 class="eyebrow mb-3">Các thì</h3>
+                <div id="t-list" class="flex flex-col gap-3"></div>
+            </aside>
+            <div id="t-main" class="flex flex-col gap-6 min-w-0 scroll-mt-24"></div>
         </div>
     </section>
 
@@ -471,7 +490,10 @@
     <script src="js/examBuilderView.js"></script>
     <script src="js/app-config.js"></script>
     <script src="js/writingService.js"></script>
+    <script src="js/accessGate.js"></script>
     <script src="js/writingView.js"></script>
+    <script src="js/tenseService.js"></script>
+    <script src="js/tenseView.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

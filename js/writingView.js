@@ -110,41 +110,15 @@
             renderMain();
         }
 
-        const isLocked = () => !!(s.status && s.status.accessRequired && !service.accessCode);
+        const isLocked = () => AccessGate.isLocked(s.status, service);
 
         function renderLock() {
-            if ($('w-lock-form')) return;
-            $('w-lock').innerHTML = `<div class="card max-w-md mx-auto p-6 sm:p-8 text-center">
-                <div class="w-12 h-12 mx-auto rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl"><i class="fa-solid fa-lock"></i></div>
-                <h3 class="mt-4 text-lg font-bold text-slate-900">Nhập mật khẩu để vào Writing</h3>
-                <p class="mt-1 text-sm text-slate-500">Phần luyện viết có AI chấm chỉ dành cho học sinh trong lớp. Hỏi giáo viên nếu bạn chưa có mật khẩu.</p>
-                <form id="w-lock-form" class="mt-5 flex flex-col gap-3" autocomplete="off">
-                    <input id="w-lock-input" type="password" class="field text-center tracking-widest" placeholder="Mật khẩu" aria-label="Mật khẩu Writing">
-                    <p id="w-lock-error" class="hidden text-xs text-rose-600"></p>
-                    <button id="w-lock-submit" type="submit" class="btn-primary justify-center"><i class="fa-solid fa-unlock"></i> <span>Mở khoá</span></button>
-                </form>
-            </div>`;
-            setTimeout(() => { const i = $('w-lock-input'); if (i) i.focus(); }, 50);
-        }
-
-        async function unlock(e) {
-            e.preventDefault();
-            const input = $('w-lock-input');
-            const btn = $('w-lock-submit');
-            const error = $('w-lock-error');
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Đang kiểm tra…</span>';
-            try {
-                await service.unlock(input.value);
-                $('w-lock').innerHTML = '';
-                render();
-            } catch (err) {
-                error.textContent = err.message;
-                error.classList.remove('hidden');
-                btn.disabled = false;
-                btn.innerHTML = '<i class="fa-solid fa-unlock"></i> <span>Mở khoá</span>';
-                input.select();
-            }
+            AccessGate.mount($('w-lock'), {
+                service,
+                title: 'Nhập mật khẩu để vào Writing',
+                description: 'Phần luyện viết có AI chấm chỉ dành cho học sinh trong lớp. Hỏi giáo viên nếu bạn chưa có mật khẩu.',
+                onUnlock: render
+            });
         }
 
         function renderStatus() {
@@ -543,11 +517,7 @@
                 if (e.locked) {
                     saveDraftNow();
                     render();
-                    const error = $('w-lock-error');
-                    if (error) {
-                        error.textContent = 'Mật khẩu đã thay đổi – hãy nhập lại (bài đang viết vẫn được lưu).';
-                        error.classList.remove('hidden');
-                    }
+                    AccessGate.showError($('w-lock'), 'Mật khẩu đã thay đổi – hãy nhập lại (bài đang viết vẫn được lưu).');
                     return;
                 }
                 updateCounter();
@@ -570,7 +540,6 @@
         function bind() {
             if (bound) return;
             bound = true;
-            $('w-lock').addEventListener('submit', unlock);
             $('w-levels').addEventListener('click', e => {
                 const btn = e.target.closest('[data-w-level]');
                 if (!btn) return;

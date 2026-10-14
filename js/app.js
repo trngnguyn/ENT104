@@ -5,8 +5,8 @@
     const Stats = StatisticsService;
     const Storage = AppStorage;
     const SKILL_BY_KEY = Object.fromEntries(SKILLS.map(s => [s.key, s]));
-    const MODES = ['practice', 'exam', 'builder', 'writing'];
-    const PANEL_MODES = ['builder', 'writing'];
+    const MODES = ['practice', 'exam', 'builder', 'writing', 'tenses'];
+    const PANEL_MODES = ['builder', 'writing', 'tenses'];
     const EXAM_SIZES = [20, 40, 50];
     const EXAM_TIMES = [0, 15, 30, 45, 60, 90];
     const LETTERS = ['A', 'B', 'C', 'D'];
@@ -37,6 +37,7 @@
     let builder = null;
     let builderView = null;
     let writingView = null;
+    let tenseView = null;
 
     const state = {
         mode: 'practice',
@@ -159,14 +160,14 @@
 
     function render() {
         renderHeader();
-        const inBuilder = state.mode === 'builder';
-        const inWriting = state.mode === 'writing';
-        show('quiz-workspace', !inBuilder && !inWriting);
-        show('builder-view', inBuilder);
-        show('writing-view', inWriting);
-        if (inBuilder || inWriting) {
+        const panels = { builder: builderView, writing: writingView, tenses: tenseView };
+        show('quiz-workspace', !panels[state.mode]);
+        show('builder-view', state.mode === 'builder');
+        show('writing-view', state.mode === 'writing');
+        show('tenses-view', state.mode === 'tenses');
+        if (panels[state.mode]) {
             $('progress-bar-fill').style.width = '0%';
-            (inBuilder ? builderView : writingView).render();
+            panels[state.mode].render();
         } else {
             renderProgress();
             renderSidebar();
@@ -981,7 +982,9 @@
             onStart: (questions, meta) => beginExam(questions, meta),
         });
         const appConfig = window.APP_CONFIG || {};
-        writingView = WritingView.create({ service: new WritingService({ apiBase: appConfig.writingApiBase || '' }) });
+        const writingService = new WritingService({ apiBase: appConfig.writingApiBase || '' });
+        writingView = WritingView.create({ service: writingService });
+        tenseView = TenseView.create({ service: new TenseService(), access: writingService, questions: () => qs.questions });
         restoreUi();
         $('data-source').textContent = `Dữ liệu: ${qs.source === 'json' ? 'data/questions.json' : 'data/question-bank.bundle.js'}`
             + (qs.skipped.length ? ` (bỏ qua ${qs.skipped.length} câu không hợp lệ)` : '') + '.';

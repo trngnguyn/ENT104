@@ -80,6 +80,11 @@ Lưu ý:
   - Độ dài được kiểm soát ở máy chủ: đoạn văn dưới 130 từ bị giới hạn điểm *Hoàn thành yêu cầu* (≥ 111 từ: tối đa 7; ≥ 78 từ: tối đa 5; ít hơn: tối đa 3), dài hơn 180 từ: tối đa 8.
   - Lưu 5 lần chấm gần nhất mỗi đề (`localStorage`, khoá `ent104.writing.v1`), xem lại, viết lại từ bài cũ hoặc bản đã sửa. Lịch sử Writing tách biệt với nút *Reset* của Practice / Exam.
   - Điểm là ước lượng của AI theo thang tham khảo của ứng dụng, **không phải tiêu chí hay điểm chính thức của ENT104**; đề Writing cũng là nội dung tổng quát (`general_a1_a2` / `general_b1`, `unit: null`).
+- **Tenses (các thì A1–A2):** 8 mục trong `data/tenses.json` – A1: hiện tại đơn, hiện tại tiếp diễn; A1–A2: quá khứ đơn (gồm *was / were*), tương lai với *be going to*; A2: tương lai đơn *will*, hiện tại tiếp diễn chỉ kế hoạch tương lai, quá khứ tiếp diễn, hiện tại hoàn thành.
+  - Mỗi thì có: cấu trúc (khẳng định / phủ định / nghi vấn / câu hỏi Wh-) kèm câu ví dụ, cách dùng, dấu hiệu nhận biết, lưu ý, lỗi thường gặp.
+  - *Luyện tập* theo từng thì (10 / 20 / tất cả câu, xáo trộn): 74 câu riêng của phần Thì (`TNS-…`) cộng các câu ngữ pháp A1 / A2 / A1-A2 trong ngân hàng có tag cùng thì (khai báo ở `bankTags`). Chấm ngay từng câu kèm giải thích, cuối lượt có điểm, danh sách câu sai và *Làm lại câu sai*; mục *Tổng hợp các thì* trộn câu của cả 8 thì. Điểm cao nhất lưu ở `localStorage` (`ent104.tenses.v1`).
+  - Danh sách thì là nội dung tiếng Anh tổng quát theo CEFR, **chưa đối chiếu với đề cương chính thức của ENT104**.
+  - Dùng **chung mật khẩu với Writing** (nhập ở tab nào cũng mở cả hai). Lưu ý: dữ liệu các thì là file tĩnh công khai trên GitHub Pages – mật khẩu chỉ chặn ở giao diện (máy chủ kiểm tra mật khẩu khi mở khoá), không phải bảo mật thật như phần chấm Writing. Nếu không kết nối được máy chủ, tab Tenses vẫn mở.
 - **Bộ lọc:** kỹ năng, trình độ (A1 / A2 / A1-A2 / B1), chủ đề, trạng thái làm bài (chưa làm / đúng / sai); nút *Review wrong answers* để ôn lại câu sai.
 - **Tìm kiếm** theo nội dung (câu hỏi, đáp án, giải thích, tên bài đọc) hoặc theo ID (vd. `GRAM-A1-0001`).
 - **Bài đọc** hiển thị ở khung riêng phía trên câu hỏi (có thể thu gọn); mỗi bài đọc chỉ lưu một lần trong `data/reading-passages.json`.
@@ -103,6 +108,10 @@ js/examBuilderService.js        Soạn đề: kiểm tra cấu hình, chọn câ
 js/examBuilderView.js           Giao diện Exam Builder
 js/writingService.js            Writing: đếm từ, giới hạn, định vị lỗi, gọi API, bản nháp / lịch sử (dùng chung với server)
 js/writingView.js               Giao diện Writing
+js/accessGate.js                Màn hình nhập mật khẩu dùng chung (Writing, Tenses)
+js/tenseService.js              Tenses: kiểm tra dữ liệu, gom câu luyện tập, tạo lượt, lưu điểm (dùng chung với test)
+js/tenseView.js                 Giao diện Tenses
+data/tenses.json                Các thì A1–A2: lý thuyết + câu luyện tập
 js/app.js                       Hiển thị Practice / Exam và xử lý sự kiện, chuyển chế độ
 data/questions.json             Ngân hàng câu hỏi (nguồn dữ liệu chính)
 data/reading-passages.json      Các bài đọc
@@ -215,6 +224,8 @@ Cảnh báo: gần trùng 70–85%, giải thích ngắn không nhắc tới đ�
 `scripts/test-features.js` chạy trên ngân hàng 1.300 câu thật (localStorage giả lập), gồm 10 nhóm: phản hồi Practice đúng/sai và khoá đáp án; Exam không lộ kết quả trước khi nộp; xem lại đáp án và giải thích sau khi nộp; đề ngẫu nhiên đúng số câu / phân bổ / tiêu chí (lặp hàng trăm lần, gồm đề mẫu 40 câu = 15 Grammar + 10 Vocabulary + 5 Communication + 10 Reading); thêm / xoá / thay câu thủ công; không trùng câu; báo thiếu câu mà không tự sửa cấu hình; lưu – mở lại – sửa – nhân bản – xoá đề; điểm và thống kê, hết giờ tự nộp; tương thích ngân hàng 1.300 câu (cơ cấu A1–A2 giữ nguyên, 300 câu B1 đúng nguồn `general_b1`, tạo được đề chỉ gồm câu B1 và bài đọc B1). Phần hiển thị (ẩn đáp án trong Exam, tô căn cứ bài đọc, giao diện Exam Builder) được kiểm tra thủ công trên trình duyệt.
 
 `scripts/test-writing.js` (18 nhóm, gồm cả CORS và chạy thử mã Cloudflare Worker; không gọi AI thật – dùng dịch vụ AI giả lập): ngân hàng đề Writing; đếm từ, giới hạn gửi bài, điểm trần theo độ dài; định vị lỗi theo nguyên từ; làm sạch phản hồi AI và tự tính điểm tổng; prompt tách bài viết khỏi chỉ dẫn; giới hạn tần suất; cấu hình `.env`; máy chủ không lộ `.env` / mã nguồn; kiểm tra đầu vào, chặn gọi chéo trang, giới hạn kích thước; khoá chỉ gửi tới AI và không lộ trong phản hồi / lỗi; chế độ chưa cấu hình và demo; bản nháp và lịch sử.
+
+`scripts/test-tenses.js` (9 nhóm): dữ liệu `data/tenses.json` đủ 8 thì và hợp lệ (id không trùng – kể cả với ngân hàng, 4 phương án khác nhau, đáp án hợp lệ, có chỗ trống); bắt được dữ liệu sai; chỉ gom câu ngữ pháp A1–A2 đúng tag (không lấy B1); mỗi thì ≥ 10 câu; lượt luyện tập đúng số câu, không trùng; lưu điểm cao nhất; máy chủ phục vụ file dữ liệu và JS mới.
 
 ## Thống kê hiện tại
 
