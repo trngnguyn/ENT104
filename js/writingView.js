@@ -129,7 +129,7 @@
             } else if (st.enabled && st.provider === 'mock') {
                 html = '<span class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 ring-1 ring-amber-200" title="Phản hồi mẫu, không phải chấm bằng AI"><i class="fa-solid fa-flask mr-1"></i>Chế độ DEMO</span>';
             } else if (st.enabled) {
-                html = `<span class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200"><i class="fa-solid fa-circle-check mr-1"></i>AI sẵn sàng${st.model ? ` • ${esc(st.model)}` : ''}</span>`;
+                html = `<span class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200"><i class="fa-solid fa-circle-check mr-1"></i>AI sẵn sàng</span>`;
             } else {
                 html = `<span class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-rose-50 text-rose-700 ring-1 ring-rose-200" title="${esc(st.message || '')}"><i class="fa-solid fa-plug-circle-xmark mr-1"></i>Chưa bật chấm AI</span>`;
             }
@@ -142,7 +142,7 @@
                 const active = s.level === l;
                 return `<button data-w-level="${l}" class="py-1.5 rounded-lg text-xs font-semibold border transition-colors ${active
                     ? 'bg-blue-50 text-blue-700 border-blue-200' : 'border-slate-200 text-slate-600 hover:bg-slate-50'}">
-                    ${l === 'all' ? 'All' : l}<span class="block text-[10px] font-medium opacity-70">${counts[l]}</span></button>`;
+                    ${l === 'all' ? 'Tất cả' : l}<span class="block text-[10px] font-medium opacity-70">${counts[l]}</span></button>`;
             }).join('');
 
             const list = service.filter(s.level);
@@ -178,7 +178,7 @@
         function renderMain() {
             const t = task();
             if (!t) {
-                $('w-main').innerHTML = '<div class="card p-10 text-center text-sm text-slate-500">Chọn một đề ở cột bên trái.</div>';
+                $('w-main').innerHTML = '<div class="card p-10 text-center text-sm text-slate-500">Chọn một đề để bắt đầu.</div>';
                 $('w-feedback').innerHTML = '';
                 return;
             }
@@ -187,7 +187,7 @@
                 ${taskCard(t)}
                 <div class="card p-5 sm:p-6">
                     <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-                        <label for="w-text" class="eyebrow">Bài viết của bạn – một đoạn văn</label>
+                        <label for="w-text" class="eyebrow">Bài viết của bạn</label>
                         <span id="w-count" class="text-xs font-semibold tabular-nums"></span>
                     </div>
                     <div class="h-1.5 rounded-full bg-slate-100 overflow-hidden mb-3"><div id="w-count-bar" class="h-full rounded-full transition-all"></div></div>
@@ -195,7 +195,7 @@
                         class="field !text-[15px] leading-relaxed custom-scrollbar resize-y" placeholder="Write your paragraph here (about ${t.targetWords} words)…">${esc(draft)}</textarea>
                     <div id="w-check" class="mt-2 space-y-1"></div>
                     <div class="flex flex-wrap items-center justify-between gap-2 mt-4">
-                        <p class="text-[11px] text-slate-400">Bản nháp được lưu tự động trên trình duyệt này • <kbd>Ctrl</kbd> + <kbd>Enter</kbd> để gửi</p>
+                        <p class="text-[11px] text-slate-400"><i class="fa-regular fa-floppy-disk mr-1"></i>Tự lưu nháp</p>
                         <div class="flex gap-2">
                             <button id="w-clear" class="btn-secondary !py-2 !text-xs"><i class="fa-solid fa-eraser"></i> Xoá bài</button>
                             <button id="w-submit" class="btn-primary !py-2"><i class="fa-solid fa-wand-magic-sparkles"></i> <span>Chấm bài</span></button>
@@ -213,14 +213,13 @@
                 <div class="flex flex-wrap items-center gap-2 mb-3">
                     <span class="px-2 py-1 bg-indigo-50 text-indigo-700 font-semibold text-xs rounded-lg">${t.level}</span>
                     <span class="px-2 py-1 font-medium text-xs rounded-lg ${TYPE_STYLE[t.type]}"><i class="fa-solid ${TYPE_ICON[t.type]} mr-1"></i>${esc(W.TYPES[t.type])}</span>
-                    <span class="px-2 py-1 bg-slate-100 text-slate-600 font-medium text-xs rounded-lg">~${t.targetWords} từ (${t.minWords}–${t.maxWords})</span>
-                    <span class="ml-auto text-[11px] font-mono text-slate-400">${esc(t.id)}</span>
+                    <span class="px-2 py-1 bg-slate-100 text-slate-600 font-medium text-xs rounded-lg">~${t.targetWords} từ</span>
                 </div>
                 <h2 class="text-xl font-bold tracking-tight text-slate-900">${esc(t.title)}</h2>
                 <p class="mt-2 text-[15px] text-slate-800">${esc(t.prompt)} Write about <b>${t.targetWords} words</b> in <b>one paragraph</b>.</p>
                 <p class="mt-1 text-sm text-slate-500">${esc(t.promptVi)} Viết <b>một đoạn văn</b> khoảng <b>${t.targetWords} từ</b>.</p>
                 <div class="mt-4">
-                    <p class="eyebrow mb-2">Bài viết cần có</p>
+                    <p class="eyebrow mb-2">Cần có</p>
                     <ul class="grid sm:grid-cols-2 gap-x-6 gap-y-1.5 text-sm text-slate-700">
                         ${t.requirements.map(r => `<li class="flex gap-2"><i class="fa-regular fa-square-check text-blue-600 mt-1 text-xs"></i><span>${esc(r)}</span></li>`).join('')}
                     </ul>
@@ -363,7 +362,7 @@
                             <div class="space-y-3">${W.CRITERIA.map(c => criterionRow(c, f.criteria[c.key], f)).join('')}</div>
                         </div>
                         ${f.summary ? `<p class="mt-4 text-sm text-slate-700 leading-relaxed">${esc(f.summary)}</p>` : ''}
-                        ${f.lengthCapped ? `<p class="mt-3 text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-lg p-3"><i class="fa-solid fa-ruler-horizontal mr-1"></i>Đoạn văn có ${f.wordCount} từ, chưa đạt yêu cầu khoảng ${f.targetWords} từ nên điểm "Hoàn thành yêu cầu" bị giới hạn tối đa ${f.lengthCap}/${f.maxScore}.</p>` : ''}
+                        ${f.lengthCapped ? `<p class="mt-3 text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-lg p-3"><i class="fa-solid fa-ruler-horizontal mr-1"></i>Bài có ${f.wordCount}/${f.targetWords} từ nên điểm "Hoàn thành yêu cầu" tối đa ${f.lengthCap}/${f.maxScore}.</p>` : ''}
                         ${f.strengths.length ? `<div class="mt-3">${listBlock('Điểm tốt', 'fa-thumbs-up', 'emerald', f.strengths)}</div>` : ''}`)}
                     ${section('grammar', correctionList(groups.grammar, 'grammar'))}
                     ${section('vocabulary', correctionList(groups.vocabulary, 'vocabulary'))}
@@ -383,8 +382,7 @@
                     </details>` : ''}
                     ${f.meta && f.meta.unmatchedCorrections ? `<p class="text-[11px] text-slate-400">Đã bỏ ${f.meta.unmatchedCorrections} góp ý của AI vì không khớp nguyên văn với bài viết.</p>` : ''}
                     <p class="text-[11px] text-slate-400 leading-relaxed border-t border-slate-200/70 pt-3">
-                        Điểm do AI ước lượng theo thang tham khảo của ứng dụng (4 tiêu chí, mỗi tiêu chí 0–10; điểm tổng là trung bình). Đây không phải tiêu chí hay điểm chính thức của học phần ENT104.
-                        AI có thể chấm hoặc sửa chưa chính xác – hãy hỏi giáo viên khi chưa chắc chắn.
+                        Điểm do AI ước lượng để tham khảo, không phải điểm chính thức ENT104. AI có thể sai – hỏi giáo viên khi chưa chắc.
                     </p>
                 </div>
             </div>`;

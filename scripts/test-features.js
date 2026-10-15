@@ -248,7 +248,7 @@ test('7. Ngân hàng không đủ câu: báo số câu hiện có, gợi ý đi�
         quotas: { skill: { grammar: 10, reading: want }, type: {}, category: {} },
     };
     const qcheck = builder.check(quota);
-    assert.ok(qcheck.errors.some(e => e.message.includes(`Reading: cần ${want} câu nhưng chỉ có ${readingTotal}`)));
+    assert.ok(qcheck.errors.some(e => e.message.includes(`Đọc hiểu: cần ${want} câu nhưng chỉ có ${readingTotal}`)));
     assert.ok(qcheck.errors.some(e => e.message.includes(`Tổng số câu đã phân bổ (${want + 10}) khác số câu của đề (40)`)));
     assert.ok(!builder.generate(quota).ok);
     const empty = builder.check({ ...builder.defaultConfig(), levels: [] });

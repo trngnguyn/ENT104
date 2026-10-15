@@ -139,6 +139,125 @@ html.dark .btn-primary:not(:disabled):hover {
     box-shadow: 0 1px 2px rgb(15 23 42 / 0.08), 0 0 0 1px rgb(var(--c-slate-200) / 0.7);
 }
 
+/* Thanh chế độ dưới đáy màn hình (điện thoại) */
+@media (max-width: 767.98px) {
+    html { scroll-padding-bottom: 4.5rem; }
+}
+.bottom-nav {
+    background-color: rgb(var(--header-bg) / 0.95);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    backdrop-filter: saturate(180%) blur(12px);
+    padding-bottom: env(safe-area-inset-bottom);
+}
+.bottom-tab {
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.55rem 0.1rem 0.5rem;
+    border-radius: 0;
+    font-size: 10.5px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+.bottom-tab i {
+    font-size: 1.05rem;
+}
+.bottom-tab.is-active {
+    background: transparent;
+    box-shadow: inset 0 2px 0 rgb(var(--c-blue-600));
+    color: rgb(var(--c-blue-600));
+    font-weight: 600;
+}
+
+/* Trang chủ */
+.home-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 1.1rem 1.25rem;
+    text-align: left;
+    background-color: rgb(var(--surface));
+    border: 1px solid rgb(var(--c-slate-200) / 0.8);
+    border-radius: 1rem;
+    box-shadow: 0 1px 2px rgb(15 23 42 / 0.04), 0 1px 3px rgb(15 23 42 / 0.06);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+.home-card:hover {
+    border-color: rgb(var(--c-blue-300));
+    box-shadow: 0 4px 14px rgb(15 23 42 / 0.08);
+    transform: translateY(-1px);
+}
+.home-icon {
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+.home-title {
+    display: block;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: rgb(var(--c-slate-900));
+}
+.home-desc {
+    display: block;
+    margin-top: 0.1rem;
+    font-size: 0.85rem;
+    color: rgb(var(--c-slate-500));
+}
+.home-arrow {
+    margin-left: auto;
+    font-size: 0.8rem;
+    color: rgb(var(--c-slate-300));
+    transition: color 0.15s ease, transform 0.15s ease;
+}
+.home-card:hover .home-arrow {
+    color: rgb(var(--c-blue-600));
+    transform: translateX(2px);
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.65rem;
+    border-radius: 999px;
+    background-color: rgb(var(--c-slate-100));
+    color: rgb(var(--c-slate-600));
+}
+
+/* Luyện tập / Thi thử trên điện thoại: bộ lọc và danh sách câu chỉ hiện khi bấm nút tương ứng */
+@media (max-width: 1023.98px) {
+    #quiz-sidebar:not([data-open]),
+    #quiz-sidebar #progress-card,
+    #quiz-sidebar > [data-panel-body] {
+        display: none;
+    }
+    #quiz-sidebar[data-open="filters"] > [data-panel-body="filters"]:not(.hidden),
+    #quiz-sidebar[data-open="map"] > [data-panel-body="map"]:not(.hidden) {
+        display: flex;
+    }
+    #quiz-sidebar[data-open="map"] > [data-panel-body="map"]:not(.hidden) {
+        display: block;
+    }
+    #quiz-sidebar[data-open] {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+@media (max-width: 1023.98px) {
+    .mobile-hide {
+        display: none !important;
+    }
+}
+[data-panel].is-open {
+    background-color: rgb(var(--c-blue-50));
+    color: rgb(var(--c-blue-700));
+}
+
 /* Menu chọn giao diện */
 .theme-option {
     display: flex;

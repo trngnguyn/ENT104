@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <title>English A1–B1 Practice – Question Bank</title>
+    <title>Luyện tiếng Anh A1–B1</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="js/tailwind-config.js?v=20261014b"></script>
+    <script src="js/tailwind-config.js?v=20261015a"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/theme.css?v=20261014b">
-    <link rel="stylesheet" href="css/styles.css?v=20261014b">
+    <link rel="stylesheet" href="css/theme.css?v=20261015a">
+    <link rel="stylesheet" href="css/styles.css?v=20261015a">
 </head>
 <body class="min-h-full flex flex-col font-sans text-slate-800 antialiased selection:bg-blue-100 selection:text-blue-800">
 
@@ -21,30 +21,31 @@
     <header class="app-header sticky top-0 z-30 border-b border-slate-200/80">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between gap-3 h-16">
-                <div class="flex items-center gap-3 min-w-0">
+                <button data-mode="home" class="flex items-center gap-3 min-w-0 text-left" title="Trang chủ">
                     <div class="w-9 h-9 flex-shrink-0 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center shadow-md shadow-blue-600/25">
                         <i class="fa-solid fa-graduation-cap"></i>
                     </div>
                     <div class="min-w-0">
-                        <h1 class="font-semibold text-[15px] leading-tight text-slate-900 truncate">English A1–B1 Practice</h1>
-                        <p id="app-subtitle" class="text-[11px] text-slate-500 truncate">Loading question bank...</p>
+                        <h1 class="font-semibold text-[15px] leading-tight text-slate-900 truncate">Luyện tiếng Anh A1–B1</h1>
+                        <p id="app-subtitle" class="text-[11px] text-slate-500 truncate">Đang tải…</p>
                     </div>
-                </div>
+                </button>
 
                 <nav class="hidden md:flex items-center gap-1 bg-slate-100 p-1 rounded-xl text-sm font-medium whitespace-nowrap" aria-label="Chế độ">
-                    <button id="mode-practice-btn" data-mode="practice" class="mode-btn"><i class="fa-solid fa-pen-to-square text-xs"></i>Practice</button>
-                    <button id="mode-exam-btn" data-mode="exam" class="mode-btn"><i class="fa-solid fa-stopwatch text-xs"></i>Exam</button>
-                    <button id="mode-builder-btn" data-mode="builder" class="mode-btn"><i class="fa-solid fa-layer-group text-xs"></i><span><span class="hidden lg:inline">Exam </span>Builder</span></button>
-                    <button id="mode-writing-btn" data-mode="writing" class="mode-btn"><i class="fa-solid fa-feather-pointed text-xs"></i>Writing</button>
-                    <button id="mode-tenses-btn" data-mode="tenses" class="mode-btn"><i class="fa-solid fa-clock-rotate-left text-xs"></i>Tenses</button>
+                    <button data-mode="home" class="mode-btn" title="Trang chủ"><i class="fa-solid fa-house text-xs"></i><span class="hidden xl:inline">Trang chủ</span></button>
+                    <button data-mode="practice" class="mode-btn"><i class="fa-solid fa-pen-to-square text-xs"></i>Luyện tập</button>
+                    <button data-mode="exam" class="mode-btn"><i class="fa-solid fa-stopwatch text-xs"></i>Thi thử</button>
+                    <button data-mode="tenses" class="mode-btn"><i class="fa-solid fa-clock-rotate-left text-xs"></i>Các thì</button>
+                    <button data-mode="writing" class="mode-btn"><i class="fa-solid fa-feather-pointed text-xs"></i>Viết</button>
+                    <button data-mode="builder" class="mode-btn"><i class="fa-solid fa-layer-group text-xs"></i>Soạn đề</button>
                 </nav>
 
                 <div class="flex items-center gap-1">
-                    <button id="stats-btn" class="icon-btn" title="Statistics">
-                        <i class="fa-solid fa-chart-column"></i><span class="hidden lg:inline">Statistics</span>
+                    <button id="stats-btn" class="icon-btn" title="Thống kê">
+                        <i class="fa-solid fa-chart-column"></i><span class="hidden lg:inline">Thống kê</span>
                     </button>
-                    <button id="reset-btn" class="icon-btn hover:!text-rose-600" title="Reset">
-                        <i class="fa-solid fa-rotate-right"></i><span class="hidden lg:inline">Reset</span>
+                    <button id="reset-btn" class="icon-btn hover:!text-rose-600" title="Xoá tiến độ luyện tập">
+                        <i class="fa-solid fa-rotate-right"></i>
                     </button>
                     <span class="w-px h-6 bg-slate-200 mx-1"></span>
                     <div class="relative">
@@ -61,26 +62,59 @@
                 </div>
             </div>
 
-            <nav class="md:hidden grid grid-cols-5 gap-1 bg-slate-100 p-1 rounded-xl text-xs font-medium mb-3" aria-label="Chế độ">
-                <button data-mode="practice" class="mode-btn !px-1 !py-1.5 flex-col !gap-0.5 text-[11px]"><i class="fa-solid fa-pen-to-square"></i>Practice</button>
-                <button data-mode="exam" class="mode-btn !px-1 !py-1.5 flex-col !gap-0.5 text-[11px]"><i class="fa-solid fa-stopwatch"></i>Exam</button>
-                <button data-mode="builder" class="mode-btn !px-1 !py-1.5 flex-col !gap-0.5 text-[11px]"><i class="fa-solid fa-layer-group"></i>Builder</button>
-                <button data-mode="writing" class="mode-btn !px-1 !py-1.5 flex-col !gap-0.5 text-[11px]"><i class="fa-solid fa-feather-pointed"></i>Writing</button>
-                <button data-mode="tenses" class="mode-btn !px-1 !py-1.5 flex-col !gap-0.5 text-[11px]"><i class="fa-solid fa-clock-rotate-left"></i>Tenses</button>
-            </nav>
         </div>
         <div class="h-0.5 bg-slate-200/60">
             <div id="progress-bar-fill" class="bg-gradient-to-r from-blue-500 to-indigo-500 h-0.5 transition-all duration-300 w-0"></div>
         </div>
     </header>
 
+    <!-- Thanh chế độ dưới đáy màn hình (điện thoại) -->
+    <nav class="bottom-nav md:hidden fixed bottom-0 inset-x-0 z-30 border-t border-slate-200/80 grid grid-cols-6" aria-label="Chế độ">
+        <button data-mode="home" class="mode-btn bottom-tab"><i class="fa-solid fa-house"></i>Trang chủ</button>
+        <button data-mode="practice" class="mode-btn bottom-tab"><i class="fa-solid fa-pen-to-square"></i>Luyện tập</button>
+        <button data-mode="exam" class="mode-btn bottom-tab"><i class="fa-solid fa-stopwatch"></i>Thi thử</button>
+        <button data-mode="tenses" class="mode-btn bottom-tab"><i class="fa-solid fa-clock-rotate-left"></i>Các thì</button>
+        <button data-mode="writing" class="mode-btn bottom-tab"><i class="fa-solid fa-feather-pointed"></i>Viết</button>
+        <button data-mode="builder" class="mode-btn bottom-tab"><i class="fa-solid fa-layer-group"></i>Soạn đề</button>
+    </nav>
+
+    <!-- Trang chủ -->
+    <section id="home-view" class="hidden flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">Hôm nay bạn muốn học gì?</h2>
+        <div id="home-progress" class="mt-2 text-sm text-slate-500"></div>
+        <div class="mt-6 grid gap-3 sm:gap-4 sm:grid-cols-2">
+            <button data-mode-link="practice" class="home-card group">
+                <span class="home-icon bg-blue-50 text-blue-600"><i class="fa-solid fa-pen-to-square"></i></span>
+                <span class="min-w-0"><span class="home-title">Luyện tập</span><span class="home-desc">Làm từng câu, biết đúng sai ngay</span></span>
+                <i class="fa-solid fa-chevron-right home-arrow"></i>
+            </button>
+            <button data-mode-link="exam" class="home-card group">
+                <span class="home-icon bg-emerald-50 text-emerald-600"><i class="fa-solid fa-stopwatch"></i></span>
+                <span class="min-w-0"><span class="home-title">Thi thử</span><span class="home-desc">Làm đề có giờ, chấm điểm cuối bài</span></span>
+                <i class="fa-solid fa-chevron-right home-arrow"></i>
+            </button>
+            <button data-mode-link="tenses" class="home-card group">
+                <span class="home-icon bg-amber-50 text-amber-600"><i class="fa-solid fa-clock-rotate-left"></i></span>
+                <span class="min-w-0"><span class="home-title">Các thì</span><span class="home-desc">Cấu trúc, ví dụ và bài tập từng thì</span></span>
+                <i class="fa-solid fa-chevron-right home-arrow"></i>
+            </button>
+            <button data-mode-link="writing" class="home-card group">
+                <span class="home-icon bg-indigo-50 text-indigo-600"><i class="fa-solid fa-feather-pointed"></i></span>
+                <span class="min-w-0"><span class="home-title">Viết đoạn văn</span><span class="home-desc">AI chấm điểm và sửa lỗi</span></span>
+                <i class="fa-solid fa-chevron-right home-arrow"></i>
+            </button>
+        </div>
+        <button data-mode-link="builder" class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-blue-600">
+            <i class="fa-solid fa-layer-group"></i> Tự soạn đề thi riêng <i class="fa-solid fa-arrow-right text-xs"></i>
+        </button>
+    </section>
+
     <!-- Exam Builder -->
     <section id="builder-view" class="hidden flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
         <div class="flex flex-wrap items-end justify-between gap-3 mb-6">
             <div>
-                <p class="eyebrow text-blue-600 mb-1">Exam Builder</p>
                 <h2 class="text-2xl font-bold tracking-tight text-slate-900">Soạn đề thi</h2>
-                <p class="text-sm text-slate-500 mt-1">Đề đã soạn chỉ gồm cấu hình và danh sách câu hỏi. Kết quả làm bài được lưu riêng (xem <b class="font-semibold text-slate-700">Statistics</b>).</p>
+                <p class="text-sm text-slate-500 mt-1">Chọn số câu, chủ đề, thời gian rồi lưu đề để làm lại.</p>
             </div>
             <button id="builder-new-btn" class="btn-secondary">
                 <i class="fa-solid fa-plus"></i> Đề mới
@@ -90,7 +124,7 @@
         <div class="grid gap-6 lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)]">
             <div class="flex flex-col gap-6 min-w-0">
                 <div class="card p-5">
-                    <h3 class="eyebrow mb-3">Đề đã lưu (Saved papers)</h3>
+                    <h3 class="eyebrow mb-3">Đề đã lưu</h3>
                     <div id="builder-saved"></div>
                 </div>
                 <div class="card p-5">
@@ -101,7 +135,7 @@
             <div class="flex flex-col gap-6 min-w-0">
                 <div id="builder-paper" class="card p-5"></div>
                 <div class="card p-5">
-                    <h3 class="eyebrow mb-3">Ngân hàng câu hỏi – chọn câu thủ công</h3>
+                    <h3 class="eyebrow mb-3">Thêm câu thủ công</h3>
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3">
                         <div class="relative col-span-2">
                             <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
@@ -124,9 +158,8 @@
     <section id="writing-view" class="hidden flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
         <div class="flex flex-wrap items-end justify-between gap-3 mb-6">
             <div>
-                <p class="eyebrow text-blue-600 mb-1">Writing</p>
-                <h2 class="text-2xl font-bold tracking-tight text-slate-900">Luyện viết đoạn văn</h2>
-                <p class="text-sm text-slate-500 mt-1">Đoạn văn miêu tả (descriptive) và kể chuyện (narrative) khoảng 150 từ. Bài được AI chấm điểm, sửa lỗi, giải thích và đưa bài viết tham khảo.</p>
+                <h2 class="text-2xl font-bold tracking-tight text-slate-900">Viết đoạn văn</h2>
+                <p class="text-sm text-slate-500 mt-1">Chọn đề, viết khoảng 150 từ, AI chấm và sửa lỗi.</p>
             </div>
             <div id="w-status"></div>
         </div>
@@ -141,7 +174,7 @@
                     <div id="w-task-list" class="flex flex-col gap-0.5 max-h-80 lg:max-h-none overflow-y-auto custom-scrollbar"></div>
                 </div>
                 <div class="card p-4">
-                    <h3 class="eyebrow mb-3">Tiến độ Writing</h3>
+                    <h3 class="eyebrow mb-3">Tiến độ</h3>
                     <div id="w-summary"></div>
                 </div>
             </aside>
@@ -154,13 +187,12 @@
     <!-- Tenses -->
     <section id="tenses-view" class="hidden flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 scroll-mt-20">
         <div class="mb-6">
-            <p class="eyebrow text-blue-600 mb-1">Tenses</p>
             <h2 class="text-2xl font-bold tracking-tight text-slate-900">Các thì A1–A2</h2>
-            <p class="text-sm text-slate-500 mt-1">Cấu trúc, cách dùng, dấu hiệu nhận biết và ví dụ của từng thì. Bấm “Luyện tập” để làm câu hỏi riêng cho thì đó.</p>
+            <p class="text-sm text-slate-500 mt-1">Chọn một thì để xem cấu trúc, rồi bấm Luyện tập.</p>
         </div>
         <div id="t-lock" class="hidden"></div>
         <div id="t-body" class="grid gap-6 lg:grid-cols-[300px_minmax(0,1fr)] items-start">
-            <aside class="card p-4 lg:sticky lg:top-[5.25rem] lg:max-h-[calc(100vh-6.5rem)] lg:overflow-y-auto custom-scrollbar">
+            <aside id="t-aside" class="card p-4 lg:sticky lg:top-[5.25rem] lg:max-h-[calc(100vh-6.5rem)] lg:overflow-y-auto custom-scrollbar">
                 <h3 class="eyebrow mb-3">Các thì</h3>
                 <div id="t-list" class="flex flex-col gap-3"></div>
             </aside>
@@ -171,76 +203,79 @@
     <!-- Practice / Exam workspace -->
     <div id="quiz-workspace" class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 grid gap-6 lg:grid-cols-[300px_minmax(0,1fr)] items-start">
 
+        <!-- Thanh công cụ trên điện thoại: mở / đóng bộ lọc và danh sách câu -->
+        <div class="lg:hidden flex items-center gap-2">
+            <button id="m-filter-btn" data-panel="filters" class="btn-secondary !py-2 !px-3 text-xs"><i class="fa-solid fa-sliders"></i><span id="m-filter-label">Bộ lọc</span></button>
+            <button id="m-map-btn" data-panel="map" class="btn-secondary !py-2 !px-3 text-xs"><i class="fa-solid fa-table-cells"></i>Danh sách câu</button>
+            <span id="m-progress" class="ml-auto text-xs text-slate-500 tabular-nums"></span>
+        </div>
+
         <!-- Sidebar -->
-        <aside class="sidebar grid md:grid-cols-2 lg:flex lg:flex-col gap-4 items-start lg:items-stretch lg:sticky lg:top-[5.25rem] lg:max-h-[calc(100vh-6.5rem)] lg:overflow-y-auto custom-scrollbar lg:pr-1 lg:-mr-1">
+        <aside id="quiz-sidebar" class="sidebar grid md:grid-cols-2 lg:flex lg:flex-col gap-4 items-start lg:items-stretch lg:sticky lg:top-[5.25rem] lg:max-h-[calc(100vh-6.5rem)] lg:overflow-y-auto custom-scrollbar lg:pr-1 lg:-mr-1">
             <!-- Progress -->
-            <div class="card p-4">
+            <div id="progress-card" class="card p-4">
                 <div class="flex items-center justify-between mb-3">
-                    <h3 class="eyebrow">Your Progress</h3>
+                    <h3 class="eyebrow">Tiến độ</h3>
                     <span id="progress-scope" class="text-[11px] text-slate-400"></span>
                 </div>
                 <div class="grid grid-cols-3 gap-2 text-center">
                     <div class="bg-slate-50 py-2.5 rounded-xl border border-slate-200/70">
                         <span id="stat-answered" class="block font-bold text-lg text-slate-800 tabular-nums">0/0</span>
-                        <span class="text-[11px] text-slate-500">Answered</span>
+                        <span class="text-[11px] text-slate-500">Đã làm</span>
                     </div>
                     <div class="bg-emerald-50 py-2.5 rounded-xl border border-emerald-100">
                         <span id="stat-correct" class="block font-bold text-lg text-emerald-600 tabular-nums">0</span>
-                        <span class="text-[11px] text-emerald-700 font-medium">Correct</span>
+                        <span class="text-[11px] text-emerald-700 font-medium">Đúng</span>
                     </div>
                     <div class="bg-rose-50 py-2.5 rounded-xl border border-rose-100">
                         <span id="stat-incorrect" class="block font-bold text-lg text-rose-600 tabular-nums">0</span>
-                        <span class="text-[11px] text-rose-700 font-medium">Incorrect</span>
+                        <span class="text-[11px] text-rose-700 font-medium">Sai</span>
                     </div>
                 </div>
                 <button id="review-wrong-btn" class="hidden mt-3 w-full text-xs font-semibold px-3 py-2 rounded-lg bg-rose-50 text-rose-700 border border-rose-100 hover:bg-rose-100 transition-colors flex items-center justify-center gap-1.5">
-                    <i class="fa-solid fa-circle-exclamation"></i> <span id="review-wrong-label">Review wrong answers</span>
+                    <i class="fa-solid fa-rotate-left"></i> <span id="review-wrong-label">Ôn câu sai</span>
                 </button>
             </div>
 
-            <!-- Search -->
-            <div id="search-card" class="card p-4">
-                <label for="search-input" class="eyebrow block mb-2">Search</label>
-                <div class="relative">
-                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-                    <input id="search-input" type="search" autocomplete="off" placeholder="Nội dung hoặc ID (vd: GRAM-A1-0001)" class="field !pl-8 text-xs">
-                </div>
-            </div>
-
             <!-- Filters -->
-            <div id="filter-card" class="card p-4 flex flex-col gap-4">
+            <div id="filter-card" data-panel-body="filters" class="card p-4 flex flex-col gap-4">
+                <div id="search-card" class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                    <input id="search-input" type="search" autocomplete="off" placeholder="Tìm câu hỏi…" aria-label="Tìm câu hỏi" class="field !pl-8 text-xs">
+                </div>
+                <div>
+                    <span class="eyebrow block mb-2">Trình độ</span>
+                    <div id="level-filter" class="grid grid-cols-5 gap-1"></div>
+                </div>
                 <div>
                     <div class="flex items-center justify-between mb-2">
-                        <span class="eyebrow">Skill</span>
-                        <button id="clear-filters-btn" class="text-[11px] font-medium text-blue-600 hover:underline">Clear filters</button>
+                        <span class="eyebrow">Kỹ năng</span>
+                        <button id="clear-filters-btn" class="text-[11px] font-medium text-blue-600 hover:underline">Bỏ lọc</button>
                     </div>
                     <div id="skill-filter" class="flex flex-col gap-0.5"></div>
                 </div>
                 <div>
-                    <span class="eyebrow block mb-2">Level</span>
-                    <div id="level-filter" class="grid grid-cols-5 gap-1"></div>
-                </div>
-                <div>
-                    <label for="category-select" class="eyebrow block mb-2">Topic</label>
+                    <label for="category-select" class="eyebrow block mb-2">Chủ đề</label>
                     <select id="category-select" class="field text-xs">
-                        <option value="all">All Topics</option>
+                        <option value="all">Tất cả chủ đề</option>
                     </select>
                 </div>
                 <div id="status-filter-wrap">
-                    <label for="status-select" class="eyebrow block mb-2">Answer Status</label>
+                    <label for="status-select" class="eyebrow block mb-2">Trạng thái</label>
                     <select id="status-select" class="field text-xs">
-                        <option value="all">All</option>
-                        <option value="unanswered">Unanswered</option>
-                        <option value="correct">Correct</option>
-                        <option value="wrong">Wrong</option>
+                        <option value="all">Tất cả</option>
+                        <option value="unanswered">Chưa làm</option>
+                        <option value="correct">Đã đúng</option>
+                        <option value="wrong">Đã sai</option>
                     </select>
                 </div>
+                <button data-panel-close class="lg:hidden btn-primary w-full"><i class="fa-solid fa-check"></i> Xong</button>
             </div>
 
             <!-- Exam Panel -->
-            <div id="exam-panel" class="hidden card p-4 flex flex-col gap-3">
+            <div id="exam-panel" data-panel-body="filters" class="hidden card p-4 flex flex-col gap-3">
                 <div class="flex items-center justify-between">
-                    <h3 class="eyebrow">Current Exam</h3>
+                    <h3 class="eyebrow">Bài thi</h3>
                     <span id="exam-state-badge" class="text-[11px] font-semibold px-2 py-0.5 rounded-full"></span>
                 </div>
                 <div id="exam-panel-timer" class="hidden text-center rounded-xl border px-3 py-2">
@@ -249,29 +284,29 @@
                 </div>
                 <p id="exam-info" class="text-xs text-slate-600 leading-relaxed"></p>
                 <div id="exam-review-wrap" class="hidden">
-                    <label for="exam-review-select" class="eyebrow block mb-2">Review</label>
+                    <label for="exam-review-select" class="eyebrow block mb-2">Xem lại</label>
                     <select id="exam-review-select" class="field text-xs">
-                        <option value="all">All questions</option>
-                        <option value="wrong">Wrong &amp; unanswered</option>
-                        <option value="unanswered">Unanswered</option>
-                        <option value="correct">Correct answers</option>
+                        <option value="all">Tất cả câu</option>
+                        <option value="wrong">Câu sai &amp; bỏ trống</option>
+                        <option value="unanswered">Câu bỏ trống</option>
+                        <option value="correct">Câu đúng</option>
                     </select>
                 </div>
                 <div class="flex gap-2">
                     <button id="show-result-btn" class="hidden flex-1 btn-secondary !py-2 !text-xs">
-                        <i class="fa-solid fa-trophy"></i> Result
+                        <i class="fa-solid fa-trophy"></i> Kết quả
                     </button>
                     <button id="exam-new-btn" class="flex-1 btn-secondary !py-2 !text-xs hover:!bg-rose-50 hover:!text-rose-700">
-                        <i class="fa-solid fa-xmark"></i> <span id="exam-new-label">Cancel exam</span>
+                        <i class="fa-solid fa-xmark"></i> <span id="exam-new-label">Huỷ bài</span>
                     </button>
                 </div>
             </div>
 
             <!-- Question Map -->
-            <div id="palette-card" class="card p-4">
+            <div id="palette-card" data-panel-body="map" class="card p-4">
                 <div class="flex items-center justify-between mb-3">
-                    <h3 class="eyebrow">Question Map</h3>
-                    <span class="text-[11px] text-slate-400" id="palette-count-label">0 Questions</span>
+                    <h3 class="eyebrow">Danh sách câu</h3>
+                    <span class="text-[11px] text-slate-400" id="palette-count-label">0 câu</span>
                 </div>
                 <div id="question-palette" class="relative grid grid-cols-6 sm:grid-cols-10 lg:grid-cols-6 gap-1.5 max-h-64 lg:max-h-72 overflow-y-auto custom-scrollbar p-1"></div>
             </div>
@@ -291,24 +326,23 @@
             <!-- Exam Setup -->
             <div id="exam-setup" class="hidden card p-6 sm:p-8">
                 <div class="flex items-center gap-4 mb-6">
-                    <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 ring-1 ring-blue-100 flex items-center justify-center text-xl">
-                        <i class="fa-solid fa-file-pen"></i>
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 ring-1 ring-emerald-100 flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-stopwatch"></i>
                     </div>
                     <div>
-                        <h2 class="text-xl font-bold tracking-tight text-slate-900">Create a Random Exam</h2>
-                        <p class="text-sm text-slate-500">Câu hỏi được chọn ngẫu nhiên từ bộ lọc ở cột bên trái.</p>
+                        <h2 class="text-xl font-bold tracking-tight text-slate-900">Thi thử</h2>
+                        <p id="exam-pool-info" class="text-sm text-slate-500"></p>
                     </div>
                 </div>
-                <p id="exam-pool-info" class="text-sm text-slate-600 mb-5"></p>
                 <div class="grid gap-5 sm:grid-cols-[minmax(0,1fr)_220px] mb-5">
                     <div>
-                        <span class="eyebrow block mb-2">Number of questions</span>
+                        <span class="eyebrow block mb-2">Số câu</span>
                         <div id="exam-size-group" class="grid grid-cols-3 gap-3"></div>
                     </div>
                     <div>
-                        <label for="exam-time-select" class="eyebrow block mb-2">Time limit</label>
+                        <label for="exam-time-select" class="eyebrow block mb-2">Thời gian</label>
                         <select id="exam-time-select" class="field !py-3">
-                            <option value="0">Không giới hạn thời gian</option>
+                            <option value="0">Không giới hạn</option>
                             <option value="15">15 phút</option>
                             <option value="30">30 phút</option>
                             <option value="45">45 phút</option>
@@ -318,20 +352,18 @@
                     </div>
                 </div>
                 <p id="exam-size-warning" class="hidden text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-lg p-3 mb-5"></p>
-                <ul class="text-xs text-slate-500 grid sm:grid-cols-2 gap-x-6 gap-y-1.5 mb-6">
-                    <li class="flex gap-2"><i class="fa-solid fa-eye-slash text-slate-400 mt-0.5"></i>Đáp án, đúng/sai và giải thích được ẩn cho tới khi nộp bài.</li>
-                    <li class="flex gap-2"><i class="fa-solid fa-pen text-slate-400 mt-0.5"></i>Bạn có thể đổi đáp án bất kỳ lúc nào trước khi nộp.</li>
-                    <li class="flex gap-2"><i class="fa-regular fa-clock text-slate-400 mt-0.5"></i>Nếu đặt giới hạn thời gian, bài sẽ tự nộp khi hết giờ.</li>
-                    <li class="flex gap-2"><i class="fa-solid fa-book-open text-slate-400 mt-0.5"></i>Câu đọc hiểu của cùng một bài đọc được xếp liền nhau.</li>
-                </ul>
+                <div class="flex flex-wrap gap-2 text-xs text-slate-500 mb-6">
+                    <span class="chip"><i class="fa-solid fa-eye-slash"></i>Đáp án hiện sau khi nộp</span>
+                    <span class="chip"><i class="fa-regular fa-clock"></i>Hết giờ tự nộp</span>
+                </div>
                 <button id="start-exam-btn" class="btn-primary w-full sm:w-auto !px-6 !py-3">
-                    <i class="fa-solid fa-play"></i> <span id="start-exam-label">Start Exam</span>
+                    <i class="fa-solid fa-play"></i> <span id="start-exam-label">Bắt đầu</span>
                 </button>
 
                 <div class="mt-8 pt-6 border-t border-slate-200/70">
                     <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-sm font-semibold text-slate-900"><i class="fa-solid fa-folder-open text-blue-600 mr-1.5"></i>Làm một đề đã soạn</h3>
-                        <button data-mode-link="builder" class="text-xs font-semibold text-blue-600 hover:underline">Mở Exam Builder <i class="fa-solid fa-arrow-right text-[10px]"></i></button>
+                        <h3 class="text-sm font-semibold text-slate-900"><i class="fa-solid fa-folder-open text-blue-600 mr-1.5"></i>Đề đã soạn</h3>
+                        <button data-mode-link="builder" class="text-xs font-semibold text-blue-600 hover:underline">Soạn đề <i class="fa-solid fa-arrow-right text-[10px]"></i></button>
                     </div>
                     <div id="exam-saved-papers"></div>
                 </div>
@@ -347,17 +379,17 @@
             <article id="question-card" class="hidden card flex flex-col">
                 <div class="flex flex-wrap items-center justify-between gap-2 px-6 sm:px-8 py-4 border-b border-slate-200/70">
                     <div class="flex flex-wrap items-center gap-2">
-                        <span id="q-number-badge" class="px-2.5 py-1 bg-blue-50 text-blue-700 ring-1 ring-inset ring-blue-200/70 font-semibold text-xs rounded-lg tabular-nums">Question 1 of 1</span>
+                        <span id="q-number-badge" class="px-2.5 py-1 bg-blue-50 text-blue-700 ring-1 ring-inset ring-blue-200/70 font-semibold text-xs rounded-lg tabular-nums">Câu 1/1</span>
                         <span id="q-skill-badge" class="px-2.5 py-1 bg-slate-100 text-slate-600 font-medium text-xs rounded-lg"></span>
                         <span id="q-level-badge" class="px-2 py-1 bg-indigo-50 text-indigo-700 font-semibold text-xs rounded-lg"></span>
-                        <span id="q-difficulty-badge" class="px-2 py-1 font-medium text-xs rounded-lg"></span>
+                        <span id="q-difficulty-badge" class="hidden sm:inline px-2 py-1 font-medium text-xs rounded-lg"></span>
                         <span id="q-timer-badge" class="hidden px-2.5 py-1 font-semibold text-xs rounded-full border">
                             <i class="fa-regular fa-clock mr-1"></i><span data-timer class="font-mono">--:--</span>
                         </span>
                     </div>
-                    <div class="flex flex-wrap items-center gap-2">
+                    <div class="hidden sm:flex flex-wrap items-center gap-2">
                         <span id="q-topic-badge" class="text-xs font-medium text-slate-500"></span>
-                        <button id="q-id-badge" title="Copy ID" class="text-[11px] font-mono text-slate-400 hover:text-blue-600 px-2 py-1 rounded-md border border-dashed border-slate-300"></button>
+                        <button id="q-id-badge" title="Sao chép mã câu" class="text-[11px] font-mono text-slate-400 hover:text-blue-600 px-2 py-1 rounded-md border border-dashed border-slate-300"></button>
                     </div>
                 </div>
 
@@ -387,35 +419,32 @@
 
                 <div class="flex items-center justify-between gap-2 px-6 sm:px-8 py-4 border-t border-slate-200/70 bg-slate-50/60 rounded-b-2xl">
                     <button id="prev-btn" class="btn-secondary">
-                        <i class="fa-solid fa-arrow-left"></i><span class="hidden sm:inline">Previous</span>
+                        <i class="fa-solid fa-arrow-left"></i><span class="hidden sm:inline">Câu trước</span>
                     </button>
                     <div class="flex items-center gap-2">
                         <button id="check-btn" class="hidden btn bg-amber-500 text-white hover:bg-amber-600 shadow-sm shadow-amber-500/25">
-                            <i class="fa-solid fa-check"></i> Kiểm tra đáp án
+                            <i class="fa-solid fa-check"></i> Kiểm tra
                         </button>
                         <button id="submit-exam-btn" class="hidden btn bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm shadow-emerald-600/25">
-                            <i class="fa-solid fa-paper-plane"></i> Submit Exam
+                            <i class="fa-solid fa-paper-plane"></i> Nộp bài
                         </button>
                         <button id="next-btn" class="btn-primary">
-                            <span class="hidden sm:inline">Next</span><i class="fa-solid fa-arrow-right"></i>
+                            <span class="hidden sm:inline">Câu sau</span><i class="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
                 </div>
             </article>
 
-            <p class="hidden md:block text-[11px] text-slate-400 text-center">
-                Phím tắt: <kbd>1</kbd>–<kbd>4</kbd> hoặc <kbd>A</kbd>–<kbd>D</kbd> chọn đáp án • <kbd>Enter</kbd> kiểm tra (Practice) • <kbd>←</kbd> <kbd>→</kbd> chuyển câu • <kbd>/</kbd> tìm kiếm
+            <p class="kbd-hint hidden lg:block text-[11px] text-slate-400 text-center">
+                Phím tắt: <kbd>1</kbd>–<kbd>4</kbd> chọn • <kbd>Enter</kbd> kiểm tra • <kbd>←</kbd> <kbd>→</kbd> chuyển câu
             </p>
         </main>
     </div>
 
-    <footer class="border-t border-slate-200/80 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col md:flex-row md:justify-between gap-2 text-[11px] text-slate-500 leading-relaxed">
-            <p class="max-w-3xl">
-                Ngân hàng câu hỏi tiếng Anh tổng quát trình độ A1–B1 (nguồn: <code>general_a1_a2</code>, <code>general_b1</code>), dùng để tham khảo khi ôn tập.
-                Nội dung <strong class="text-slate-700">chưa được đối chiếu</strong> với đề cương chính thức của học phần ENT104 – Trường Đại học FPT.
-            </p>
-            <p id="data-source" class="md:text-right"></p>
+    <footer class="border-t border-slate-200/80 mt-auto pb-16 md:pb-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-[11px] text-slate-400 text-center">
+            <p>Nội dung tiếng Anh tổng quát A1–B1 để ôn tập, <strong class="font-semibold text-slate-500">chưa đối chiếu</strong> với đề cương chính thức ENT104.</p>
+            <p id="data-source" class="hidden"></p>
         </div>
     </footer>
 
@@ -426,22 +455,22 @@
                 <div class="w-14 h-14 bg-blue-50 text-blue-600 ring-1 ring-blue-100 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-3">
                     <i class="fa-solid fa-trophy"></i>
                 </div>
-                <h2 class="text-2xl font-bold tracking-tight text-slate-900">Exam Completed!</h2>
-                <p id="result-subtitle" class="text-slate-500 text-sm mt-1">Here is how you performed on this exam</p>
+                <h2 class="text-2xl font-bold tracking-tight text-slate-900">Đã nộp bài!</h2>
+                <p id="result-subtitle" class="text-slate-500 text-sm mt-1"></p>
             </div>
 
             <div class="grid grid-cols-3 gap-3 text-center">
                 <div class="bg-blue-50 rounded-xl p-4 border border-blue-100">
-                    <span class="eyebrow">Score</span>
-                    <span id="final-score" class="block font-extrabold text-3xl text-blue-600 mt-1 tabular-nums">0%</span>
+                    <span class="eyebrow">Điểm</span>
+                    <span id="final-score" class="block font-extrabold text-2xl sm:text-3xl text-blue-600 mt-1 tabular-nums">0%</span>
                 </div>
                 <div class="bg-emerald-50 rounded-xl p-4 border border-emerald-100">
-                    <span class="eyebrow">Correct</span>
-                    <span id="final-accuracy" class="block font-extrabold text-3xl text-emerald-600 mt-1 tabular-nums">0/0</span>
+                    <span class="eyebrow">Đúng</span>
+                    <span id="final-accuracy" class="block font-extrabold text-2xl sm:text-3xl text-emerald-600 mt-1 tabular-nums">0/0</span>
                 </div>
                 <div class="bg-slate-50 rounded-xl p-4 border border-slate-200/70">
-                    <span class="eyebrow">Time</span>
-                    <span id="final-time" class="block font-extrabold text-3xl text-slate-700 mt-1 tabular-nums">00:00</span>
+                    <span class="eyebrow">Thời gian</span>
+                    <span id="final-time" class="block font-extrabold text-2xl sm:text-3xl text-slate-700 mt-1 tabular-nums">00:00</span>
                 </div>
             </div>
 
@@ -453,17 +482,16 @@
 
             <div>
                 <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-                    <p class="eyebrow">Danh sách câu hỏi</p>
+                    <p class="eyebrow">Bấm vào câu để xem lại</p>
                     <div id="result-list-filter" class="flex bg-slate-100 p-0.5 rounded-lg text-[11px] font-semibold"></div>
                 </div>
                 <div id="result-question-list" class="max-h-64 overflow-y-auto custom-scrollbar border border-slate-200/70 rounded-xl divide-y divide-slate-100"></div>
-                <p class="text-[11px] text-slate-400 mt-1">Bấm vào một câu để xem lại đáp án và giải thích.</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                <button id="result-review-wrong-btn" class="btn bg-rose-50 text-rose-700 hover:bg-rose-100">Review Wrong</button>
-                <button id="result-review-all-btn" class="btn-secondary">Review All</button>
-                <button id="result-new-exam-btn" class="btn-primary">New Exam</button>
+                <button id="result-review-wrong-btn" class="btn bg-rose-50 text-rose-700 hover:bg-rose-100"><i class="fa-solid fa-rotate-left"></i> Xem câu sai</button>
+                <button id="result-review-all-btn" class="btn-secondary">Xem tất cả</button>
+                <button id="result-new-exam-btn" class="btn-primary">Đề mới</button>
             </div>
         </div>
     </div>
@@ -472,8 +500,8 @@
     <div id="stats-modal" class="modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
         <div class="card !shadow-2xl max-w-2xl w-full p-6 sm:p-8 flex flex-col gap-5 max-h-full overflow-y-auto custom-scrollbar">
             <div class="flex items-center justify-between">
-                <h2 class="text-xl font-bold tracking-tight text-slate-900"><i class="fa-solid fa-chart-column text-blue-600 mr-2"></i>Statistics</h2>
-                <button id="stats-close-btn" class="icon-btn" title="Close">
+                <h2 class="text-xl font-bold tracking-tight text-slate-900"><i class="fa-solid fa-chart-column text-blue-600 mr-2"></i>Thống kê</h2>
+                <button id="stats-close-btn" class="icon-btn" title="Đóng">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
@@ -481,19 +509,19 @@
         </div>
     </div>
 
-    <script src="js/theme.js?v=20261014b"></script>
-    <script src="js/storage.js?v=20261014b"></script>
-    <script src="js/questionService.js?v=20261014b"></script>
-    <script src="js/quizService.js?v=20261014b"></script>
-    <script src="js/statisticsService.js?v=20261014b"></script>
-    <script src="js/examBuilderService.js?v=20261014b"></script>
-    <script src="js/examBuilderView.js?v=20261014b"></script>
-    <script src="js/app-config.js?v=20261014b"></script>
-    <script src="js/writingService.js?v=20261014b"></script>
-    <script src="js/accessGate.js?v=20261014b"></script>
-    <script src="js/writingView.js?v=20261014b"></script>
-    <script src="js/tenseService.js?v=20261014b"></script>
-    <script src="js/tenseView.js?v=20261014b"></script>
-    <script src="js/app.js?v=20261014b"></script>
+    <script src="js/theme.js?v=20261015a"></script>
+    <script src="js/storage.js?v=20261015a"></script>
+    <script src="js/questionService.js?v=20261015a"></script>
+    <script src="js/quizService.js?v=20261015a"></script>
+    <script src="js/statisticsService.js?v=20261015a"></script>
+    <script src="js/examBuilderService.js?v=20261015a"></script>
+    <script src="js/examBuilderView.js?v=20261015a"></script>
+    <script src="js/app-config.js?v=20261015a"></script>
+    <script src="js/writingService.js?v=20261015a"></script>
+    <script src="js/accessGate.js?v=20261015a"></script>
+    <script src="js/writingView.js?v=20261015a"></script>
+    <script src="js/tenseService.js?v=20261015a"></script>
+    <script src="js/tenseView.js?v=20261015a"></script>
+    <script src="js/app.js?v=20261015a"></script>
 </body>
 </html>

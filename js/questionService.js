@@ -7,19 +7,19 @@
     'use strict';
 
     const SKILLS = [
-        { key: 'grammar', label: 'Grammar', icon: 'fa-spell-check' },
-        { key: 'vocabulary', label: 'Vocabulary', icon: 'fa-book' },
-        { key: 'communication', label: 'Communication', icon: 'fa-comments' },
-        { key: 'reading', label: 'Reading', icon: 'fa-book-open' },
-        { key: 'completion_error', label: 'Completion & Error', icon: 'fa-pen-to-square' },
-        { key: 'writing', label: 'Ordering & Writing', icon: 'fa-list-ol' },
+        { key: 'grammar', label: 'Ngữ pháp', icon: 'fa-spell-check' },
+        { key: 'vocabulary', label: 'Từ vựng', icon: 'fa-book' },
+        { key: 'communication', label: 'Giao tiếp', icon: 'fa-comments' },
+        { key: 'reading', label: 'Đọc hiểu', icon: 'fa-book-open' },
+        { key: 'completion_error', label: 'Hoàn thành câu & tìm lỗi', icon: 'fa-pen-to-square' },
+        { key: 'writing', label: 'Sắp xếp & viết câu', icon: 'fa-list-ol' },
     ];
     const LEVELS = ['A1', 'A2', 'A1-A2', 'B1'];
     const TYPE_LABELS = {
-        completion: 'Sentence Completion',
-        error: 'Error Identification',
-        choice: 'Multiple Choice',
-        ordering: 'Ordering',
+        completion: 'Điền chỗ trống',
+        error: 'Tìm lỗi sai',
+        choice: 'Chọn đáp án',
+        ordering: 'Sắp xếp',
     };
     const STATUS_LABELS = {
         reviewed: 'Giáo viên đã duyệt',

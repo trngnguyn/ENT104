@@ -181,7 +181,7 @@
                     <label class="flex items-center gap-2 border rounded-lg px-3 py-2 cursor-pointer ${c.mode === v ? 'border-blue-400 bg-blue-50 text-blue-800' : 'border-slate-200 text-slate-600'}">
                         <input type="radio" name="b-mode" data-field="mode" value="${v}" ${c.mode === v ? 'checked' : ''}> ${l}
                     </label>`).join('')}
-                </div>`, random ? '' : 'Thêm câu từ khung “Ngân hàng câu hỏi” bên phải. Các tiêu chí bên dưới dùng để lọc và đối chiếu.')}
+                </div>`, random ? '' : 'Thêm câu ở mục “Thêm câu thủ công”.')}
                 <div class="grid grid-cols-2 gap-3">
                     ${field(random ? 'Số câu hỏi' : 'Số câu dự kiến', `<input data-field="total" type="number" min="1" max="${qs.questions.length}" value="${c.total}" class="${inputCls}">`)}
                     ${field('Thời gian (phút)', `<input data-field="timeLimit" type="number" min="0" max="300" value="${c.timeLimit}" class="${inputCls}">`, '0 = không giới hạn')}
@@ -194,7 +194,7 @@
                         <button data-topics="none" class="text-slate-500 hover:underline">Bỏ chọn tất cả</button>
                     </div>
                     <div class="border border-slate-100 rounded-lg px-2 py-1 max-h-72 overflow-y-auto custom-scrollbar">${topicTree}</div>`,
-                    'Số câu bên cạnh mỗi chủ đề đã tính theo trình độ, độ khó và loại câu đang chọn. “Ordering & Writing” và “Completion & Error” là nhóm “khác”.')}
+                    'Số bên cạnh là số câu phù hợp với lựa chọn ở trên.')}
                 ${random ? field('Phân bổ số câu', `<select data-field="quotaBy" class="${inputCls}">
                     ${B.DIMENSIONS.map(d => `<option value="${d}" ${c.quotaBy === d ? 'selected' : ''}>${DIM_LABELS[d]}</option>`).join('')}
                 </select><div id="b-quotas" class="mt-2"></div>`) : ''}
@@ -354,9 +354,9 @@
                     <button data-action="clear" class="text-xs font-semibold px-3 py-2 rounded-lg bg-white border border-slate-200 text-rose-700 hover:bg-rose-50 disabled:opacity-40" ${list.length ? '' : 'disabled'}><i class="fa-regular fa-trash-can mr-1"></i>Xoá hết câu</button>
                 </div>
                 ${list.length
-                    ? `<p class="text-[11px] text-slate-400">Câu hỏi được sắp theo kỹ năng; câu cùng bài đọc luôn đứng liền nhau. Bấm vào một câu để xem đáp án và giải thích.</p>
+                    ? `<p class="text-[11px] text-slate-400">Bấm vào câu để xem đáp án.</p>
                        <ul class="max-h-[32rem] overflow-y-auto custom-scrollbar pr-1">${rows}</ul>`
-                    : `<p class="text-sm text-slate-500 bg-slate-50 rounded-xl p-4 text-center">Đề chưa có câu hỏi. ${c.mode === 'random' ? 'Bấm <b>Tạo đề ngẫu nhiên</b> hoặc thêm' : 'Thêm'} câu từ ngân hàng câu hỏi bên dưới.</p>`}`;
+                    : `<p class="text-sm text-slate-500 bg-slate-50 rounded-xl p-4 text-center">Đề chưa có câu hỏi. ${c.mode === 'random' ? 'Bấm <b>Tạo đề ngẫu nhiên</b> hoặc thêm' : 'Thêm'} câu ở mục “Thêm câu thủ công”.</p>`}`;
         }
 
         function renderBrowserControls() {
@@ -437,7 +437,7 @@
             const result = builder.generate(s.config);
             if (!result.ok) {
                 renderCheck();
-                flash('Chưa tạo được đề: cấu hình chưa đáp ứng được. Xem thông báo trong phần Cấu hình đề để điều chỉnh.', 'error');
+                flash('Chưa đủ câu cho cấu hình này – xem gợi ý ở phần Cấu hình đề.', 'error');
                 return;
             }
             setIds(result.ids);
@@ -644,7 +644,7 @@
                     flash(`Đã tạo bản sao “${r.paper.name}”.`, 'success');
                 } else if (t.dataset.paperDel) {
                     const paper = builder.getPaper(t.dataset.paperDel);
-                    if (!paper || !confirm(`Xoá đề “${paper.name}”? Kết quả các lần đã làm vẫn được giữ trong Statistics.`)) return;
+                    if (!paper || !confirm(`Xoá đề “${paper.name}”? Kết quả các lần đã làm vẫn được giữ trong Thống kê.`)) return;
                     builder.deletePaper(paper.id);
                     if (s.paperId === paper.id) {
                         s.paperId = null;

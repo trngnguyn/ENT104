@@ -85,6 +85,11 @@
             renderMain();
         }
 
+        function renderMain() {
+            $('t-aside').classList.toggle('mobile-hide', !!s.session);
+            renderContent();
+        }
+
         function bestBadge(id) {
             const b = service.best(id);
             return b ? `<span class="flex-shrink-0 text-[11px] font-bold px-1.5 py-0.5 rounded-md bg-${pctTone(b.pct)}-50 text-${pctTone(b.pct)}-700 tabular-nums">${b.pct}%</span>` : '';
@@ -94,8 +99,8 @@
             const groups = LEVEL_ORDER.map(level => [level, service.tenses.filter(t => t.level === level)]).filter(([, list]) => list.length);
             const item = t => {
                 const active = t.id === s.tenseId;
-                return `<button data-t-tense="${esc(t.id)}" class="w-full text-left px-3 py-2.5 rounded-xl border transition-colors ${active
-                    ? 'bg-blue-50 border-blue-200' : 'border-transparent hover:bg-slate-50'}">
+                return `<button data-t-tense="${esc(t.id)}" class="w-full min-w-0 text-left px-3 py-2.5 rounded-xl border transition-colors ${active
+                    ? 'bg-blue-50 border-blue-200' : 'border-slate-200/70 lg:border-transparent hover:bg-slate-50'}">
                     <div class="flex items-center justify-between gap-2">
                         <span class="text-sm font-semibold ${active ? 'text-blue-800' : 'text-slate-800'} truncate">${esc(t.vi)}</span>
                         ${bestBadge(t.id)}
@@ -107,7 +112,7 @@
             $('t-list').innerHTML = groups.map(([level, list]) => `
                 <div>
                     <p class="text-[11px] font-bold uppercase tracking-wide text-slate-400 px-1 mb-1">${level}</p>
-                    <div class="flex flex-col gap-0.5">${list.map(item).join('')}</div>
+                    <div class="grid grid-cols-2 gap-1.5 lg:flex lg:flex-col lg:gap-0.5">${list.map(item).join('')}</div>
                 </div>`).join('') + `
                 <button data-t-tense="${T.MIXED_ID}" class="w-full text-left px-3 py-2.5 rounded-xl border transition-colors ${mixedActive
                     ? 'bg-blue-50 border-blue-200' : 'border-dashed border-slate-300 hover:bg-slate-50'}">
@@ -115,11 +120,11 @@
                         <span class="text-sm font-semibold ${mixedActive ? 'text-blue-800' : 'text-slate-800'}"><i class="fa-solid fa-shuffle text-xs mr-1"></i>Tổng hợp các thì</span>
                         ${bestBadge(T.MIXED_ID)}
                     </div>
-                    <div class="mt-0.5 text-[11px] text-slate-500">Trộn câu hỏi của cả ${service.tenses.length} thì</div>
+                    <div class="mt-0.5 text-[11px] text-slate-500">Trộn câu của cả ${service.tenses.length} thì</div>
                 </button>`;
         }
 
-        function renderMain() {
+        function renderContent() {
             if (s.session) return renderSession();
             if (s.tenseId === T.MIXED_ID) return renderMixed();
             const t = tense();
@@ -154,14 +159,14 @@
 
                 ${t.signals.length ? section('Dấu hiệu nhận biết', 'fa-magnifying-glass', `<div class="flex flex-wrap gap-2">${t.signals.map(x => `<span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-100">${esc(x)}</span>`).join('')}</div>`) : ''}
 
-                ${t.notes.length ? section('Lưu ý', 'fa-circle-info', `<ul class="space-y-2 text-sm text-slate-700">${t.notes.map(n => `<li class="flex gap-2"><i class="fa-solid fa-check text-emerald-500 text-xs mt-1"></i><span>${esc(n)}</span></li>`).join('')}</ul>`) : ''}
+                ${t.notes.length ? section('Lưu ý', 'fa-circle-info', `<ul class="space-y-2 text-sm text-slate-700">${t.notes.map(n => `<li class="flex gap-2"><i class="fa-solid fa-check text-emerald-500 text-xs mt-1"></i><span>${esc(n)}</span></li>`).join('')}</ul>`, { collapsed: true }) : ''}
 
                 ${t.mistakes.length ? section('Lỗi thường gặp', 'fa-triangle-exclamation', `<div class="space-y-3">${t.mistakes.map(m => `
                     <div class="rounded-xl border border-slate-200 p-3 text-sm">
                         <p><i class="fa-solid fa-xmark text-rose-500 w-4"></i> <del class="text-rose-700">${esc(m.wrong)}</del></p>
                         <p class="mt-1"><i class="fa-solid fa-check text-emerald-600 w-4"></i> <span class="font-semibold text-emerald-700">${esc(m.right)}</span></p>
                         <p class="mt-1.5 text-slate-500 text-xs">${esc(m.why)}</p>
-                    </div>`).join('')}</div>`) : ''}
+                    </div>`).join('')}</div>`, { collapsed: true }) : ''}
 
                 <p class="text-xs text-slate-400 px-1">${esc(service.note)}</p>`;
         }
@@ -172,7 +177,7 @@
                     <div class="flex flex-wrap items-start justify-between gap-4">
                         <div class="min-w-0">
                             <h3 class="text-xl font-bold text-slate-900"><i class="fa-solid fa-shuffle text-blue-600 mr-1"></i> Tổng hợp các thì</h3>
-                            <p class="mt-1 text-sm text-slate-600">Câu hỏi trộn từ tất cả các thì A1–A2 – luyện phân biệt khi nào dùng thì nào.</p>
+                            <p class="mt-1 text-sm text-slate-600">Luyện phân biệt khi nào dùng thì nào.</p>
                         </div>
                         ${practiceBox(T.MIXED_ID)}
                     </div>
@@ -203,7 +208,14 @@
             </div>`;
         }
 
-        function section(title, icon, body) {
+        function section(title, icon, body, { collapsed = false } = {}) {
+            if (collapsed) {
+                return `<details class="card p-5 sm:p-6 group">
+                    <summary class="eyebrow cursor-pointer flex items-center"><i class="fa-solid ${icon} mr-1"></i> ${title}
+                        <i class="fa-solid fa-chevron-down ml-auto text-[10px] transition-transform group-open:rotate-180"></i></summary>
+                    <div class="mt-3">${body}</div>
+                </details>`;
+            }
             return `<div class="card p-5 sm:p-6">
                 <h4 class="eyebrow mb-3"><i class="fa-solid ${icon} mr-1"></i> ${title}</h4>
                 ${body}
@@ -268,7 +280,7 @@
                         </div>
                         <div class="mt-4 flex justify-end">
                             <button data-t-next class="btn-primary">${last ? '<i class="fa-solid fa-flag-checkered"></i> Xem kết quả' : 'Câu tiếp <i class="fa-solid fa-arrow-right"></i>'}</button>
-                        </div>` : '<p class="mt-4 text-xs text-slate-400">Phím tắt: 1–4 hoặc A–D để chọn, Enter để sang câu tiếp.</p>'}
+                        </div>` : '<p class="hidden lg:block mt-4 text-xs text-slate-400">Phím tắt: 1–4 chọn, Enter sang câu tiếp.</p>'}
                 </div>`;
         }
 
