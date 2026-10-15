@@ -9,7 +9,7 @@
     "validate": "node scripts/validate-questions.js",
     "build": "node scripts/build-bundle.js && node scripts/validate-questions.js",
     "generate": "node scripts/generate-question-bank.js",
-    "test": "node scripts/test-features.js && node scripts/test-writing.js && node scripts/test-tenses.js",
+    "test": "node scripts/test-features.js && node scripts/test-writing.js && node scripts/test-tenses.js && node scripts/test-review.js",
     "check-ai": "node scripts/check-ai.js"
   },
   "engines": {

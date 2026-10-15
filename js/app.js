@@ -35,6 +35,7 @@
 
     const qs = new QuestionService();
     let quiz = null;
+    let review = null;
     let builder = null;
     let builderView = null;
     let writingView = null;
@@ -52,6 +53,7 @@
         currentId: null,
         pending: null,
         passageCollapsed: false,
+        review: null,
     };
 
     // ------------------------------------------------------------------ helpers
@@ -133,6 +135,7 @@
             return list.filter(q => quiz.examStatus(q) === state.examFilter);
         }
         if (PANEL_MODES.includes(state.mode)) return [];
+        if (state.review) return state.review.map(id => qs.byId.get(id)).filter(Boolean);
         return qs.filter(state.filters, practiceExtra());
     }
 
@@ -199,8 +202,58 @@
                 ? `Bạn đã làm <b class="text-slate-700">${s.answered}</b> câu, đúng <b class="text-emerald-600">${s.accuracy}%</b>.
                    <button data-home-continue class="ml-1 font-semibold text-blue-600 hover:underline">Làm tiếp <i class="fa-solid fa-arrow-right text-xs"></i></button>`
                 : 'Chọn một mục bên dưới để bắt đầu.';
+            renderToday();
         },
     };
+
+    const shortDate = key => {
+        const [, m, d] = key.split('-');
+        return `${d}/${m}`;
+    };
+
+    function renderToday() {
+        const done = review.doneToday;
+        const goal = review.goal;
+        const reached = done >= goal;
+        const streak = review.streak();
+        const due = review.dueIds(id => qs.byId.has(id)).length;
+        const next = review.nextDue();
+        const goalSelect = `<select data-home-goal aria-label="Mục tiêu mỗi ngày" class="bg-transparent text-[11px] font-semibold text-slate-500 border border-slate-200 rounded-md py-0.5 pl-1.5 pr-5">
+            ${ReviewService.GOALS.map(g => `<option value="${g}" ${g === goal ? 'selected' : ''}>${g} câu/ngày</option>`).join('')}
+        </select>`;
+        $('home-today').innerHTML = `
+            <div class="card p-4 sm:p-5">
+                <div class="flex items-center justify-between gap-2">
+                    <span class="eyebrow">Mục tiêu hôm nay</span>${goalSelect}
+                </div>
+                <p class="mt-2 text-2xl font-bold tabular-nums text-slate-900">${done}<span class="text-base font-semibold text-slate-400">/${goal} câu</span></p>
+                <div class="mt-2 h-2 rounded-full bg-slate-100 overflow-hidden">
+                    <div class="h-full rounded-full ${reached ? 'bg-emerald-500' : 'bg-blue-500'}" style="width:${Math.min(100, Math.round((done * 100) / goal))}%"></div>
+                </div>
+                <p class="mt-2 text-xs ${streak ? 'text-amber-700' : 'text-slate-500'}">
+                    <i class="fa-solid fa-fire mr-1 ${streak ? 'text-amber-500' : 'text-slate-300'}"></i>${streak ? `${streak} ngày học liên tiếp` : 'Làm 1 câu để bắt đầu chuỗi ngày học'}${reached ? ' · <b class="text-emerald-600">Đạt mục tiêu!</b>' : ''}
+                </p>
+            </div>
+            <div class="card p-4 sm:p-5 flex flex-col">
+                <span class="eyebrow">Ôn tập hôm nay</span>
+                ${due ? `
+                <p class="mt-2 text-2xl font-bold tabular-nums text-slate-900">${due}<span class="text-base font-semibold text-slate-400"> câu cần ôn</span></p>
+                <button data-review-start class="btn-primary mt-3 sm:mt-auto self-start !px-5"><i class="fa-solid fa-rotate"></i> Ôn ngay</button>`
+                : `<p class="mt-2 text-sm text-slate-500">${review.scheduled
+                    ? `<i class="fa-solid fa-circle-check text-emerald-500 mr-1"></i>Hôm nay không có câu cần ôn.${next ? ` Lần ôn tới: ${shortDate(next)}.` : ''}`
+                    : 'Câu làm sai sẽ được hẹn ôn lại ở đây sau 1, 3 và 7 ngày.'}</p>`}
+            </div>`;
+    }
+
+    function renderReviewBanner() {
+        const active = state.mode === 'practice' && !!state.review;
+        show('review-banner', active);
+        if (!active) return;
+        const total = state.view.length;
+        const done = state.view.filter(q => hasAnswer(quiz.practiceAnswer(q.id))).length;
+        $('review-banner-text').textContent = done >= total ? `Đã ôn xong ${total} câu hôm nay!` : `Ôn tập: ${done}/${total} câu`;
+        $('review-exit-btn').textContent = done >= total ? 'Xong' : 'Thoát';
+    }
 
     /** Điện thoại: mở / đóng bộ lọc hoặc danh sách câu (trên màn hình lớn luôn hiện ở cột trái). */
     function renderMobileBar(summary) {
@@ -213,6 +266,7 @@
         const active = ['skill', 'level', 'category'].filter(k => f[k] !== 'all').length
             + (f.query ? 1 : 0) + (state.mode === 'practice' && f.status !== 'all' ? 1 : 0);
         $('m-filter-label').textContent = examView ? 'Bài thi' : `Bộ lọc${active ? ` (${active})` : ''}`;
+        show('m-filter-btn', !(state.mode === 'practice' && state.review));
         show('m-map-btn', state.mode === 'practice' || examView);
         const hideResult = state.mode === 'exam' && !examSubmitted();
         $('m-progress').textContent = summary.total
@@ -228,8 +282,9 @@
             scope = quiz.exam ? (quiz.exam.submittedAt ? 'Đã nộp' : 'Đang thi') : '';
         } else {
             summary = Stats.summarize(state.view, id => quiz.practiceAnswer(id));
-            scope = state.view.length === qs.questions.length ? 'Tất cả câu' : 'Theo bộ lọc';
+            scope = state.review ? 'Ôn tập' : state.view.length === qs.questions.length ? 'Tất cả câu' : 'Theo bộ lọc';
         }
+        renderReviewBanner();
         renderMobileBar(summary);
         const hideResult = state.mode === 'exam' && !examSubmitted();
         $('stat-answered').textContent = `${summary.answered}/${summary.total}`;
@@ -239,7 +294,7 @@
         $('progress-bar-fill').style.width = `${summary.total ? (summary.answered * 100) / summary.total : 0}%`;
 
         const wrongBtn = $('review-wrong-btn');
-        if (state.mode === 'practice') {
+        if (state.mode === 'practice' && !state.review) {
             const base = qs.filter({ ...state.filters, status: 'all' });
             const wrong = base.filter(q => quiz.practiceStatus(q) === 'wrong').length;
             show(wrongBtn, wrong > 0 && state.filters.status !== 'wrong');
@@ -250,7 +305,7 @@
     }
 
     function renderSidebar() {
-        const choosingPool = state.mode === 'practice' || !quiz.exam;
+        const choosingPool = state.mode === 'practice' ? !state.review : !quiz.exam;
         show('search-card', choosingPool);
         show('filter-card', choosingPool);
         show('status-filter-wrap', state.mode === 'practice');
@@ -612,7 +667,7 @@
 
     function autoSubmit() {
         const summary = Stats.summarize(quiz.examQuestions(), id => quiz.examAnswer(id));
-        quiz.submitExam(summary, { auto: true });
+        afterExamSubmit(quiz.submitExam(summary, { auto: true }));
         state.mode = 'exam';
         state.examFilter = 'all';
         state.resultFilter = 'all';
@@ -640,7 +695,37 @@
         const index = pendingFor(q);
         if (state.mode !== 'practice' || index === null) return;
         state.pending = null;
-        if (quiz.answerPractice(q.id, index)) render();
+        if (!quiz.answerPractice(q.id, index)) return;
+        review.record(q.id, index === q.answer);
+        review.logActivity(1);
+        render();
+    }
+
+    /** Sau khi nộp bài thi: câu sai vào lịch ôn, số câu đã làm tính vào mục tiêu ngày. */
+    function afterExamSubmit(entry) {
+        if (!entry) return;
+        const list = quiz.examQuestions();
+        review.addWrong(list.filter(q => quiz.examStatus(q) === 'wrong').map(q => q.id));
+        review.logActivity(entry.total - entry.unanswered);
+    }
+
+    function startReview() {
+        const ids = review.dueIds(id => qs.byId.has(id));
+        if (!ids.length) return;
+        quiz.clearPractice(ids);
+        state.mode = 'practice';
+        state.review = ids;
+        state.examFilter = 'all';
+        state.pending = null;
+        state.panel = null;
+        refreshView({ keepCurrent: false });
+        window.scrollTo(0, 0);
+    }
+
+    function exitReview() {
+        state.review = null;
+        state.pending = null;
+        setMode('home');
     }
 
     function retryQuestion() {
@@ -652,9 +737,10 @@
     }
 
     function setMode(mode) {
-        if (mode === state.mode || !MODES.includes(mode)) return;
+        if (!MODES.includes(mode) || (mode === state.mode && !(mode === 'practice' && state.review))) return;
         if (state.mode === 'writing') writingView.saveDraft();
         state.mode = mode;
+        state.review = null;
         state.examFilter = 'all';
         state.pending = null;
         state.panel = null;
@@ -664,6 +750,7 @@
 
     function updateFilters(patch) {
         Object.assign(state.filters, patch);
+        state.review = null;
         refreshView();
     }
 
@@ -706,7 +793,7 @@
         if (summary.unanswered > 0
             && !confirm(`Bạn còn ${summary.unanswered}/${summary.total} câu chưa trả lời. Vẫn nộp bài?`)) return;
         if (quiz.isExpired()) return autoSubmit();
-        quiz.submitExam(summary);
+        afterExamSubmit(quiz.submitExam(summary));
         state.examFilter = 'all';
         state.resultFilter = 'all';
         refreshView();
@@ -734,9 +821,11 @@
             return;
         }
         const answered = Object.keys(quiz.practice).length;
-        if (!answered) return;
-        if (!confirm(`Xoá toàn bộ tiến độ luyện tập (${answered} câu đã làm)?`)) return;
+        if (!answered && !review.scheduled) return;
+        if (!confirm(`Xoá toàn bộ tiến độ luyện tập (${answered} câu đã làm) và lịch ôn tập?`)) return;
         quiz.clearPractice();
+        review.forget();
+        state.review = null;
         state.pending = null;
         refreshView();
     }
@@ -887,6 +976,15 @@
             const next = state.view.find(q => !hasAnswer(quiz.practiceAnswer(q.id)));
             if (next) goTo(next.id);
         });
+        $('home-today').addEventListener('click', e => {
+            if (e.target.closest('[data-review-start]')) startReview();
+        });
+        $('home-today').addEventListener('change', e => {
+            if (!e.target.matches('[data-home-goal]')) return;
+            review.goal = Number(e.target.value);
+            renderToday();
+        });
+        $('review-exit-btn').addEventListener('click', exitReview);
         document.querySelectorAll('[data-panel-close]').forEach(btn => btn.addEventListener('click', () => {
             state.panel = null;
             render();
@@ -1024,6 +1122,8 @@
             return;
         }
         quiz = new QuizService(qs);
+        review = new ReviewService();
+        review.seed(Object.keys(quiz.practice).filter(id => qs.byId.has(id) && quiz.practiceStatus(qs.byId.get(id)) === 'wrong'));
         builder = new ExamBuilderService(qs);
         builderView = ExamBuilderView.create({
             qs,
@@ -1034,7 +1134,15 @@
         const appConfig = window.APP_CONFIG || {};
         const writingService = new WritingService({ apiBase: appConfig.writingApiBase || '' });
         writingView = WritingView.create({ service: writingService });
-        tenseView = TenseView.create({ service: new TenseService(), access: writingService, questions: () => qs.questions });
+        tenseView = TenseView.create({
+            service: new TenseService(),
+            access: writingService,
+            questions: () => qs.questions,
+            onAnswer: (q, correct) => {
+                if (qs.byId.has(q.id)) review.record(q.id, correct);
+                review.logActivity(1);
+            },
+        });
         restoreUi();
         $('data-source').textContent = `Dữ liệu: ${qs.source === 'json' ? 'data/questions.json' : 'data/question-bank.bundle.js'}`
             + (qs.skipped.length ? ` (bỏ qua ${qs.skipped.length} câu không hợp lệ)` : '') + '.';

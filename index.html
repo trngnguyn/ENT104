@@ -7,13 +7,13 @@
     <title>Luyện tiếng Anh A1–B1</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="js/tailwind-config.js?v=20261015a"></script>
+    <script src="js/tailwind-config.js?v=20261015b"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/theme.css?v=20261015a">
-    <link rel="stylesheet" href="css/styles.css?v=20261015a">
+    <link rel="stylesheet" href="css/theme.css?v=20261015b">
+    <link rel="stylesheet" href="css/styles.css?v=20261015b">
 </head>
 <body class="min-h-full flex flex-col font-sans text-slate-800 antialiased selection:bg-blue-100 selection:text-blue-800">
 
@@ -82,7 +82,8 @@
     <section id="home-view" class="hidden flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
         <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">Hôm nay bạn muốn học gì?</h2>
         <div id="home-progress" class="mt-2 text-sm text-slate-500"></div>
-        <div class="mt-6 grid gap-3 sm:gap-4 sm:grid-cols-2">
+        <div id="home-today" class="mt-6 grid gap-3 sm:gap-4 sm:grid-cols-2"></div>
+        <div class="mt-3 sm:mt-4 grid gap-3 sm:gap-4 sm:grid-cols-2">
             <button data-mode-link="practice" class="home-card group">
                 <span class="home-icon bg-blue-50 text-blue-600"><i class="fa-solid fa-pen-to-square"></i></span>
                 <span class="min-w-0"><span class="home-title">Luyện tập</span><span class="home-desc">Làm từng câu, biết đúng sai ngay</span></span>
@@ -323,6 +324,13 @@
                 <p class="text-slate-600 mt-2">Hãy chạy <code class="bg-slate-100 px-1 rounded">npm start</code> rồi mở <code class="bg-slate-100 px-1 rounded">http://localhost:8080</code>, hoặc kiểm tra file <code class="bg-slate-100 px-1 rounded">data/question-bank.bundle.js</code> (tạo lại bằng <code class="bg-slate-100 px-1 rounded">npm run build</code>).</p>
             </div>
 
+            <!-- Đang ôn tập theo lịch -->
+            <div id="review-banner" class="hidden flex items-center gap-3 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm">
+                <i class="fa-solid fa-rotate text-amber-600"></i>
+                <span id="review-banner-text" class="flex-1 font-medium text-amber-900"></span>
+                <button id="review-exit-btn" class="text-xs font-semibold text-amber-800 hover:underline">Thoát</button>
+            </div>
+
             <!-- Exam Setup -->
             <div id="exam-setup" class="hidden card p-6 sm:p-8">
                 <div class="flex items-center gap-4 mb-6">
@@ -509,19 +517,20 @@
         </div>
     </div>
 
-    <script src="js/theme.js?v=20261015a"></script>
-    <script src="js/storage.js?v=20261015a"></script>
-    <script src="js/questionService.js?v=20261015a"></script>
-    <script src="js/quizService.js?v=20261015a"></script>
-    <script src="js/statisticsService.js?v=20261015a"></script>
-    <script src="js/examBuilderService.js?v=20261015a"></script>
-    <script src="js/examBuilderView.js?v=20261015a"></script>
-    <script src="js/app-config.js?v=20261015a"></script>
-    <script src="js/writingService.js?v=20261015a"></script>
-    <script src="js/accessGate.js?v=20261015a"></script>
-    <script src="js/writingView.js?v=20261015a"></script>
-    <script src="js/tenseService.js?v=20261015a"></script>
-    <script src="js/tenseView.js?v=20261015a"></script>
-    <script src="js/app.js?v=20261015a"></script>
+    <script src="js/theme.js?v=20261015b"></script>
+    <script src="js/storage.js?v=20261015b"></script>
+    <script src="js/questionService.js?v=20261015b"></script>
+    <script src="js/quizService.js?v=20261015b"></script>
+    <script src="js/statisticsService.js?v=20261015b"></script>
+    <script src="js/reviewService.js?v=20261015b"></script>
+    <script src="js/examBuilderService.js?v=20261015b"></script>
+    <script src="js/examBuilderView.js?v=20261015b"></script>
+    <script src="js/app-config.js?v=20261015b"></script>
+    <script src="js/writingService.js?v=20261015b"></script>
+    <script src="js/accessGate.js?v=20261015b"></script>
+    <script src="js/writingView.js?v=20261015b"></script>
+    <script src="js/tenseService.js?v=20261015b"></script>
+    <script src="js/tenseView.js?v=20261015b"></script>
+    <script src="js/app.js?v=20261015b"></script>
 </body>
 </html>

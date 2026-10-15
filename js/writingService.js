@@ -187,8 +187,21 @@
             return level && level !== 'all' ? this.tasks.filter(t => t.level === level) : this.tasks;
         }
 
-        /** Trạng thái backend: { enabled, provider, model, message }. */
-        async status() {
+        /**
+         * Trạng thái backend: { enabled, provider, model, message }.
+         * Writing và Các thì dùng chung một lần gọi; refresh = true để hỏi lại máy chủ.
+         */
+        status({ refresh = false } = {}) {
+            if (!this._status || refresh) {
+                this._status = this._fetchStatus().then(st => {
+                    if (st.unreachable) this._status = null;
+                    return st;
+                });
+            }
+            return this._status;
+        }
+
+        async _fetchStatus() {
             try {
                 const res = await this.fetch(`${this.apiBase}api/writing/status`, { cache: 'no-cache' });
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);

@@ -453,6 +453,31 @@ async function main() {
         assert.ok(!st.enabled && st.unreachable && !/npm start/.test(st.message));
     });
 
+    await test('16b. Writing và Các thì dùng chung một lần gọi /status; refresh mới hỏi lại; lỗi mạng thì lần sau thử lại', async () => {
+        let calls = 0;
+        let fail = false;
+        const svc = new W({
+            storage: fakeStorage,
+            apiBase: 'https://w.example/',
+            fetchImpl: async () => {
+                calls += 1;
+                if (fail) throw new Error('offline');
+                return { ok: true, json: async () => ({ enabled: true, accessRequired: true }) };
+            },
+        });
+        const [a, b] = await Promise.all([svc.status(), svc.status()]);
+        await svc.status();
+        assert.strictEqual(calls, 1);
+        assert.strictEqual(a, b);
+        await svc.status({ refresh: true });
+        assert.strictEqual(calls, 2);
+        fail = true;
+        assert.ok((await svc.status({ refresh: true })).unreachable);
+        fail = false;
+        assert.ok((await svc.status()).enabled);
+        assert.strictEqual(calls, 4);
+    });
+
     await test('17. AI: quá tải/không còn model → chuyển model dự phòng; sai khoá → dừng ngay', async () => {
         const ai = {
             ...getConfig({ AI_API_KEY: 'k', AI_MODEL: 'main', AI_FALLBACK_MODELS: 'lite,latest', AI_REASONING_EFFORT: 'low' }).ai,

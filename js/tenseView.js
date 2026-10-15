@@ -21,7 +21,7 @@
     const pctTone = p => (p >= 80 ? 'emerald' : p >= 50 ? 'amber' : 'rose');
     const blank = html => String(html).replace(/_{3,}/g, '<span class="inline-block min-w-[3.5rem] border-b-2 border-blue-400 mx-0.5">&nbsp;</span>');
 
-    function create({ service, access, questions }) {
+    function create({ service, access, questions, onAnswer = null }) {
         const s = {
             loaded: false,
             loading: false,
@@ -288,6 +288,10 @@
             const ss = s.session;
             if (!ss || ss.done || ss.answers[ss.index] !== undefined) return;
             ss.answers[ss.index] = i;
+            if (onAnswer) {
+                const q = ss.items[ss.index];
+                onAnswer(q, i === q.answer);
+            }
             renderSession();
         }
 

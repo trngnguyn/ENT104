@@ -85,6 +85,9 @@ Lưu ý:
   - *Luyện tập* theo từng thì (10 / 20 / tất cả câu, xáo trộn): 74 câu riêng của phần Thì (`TNS-…`) cộng các câu ngữ pháp A1 / A2 / A1-A2 trong ngân hàng có tag cùng thì (khai báo ở `bankTags`). Chấm ngay từng câu kèm giải thích, cuối lượt có điểm, danh sách câu sai và *Làm lại câu sai*; mục *Tổng hợp các thì* trộn câu của cả 8 thì. Điểm cao nhất lưu ở `localStorage` (`ent104.tenses.v1`).
   - Danh sách thì là nội dung tiếng Anh tổng quát theo CEFR, **chưa đối chiếu với đề cương chính thức của ENT104**.
   - Dùng **chung mật khẩu với Writing** (nhập ở tab nào cũng mở cả hai). Lưu ý: dữ liệu các thì là file tĩnh công khai trên GitHub Pages – mật khẩu chỉ chặn ở giao diện (máy chủ kiểm tra mật khẩu khi mở khoá), không phải bảo mật thật như phần chấm Writing. Nếu không kết nối được máy chủ, tab Tenses vẫn mở.
+- **Trang chủ – Hôm nay:**
+  - *Ôn tập hôm nay*: câu làm sai (ở Luyện tập, Các thì hoặc bài thi) được hẹn ôn lại sau 1 ngày; ôn đúng đúng hạn thì giãn ra 3 rồi 7 ngày, đúng ở mốc 7 ngày thì bỏ khỏi lịch; ôn sai thì quay lại mốc 1 ngày. Bấm *Ôn ngay* để làm các câu đến hạn.
+  - *Mục tiêu hôm nay* (10 / 20 / 30 / 50 câu mỗi ngày) và chuỗi ngày học liên tiếp (ngày có làm ít nhất 1 câu). Lưu trong `localStorage` (`ent104.review.v1`); nút *Xoá tiến độ* xoá cả lịch ôn.
 - **Bộ lọc:** kỹ năng, trình độ (A1 / A2 / A1-A2 / B1), chủ đề, trạng thái làm bài (chưa làm / đúng / sai); nút *Review wrong answers* để ôn lại câu sai.
 - **Tìm kiếm** theo nội dung (câu hỏi, đáp án, giải thích, tên bài đọc) hoặc theo ID (vd. `GRAM-A1-0001`).
 - **Bài đọc** hiển thị ở khung riêng phía trên câu hỏi (có thể thu gọn); mỗi bài đọc chỉ lưu một lần trong `data/reading-passages.json`.
@@ -104,6 +107,7 @@ js/storage.js                   Đọc / ghi localStorage an toàn
 js/questionService.js           Tải dữ liệu (JSON → bundle), lọc, tìm kiếm, tìm đoạn căn cứ trong bài đọc
 js/quizService.js               Trạng thái luyện tập / bài thi (giới hạn thời gian, tự nộp), lịch sử kết quả
 js/statisticsService.js         Tính thống kê
+js/reviewService.js             Lịch ôn câu sai (1 / 3 / 7 ngày), mục tiêu mỗi ngày, chuỗi ngày học
 js/examBuilderService.js        Soạn đề: kiểm tra cấu hình, chọn câu, thêm / xoá / thay, lưu đề
 js/examBuilderView.js           Giao diện Exam Builder
 js/writingService.js            Writing: đếm từ, giới hạn, định vị lỗi, gọi API, bản nháp / lịch sử (dùng chung với server)
@@ -130,6 +134,7 @@ data/question-bank.bundle.js    Bản đóng gói tự sinh từ 2 file JSON (d�
 scripts/validate-questions.js   Kiểm tra dữ liệu
 scripts/test-features.js        Kiểm thử logic Practice / Exam / Exam Builder (npm test)
 scripts/test-writing.js         Kiểm thử Writing và máy chủ (npm test, dùng AI giả lập)
+scripts/test-review.js          Kiểm thử lịch ôn tập, mục tiêu ngày, chuỗi ngày học (npm test)
 scripts/build-bundle.js         Tạo lại bundle từ JSON
 scripts/serve.js                Khởi động máy chủ (npm start)
 scripts/generate-question-bank.js, scripts/bank/*, scripts/lib/*
@@ -223,9 +228,11 @@ Cảnh báo: gần trùng 70–85%, giải thích ngắn không nhắc tới đ�
 
 `scripts/test-features.js` chạy trên ngân hàng 1.300 câu thật (localStorage giả lập), gồm 10 nhóm: phản hồi Practice đúng/sai và khoá đáp án; Exam không lộ kết quả trước khi nộp; xem lại đáp án và giải thích sau khi nộp; đề ngẫu nhiên đúng số câu / phân bổ / tiêu chí (lặp hàng trăm lần, gồm đề mẫu 40 câu = 15 Grammar + 10 Vocabulary + 5 Communication + 10 Reading); thêm / xoá / thay câu thủ công; không trùng câu; báo thiếu câu mà không tự sửa cấu hình; lưu – mở lại – sửa – nhân bản – xoá đề; điểm và thống kê, hết giờ tự nộp; tương thích ngân hàng 1.300 câu (cơ cấu A1–A2 giữ nguyên, 300 câu B1 đúng nguồn `general_b1`, tạo được đề chỉ gồm câu B1 và bài đọc B1). Phần hiển thị (ẩn đáp án trong Exam, tô căn cứ bài đọc, giao diện Exam Builder) được kiểm tra thủ công trên trình duyệt.
 
-`scripts/test-writing.js` (18 nhóm, gồm cả CORS và chạy thử mã Cloudflare Worker; không gọi AI thật – dùng dịch vụ AI giả lập): ngân hàng đề Writing; đếm từ, giới hạn gửi bài, điểm trần theo độ dài; định vị lỗi theo nguyên từ; làm sạch phản hồi AI và tự tính điểm tổng; prompt tách bài viết khỏi chỉ dẫn; giới hạn tần suất; cấu hình `.env`; máy chủ không lộ `.env` / mã nguồn; kiểm tra đầu vào, chặn gọi chéo trang, giới hạn kích thước; khoá chỉ gửi tới AI và không lộ trong phản hồi / lỗi; chế độ chưa cấu hình và demo; bản nháp và lịch sử.
+`scripts/test-writing.js` (20 nhóm, gồm cả CORS và chạy thử mã Cloudflare Worker; không gọi AI thật – dùng dịch vụ AI giả lập): ngân hàng đề Writing; đếm từ, giới hạn gửi bài, điểm trần theo độ dài; định vị lỗi theo nguyên từ; làm sạch phản hồi AI và tự tính điểm tổng; prompt tách bài viết khỏi chỉ dẫn; giới hạn tần suất; cấu hình `.env`; máy chủ không lộ `.env` / mã nguồn; kiểm tra đầu vào, chặn gọi chéo trang, giới hạn kích thước; khoá chỉ gửi tới AI và không lộ trong phản hồi / lỗi; chế độ chưa cấu hình và demo; bản nháp và lịch sử.
 
 `scripts/test-tenses.js` (9 nhóm): dữ liệu `data/tenses.json` đủ 8 thì và hợp lệ (id không trùng – kể cả với ngân hàng, 4 phương án khác nhau, đáp án hợp lệ, có chỗ trống); bắt được dữ liệu sai; chỉ gom câu ngữ pháp A1–A2 đúng tag (không lấy B1); mỗi thì ≥ 10 câu; lượt luyện tập đúng số câu, không trùng; lưu điểm cao nhất; máy chủ phục vụ file dữ liệu và JS mới.
+
+`scripts/test-review.js` (8 nhóm, đồng hồ giả lập): câu sai hẹn ôn sau 1 ngày; ôn đúng giãn 3 → 7 ngày rồi bỏ khỏi lịch; ôn sai quay về mốc 1 ngày; lần đầu đưa câu sai cũ vào lịch; câu sai trong bài thi không làm lùi câu đã ở mốc xa; mục tiêu ngày được lưu; chuỗi ngày học; xoá tiến độ xoá lịch ôn.
 
 ## Thống kê hiện tại
 

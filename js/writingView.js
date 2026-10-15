@@ -521,7 +521,7 @@
                 updateCounter();
                 flash(e.message);
                 if (/chưa được bật|not_configured/.test(e.message)) {
-                    s.status = await service.status();
+                    s.status = await service.status({ refresh: true });
                     render();
                 }
             }
