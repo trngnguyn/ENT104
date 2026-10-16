@@ -420,9 +420,14 @@
         show('question-card', !!q);
         if (needsSetup) renderExamSetup();
         else if (!q) {
-            $('empty-text').textContent = state.mode === 'exam'
-                ? 'Không có câu nào trong mục xem lại này.'
-                : 'Không có câu hỏi nào phù hợp với bộ lọc hoặc từ khoá tìm kiếm.';
+            if (state.mode === 'exam') {
+                $('empty-text').textContent = 'Không có câu nào trong mục xem lại này.';
+            } else if (state.filters.status !== 'all') {
+                const labels = { unanswered: 'Chưa làm', correct: 'Đã đúng', wrong: 'Đã sai' };
+                $('empty-text').textContent = `Không có câu nào ở trạng thái “${labels[state.filters.status] || state.filters.status}”. Đổi bộ lọc Trạng thái về “Tất cả” để xem lại ngân hàng.`;
+            } else {
+                $('empty-text').textContent = 'Không có câu hỏi nào phù hợp với bộ lọc hoặc từ khoá tìm kiếm.';
+            }
         } else renderQuestion(q);
     }
 
@@ -827,6 +832,8 @@
         review.forget();
         state.review = null;
         state.pending = null;
+        // Sau khi xoá tiến độ, lọc "Đã đúng / Đã sai / Chưa làm" không còn nghĩa và sẽ để lại danh sách trống.
+        state.filters.status = 'all';
         refreshView();
     }
 

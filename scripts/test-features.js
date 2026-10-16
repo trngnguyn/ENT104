@@ -86,6 +86,11 @@ test('1. Practice: trả lời đúng / sai cho phản hồi chính xác và kho
     quiz.clearPractice([b.id]);
     assert.ok(quiz.answerPractice(b.id, b.answer), 'làm lại câu hỏi thì được trả lời lại');
     assert.strictEqual(quiz.practiceStatus(b), 'correct');
+    // Sau Reset: nếu vẫn lọc theo "Đã sai" thì danh sách trống — app phải đưa status về "all".
+    quiz.clearPractice();
+    const afterReset = qs.questions.filter(q => quiz.practiceStatus(q) === 'wrong');
+    assert.strictEqual(afterReset.length, 0, 'xoá tiến độ thì không còn câu "Đã sai"');
+    assert.ok(qs.questions.filter(q => quiz.practiceStatus(q) === 'unanswered').length === qs.questions.length);
     // Dữ liệu phản hồi: mọi câu đều có giải thích; ghi chú phương án sai không trỏ vào đáp án đúng.
     for (const q of qs.questions) {
         assert.ok(q.explanation && q.explanation.length >= 10, `${q.id} thiếu giải thích`);
