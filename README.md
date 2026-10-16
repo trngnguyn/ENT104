@@ -1,6 +1,6 @@
 # English A1–B1 Practice – Ngân hàng câu hỏi
 
-Ứng dụng web tĩnh để luyện tập và thi thử tiếng Anh trình độ A1–B1, kèm ngân hàng **1.300 câu hỏi** lưu ở dạng JSON: 1.000 câu A1–A2 và 300 câu B1.
+Ứng dụng web tĩnh để luyện tập và thi thử tiếng Anh trình độ A1–B1, kèm ngân hàng **1.344 câu hỏi** lưu ở dạng JSON (A1–A2 + B1; đã bổ sung thêm câu medium/hard).
 
 > **Lưu ý về ENT104:** toàn bộ câu hỏi là nội dung tiếng Anh tổng quát – A1–A2 (`source: "general_a1_a2"`) và B1 (`source: "general_b1"`), đều có `unit: null`.
 > Nội dung **chưa được đối chiếu** với đề cương chính thức của học phần ENT104 – Trường Đại học FPT. Không có câu nào được gán unit, bài học, giáo trình hay tỷ trọng đề thi.
@@ -226,7 +226,7 @@ Cảnh báo: gần trùng 70–85%, giải thích ngắn không nhắc tới đ�
 
 ## Kiểm thử chức năng (`npm test`)
 
-`scripts/test-features.js` chạy trên ngân hàng 1.300 câu thật (localStorage giả lập), gồm 10 nhóm: phản hồi Practice đúng/sai và khoá đáp án; Exam không lộ kết quả trước khi nộp; xem lại đáp án và giải thích sau khi nộp; đề ngẫu nhiên đúng số câu / phân bổ / tiêu chí (lặp hàng trăm lần, gồm đề mẫu 40 câu = 15 Grammar + 10 Vocabulary + 5 Communication + 10 Reading); thêm / xoá / thay câu thủ công; không trùng câu; báo thiếu câu mà không tự sửa cấu hình; lưu – mở lại – sửa – nhân bản – xoá đề; điểm và thống kê, hết giờ tự nộp; tương thích ngân hàng 1.300 câu (cơ cấu A1–A2 giữ nguyên, 300 câu B1 đúng nguồn `general_b1`, tạo được đề chỉ gồm câu B1 và bài đọc B1). Phần hiển thị (ẩn đáp án trong Exam, tô căn cứ bài đọc, giao diện Exam Builder) được kiểm tra thủ công trên trình duyệt.
+`scripts/test-features.js` chạy trên ngân hàng câu hỏi thật (≥ 1.300 câu, localStorage giả lập), gồm 10 nhóm: phản hồi Practice đúng/sai và khoá đáp án; Exam không lộ kết quả trước khi nộp; xem lại đáp án và giải thích sau khi nộp; đề ngẫu nhiên đúng số câu / phân bổ / tiêu chí; thêm / xoá / thay câu thủ công; không trùng câu; báo thiếu câu mà không tự sửa cấu hình; lưu – mở lại – sửa – nhân bản – xoá đề; điểm và thống kê, hết giờ tự nộp; tương thích ngân hàng A1–A2 + B1 (đúng nguồn `general_*`, tạo được đề chỉ gồm câu B1 và bài đọc B1). Phần hiển thị được kiểm tra thủ công trên trình duyệt.
 
 `scripts/test-writing.js` (20 nhóm, gồm cả CORS và chạy thử mã Cloudflare Worker; không gọi AI thật – dùng dịch vụ AI giả lập): ngân hàng đề Writing; đếm từ, giới hạn gửi bài, điểm trần theo độ dài; định vị lỗi theo nguyên từ; làm sạch phản hồi AI và tự tính điểm tổng; prompt tách bài viết khỏi chỉ dẫn; giới hạn tần suất; cấu hình `.env`; máy chủ không lộ `.env` / mã nguồn; kiểm tra đầu vào, chặn gọi chéo trang, giới hạn kích thước; khoá chỉ gửi tới AI và không lộ trong phản hồi / lỗi; chế độ chưa cấu hình và demo; bản nháp và lịch sử.
 
@@ -238,15 +238,17 @@ Cảnh báo: gần trùng 70–85%, giải thích ngắn không nhắc tới đ�
 
 | | A1–A2 | B1 | Tổng |
 |---|---|---|---|
-| Tổng | 1.000 (30 bài đọc) | 300 (9 bài đọc) | 1.300 (39 bài đọc) |
-| Grammar | 300 | 90 | 390 |
-| Vocabulary | 200 | 60 | 260 |
-| Communication | 150 | 45 | 195 |
+| Tổng | 1.022 (30 bài đọc) | 322 (9 bài đọc) | 1.344 (39 bài đọc) |
+| Grammar | 314 | 103 | 417 |
+| Vocabulary | 205 | 66 | 271 |
+| Communication | 153 | 48 | 201 |
 | Reading | 150 | 45 | 195 |
 | Completion & Error | 100 | 30 | 130 |
 | Ordering & Writing | 100 | 30 | 130 |
 
-- Theo trình độ: A1 / A2 / A1-A2 / B1 = 468 / 335 / 197 / 300.
-- `ai_reviewed` / `needs_review` / `reviewed`: 1.288 / 12 / 0 (cả 300 câu B1 đều là `ai_reviewed`).
+- Theo trình độ: A1 / A2 / A1-A2 / B1 = 468 / 357 / 197 / 322.
+- Độ khó: easy / medium / hard ≈ 607 / 606 / 131 (đã nâng một phần câu easy và thêm câu medium/hard).
+- `ai_reviewed` / `auto_validated` / `needs_review`: 1.275 / 57 / 12. Câu mới hoặc vừa nâng cấp ghi `auto_validated` cho tới khi được rà soát kỹ hơn.
+- Nội dung tổng quát theo CEFR, **không** tuyên bố là đề chính thức ENT104.
 
-Số câu A2 (335) thấp hơn mục tiêu 400 vì câu hỏi không bị nâng trình độ chỉ để đủ chỉ tiêu.
+Có thể áp dụng thêm gói khó hơn bằng `node scripts/apply-harder-pack.js` (xem `scripts/bank/harder-pack.js`).

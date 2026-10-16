@@ -321,19 +321,26 @@ test('9. Điểm và thống kê phản ánh đúng câu trả lời; hết gi�
 });
 
 // ---------------------------------------------------------------- 10. Whole bank
-test('10. Hoạt động với ngân hàng 1.300 câu (A1–A2 + B1), không ảnh hưởng chức năng cũ', () => {
-    assert.strictEqual(qs.questions.length, 1300);
+test('10. Hoạt động với ngân hàng A1–A2 + B1 (≥ 1.300 câu), không ảnh hưởng chức năng cũ', () => {
+    assert.ok(qs.questions.length >= 1300, `cần ≥ 1300 câu, hiện có ${qs.questions.length}`);
     assert.strictEqual(qs.skipped.length, 0);
     const builder = new ExamBuilderService(qs, { rand: seeded(10) });
     const bySkill = list => Stats.countBy(list, q => q.skill);
     const a12 = qs.questions.filter(q => q.level !== 'B1');
     const b1 = qs.questions.filter(q => q.level === 'B1');
-    assert.deepStrictEqual(bySkill(a12), { grammar: 300, vocabulary: 200, communication: 150, reading: 150, completion_error: 100, writing: 100 });
-    assert.deepStrictEqual(bySkill(b1), { grammar: 90, vocabulary: 60, communication: 45, reading: 45, completion_error: 30, writing: 30 });
+    const a12Skills = bySkill(a12);
+    const b1Skills = bySkill(b1);
+    // Cơ cấu tối thiểu từ ngân hàng gốc 1.000 + 300; được phép thêm câu khó hơn sau này.
+    for (const [k, n] of Object.entries({ grammar: 300, vocabulary: 200, communication: 150, reading: 150, completion_error: 100, writing: 100 })) {
+        assert.ok(a12Skills[k] >= n, `A1–A2 ${k}: ${a12Skills[k]} < ${n}`);
+    }
+    for (const [k, n] of Object.entries({ grammar: 90, vocabulary: 60, communication: 45, reading: 45, completion_error: 30, writing: 30 })) {
+        assert.ok(b1Skills[k] >= n, `B1 ${k}: ${b1Skills[k]} < ${n}`);
+    }
     assert.ok(b1.every(q => q.source === 'general_b1' && q.unit === null && /-B1-\d{4}$/.test(q.id)));
     assert.ok(a12.every(q => q.source === 'general_a1_a2'));
     assert.ok(QuestionService.LEVELS.includes('B1') && ExamBuilderService.LEVELS.includes('B1'));
-    assert.strictEqual(qs.filter({ level: 'B1' }).length, 300);
+    assert.ok(qs.filter({ level: 'B1' }).length >= 300);
     const b1Paper = builder.generate({ ...builder.defaultConfig(), total: 40, levels: ['B1'] });
     assert.ok(b1Paper.ok && b1Paper.ids.length === 40 && b1Paper.ids.every(id => qs.byId.get(id).level === 'B1'));
     for (const id of b1Paper.ids) {
@@ -349,9 +356,10 @@ test('10. Hoạt động với ngân hàng 1.300 câu (A1–A2 + B1), không ả
     assert.ok(small.length > 0 && small.length < 50);
     assert.strictEqual(builder.quickPaper(small, 50).length, small.length, 'đề nhanh không vượt quá số câu có thật');
     assert.ok(qs.filter({ query: 'GRAM-A1-0001' }).some(q => q.id === 'GRAM-A1-0001'));
-    const all = builder.generate({ ...builder.defaultConfig(), total: 1300 });
-    assert.ok(all.ok && all.ids.length === 1300 && unique(all.ids));
-    assert.ok(!builder.check({ ...builder.defaultConfig(), total: 1301 }).ok);
+    const n = qs.questions.length;
+    const all = builder.generate({ ...builder.defaultConfig(), total: n });
+    assert.ok(all.ok && all.ids.length === n && unique(all.ids));
+    assert.ok(!builder.check({ ...builder.defaultConfig(), total: n + 1 }).ok);
     const quiz = freshQuiz();
     quiz.answerPractice('GRAM-A1-0001', 0);
     quiz.startExam([qs.byId.get('VOC-A1-0001')], {});

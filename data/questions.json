@@ -5,27 +5,22 @@
     "type": "completion",
     "category": "Verb BE",
     "level": "A1",
-    "difficulty": "easy",
+    "difficulty": "medium",
     "unit": null,
     "source": "general_a1_a2",
-    "question": "Where ______ your new English teacher from?",
+    "question": "A: ______ your new English teacher from England or the US?<br>B: She's from Canada, actually.",
     "options": [
-      "be",
-      "are",
-      "is",
-      "am"
+      "Is",
+      "Are",
+      "Does",
+      "Do"
     ],
-    "answer": 2,
-    "explanation": "Chủ ngữ 'your new English teacher' là ngôi thứ 3 số ít (tương đương 'he' hoặc 'she'), do đó động từ 'be' ở thì hiện tại đơn phải dùng 'is'.",
-    "optionNotes": {
-      "be": "'be' là dạng nguyên mẫu; chỉ dùng sau động từ khuyết thiếu (will be, can be…) hoặc sau 'to'.",
-      "are": "'are' là 'be' ở hiện tại, dùng với you/we/they hoặc danh từ số nhiều.",
-      "am": "'am' chỉ dùng với chủ ngữ 'I' (thì hiện tại)."
-    },
+    "answer": 0,
+    "explanation": "Câu hỏi Yes/No với động từ 'be': đảo 'Is/Are/Am' lên trước chủ ngữ. Chủ ngữ 'your new English teacher' số ít → 'Is'. Không dùng Do/Does với 'be'.",
     "tags": [
       "be"
     ],
-    "status": "ai_reviewed",
+    "status": "auto_validated",
     "origin": "original_50"
   },
   {
@@ -34,28 +29,23 @@
     "type": "completion",
     "category": "Verb BE",
     "level": "A1",
-    "difficulty": "easy",
+    "difficulty": "medium",
     "unit": null,
     "source": "general_a1_a2",
-    "question": "My best friend ______ from Soc Trang.",
+    "question": "My best friend and I ______ from the same town, but we study at different universities now.",
     "options": [
-      "is",
       "am",
-      "be",
-      "are"
+      "is",
+      "are",
+      "be"
     ],
-    "answer": 0,
-    "explanation": "Chủ ngữ 'My best friend' là ngôi thứ ba số ít nên động từ 'be' ở hiện tại là 'is'.",
-    "optionNotes": {
-      "am": "'am' chỉ dùng với chủ ngữ 'I' (thì hiện tại).",
-      "be": "'be' là dạng nguyên mẫu; chỉ dùng sau động từ khuyết thiếu (will be, can be…) hoặc sau 'to'.",
-      "are": "'are' là 'be' ở hiện tại, dùng với you/we/they hoặc danh từ số nhiều."
-    },
+    "answer": 2,
+    "explanation": "Chủ ngữ ghép 'My best friend and I' = we (số nhiều) → dùng 'are'. Không dùng 'is' dù 'friend' đứng gần động từ.",
     "tags": [
       "grammar",
       "be"
     ],
-    "status": "ai_reviewed"
+    "status": "auto_validated"
   },
   {
     "id": "GRAM-A1-0003",
@@ -63,28 +53,23 @@
     "type": "completion",
     "category": "Verb BE",
     "level": "A1",
-    "difficulty": "easy",
+    "difficulty": "medium",
     "unit": null,
     "source": "general_a1_a2",
-    "question": "These shoes ______ very comfortable.",
+    "question": "These shoes ______ really comfortable, but that pair over there ______ too tight.",
     "options": [
-      "is",
-      "are",
-      "am",
-      "be"
+      "is / are",
+      "are / is",
+      "are / are",
+      "is / is"
     ],
     "answer": 1,
-    "explanation": "Chủ ngữ 'These shoes' là số nhiều nên động từ 'be' ở hiện tại là 'are'.",
-    "optionNotes": {
-      "is": "'is' là 'be' ở hiện tại, dùng với he/she/it, danh từ số ít hoặc không đếm được.",
-      "am": "'am' chỉ dùng với chủ ngữ 'I' (thì hiện tại).",
-      "be": "'be' là dạng nguyên mẫu; chỉ dùng sau động từ khuyết thiếu (will be, can be…) hoặc sau 'to'."
-    },
+    "explanation": "'These shoes' số nhiều → 'are'; 'that pair' số ít → 'is'.",
     "tags": [
       "grammar",
       "be"
     ],
-    "status": "ai_reviewed"
+    "status": "auto_validated"
   },
   {
     "id": "GRAM-A1-0004",
@@ -92,28 +77,23 @@
     "type": "completion",
     "category": "Verb BE",
     "level": "A1",
-    "difficulty": "easy",
+    "difficulty": "medium",
     "unit": null,
     "source": "general_a1_a2",
-    "question": "I ______ nineteen years old.",
+    "question": "I ______ nineteen, and my twin brother ______ nineteen too — we were born on the same day.",
     "options": [
-      "am",
-      "be",
-      "is",
-      "are"
+      "am / is",
+      "is / am",
+      "are / is",
+      "am / are"
     ],
     "answer": 0,
-    "explanation": "Chủ ngữ 'I' nên động từ 'be' ở hiện tại là 'am'.",
-    "optionNotes": {
-      "be": "'be' là dạng nguyên mẫu; chỉ dùng sau động từ khuyết thiếu (will be, can be…) hoặc sau 'to'.",
-      "is": "'is' là 'be' ở hiện tại, dùng với he/she/it, danh từ số ít hoặc không đếm được.",
-      "are": "'are' là 'be' ở hiện tại, dùng với you/we/they hoặc danh từ số nhiều."
-    },
+    "explanation": "Với 'I' dùng 'am'; với 'my twin brother' (he) dùng 'is'.",
     "tags": [
       "grammar",
       "be"
     ],
-    "status": "ai_reviewed"
+    "status": "auto_validated"
   },
   {
     "id": "GRAM-A1-0005",
@@ -121,28 +101,23 @@
     "type": "completion",
     "category": "Verb BE",
     "level": "A1",
-    "difficulty": "easy",
+    "difficulty": "medium",
     "unit": null,
     "source": "general_a1_a2",
-    "question": "Our school ______ near the river.",
+    "question": "Our school ______ near the river, so students often walk there after class when the weather ______ fine.",
     "options": [
-      "am",
-      "is",
-      "are",
-      "be"
+      "is / is",
+      "are / is",
+      "is / are",
+      "are / are"
     ],
-    "answer": 1,
-    "explanation": "Chủ ngữ 'Our school' là ngôi thứ ba số ít nên động từ 'be' ở hiện tại là 'is'.",
-    "optionNotes": {
-      "am": "'am' chỉ dùng với chủ ngữ 'I' (thì hiện tại).",
-      "are": "'are' là 'be' ở hiện tại, dùng với you/we/they hoặc danh từ số nhiều.",
-      "be": "'be' là dạng nguyên mẫu; chỉ dùng sau động từ khuyết thiếu (will be, can be…) hoặc sau 'to'."
-    },
+    "answer": 0,
+    "explanation": "'Our school' số ít → 'is'; 'the weather' số ít → 'is'.",
     "tags": [
       "grammar",
       "be"
     ],
-    "status": "ai_reviewed"
+    "status": "auto_validated"
   },
   {
     "id": "GRAM-A1-0006",
@@ -150,28 +125,23 @@
     "type": "completion",
     "category": "Verb BE",
     "level": "A1",
-    "difficulty": "easy",
+    "difficulty": "medium",
     "unit": null,
     "source": "general_a1_a2",
-    "question": "The students ______ in the library now.",
+    "question": "The students ______ in the library now, but the librarian ______ at the front desk.",
     "options": [
-      "is",
-      "am",
-      "be",
-      "are"
+      "is / are",
+      "are / is",
+      "are / are",
+      "is / is"
     ],
-    "answer": 3,
-    "explanation": "Chủ ngữ 'The students' là số nhiều nên động từ 'be' ở hiện tại là 'are'.",
-    "optionNotes": {
-      "is": "'is' là 'be' ở hiện tại, dùng với he/she/it, danh từ số ít hoặc không đếm được.",
-      "am": "'am' chỉ dùng với chủ ngữ 'I' (thì hiện tại).",
-      "be": "'be' là dạng nguyên mẫu; chỉ dùng sau động từ khuyết thiếu (will be, can be…) hoặc sau 'to'."
-    },
+    "answer": 1,
+    "explanation": "'The students' số nhiều → 'are'; 'the librarian' số ít → 'is'.",
     "tags": [
       "grammar",
       "be"
     ],
-    "status": "ai_reviewed"
+    "status": "auto_validated"
   },
   {
     "id": "GRAM-A1-0007",
@@ -208,28 +178,23 @@
     "type": "completion",
     "category": "Verb BE",
     "level": "A1",
-    "difficulty": "easy",
+    "difficulty": "medium",
     "unit": null,
     "source": "general_a1_a2",
-    "question": "It ______ cold and windy today.",
+    "question": "The news about the exam results ______ very surprising, so everyone ______ quiet in the hallway.",
     "options": [
-      "am",
-      "are",
-      "be",
-      "is"
+      "are / is",
+      "is / is",
+      "is / are",
+      "are / are"
     ],
-    "answer": 3,
-    "explanation": "Chủ ngữ 'It' là ngôi thứ ba số ít nên động từ 'be' ở hiện tại là 'is'.",
-    "optionNotes": {
-      "am": "'am' chỉ dùng với chủ ngữ 'I' (thì hiện tại).",
-      "are": "'are' là 'be' ở hiện tại, dùng với you/we/they hoặc danh từ số nhiều.",
-      "be": "'be' là dạng nguyên mẫu; chỉ dùng sau động từ khuyết thiếu (will be, can be…) hoặc sau 'to'."
-    },
+    "answer": 1,
+    "explanation": "'News' là danh từ không đếm được (số ít) dù có -s → 'is'. 'everyone' cũng số ít → 'is'.",
     "tags": [
       "grammar",
       "be"
     ],
-    "status": "ai_reviewed"
+    "status": "auto_validated"
   },
   {
     "id": "GRAM-A1-0009",
@@ -267,29 +232,24 @@
     "type": "completion",
     "category": "Verb BE",
     "level": "A1",
-    "difficulty": "easy",
+    "difficulty": "medium",
     "unit": null,
     "source": "general_a1_a2",
-    "question": "These apples ______ fresh. Don't eat them.",
+    "question": "You ______ late again! The teacher and the other students ______ already in the classroom.",
     "options": [
-      "don't",
-      "isn't",
-      "not",
-      "aren't"
+      "is / is",
+      "are / is",
+      "are / are",
+      "is / are"
     ],
-    "answer": 3,
-    "explanation": "Câu phủ định với động từ 'be': chủ ngữ 'These apples' là số nhiều → 'aren't'. Không dùng 'don't/doesn't' với 'be'.",
-    "optionNotes": {
-      "don't": "'don't' là phủ định hiện tại đơn của động từ thường, dùng với I/you/we/they; không dùng với 'be'.",
-      "isn't": "'isn't' là phủ định của 'be' ở hiện tại cho chủ ngữ số ít (he/she/it).",
-      "not": "'not' không đứng một mình trước động từ thường; cần trợ động từ (don't/doesn't/didn't) hoặc đi sau 'be'/động từ khuyết thiếu."
-    },
+    "answer": 2,
+    "explanation": "Với 'you' luôn dùng 'are'. Chủ ngữ ghép 'The teacher and the other students' số nhiều → 'are'.",
     "tags": [
       "grammar",
       "be",
       "negative"
     ],
-    "status": "ai_reviewed"
+    "status": "auto_validated"
   },
   {
     "id": "GRAM-A1-0011",
@@ -2156,28 +2116,23 @@
     "type": "completion",
     "category": "Simple Present",
     "level": "A1",
-    "difficulty": "easy",
+    "difficulty": "medium",
     "unit": null,
     "source": "general_a1_a2",
-    "question": "My roommate ______ eat meat because she is a vegetarian.",
+    "question": "My roommate ______ eat meat, and she also ______ drink coffee — she prefers tea and vegetables.",
     "options": [
-      "don't",
-      "not",
-      "isn't",
-      "doesn't"
+      "don't / don't",
+      "doesn't / doesn't",
+      "isn't / doesn't",
+      "doesn't / don't"
     ],
-    "answer": 3,
-    "explanation": "Thì hiện tại đơn dạng phủ định với chủ ngữ số ít 'My roommate' sử dụng trợ động từ 'doesn't + V-bare'.",
-    "optionNotes": {
-      "don't": "'don't' là phủ định hiện tại đơn của động từ thường, dùng với I/you/we/they; không dùng với 'be'.",
-      "not": "'not' không đứng một mình trước động từ thường; cần trợ động từ (don't/doesn't/didn't) hoặc đi sau 'be'/động từ khuyết thiếu.",
-      "isn't": "'isn't' là phủ định của 'be' ở hiện tại cho chủ ngữ số ít (he/she/it)."
-    },
+    "answer": 1,
+    "explanation": "Phủ định hiện tại đơn với động từ thường: he/she/it + doesn't + V. Cả hai chỗ đều là 'she' → 'doesn't / doesn't'.",
     "tags": [
       "present-simple",
       "negative"
     ],
-    "status": "ai_reviewed",
+    "status": "auto_validated",
     "origin": "original_50"
   },
   {
@@ -2186,28 +2141,23 @@
     "type": "completion",
     "category": "Simple Present",
     "level": "A1",
-    "difficulty": "easy",
+    "difficulty": "medium",
     "unit": null,
     "source": "general_a1_a2",
-    "question": "How often ______ your brother go to the fitness gym?",
+    "question": "How often ______ your brother go to the gym, and ______ he usually go alone or with friends?",
     "options": [
-      "is",
-      "do",
-      "are",
-      "does"
+      "do / do",
+      "does / does",
+      "is / does",
+      "does / is"
     ],
-    "answer": 3,
-    "explanation": "Câu hỏi thì hiện tại đơn với chủ ngữ số ít 'your brother' cần trợ động từ 'does'.",
-    "optionNotes": {
-      "is": "'is' là 'be' ở hiện tại, dùng với he/she/it, danh từ số ít hoặc không đếm được.",
-      "do": "'do' là trợ động từ thì hiện tại đơn, dùng với I/you/we/they (động từ chính phải ở nguyên mẫu).",
-      "are": "'are' là 'be' ở hiện tại, dùng với you/we/they hoặc danh từ số nhiều."
-    },
+    "answer": 1,
+    "explanation": "Câu hỏi với he/she/it ở hiện tại đơn dùng 'does' + V nguyên mẫu. Cả hai chỗ đều hỏi về 'he' → 'does / does'.",
     "tags": [
       "present-simple",
       "question"
     ],
-    "status": "ai_reviewed",
+    "status": "auto_validated",
     "origin": "original_50"
   },
   {
@@ -2216,23 +2166,23 @@
     "type": "completion",
     "category": "Simple Present",
     "level": "A1",
-    "difficulty": "easy",
+    "difficulty": "medium",
     "unit": null,
     "source": "general_a1_a2",
-    "question": "My grandmother ______ the plants in her garden every morning.",
+    "question": "My grandmother ______ the plants every morning, but today she ______ them because it is raining.",
     "options": [
-      "is water",
-      "water",
-      "waters",
-      "watering"
+      "water / is not watering",
+      "waters / is not watering",
+      "waters / does not water",
+      "is watering / waters"
     ],
-    "answer": 2,
-    "explanation": "Thì hiện tại đơn (thói quen, sự thật). Chủ ngữ 'My grandmother' là ngôi thứ ba số ít nên động từ thêm -s: 'waters'.",
+    "answer": 1,
+    "explanation": "Thói quen → hiện tại đơn 'waters'. Hành động (không) đang xảy ra hôm nay → hiện tại tiếp diễn phủ định 'is not watering'.",
     "tags": [
       "grammar",
       "present-simple"
     ],
-    "status": "ai_reviewed"
+    "status": "auto_validated"
   },
   {
     "id": "GRAM-A1-0079",
@@ -10432,28 +10382,23 @@
     "type": "choice",
     "category": "Family",
     "level": "A1",
-    "difficulty": "easy",
+    "difficulty": "medium",
     "unit": null,
     "source": "general_a1_a2",
-    "question": "My father's brother is my ______.",
+    "question": "My father's brother is my ______, so his daughter is my ______.",
     "options": [
-      "aunt",
-      "nephew",
-      "uncle",
-      "cousin"
+      "uncle / niece",
+      "uncle / cousin",
+      "aunt / cousin",
+      "cousin / uncle"
     ],
-    "answer": 2,
-    "explanation": "'uncle' = chú/bác/cậu (anh/em trai của bố hoặc mẹ).",
-    "optionNotes": {
-      "aunt": "'aunt' = cô, dì, bác gái.",
-      "nephew": "'nephew' = cháu trai (con của anh chị em).",
-      "cousin": "'cousin' = anh/chị/em họ."
-    },
+    "answer": 1,
+    "explanation": "Anh/em trai của bố = uncle. Con của uncle/aunt = cousin (anh/chị/em họ).",
     "tags": [
       "vocabulary",
       "family"
     ],
-    "status": "ai_reviewed"
+    "status": "auto_validated"
   },
   {
     "id": "VOC-A1-0002",
@@ -10461,28 +10406,23 @@
     "type": "choice",
     "category": "Family",
     "level": "A1",
-    "difficulty": "easy",
+    "difficulty": "medium",
     "unit": null,
     "source": "general_a1_a2",
-    "question": "My mother's sister is my ______.",
+    "question": "My mother's sister is my ______, and her son is therefore my ______.",
     "options": [
-      "uncle",
-      "cousin",
-      "niece",
-      "aunt"
+      "aunt / nephew",
+      "uncle / cousin",
+      "aunt / cousin",
+      "niece / cousin"
     ],
-    "answer": 3,
-    "explanation": "'aunt' = cô/dì (chị/em gái của bố hoặc mẹ).",
-    "optionNotes": {
-      "uncle": "'uncle' = chú, bác, cậu.",
-      "cousin": "'cousin' = anh/chị/em họ.",
-      "niece": "'niece' = cháu gái (con của anh chị em)."
-    },
+    "answer": 2,
+    "explanation": "Chị/em gái của mẹ = aunt. Con của aunt = cousin.",
     "tags": [
       "vocabulary",
       "family"
     ],
-    "status": "ai_reviewed"
+    "status": "auto_validated"
   },
   {
     "id": "VOC-A1-0003",
@@ -34246,5 +34186,1062 @@
       "conjunction"
     ],
     "status": "ai_reviewed"
+  },
+  {
+    "id": "GRAM-A2-0100",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_a1_a2",
+    "question": "I ______ this film last weekend, so I don't want to watch it again tonight.",
+    "options": [
+      "have seen",
+      "saw",
+      "was seeing",
+      "see"
+    ],
+    "answer": 1,
+    "explanation": "'Last weekend' là thời điểm xác định trong quá khứ → quá khứ đơn 'saw'. Hiện tại hoàn thành không đi với mốc thời gian xác định như last weekend.",
+    "tags": [
+      "grammar",
+      "present-perfect",
+      "past-simple"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-A2-0101",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_a1_a2",
+    "question": "A: ______ to Hue before?<br>B: Yes, I went there with my class in 2022.",
+    "options": [
+      "Did you ever go",
+      "Have you ever been",
+      "Are you ever going",
+      "Do you ever go"
+    ],
+    "answer": 1,
+    "explanation": "Hỏi về trải nghiệm đến nay (chưa nêu thời điểm) → hiện tại hoàn thành 'Have you ever been'. Câu trả lời dùng quá khứ đơn vì có năm 2022.",
+    "tags": [
+      "grammar",
+      "present-perfect"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-A2-0102",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Conditionals",
+    "level": "A2",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_a1_a2",
+    "question": "If it ______ this weekend, we ______ the outdoor concert and stay home.",
+    "options": [
+      "will rain / will cancel",
+      "rains / will cancel",
+      "rained / cancel",
+      "rains / cancel"
+    ],
+    "answer": 1,
+    "explanation": "Điều kiện loại 1: If + hiện tại đơn, will + V. Không dùng will trong mệnh đề if.",
+    "tags": [
+      "grammar",
+      "conditionals"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-A2-0103",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Comparatives",
+    "level": "A2",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_a1_a2",
+    "question": "This exercise is ______ than the one we did yesterday, but it is not ______ difficult in the book.",
+    "options": [
+      "more hard / the most",
+      "harder / the most",
+      "harder / more",
+      "more harder / most"
+    ],
+    "answer": 1,
+    "explanation": "Tính từ ngắn: hard → harder. So sánh nhất: the most difficult (tính từ dài).",
+    "tags": [
+      "grammar",
+      "comparatives"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-A2-0104",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Modals",
+    "level": "A2",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_a1_a2",
+    "question": "You ______ bring food to the cinema — they sell snacks there. But you ______ turn off your phone during the film.",
+    "options": [
+      "mustn't / don't have to",
+      "don't have to / must",
+      "must / must",
+      "shouldn't / don't have to"
+    ],
+    "answer": 1,
+    "explanation": "'don't have to' = không bắt buộc. 'must' = bắt buộc/cần thiết. Không nhầm với mustn't (cấm).",
+    "tags": [
+      "grammar",
+      "modals"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-A2-0105",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Passive Voice",
+    "level": "A2",
+    "difficulty": "medium",
+    "unit": null,
+    "source": "general_a1_a2",
+    "question": "These smartphones ______ in Vietnam and then ______ to other countries.",
+    "options": [
+      "make / send",
+      "are made / are sent",
+      "are made / send",
+      "made / are sent"
+    ],
+    "answer": 1,
+    "explanation": "Bị động hiện tại cho cả hai động từ: are made / are sent (sản phẩm được làm và được gửi).",
+    "tags": [
+      "grammar",
+      "passive"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-A2-0106",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Passive Voice",
+    "level": "A2",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_a1_a2",
+    "question": "The new library ______ last year, and it ______ by hundreds of students every day now.",
+    "options": [
+      "built / visits",
+      "was built / is visited",
+      "was built / visits",
+      "is built / was visited"
+    ],
+    "answer": 1,
+    "explanation": "Quá khứ bị động: was built (last year). Hiện tại bị động: is visited (every day).",
+    "tags": [
+      "grammar",
+      "passive"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-A2-0107",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Reported Speech",
+    "level": "A2",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_a1_a2",
+    "question": "Mai said, \"I am busy today.\" → Mai said that she ______ busy ______.",
+    "options": [
+      "is / today",
+      "was / that day",
+      "was / today",
+      "is / that day"
+    ],
+    "answer": 1,
+    "explanation": "Tường thuật: hiện tại → quá khứ (am → was); today → that day.",
+    "tags": [
+      "grammar",
+      "reported-speech"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-A2-0108",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Relative Clauses",
+    "level": "A2",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_a1_a2",
+    "question": "The teacher ______ helped me after class is Ms. Hoa.",
+    "options": [
+      "which",
+      "who",
+      "where",
+      "whose"
+    ],
+    "answer": 1,
+    "explanation": "Danh từ chỉ người làm chủ ngữ của mệnh đề quan hệ → 'who'. 'which' cho vật; 'whose' = của ai.",
+    "tags": [
+      "grammar",
+      "relative-clauses"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-A2-0109",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Gerunds & Infinitives",
+    "level": "A2",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_a1_a2",
+    "question": "I enjoy ______ English songs, but I decided ______ a course this term.",
+    "options": [
+      "to listen / taking",
+      "listening / to take",
+      "listen / take",
+      "listening / taking"
+    ],
+    "answer": 1,
+    "explanation": "enjoy + V-ing; decide + to V.",
+    "tags": [
+      "grammar",
+      "gerund-infinitive"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-B1-0091",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Mixed Conditionals / Wish",
+    "level": "B1",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_b1",
+    "question": "I wish I ______ more time to revise, but I have to work this evening.",
+    "options": [
+      "have",
+      "had",
+      "will have",
+      "would have"
+    ],
+    "answer": 1,
+    "explanation": "Wish về hiện tại trái thực tế: wish + quá khứ đơn → 'I wish I had more time'.",
+    "tags": [
+      "grammar",
+      "wish"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-B1-0092",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Past Perfect",
+    "level": "B1",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_b1",
+    "question": "By the time we reached the station, the train ______, so we had to wait an hour.",
+    "options": [
+      "has left",
+      "left",
+      "had left",
+      "was leaving"
+    ],
+    "answer": 2,
+    "explanation": "Hành động hoàn tất trước một hành động quá khứ khác (reached) → quá khứ hoàn thành 'had left'.",
+    "tags": [
+      "grammar",
+      "past-perfect"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-B1-0093",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Future Perfect",
+    "level": "B1",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_b1",
+    "question": "By next July, she ______ at this company for ten years.",
+    "options": [
+      "will work",
+      "will be working",
+      "will have worked",
+      "has worked"
+    ],
+    "answer": 2,
+    "explanation": "'By + thời điểm tương lai' + khoảng thời gian → tương lai hoàn thành 'will have worked'.",
+    "tags": [
+      "grammar",
+      "future-perfect"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-B1-0094",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Articles & Determiners",
+    "level": "B1",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_b1",
+    "question": "______ information you gave me was useful, but I still need ______ advice about visas.",
+    "options": [
+      "An / an",
+      "The / some",
+      "The / an",
+      "Some / the"
+    ],
+    "answer": 1,
+    "explanation": "'The information' = thông tin đã xác định. 'advice' không đếm được → 'some advice', không dùng 'an advice'.",
+    "tags": [
+      "grammar",
+      "articles"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-B1-0095",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Inversion / Emphasis",
+    "level": "B1",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_b1",
+    "question": "Rarely ______ such a crowded market in this town.",
+    "options": [
+      "I have seen",
+      "have I seen",
+      "I saw",
+      "did I saw"
+    ],
+    "answer": 1,
+    "explanation": "Trạng từ phủ định đứng đầu câu (Rarely) → đảo trợ động từ: 'Rarely have I seen…'.",
+    "tags": [
+      "grammar",
+      "inversion"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-B1-0096",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Participles",
+    "level": "B1",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_b1",
+    "question": "______ in Can Tho for years, he knows the best places to eat.",
+    "options": [
+      "Living",
+      "Lived",
+      "Having lived",
+      "To live"
+    ],
+    "answer": 2,
+    "explanation": "'Having lived' nhấn mạnh việc đã sống trước và dẫn đến kết quả hiện tại (knows).",
+    "tags": [
+      "grammar",
+      "participle"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-B1-0097",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Noun Clauses",
+    "level": "B1",
+    "difficulty": "medium",
+    "unit": null,
+    "source": "general_b1",
+    "question": "I don't know ______ she will join us tomorrow.",
+    "options": [
+      "that if",
+      "whether",
+      "what",
+      "which"
+    ],
+    "answer": 1,
+    "explanation": "Mệnh đề danh từ Yes/No sau 'know' dùng whether/if. 'Whether' tự nhiên hơn trong văn viết trang trọng.",
+    "tags": [
+      "grammar",
+      "noun-clauses"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-B1-0098",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Causative",
+    "level": "B1",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_b1",
+    "question": "I need to ______ my laptop ______ because it is running very slowly.",
+    "options": [
+      "make / repair",
+      "have / repaired",
+      "have / repair",
+      "get / repairing"
+    ],
+    "answer": 1,
+    "explanation": "Cấu trúc nhờ ai làm hộ: have/get + object + V3 → 'have my laptop repaired'.",
+    "tags": [
+      "grammar",
+      "causative"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "VOC-A2-0055",
+    "skill": "vocabulary",
+    "type": "completion",
+    "category": "Collocations",
+    "level": "A2",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_a1_a2",
+    "question": "Please ______ attention to the safety instructions before the exam starts.",
+    "options": [
+      "make",
+      "pay",
+      "do",
+      "give"
+    ],
+    "answer": 1,
+    "explanation": "Collocation cố định: pay attention (to).",
+    "tags": [
+      "vocabulary",
+      "collocations"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "VOC-A2-0056",
+    "skill": "vocabulary",
+    "type": "completion",
+    "category": "Collocations",
+    "level": "A2",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_a1_a2",
+    "question": "We need to ______ a decision about the trip by Friday.",
+    "options": [
+      "do",
+      "make",
+      "take",
+      "have"
+    ],
+    "answer": 1,
+    "explanation": "Collocation: make a decision (không dùng do a decision).",
+    "tags": [
+      "vocabulary",
+      "collocations"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "VOC-A2-0057",
+    "skill": "vocabulary",
+    "type": "completion",
+    "category": "Phrasal Verbs",
+    "level": "A2",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_a1_a2",
+    "question": "The meeting was ______ until next Monday because the manager was ill.",
+    "options": [
+      "put off",
+      "put on",
+      "put up",
+      "put out"
+    ],
+    "answer": 0,
+    "explanation": "put off = hoãn lại. put on = mặc/bật; put up = dựng/cho ở nhờ; put out = dập tắt.",
+    "tags": [
+      "vocabulary",
+      "phrasal-verbs"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "VOC-B1-0061",
+    "skill": "vocabulary",
+    "type": "completion",
+    "category": "Phrasal Verbs",
+    "level": "B1",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_b1",
+    "question": "After three years abroad, she found it hard to ______ the changes in her hometown.",
+    "options": [
+      "get over",
+      "catch up with",
+      "look forward to",
+      "run out of"
+    ],
+    "answer": 1,
+    "explanation": "catch up with = bắt kịp / theo kịp (thay đổi, tin tức). get over = vượt qua (bệnh/cú sốc).",
+    "tags": [
+      "vocabulary",
+      "phrasal-verbs"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "VOC-B1-0062",
+    "skill": "vocabulary",
+    "type": "completion",
+    "category": "Word Formation",
+    "level": "B1",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_b1",
+    "question": "His ______ of the problem was clear, but his ______ was not very practical.",
+    "options": [
+      "explain / solve",
+      "explanation / solution",
+      "explaining / solving",
+      "explanatory / solvable"
+    ],
+    "answer": 1,
+    "explanation": "Cần danh từ sau tính từ sở hữu 'His': explanation, solution.",
+    "tags": [
+      "vocabulary",
+      "word-formation"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "VOC-B1-0063",
+    "skill": "vocabulary",
+    "type": "completion",
+    "category": "Confusable Words",
+    "level": "B1",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_b1",
+    "question": "The museum was so ______ that we stayed for three hours, and we were really ______ in the guide's stories.",
+    "options": [
+      "interesting / interested",
+      "interested / interesting",
+      "interesting / interesting",
+      "interested / interested"
+    ],
+    "answer": 0,
+    "explanation": "Tính từ -ing mô tả thứ gây cảm xúc (the museum was interesting). Tính từ -ed mô tả cảm xúc của người (we were interested).",
+    "tags": [
+      "vocabulary",
+      "confusable"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "COMM-A2-0043",
+    "skill": "communication",
+    "type": "choice",
+    "category": "Opinions & Reasons",
+    "level": "A2",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_a1_a2",
+    "question": "A: Do you think online classes are better than face-to-face classes?<br>B: ______ They are flexible, but I miss talking to my classmates.",
+    "options": [
+      "Yes, they're perfect in every way.",
+      "I'm not sure. It depends.",
+      "No, I never study.",
+      "Online classes don't exist."
+    ],
+    "answer": 1,
+    "explanation": "Câu trả lời cân bằng ('flexible, but…') khớp với 'I'm not sure. It depends.' hơn là khẳng định tuyệt đối.",
+    "tags": [
+      "communication",
+      "opinions"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "COMM-B1-0046",
+    "skill": "communication",
+    "type": "choice",
+    "category": "Opinions & Reasons",
+    "level": "B1",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_b1",
+    "question": "A: Will people still use cash in the future?<br>B: ______ Older people and small markets may still need it, even if cards become more common.",
+    "options": [
+      "Definitely not. Cash has already disappeared everywhere.",
+      "I think so, at least in some situations.",
+      "Cash is a type of credit card.",
+      "I don't know what cash means."
+    ],
+    "answer": 1,
+    "explanation": "B nêu lý do thực tế (người lớn tuổi, chợ nhỏ) → quan điểm 'vẫn dùng ở một số tình huống' là phù hợp nhất.",
+    "tags": [
+      "communication",
+      "opinions"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "COMM-A2-0044",
+    "skill": "communication",
+    "type": "choice",
+    "category": "Agreeing & Disagreeing",
+    "level": "A2",
+    "difficulty": "medium",
+    "unit": null,
+    "source": "general_a1_a2",
+    "question": "A: Students should not use phones in class.<br>B: ______ Phones can help them look up new words quickly.",
+    "options": [
+      "I completely agree.",
+      "I'm afraid I disagree.",
+      "That's a great idea.",
+      "Neither do I."
+    ],
+    "answer": 1,
+    "explanation": "B đưa lý do phản bác → đang không đồng ý: 'I'm afraid I disagree.'",
+    "tags": [
+      "communication",
+      "agree-disagree"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "COMM-B1-0047",
+    "skill": "communication",
+    "type": "choice",
+    "category": "Suggestions",
+    "level": "B1",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_b1",
+    "question": "A: Our group project is due tomorrow and we haven't finished.<br>B: ______ we stay an extra hour after class and divide the last two tasks?",
+    "options": [
+      "How about",
+      "Why don't",
+      "What if",
+      "Would you mind"
+    ],
+    "answer": 1,
+    "explanation": "'Why don't we + V' dùng để đề nghị cả nhóm cùng làm. 'How about' cần V-ing; 'Would you mind' cần V-ing và mang nghĩa nhờ vả lịch sự.",
+    "tags": [
+      "communication",
+      "suggestions"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-A2-0110",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Quantifiers",
+    "level": "A2",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_a1_a2",
+    "question": "There is ______ milk left in the fridge, so we need to buy ______. There aren't ______ eggs either.",
+    "options": [
+      "little / some / many",
+      "a few / any / much",
+      "few / some / much",
+      "little / any / many"
+    ],
+    "answer": 0,
+    "explanation": "'little' + danh từ không đếm được (milk). 'buy some' (khẳng định). 'aren't many' + danh từ đếm được số nhiều (eggs).",
+    "tags": [
+      "grammar",
+      "quantifiers"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-A2-0111",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Adjective Order",
+    "level": "A2",
+    "difficulty": "medium",
+    "unit": null,
+    "source": "general_a1_a2",
+    "question": "She bought a ______ bag for her trip.",
+    "options": [
+      "leather black small",
+      "small black leather",
+      "black small leather",
+      "leather small black"
+    ],
+    "answer": 1,
+    "explanation": "Thứ tự tính từ thường gặp: size → color → material → noun → 'small black leather bag'.",
+    "tags": [
+      "grammar",
+      "adjective-order"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-B1-0099",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Used To vs Be Used To",
+    "level": "B1",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_b1",
+    "question": "I ______ get up early when I was at school, but now I ______ starting work at 9 a.m.",
+    "options": [
+      "used to / am used to",
+      "am used to / used to",
+      "use to / used to",
+      "used to / use to"
+    ],
+    "answer": 0,
+    "explanation": "'used to + V' = thói quen quá khứ. 'be used to + V-ing' = đã quen với việc gì ở hiện tại.",
+    "tags": [
+      "grammar",
+      "used-to"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "VOC-B1-0064",
+    "skill": "vocabulary",
+    "type": "completion",
+    "category": "Topic: Environment",
+    "level": "B1",
+    "difficulty": "medium",
+    "unit": null,
+    "source": "general_b1",
+    "question": "Cities can reduce air ______ by encouraging people to use public transport instead of private cars.",
+    "options": [
+      "pollution",
+      "population",
+      "solution",
+      "revolution"
+    ],
+    "answer": 0,
+    "explanation": "air pollution = ô nhiễm không khí. Các từ còn lại gần về mặt hình thức nhưng sai nghĩa trong ngữ cảnh.",
+    "tags": [
+      "vocabulary",
+      "environment"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "VOC-B1-0065",
+    "skill": "vocabulary",
+    "type": "completion",
+    "category": "Topic: Technology",
+    "level": "B1",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_b1",
+    "question": "Many people ______ online banking because it is convenient, but others still ______ about security.",
+    "options": [
+      "prefer / worry",
+      "prefer / worried",
+      "preferred / worry",
+      "preferring / worrying"
+    ],
+    "answer": 0,
+    "explanation": "Hai động từ hiện tại đơn song song: prefer / worry.",
+    "tags": [
+      "vocabulary",
+      "technology"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-B1-0100",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Linking Words",
+    "level": "B1",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_b1",
+    "question": "Cash is still useful in small markets; ______, most young people prefer paying by phone.",
+    "options": [
+      "for example",
+      "however",
+      "because",
+      "so"
+    ],
+    "answer": 1,
+    "explanation": "'However' nối hai ý đối lập. 'For example' nêu ví dụ; 'because/so' nêu nguyên nhân–kết quả.",
+    "tags": [
+      "grammar",
+      "linkers"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-B1-0101",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Present Perfect Continuous",
+    "level": "B1",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_b1",
+    "question": "She ______ emails all morning, so she only ______ three of them so far.",
+    "options": [
+      "has written / has been writing",
+      "has been writing / has written",
+      "wrote / has written",
+      "is writing / wrote"
+    ],
+    "answer": 1,
+    "explanation": "Nhấn mạnh hành động kéo dài → has been writing. Nêu số lượng đã hoàn thành → has written.",
+    "tags": [
+      "grammar",
+      "present-perfect-continuous"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "COMM-A2-0045",
+    "skill": "communication",
+    "type": "choice",
+    "category": "Clarifying",
+    "level": "A2",
+    "difficulty": "medium",
+    "unit": null,
+    "source": "general_a1_a2",
+    "question": "A: Could you send me the file by 5 p.m.?<br>B: Sorry, ______ Do you mean today or tomorrow?",
+    "options": [
+      "I don't understand.",
+      "Here you are.",
+      "You're welcome.",
+      "Never mind."
+    ],
+    "answer": 0,
+    "explanation": "B đang yêu cầu làm rõ → 'I don't understand' / hỏi lại là phù hợp nhất trong các lựa chọn.",
+    "tags": [
+      "communication",
+      "clarifying"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "VOC-A2-0058",
+    "skill": "vocabulary",
+    "type": "completion",
+    "category": "Prepositional Phrases",
+    "level": "A2",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_a1_a2",
+    "question": "She is interested ______ learning Korean and good ______ remembering new words.",
+    "options": [
+      "in / at",
+      "on / in",
+      "at / in",
+      "in / on"
+    ],
+    "answer": 0,
+    "explanation": "interested in + V-ing; good at + V-ing.",
+    "tags": [
+      "vocabulary",
+      "prepositions"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-A2-0112",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Question Tags",
+    "level": "A2",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_a1_a2",
+    "question": "You've already finished the homework, ______?",
+    "options": [
+      "haven't you",
+      "don't you",
+      "didn't you",
+      "aren't you"
+    ],
+    "answer": 0,
+    "explanation": "Câu khẳng định với have (hiện tại hoàn thành) → tag phủ định 'haven't you'.",
+    "tags": [
+      "grammar",
+      "question-tags"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-A2-0113",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "So / Too / Neither / Either",
+    "level": "A2",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_a1_a2",
+    "question": "A: I don't like getting up early.<br>B: ______.",
+    "options": [
+      "So do I",
+      "Neither do I",
+      "I do too",
+      "Me too always"
+    ],
+    "answer": 1,
+    "explanation": "Đồng ý với câu phủ định → 'Neither do I' (= tôi cũng không).",
+    "tags": [
+      "grammar",
+      "agreement"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "VOC-B1-0066",
+    "skill": "vocabulary",
+    "type": "completion",
+    "category": "Academic-ish B1",
+    "level": "B1",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_b1",
+    "question": "The main ______ of the study is that students learn better when they discuss ideas in groups.",
+    "options": [
+      "finding",
+      "found",
+      "finder",
+      "founded"
+    ],
+    "answer": 0,
+    "explanation": "'finding' (danh từ) = phát hiện/kết quả nghiên cứu. 'founded' = thành lập; 'found' = tìm thấy / V3.",
+    "tags": [
+      "vocabulary",
+      "academic"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-B1-0102",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Conditionals Type 2–3",
+    "level": "B1",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_b1",
+    "question": "If I ______ harder last term, I ______ the scholarship.",
+    "options": [
+      "studied / would get",
+      "had studied / would have got",
+      "had studied / would get",
+      "studied / would have got"
+    ],
+    "answer": 1,
+    "explanation": "Điều kiện loại 3 (quá khứ trái thực tế): If + had V3, would have V3.",
+    "tags": [
+      "grammar",
+      "conditionals"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "COMM-B1-0048",
+    "skill": "communication",
+    "type": "choice",
+    "category": "Polite Requests",
+    "level": "B1",
+    "difficulty": "medium",
+    "unit": null,
+    "source": "general_b1",
+    "question": "You want a classmate to explain a grammar point again. The most polite option is:",
+    "options": [
+      "Explain it again.",
+      "You must explain it now.",
+      "Would you mind explaining that point again?",
+      "Why didn't you explain clearly?"
+    ],
+    "answer": 2,
+    "explanation": "'Would you mind + V-ing?' là cách nhờ lịch sự. Các lựa chọn còn lại quá thẳng hoặc đổ lỗi.",
+    "tags": [
+      "communication",
+      "requests"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "GRAM-B1-0103",
+    "skill": "grammar",
+    "type": "completion",
+    "category": "Articles with Unique/Generic",
+    "level": "B1",
+    "difficulty": "medium",
+    "unit": null,
+    "source": "general_b1",
+    "question": "______ life is hard without ______ friends who support you.",
+    "options": [
+      "The / the",
+      "No article / no article",
+      "A / the",
+      "The / no article"
+    ],
+    "answer": 1,
+    "explanation": "Nói khái quát: life và friends không dùng mạo từ khi nói chung.",
+    "tags": [
+      "grammar",
+      "articles"
+    ],
+    "status": "auto_validated"
+  },
+  {
+    "id": "VOC-A2-0059",
+    "skill": "vocabulary",
+    "type": "completion",
+    "category": "Synonyms in Context",
+    "level": "A2",
+    "difficulty": "hard",
+    "unit": null,
+    "source": "general_a1_a2",
+    "question": "The hotel was not cheap, but it was very ______ — close to the station and open 24 hours.",
+    "options": [
+      "convenient",
+      "comfortable",
+      "careful",
+      "common"
+    ],
+    "answer": 0,
+    "explanation": "convenient = thuận tiện (vị trí, giờ mở cửa). comfortable = dễ chịu (ghế, giường).",
+    "tags": [
+      "vocabulary",
+      "synonyms"
+    ],
+    "status": "auto_validated"
   }
 ]
