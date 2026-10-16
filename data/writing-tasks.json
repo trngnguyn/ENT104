@@ -6,11 +6,20 @@
     "title": "My best friend",
     "prompt": "Write a descriptive paragraph about your best friend.",
     "promptVi": "Viết một đoạn văn miêu tả người bạn thân nhất của bạn.",
-    "requirements": ["his or her name, age and where he or she lives", "what he or she looks like", "what he or she is like (personality)", "what you do together and why you like him or her"],
+    "requirements": [
+      "his or her name, age and where he or she lives",
+      "what he or she looks like",
+      "what he or she is like (personality)",
+      "what you do together and why you like him or her"
+    ],
     "minWords": 130,
     "targetWords": 150,
     "maxWords": 180,
-    "tips": ["Câu chủ đề: My best friend is … . Câu kết: I am very happy to have a friend like …", "Ngoại hình: She has long black hair and big brown eyes. He is tall and thin.", "Tính cách: kind, funny, friendly, helpful, clever, quiet."],
+    "tips": [
+      "Câu chủ đề: My best friend is … . Câu kết: I am very happy to have a friend like …",
+      "Ngoại hình: She has long black hair and big brown eyes. He is tall and thin.",
+      "Tính cách: kind, funny, friendly, helpful, clever, quiet."
+    ],
     "source": "general_a1_a2",
     "unit": null,
     "status": "ai_reviewed"
@@ -22,11 +31,20 @@
     "title": "My bedroom",
     "prompt": "Write a descriptive paragraph about your bedroom.",
     "promptVi": "Viết một đoạn văn miêu tả phòng ngủ của bạn.",
-    "requirements": ["how big it is and what color the walls are", "the furniture and where it is", "your favorite thing in the room", "what you do there and how you feel in it"],
+    "requirements": [
+      "how big it is and what color the walls are",
+      "the furniture and where it is",
+      "your favorite thing in the room",
+      "what you do there and how you feel in it"
+    ],
     "minWords": 130,
     "targetWords": 150,
     "maxWords": 180,
-    "tips": ["There is + danh từ số ít, There are + danh từ số nhiều.", "Giới từ chỉ vị trí: in, on, under, next to, between, in front of, behind.", "Miêu tả theo thứ tự không gian: from the door → the bed → the window → the desk."],
+    "tips": [
+      "There is + danh từ số ít, There are + danh từ số nhiều.",
+      "Giới từ chỉ vị trí: in, on, under, next to, between, in front of, behind.",
+      "Miêu tả theo thứ tự không gian: from the door → the bed → the window → the desk."
+    ],
     "source": "general_a1_a2",
     "unit": null,
     "status": "ai_reviewed"
@@ -38,11 +56,20 @@
     "title": "A park in my town",
     "prompt": "Write a descriptive paragraph about a park or a market in your town.",
     "promptVi": "Viết một đoạn văn miêu tả một công viên hoặc một khu chợ ở thị trấn / thành phố của bạn.",
-    "requirements": ["its name and where it is", "what you can see there", "what people do there", "why you like it"],
+    "requirements": [
+      "its name and where it is",
+      "what you can see there",
+      "what people do there",
+      "why you like it"
+    ],
     "minWords": 130,
     "targetWords": 150,
     "maxWords": 180,
-    "tips": ["Dùng tính từ: big, small, green, quiet, busy, clean, beautiful.", "Những gì nhìn / nghe thấy: I can see…, I can hear…", "Hoạt động của mọi người: People walk, run, play, sell…"],
+    "tips": [
+      "Dùng tính từ: big, small, green, quiet, busy, clean, beautiful.",
+      "Những gì nhìn / nghe thấy: I can see…, I can hear…",
+      "Hoạt động của mọi người: People walk, run, play, sell…"
+    ],
     "source": "general_a1_a2",
     "unit": null,
     "status": "ai_reviewed"
@@ -54,11 +81,19 @@
     "title": "A person in my family",
     "prompt": "Write a descriptive paragraph about one person in your family.",
     "promptVi": "Viết một đoạn văn miêu tả một người trong gia đình bạn.",
-    "requirements": ["who the person is and how old he or she is", "his or her job and daily routine", "what he or she looks like and is like", "what you love about this person"],
+    "requirements": [
+      "who the person is and how old he or she is",
+      "his or her job and daily routine",
+      "what he or she looks like and is like",
+      "what you love about this person"
+    ],
     "minWords": 130,
     "targetWords": 150,
     "maxWords": 180,
-    "tips": ["Động từ sau he / she thêm -s / -es: She works…, He watches…", "Trạng từ tần suất đứng trước động từ thường: She always gets up early."],
+    "tips": [
+      "Động từ sau he / she thêm -s / -es: She works…, He watches…",
+      "Trạng từ tần suất đứng trước động từ thường: She always gets up early."
+    ],
     "source": "general_a1_a2",
     "unit": null,
     "status": "ai_reviewed"
@@ -70,11 +105,19 @@
     "title": "My last birthday",
     "prompt": "Write a narrative paragraph about your last birthday.",
     "promptVi": "Viết một đoạn văn kể về sinh nhật gần đây nhất của bạn.",
-    "requirements": ["when it was and where you were", "who was with you", "what you did, in order", "how you felt at the end of the day"],
+    "requirements": [
+      "when it was and where you were",
+      "who was with you",
+      "what you did, in order",
+      "how you felt at the end of the day"
+    ],
     "minWords": 130,
     "targetWords": 150,
     "maxWords": 180,
-    "tips": ["Dùng thì quá khứ đơn: was / were, went, had, ate, got.", "Từ nối trình tự: first, then, after that, finally."],
+    "tips": [
+      "Dùng thì quá khứ đơn: was / were, went, had, ate, got.",
+      "Từ nối trình tự: first, then, after that, finally."
+    ],
     "source": "general_a1_a2",
     "unit": null,
     "status": "ai_reviewed"
@@ -86,11 +129,19 @@
     "title": "A day at the beach",
     "prompt": "Write a narrative paragraph about a day you spent at the beach (or in the countryside).",
     "promptVi": "Viết một đoạn văn kể về một ngày bạn đi biển (hoặc về quê).",
-    "requirements": ["when you went and who you went with", "how you got there", "what you did in the morning and in the afternoon", "how the day ended"],
+    "requirements": [
+      "when you went and who you went with",
+      "how you got there",
+      "what you did in the morning and in the afternoon",
+      "how the day ended"
+    ],
     "minWords": 130,
     "targetWords": 150,
     "maxWords": 180,
-    "tips": ["Động từ bất quy tắc: go → went, swim → swam, eat → ate, take → took.", "Thời gian: in the morning, at noon, in the afternoon, in the evening."],
+    "tips": [
+      "Động từ bất quy tắc: go → went, swim → swam, eat → ate, take → took.",
+      "Thời gian: in the morning, at noon, in the afternoon, in the evening."
+    ],
     "source": "general_a1_a2",
     "unit": null,
     "status": "ai_reviewed"
@@ -102,11 +153,19 @@
     "title": "My first day at a new school",
     "prompt": "Write a narrative paragraph about your first day at a new school or class.",
     "promptVi": "Viết một đoạn văn kể về ngày đầu tiên của bạn ở trường hoặc lớp mới.",
-    "requirements": ["how you felt in the morning", "what happened when you arrived", "who you met", "how you felt at the end of the day"],
+    "requirements": [
+      "how you felt in the morning",
+      "what happened when you arrived",
+      "who you met",
+      "how you felt at the end of the day"
+    ],
     "minWords": 130,
     "targetWords": 150,
     "maxWords": 180,
-    "tips": ["Tính từ cảm xúc: nervous, shy, happy, excited, tired.", "Kể theo trình tự thời gian và kết thúc bằng cảm xúc của bạn."],
+    "tips": [
+      "Tính từ cảm xúc: nervous, shy, happy, excited, tired.",
+      "Kể theo trình tự thời gian và kết thúc bằng cảm xúc của bạn."
+    ],
     "source": "general_a1_a2",
     "unit": null,
     "status": "ai_reviewed"
@@ -118,11 +177,19 @@
     "title": "A happy Sunday with my family",
     "prompt": "Write a narrative paragraph about a happy Sunday you spent with your family.",
     "promptVi": "Viết một đoạn văn kể về một ngày Chủ nhật vui vẻ bên gia đình.",
-    "requirements": ["what you did in the morning", "where you went or what you ate", "something funny or nice that happened", "why it was a happy day"],
+    "requirements": [
+      "what you did in the morning",
+      "where you went or what you ate",
+      "something funny or nice that happened",
+      "why it was a happy day"
+    ],
     "minWords": 130,
     "targetWords": 150,
     "maxWords": 180,
-    "tips": ["Quá khứ đơn với động từ có quy tắc: cook → cooked, visit → visited, play → played.", "Nêu lý do: It was a happy day because…"],
+    "tips": [
+      "Quá khứ đơn với động từ có quy tắc: cook → cooked, visit → visited, play → played.",
+      "Nêu lý do: It was a happy day because…"
+    ],
     "source": "general_a1_a2",
     "unit": null,
     "status": "ai_reviewed"
@@ -130,15 +197,24 @@
   {
     "id": "WT-A2-01",
     "level": "A2",
-    "type": "descriptive",
-    "title": "My hometown",
-    "prompt": "Write a descriptive paragraph about your hometown.",
-    "promptVi": "Viết một đoạn văn miêu tả quê hương của bạn.",
-    "requirements": ["where it is and how big it is", "what it looks like (places, buildings, nature)", "what the people and the food are like", "how you feel about it"],
+    "type": "opinion",
+    "title": "Online or classroom learning",
+    "prompt": "Do you think studying online is better than studying in a classroom? Why?",
+    "promptVi": "Bạn nghĩ học trực tuyến có tốt hơn học trên lớp không? Vì sao?",
+    "requirements": [
+      "state your opinion clearly in the first sentence",
+      "give two reasons that support your view",
+      "add a short example from school or daily life",
+      "end with a concluding sentence that restates your opinion"
+    ],
+    "tips": [
+      "Mở bài: I think studying in a classroom is better because… / In my opinion, online learning is better…",
+      "Lý do + ví dụ: First,… For example,… Second,…",
+      "Từ nối: because, so, however, for example, in addition."
+    ],
     "minWords": 130,
     "targetWords": 150,
     "maxWords": 180,
-    "tips": ["So sánh: It is smaller than…, It is one of the most beautiful… in…", "It is famous for…; There are a lot of…", "Câu kết nêu cảm xúc: I will always love…"],
     "source": "general_a1_a2",
     "unit": null,
     "status": "ai_reviewed"
@@ -146,15 +222,24 @@
   {
     "id": "WT-A2-02",
     "level": "A2",
-    "type": "descriptive",
-    "title": "Tet in my family",
-    "prompt": "Write a descriptive paragraph about how your family celebrates Tet (Lunar New Year).",
-    "promptVi": "Viết một đoạn văn miêu tả cách gia đình bạn đón Tết Nguyên đán.",
-    "requirements": ["how your family prepares for Tet", "what your house looks like at Tet", "the special food you eat", "what people usually do and how you feel"],
+    "type": "opinion",
+    "title": "Phones and young people",
+    "prompt": "Do you think young people spend too much time on their phones? Why?",
+    "promptVi": "Bạn nghĩ giới trẻ dành quá nhiều thời gian cho điện thoại không? Vì sao?",
+    "requirements": [
+      "say whether you agree or disagree",
+      "explain how phones help or harm study, health or friendships",
+      "give one clear example",
+      "finish with your overall view"
+    ],
+    "tips": [
+      "I agree that… / I do not think that…",
+      "Useful words: useful, waste time, concentrate, communicate, healthy.",
+      "Câu kết: Overall, I believe young people should…"
+    ],
     "minWords": 130,
     "targetWords": 150,
     "maxWords": 180,
-    "tips": ["Thói quen lặp lại mỗi năm dùng hiện tại đơn: Every year, my family cleans…", "Miêu tả bằng các giác quan: smell, colors, sounds."],
     "source": "general_a1_a2",
     "unit": null,
     "status": "ai_reviewed"
@@ -162,15 +247,24 @@
   {
     "id": "WT-A2-03",
     "level": "A2",
-    "type": "descriptive",
-    "title": "A person I admire",
-    "prompt": "Write a descriptive paragraph about a person you admire.",
-    "promptVi": "Viết một đoạn văn miêu tả một người mà bạn ngưỡng mộ.",
-    "requirements": ["who the person is and how you know him or her", "what he or she looks like", "his or her personality, with examples", "why you admire this person"],
+    "type": "opinion",
+    "title": "City or countryside",
+    "prompt": "Is living in a big city better than living in the countryside? Why?",
+    "promptVi": "Sống ở thành phố lớn có tốt hơn sống ở nông thôn không? Vì sao?",
+    "requirements": [
+      "choose city or countryside and state your opinion",
+      "give two advantages of your choice",
+      "mention one disadvantage honestly",
+      "conclude with your preference"
+    ],
+    "tips": [
+      "So sánh: better than, more… than, less… than.",
+      "Ý tưởng: jobs, transport, quiet life, clean air, friends, shops.",
+      "However, … để nêu nhược điểm ngắn."
+    ],
     "minWords": 130,
     "targetWords": 150,
     "maxWords": 180,
-    "tips": ["Đưa ví dụ cho tính cách: She is very patient. For example, she…", "Lý do: I admire him because… / That is why…"],
     "source": "general_a1_a2",
     "unit": null,
     "status": "ai_reviewed"
@@ -178,15 +272,24 @@
   {
     "id": "WT-A2-04",
     "level": "A2",
-    "type": "descriptive",
-    "title": "My favorite café",
-    "prompt": "Write a descriptive paragraph about your favorite café or restaurant.",
-    "promptVi": "Viết một đoạn văn miêu tả quán cà phê hoặc nhà hàng yêu thích của bạn.",
-    "requirements": ["its name and location", "what it looks like inside", "the food or drinks and the prices", "why you like going there"],
+    "type": "opinion",
+    "title": "School uniforms",
+    "prompt": "Do you think students should wear school uniforms? Why?",
+    "promptVi": "Bạn nghĩ học sinh có nên mặc đồng phục không? Vì sao?",
+    "requirements": [
+      "state your opinion about school uniforms",
+      "give two reasons (for example cost, equality, comfort or identity)",
+      "include a short example",
+      "end with a recommendation"
+    ],
+    "tips": [
+      "I believe students should / should not wear uniforms because…",
+      "Useful: equal, expensive, comfortable, look the same, save time.",
+      "Kết: For these reasons, I think…"
+    ],
     "minWords": 130,
     "targetWords": 150,
     "maxWords": 180,
-    "tips": ["Tính từ: cozy, modern, quiet, crowded, cheap, delicious.", "Trật tự tính từ: a small wooden table, a lovely old café."],
     "source": "general_a1_a2",
     "unit": null,
     "status": "ai_reviewed"
@@ -194,15 +297,24 @@
   {
     "id": "WT-A2-05",
     "level": "A2",
-    "type": "narrative",
-    "title": "A memorable trip",
-    "prompt": "Write a narrative paragraph about a trip that you remember well.",
-    "promptVi": "Viết một đoạn văn kể về một chuyến đi mà bạn nhớ rõ.",
-    "requirements": ["where and when you went, and with whom", "how you traveled", "the best or worst moment of the trip", "why you still remember it"],
+    "type": "opinion",
+    "title": "Fast food",
+    "prompt": "Is fast food a bad choice for young people? Why?",
+    "promptVi": "Đồ ăn nhanh có phải là lựa chọn xấu cho giới trẻ không? Vì sao?",
+    "requirements": [
+      "state your opinion about fast food",
+      "explain effects on health, time or money",
+      "give one everyday example",
+      "conclude with advice for young people"
+    ],
+    "tips": [
+      "Mở: In my opinion, fast food is…",
+      "Từ vựng: unhealthy, convenient, cheap, overweight, cook at home.",
+      "Advice: Young people should…"
+    ],
     "minWords": 130,
     "targetWords": 150,
     "maxWords": 180,
-    "tips": ["Kể theo trình tự: at first, then, after that, in the end.", "Quá khứ đơn với động từ bất quy tắc: take → took, see → saw, feel → felt."],
     "source": "general_a1_a2",
     "unit": null,
     "status": "ai_reviewed"
@@ -210,15 +322,24 @@
   {
     "id": "WT-A2-06",
     "level": "A2",
-    "type": "narrative",
-    "title": "The day I got lost",
-    "prompt": "Write a narrative paragraph about a time when you got lost.",
-    "promptVi": "Viết một đoạn văn kể về một lần bạn bị lạc đường.",
-    "requirements": ["where you were and why you were there", "how you got lost", "what you did and who helped you", "what you learned from it"],
+    "type": "opinion",
+    "title": "Learning English",
+    "prompt": "Do you think learning English is important for your future? Why?",
+    "promptVi": "Bạn nghĩ học tiếng Anh có quan trọng cho tương lai của bạn không? Vì sao?",
+    "requirements": [
+      "state how important English is for you",
+      "give two reasons linked to study, work or travel",
+      "add a personal example",
+      "end by saying what you will do to improve"
+    ],
+    "tips": [
+      "English helps me… / I need English because…",
+      "Ví dụ: job interviews, watching films, talking to foreigners.",
+      "Kết: That is why I will keep practicing English."
+    ],
     "minWords": 130,
     "targetWords": 150,
     "maxWords": 180,
-    "tips": ["Quá khứ tiếp diễn cho bối cảnh: I was walking along… when…", "Câu kết rút ra bài học: Since then, I always…"],
     "source": "general_a1_a2",
     "unit": null,
     "status": "ai_reviewed"
@@ -226,15 +347,24 @@
   {
     "id": "WT-A2-07",
     "level": "A2",
-    "type": "narrative",
-    "title": "Learning something new",
-    "prompt": "Write a narrative paragraph about a time you learned to do something new, for example riding a bike, swimming or cooking.",
-    "promptVi": "Viết một đoạn văn kể về lần bạn học một kỹ năng mới, ví dụ đi xe đạp, bơi hoặc nấu ăn.",
-    "requirements": ["what you learned and when", "who taught you", "the problems you had", "how you felt when you finally did it"],
+    "type": "descriptive",
+    "title": "My hometown",
+    "prompt": "Write a descriptive paragraph about your hometown for a friend who has never visited it.",
+    "promptVi": "Viết một đoạn văn miêu tả quê hương / thành phố của bạn cho một người bạn chưa từng đến đó.",
+    "requirements": [
+      "where it is and how big it is",
+      "what it looks like (streets, buildings, nature)",
+      "what people usually do there",
+      "why a visitor should come"
+    ],
+    "tips": [
+      "Câu chủ đề: My hometown is…, a … city / town in…",
+      "There is / There are + chi tiết cụ thể.",
+      "Kết: I hope you will visit someday because…"
+    ],
     "minWords": 130,
     "targetWords": 150,
     "maxWords": 180,
-    "tips": ["could / couldn't để nói về khả năng trong quá khứ: At first, I couldn't…", "Từ nối: but, so, because, finally."],
     "source": "general_a1_a2",
     "unit": null,
     "status": "ai_reviewed"
@@ -243,14 +373,23 @@
     "id": "WT-A2-08",
     "level": "A2",
     "type": "narrative",
-    "title": "A funny day",
-    "prompt": "Write a narrative paragraph about something funny that happened to you or your friends.",
-    "promptVi": "Viết một đoạn văn kể về một chuyện buồn cười đã xảy ra với bạn hoặc bạn bè.",
-    "requirements": ["when and where it happened", "who was there", "what happened, step by step", "how everyone reacted at the end"],
+    "title": "A memorable trip",
+    "prompt": "Write a narrative paragraph about a trip that you remember well.",
+    "promptVi": "Viết một đoạn văn kể về một chuyến đi mà bạn còn nhớ rõ.",
+    "requirements": [
+      "when and where you went and who you went with",
+      "what you did, in order",
+      "one problem or surprise during the trip",
+      "how you felt at the end"
+    ],
+    "tips": [
+      "Quá khứ đơn: went, stayed, visited, bought.",
+      "Trình tự: First, Then, After that, Finally.",
+      "Cảm xúc: excited, tired, surprised, proud."
+    ],
     "minWords": 130,
     "targetWords": 150,
     "maxWords": 180,
-    "tips": ["Mở đầu gây chú ý: I will never forget the day when…", "Từ chỉ thời điểm: suddenly, a moment later, at that moment."],
     "source": "general_a1_a2",
     "unit": null,
     "status": "ai_reviewed"
@@ -258,15 +397,24 @@
   {
     "id": "WT-B1-01",
     "level": "B1",
-    "type": "descriptive",
-    "title": "A place that is special to me",
-    "prompt": "Write a descriptive paragraph about a place that is special to you.",
-    "promptVi": "Viết một đoạn văn miêu tả một nơi đặc biệt đối với bạn.",
-    "requirements": ["where the place is and how you know it", "a vivid description using at least three senses (sight, sound, smell…)", "a memory connected to the place", "why it is important to you"],
+    "type": "opinion",
+    "title": "Cash in the future",
+    "prompt": "Do you think people will still use cash for buying and selling in the future? Why?",
+    "promptVi": "Bạn nghĩ trong tương lai mọi người vẫn dùng tiền mặt để mua bán không? Vì sao?",
+    "requirements": [
+      "state your opinion clearly",
+      "give at least two reasons with brief explanations",
+      "include one concrete example (shops, markets, online shopping, older people, etc.)",
+      "conclude by restating your view or making a short prediction"
+    ],
+    "tips": [
+      "Mở: I think people will / will not still use cash in the future because…",
+      "Lý do thường gặp: convenience, security, older people, small markets, internet problems.",
+      "Từ nối B1: although, however, for instance, as a result, in conclusion."
+    ],
     "minWords": 130,
     "targetWords": 150,
     "maxWords": 180,
-    "tips": ["Mệnh đề quan hệ để thêm chi tiết: the lake where I used to fish…", "Hình ảnh cụ thể thay vì chung chung: not \"nice\" but \"peaceful\", \"breathtaking\"…"],
     "source": "general_b1",
     "unit": null,
     "status": "ai_reviewed"
@@ -274,15 +422,24 @@
   {
     "id": "WT-B1-02",
     "level": "B1",
-    "type": "descriptive",
-    "title": "My university campus",
-    "prompt": "Write a descriptive paragraph about your university or school campus for a new student.",
-    "promptVi": "Viết một đoạn văn miêu tả khuôn viên trường đại học / trường học của bạn cho sinh viên mới.",
-    "requirements": ["the general appearance and location of the campus", "the most important buildings and facilities", "the atmosphere at different times of the day", "your overall impression"],
+    "type": "opinion",
+    "title": "Online learning vs classrooms",
+    "prompt": "Do you think online learning will replace traditional classrooms in the future? Why?",
+    "promptVi": "Bạn nghĩ học trực tuyến sẽ thay thế lớp học truyền thống trong tương lai không? Vì sao?",
+    "requirements": [
+      "state whether online learning will replace classrooms or not",
+      "compare advantages and disadvantages briefly",
+      "support your view with one example from school or university",
+      "finish with a clear conclusion"
+    ],
+    "tips": [
+      "Useful: replace, face-to-face, interaction, self-discipline, flexible.",
+      "Although online courses are convenient, …",
+      "In conclusion, I believe…"
+    ],
     "minWords": 130,
     "targetWords": 150,
     "maxWords": 180,
-    "tips": ["Sắp xếp theo không gian: As you enter the main gate, … On your left, … At the back, …", "Bị động khi cần: The library was built…, It is surrounded by…"],
     "source": "general_b1",
     "unit": null,
     "status": "ai_reviewed"
@@ -290,15 +447,24 @@
   {
     "id": "WT-B1-03",
     "level": "B1",
-    "type": "descriptive",
-    "title": "A night market",
-    "prompt": "Write a descriptive paragraph about a night market or a busy street at night in your city.",
-    "promptVi": "Viết một đoạn văn miêu tả một khu chợ đêm hoặc một con phố đông đúc về đêm ở thành phố của bạn.",
-    "requirements": ["where it is and when it opens", "what you can see, hear and smell", "the people, the stalls and the food", "the feeling it gives you"],
+    "type": "opinion",
+    "title": "Social media and teenagers",
+    "prompt": "Is social media more helpful or more harmful for teenagers? Why?",
+    "promptVi": "Mạng xã hội hữu ích hơn hay có hại hơn đối với thanh thiếu niên? Vì sao?",
+    "requirements": [
+      "choose helpful or harmful as your main view",
+      "give two strong reasons",
+      "add one real-life style example",
+      "acknowledge the other side in one sentence, then restate your opinion"
+    ],
+    "tips": [
+      "Mở mạnh: In my view, social media is more helpful / harmful for teenagers.",
+      "On the one hand… On the other hand… nhưng vẫn nghiêng một phía.",
+      "Từ vựng: distract, cyberbullying, stay connected, share information."
+    ],
     "minWords": 130,
     "targetWords": 150,
     "maxWords": 180,
-    "tips": ["Tính từ và trạng từ đa dạng: colorful, noisy, mouth-watering, slowly, brightly.", "Câu chủ đề nêu ấn tượng chung, các câu sau đưa chi tiết hỗ trợ."],
     "source": "general_b1",
     "unit": null,
     "status": "ai_reviewed"
@@ -306,15 +472,24 @@
   {
     "id": "WT-B1-04",
     "level": "B1",
-    "type": "descriptive",
-    "title": "Someone who influenced me",
-    "prompt": "Write a descriptive paragraph about a person who has had an important influence on your life.",
-    "promptVi": "Viết một đoạn văn miêu tả một người có ảnh hưởng quan trọng đến cuộc sống của bạn.",
-    "requirements": ["who the person is", "his or her appearance and personality", "a specific example of something he or she did", "how he or she has influenced you"],
+    "type": "opinion",
+    "title": "Practical skills at university",
+    "prompt": "Should universities focus more on practical skills than on theory? Why?",
+    "promptVi": "Đại học có nên tập trung vào kỹ năng thực hành nhiều hơn lý thuyết không? Vì sao?",
+    "requirements": [
+      "state your position",
+      "explain how practical skills and theory help students differently",
+      "give one example related to jobs or projects",
+      "end with a recommendation for universities"
+    ],
+    "tips": [
+      "I believe universities should…",
+      "Useful: prepare for jobs, problem-solving, internship, balance.",
+      "Therefore, universities ought to…"
+    ],
     "minWords": 130,
     "targetWords": 150,
     "maxWords": 180,
-    "tips": ["Hiện tại hoàn thành cho ảnh hưởng kéo dài tới nay: She has taught me…, Since then, I have…", "Dẫn chứng: For instance, … / I still remember the time when…"],
     "source": "general_b1",
     "unit": null,
     "status": "ai_reviewed"
@@ -322,15 +497,24 @@
   {
     "id": "WT-B1-05",
     "level": "B1",
-    "type": "narrative",
-    "title": "A surprising day",
-    "prompt": "Write a narrative paragraph that begins with this sentence: \"When I woke up that morning, I had no idea that it would be a very surprising day.\"",
-    "promptVi": "Viết một đoạn văn kể chuyện bắt đầu bằng câu: \"When I woke up that morning, I had no idea that it would be a very surprising day.\"",
-    "requirements": ["start with the given sentence", "describe the events in a clear order", "include the surprise and your feelings", "give the story a clear ending"],
+    "type": "opinion",
+    "title": "Working from home",
+    "prompt": "Do you think working from home is better than working in an office? Why?",
+    "promptVi": "Bạn nghĩ làm việc tại nhà có tốt hơn làm việc tại văn phòng không? Vì sao?",
+    "requirements": [
+      "state your preference",
+      "give two reasons about time, focus, teamwork or well-being",
+      "mention one drawback of your preferred option",
+      "conclude with your overall opinion"
+    ],
+    "tips": [
+      "Working from home allows people to…",
+      "However, office work makes it easier to…",
+      "Overall, I prefer…"
+    ],
     "minWords": 130,
     "targetWords": 150,
     "maxWords": 180,
-    "tips": ["Kết hợp quá khứ đơn, quá khứ tiếp diễn (I was walking when…) và quá khứ hoàn thành (I had never…).", "Từ nối câu chuyện: suddenly, a few minutes later, to my surprise, in the end."],
     "source": "general_b1",
     "unit": null,
     "status": "ai_reviewed"
@@ -338,15 +522,24 @@
   {
     "id": "WT-B1-06",
     "level": "B1",
-    "type": "narrative",
-    "title": "A difficult decision",
-    "prompt": "Write a narrative paragraph about a time when you had to make a difficult decision.",
-    "promptVi": "Viết một đoạn văn kể về một lần bạn phải đưa ra quyết định khó khăn.",
-    "requirements": ["the situation and why the decision was difficult", "the choices you had", "what you decided and what happened next", "what you learned from the experience"],
+    "type": "opinion",
+    "title": "Electric vehicles",
+    "prompt": "Are electric vehicles a good solution to pollution in cities? Why?",
+    "promptVi": "Xe điện có phải là giải pháp tốt cho ô nhiễm ở thành phố không? Vì sao?",
+    "requirements": [
+      "state whether electric vehicles are a good solution",
+      "explain effects on air quality, noise or cost",
+      "give one example or comparison with petrol cars",
+      "conclude with a balanced but clear final view"
+    ],
+    "tips": [
+      "Electric vehicles can reduce…",
+      "Although charging stations are still limited, …",
+      "In short, I think they are / are not enough on their own."
+    ],
     "minWords": 130,
     "targetWords": 150,
     "maxWords": 180,
-    "tips": ["Diễn đạt phân vân: I couldn't decide whether to … or …", "Câu điều kiện loại 3 khi suy ngẫm: If I had…, I would have…"],
     "source": "general_b1",
     "unit": null,
     "status": "ai_reviewed"
@@ -354,15 +547,24 @@
   {
     "id": "WT-B1-07",
     "level": "B1",
-    "type": "narrative",
-    "title": "A problem while traveling",
-    "prompt": "Write a narrative paragraph about an unexpected problem you had while traveling and how you solved it.",
-    "promptVi": "Viết một đoạn văn kể về một sự cố bất ngờ khi đi du lịch và cách bạn giải quyết.",
-    "requirements": ["where you were going and with whom", "what went wrong", "how you solved the problem", "how the trip ended and how you felt"],
+    "type": "opinion",
+    "title": "AI and jobs",
+    "prompt": "Do you think artificial intelligence (AI) will replace many jobs in the next twenty years? Why?",
+    "promptVi": "Bạn nghĩ trí tuệ nhân tạo (AI) sẽ thay thế nhiều công việc trong hai mươi năm tới không? Vì sao?",
+    "requirements": [
+      "state your prediction clearly",
+      "give two reasons with short explanations",
+      "include one job or industry as an example",
+      "end with advice for young people"
+    ],
+    "tips": [
+      "I think AI will / will not replace many jobs because…",
+      "Useful: automate, create new jobs, soft skills, lifelong learning.",
+      "Young people should…"
+    ],
     "minWords": 130,
     "targetWords": 150,
     "maxWords": 180,
-    "tips": ["Bối cảnh bằng quá khứ tiếp diễn, sự việc chen ngang bằng quá khứ đơn.", "Từ nối: unfortunately, luckily, as a result, eventually."],
     "source": "general_b1",
     "unit": null,
     "status": "ai_reviewed"
@@ -371,14 +573,23 @@
     "id": "WT-B1-08",
     "level": "B1",
     "type": "narrative",
-    "title": "A time I helped someone",
-    "prompt": "Write a narrative paragraph about a time when you helped someone.",
-    "promptVi": "Viết một đoạn văn kể về một lần bạn giúp đỡ người khác.",
-    "requirements": ["who the person was and what problem he or she had", "what you did to help, step by step", "how the person reacted", "how the experience made you feel"],
+    "title": "A difficult decision",
+    "prompt": "Write a narrative paragraph about a time when you had to make a difficult decision.",
+    "promptVi": "Viết một đoạn văn kể về một lần bạn phải đưa ra quyết định khó khăn.",
+    "requirements": [
+      "describe the situation and why the decision was difficult",
+      "explain the choices you had",
+      "say what you decided and what happened next",
+      "end with what you learned"
+    ],
+    "tips": [
+      "I could not decide whether to … or …",
+      "If I had…, I would have… (điều kiện loại 3 khi suy ngẫm).",
+      "That experience taught me that…"
+    ],
     "minWords": 130,
     "targetWords": 150,
     "maxWords": 180,
-    "tips": ["Mở đầu bằng bối cảnh: It was a rainy afternoon when…", "Kết đoạn bằng suy nghĩ: That day taught me that…"],
     "source": "general_b1",
     "unit": null,
     "status": "ai_reviewed"

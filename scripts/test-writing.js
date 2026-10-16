@@ -60,18 +60,22 @@ const goodAi = {
 };
 
 async function main() {
-    await test('1. Ngân hàng đề: 24 đoạn văn miêu tả / kể chuyện ~150 từ, đúng nguồn, không gán unit', () => {
+    await test('1. Ngân hàng đề: 24 đoạn ~150 từ; A1 miêu tả/kể chuyện, A2–B1 chủ yếu ý kiến; đúng nguồn, không gán unit', () => {
         const list = [...tasks.values()];
         assert.strictEqual(list.length, 24);
-        for (const level of W.LEVELS) {
-            const lv = list.filter(t => t.level === level);
-            assert.strictEqual(lv.filter(t => t.type === 'descriptive').length, 4, level);
-            assert.strictEqual(lv.filter(t => t.type === 'narrative').length, 4, level);
-        }
+        const a1 = list.filter(t => t.level === 'A1');
+        assert.strictEqual(a1.filter(t => t.type === 'descriptive').length, 4);
+        assert.strictEqual(a1.filter(t => t.type === 'narrative').length, 4);
+        const a2 = list.filter(t => t.level === 'A2');
+        const b1 = list.filter(t => t.level === 'B1');
+        assert.ok(a2.filter(t => t.type === 'opinion').length >= 6, 'A2 hầu hết là opinion');
+        assert.ok(b1.filter(t => t.type === 'opinion').length >= 6, 'B1 hầu hết là opinion');
+        assert.ok(list.some(t => /cash for buying and selling/i.test(t.prompt)), 'có đề opinion kiểu cash');
         for (const t of list) {
             assert.deepStrictEqual([t.minWords, t.targetWords, t.maxWords], [130, 150, 180], t.id);
             assert.strictEqual(t.unit, null);
             assert.strictEqual(t.source, t.level === 'B1' ? 'general_b1' : 'general_a1_a2');
+            assert.ok(W.TYPES[t.type], t.id);
         }
         assert.ok(W.validateTask({ ...taskA1, targetWords: 200 }).length > 0);
         assert.ok(W.validateTask({ ...taskA1, type: 'email' }).length > 0);

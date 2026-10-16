@@ -19,6 +19,9 @@ const GENRE_EXPECTATIONS = {
         + '(appearance, senses, spatial order, precise adjectives); a concluding sentence that gives the writer\'s feeling or overall impression.',
     narrative: 'ONE narrative paragraph: an opening sentence that sets the scene (who, when, where); events told in clear chronological order '
         + 'with past tenses and time connectors (first, then, suddenly, after that, finally); a high point; a concluding sentence with the ending, feeling or lesson.',
+    opinion: 'ONE opinion paragraph: a clear topic sentence that states the writer\'s view on the question; two or three supporting reasons with brief '
+        + 'examples or explanations; linking words for cause and contrast (because, so, however, for example, in addition); a concluding sentence that restates '
+        + 'the opinion or gives a short recommendation. Do not write a story or a pure description.',
 };
 
 const MAX = {
@@ -59,8 +62,8 @@ function buildMessages(task, text) {
         '',
         'SCORING: give each criterion an integer from 0 to 10.',
         '- task: covers every required point, follows the text type above, and reaches the required length.',
-        '- grammar: accuracy and range of grammar for the level (for narratives, correct use of past tenses).',
-        '- vocabulary: accuracy, spelling, appropriacy and range of words for the level (for descriptions, precise and varied adjectives).',
+        '- grammar: accuracy and range of grammar for the level (for narratives, correct use of past tenses; for opinions, clear present tenses, modals and connectors).',
+        '- vocabulary: accuracy, spelling, appropriacy and range of words for the level (for descriptions, precise adjectives; for opinions, opinion and reason phrases).',
         '- organization: paragraph structure (topic sentence, supporting sentences, concluding sentence), written as ONE paragraph,',
         '  logical order, linking words, punctuation and capitalization.',
         'Bands: 9-10 fully successful with very few minor slips; 7-8 successful, some errors that do not affect meaning;',
@@ -269,7 +272,7 @@ function mockFeedback(task, text) {
         strengths: [lengthNote],
         improvements: ['Cấu hình AI để nhận nhận xét chi tiết về ngữ pháp, từ vựng và nội dung.'],
         corrections,
-        suggestions: MOCK_SUGGESTIONS[task.type],
+        suggestions: MOCK_SUGGESTIONS[task.type] || MOCK_SUGGESTIONS.opinion,
         correctedText: applyCorrections(text, corrections),
         modelAnswer: '',
     };
@@ -294,6 +297,16 @@ const MOCK_SUGGESTIONS = {
         vocabulary: [
             { item: 'after that / finally', meaning: 'sau đó / cuối cùng (từ nối thời gian)', example: 'After that, we had lunch together.' },
             { item: 'delighted', meaning: 'rất vui (thay cho "very happy")', example: 'I was delighted with my present.' },
+        ],
+    },
+    opinion: {
+        grammar: [
+            { point: 'I think / In my opinion + clause', example: 'In my opinion, people will still use cash in the future.', note: 'Mở đầu bằng cách nêu rõ quan điểm của bạn.' },
+            { point: 'because / so / however', example: 'Cash is useful because not everyone has a bank card. However, cards are faster.', note: 'Nối lý do và đối lập ý.' },
+        ],
+        vocabulary: [
+            { item: 'for example / for instance', meaning: 'ví dụ', example: 'For example, markets in small towns still prefer cash.' },
+            { item: 'convenient / reliable', meaning: 'tiện lợi / đáng tin cậy', example: 'Online payment is convenient, but cash is still reliable.' },
         ],
     },
 };

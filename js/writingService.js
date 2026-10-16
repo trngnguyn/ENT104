@@ -9,6 +9,12 @@
     const TYPES = {
         descriptive: 'Descriptive paragraph',
         narrative: 'Narrative paragraph',
+        opinion: 'Opinion paragraph',
+    };
+    const TYPE_LABELS_VI = {
+        descriptive: 'Miêu tả',
+        narrative: 'Kể chuyện',
+        opinion: 'Ý kiến',
     };
     const CRITERIA = [
         { key: 'task', label: 'Hoàn thành yêu cầu', en: 'Task achievement' },
@@ -351,7 +357,7 @@
     }
 
     Object.assign(WritingService, {
-        LEVELS, TYPES, CRITERIA, CORRECTION_TYPES, CORRECTION_GROUPS, MAX_SCORE, LIMITS, STORE_KEY,
+        LEVELS, TYPES, TYPE_LABELS_VI, CRITERIA, CORRECTION_TYPES, CORRECTION_GROUPS, MAX_SCORE, LIMITS, STORE_KEY,
         correctionGroup, countWords, checkSubmission, lengthCap, overallScore, locateCorrections, segments, validateTask,
     });
 

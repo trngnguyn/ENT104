@@ -9,10 +9,16 @@
 
     const W = global.WritingService;
     const LEVEL_FILTERS = ['all', ...W.LEVELS];
-    const TYPE_ICON = { descriptive: 'fa-image', narrative: 'fa-book' };
+    const TYPE_ICON = { descriptive: 'fa-image', narrative: 'fa-book', opinion: 'fa-comments' };
     const TYPE_STYLE = {
         descriptive: 'bg-sky-50 text-sky-700',
         narrative: 'bg-amber-50 text-amber-700',
+        opinion: 'bg-indigo-50 text-indigo-700',
+    };
+    const STRUCTURE_TIP = {
+        descriptive: 'Cấu trúc: câu chủ đề giới thiệu đối tượng → các câu miêu tả chi tiết (theo không gian / đặc điểm) → câu kết nêu cảm nhận.',
+        narrative: 'Cấu trúc: câu mở đầu nêu bối cảnh (ai, khi nào, ở đâu) → các sự việc theo thứ tự thời gian → cao trào → câu kết (kết quả / cảm xúc / bài học).',
+        opinion: 'Cấu trúc: câu chủ đề nêu rõ quan điểm → 2–3 lý do kèm ví dụ ngắn → câu kết nhắc lại ý kiến hoặc đưa lời khuyên ngắn.',
     };
     const CORRECTION_STYLE = {
         grammar: 'bg-rose-50 text-rose-700',
@@ -157,7 +163,7 @@
                     </div>
                     <div class="flex items-center gap-1.5 mt-1 text-[11px] text-slate-500">
                         <span class="font-semibold text-indigo-700">${t.level}</span>•
-                        <i class="fa-solid ${TYPE_ICON[t.type]} text-[10px]"></i>${t.type === 'descriptive' ? 'Miêu tả' : 'Kể chuyện'} •
+                        <i class="fa-solid ${TYPE_ICON[t.type]} text-[10px]"></i>${W.TYPE_LABELS_VI[t.type] || t.type} •
                         ~${t.targetWords} từ
                     </div>
                 </button>`;
@@ -227,9 +233,7 @@
                 <details class="mt-4 rounded-xl border border-slate-200/70 bg-slate-50/60">
                     <summary class="cursor-pointer px-4 py-2.5 text-sm font-semibold text-slate-700"><i class="fa-regular fa-lightbulb text-amber-500 mr-1.5"></i>Gợi ý cách viết</summary>
                     <ul class="px-4 pb-3 space-y-1.5 text-sm text-slate-600 list-disc list-inside">
-                        <li>${t.type === 'descriptive'
-                            ? 'Cấu trúc: câu chủ đề giới thiệu đối tượng → các câu miêu tả chi tiết (theo không gian / đặc điểm) → câu kết nêu cảm nhận.'
-                            : 'Cấu trúc: câu mở đầu nêu bối cảnh (ai, khi nào, ở đâu) → các sự việc theo thứ tự thời gian → cao trào → câu kết (kết quả / cảm xúc / bài học).'}</li>
+                        <li>${STRUCTURE_TIP[t.type] || STRUCTURE_TIP.opinion}</li>
                         ${t.tips.map(x => `<li>${esc(x)}</li>`).join('')}
                     </ul>
                 </details>

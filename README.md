@@ -72,7 +72,7 @@ Lưu ý:
   - Câu đọc hiểu được chọn theo cụm cùng bài đọc và luôn xếp liền nhau, kèm bài đọc khi làm bài.
   - Xem trước đề (bấm vào câu để xem đáp án, giải thích), cơ cấu theo kỹ năng / trình độ / độ khó / chủ đề / loại câu; xoá, thay thế (cùng kỹ năng, ưu tiên cùng chủ đề), thêm câu từ ngân hàng (tìm theo ID, nội dung, chủ đề, trình độ) hoặc thêm cả bài đọc. Không thể thêm một câu hai lần.
   - Lưu đề để dùng lại; mở / sửa, lưu thành đề mới, nhân bản, xoá đề đã lưu. Đề đã lưu (`ent104.savedPapers.v1`) tách biệt với kết quả làm bài (`ent104.examHistory.v1`).
-- **Writing (luyện viết đoạn văn):** 24 đề (`data/writing-tasks.json`) – mỗi trình độ A1 / A2 / B1 có 4 đoạn văn miêu tả (*descriptive*) và 4 đoạn văn kể chuyện (*narrative*). Yêu cầu chung: **một đoạn văn khoảng 150 từ** (chấp nhận 130–180 từ).
+- **Writing (luyện viết đoạn văn):** 24 đề (`data/writing-tasks.json`) – A1: 4 miêu tả (*descriptive*) + 4 kể chuyện (*narrative*); A2–B1: chủ yếu đoạn văn nêu ý kiến (*opinion*, ví dụ *Do you think people will still use cash…?*), kèm vài đề miêu tả / kể chuyện. Yêu cầu chung: **một đoạn văn khoảng 150 từ** (chấp nhận 130–180 từ). Nội dung tổng quát theo CEFR, **không** phải đề chính thức ENT104.
   - Viết bài: bộ đếm từ so với mục tiêu 150 từ, cảnh báo khi thiếu từ / tách nhiều đoạn, bản nháp tự lưu theo từng đề, `Ctrl + Enter` để gửi.
   - Kết quả chia **hai cột** (trên điện thoại xếp dọc):
     - **Bài làm của học sinh** (cột trái, cố định khi cuộn): chế độ *Bài gốc* tô lỗi (hồng = ngữ pháp, tím = từ vựng, có số thứ tự) và chế độ *Bài đã sửa* gạch phần sai, chèn phần sửa ngay sau. Bấm vào lỗi để xem giải thích ở cột phải và ngược lại.
