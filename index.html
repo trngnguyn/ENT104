@@ -13,7 +13,7 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/theme.css?v=20261016d">
-    <link rel="stylesheet" href="css/styles.css?v=20261016d">
+    <link rel="stylesheet" href="css/styles.css?v=20261016e">
 </head>
 <body class="min-h-full flex flex-col font-sans text-slate-800 antialiased selection:bg-blue-100 selection:text-blue-800">
 
@@ -37,6 +37,7 @@
                     <button data-mode="exam" class="mode-btn"><i class="fa-solid fa-stopwatch text-xs"></i>Thi thử</button>
                     <button data-mode="tenses" class="mode-btn"><i class="fa-solid fa-clock-rotate-left text-xs"></i>Các thì</button>
                     <button data-mode="writing" class="mode-btn"><i class="fa-solid fa-feather-pointed text-xs"></i>Viết</button>
+                    <button data-mode="speaking" class="mode-btn"><i class="fa-solid fa-microphone text-xs"></i>Nói</button>
                     <button data-mode="builder" class="mode-btn"><i class="fa-solid fa-layer-group text-xs"></i>Soạn đề</button>
                 </nav>
 
@@ -69,12 +70,13 @@
     </header>
 
     <!-- Thanh chế độ dưới đáy màn hình (điện thoại) -->
-    <nav class="bottom-nav md:hidden fixed bottom-0 inset-x-0 z-30 border-t border-slate-200/80 grid grid-cols-6" aria-label="Chế độ">
+    <nav class="bottom-nav md:hidden fixed bottom-0 inset-x-0 z-30 border-t border-slate-200/80 grid grid-cols-7" aria-label="Chế độ">
         <button data-mode="home" class="mode-btn bottom-tab"><i class="fa-solid fa-house"></i>Trang chủ</button>
         <button data-mode="practice" class="mode-btn bottom-tab"><i class="fa-solid fa-pen-to-square"></i>Luyện tập</button>
         <button data-mode="exam" class="mode-btn bottom-tab"><i class="fa-solid fa-stopwatch"></i>Thi thử</button>
         <button data-mode="tenses" class="mode-btn bottom-tab"><i class="fa-solid fa-clock-rotate-left"></i>Các thì</button>
         <button data-mode="writing" class="mode-btn bottom-tab"><i class="fa-solid fa-feather-pointed"></i>Viết</button>
+        <button data-mode="speaking" class="mode-btn bottom-tab"><i class="fa-solid fa-microphone"></i>Nói</button>
         <button data-mode="builder" class="mode-btn bottom-tab"><i class="fa-solid fa-layer-group"></i>Soạn đề</button>
     </nav>
 
@@ -102,6 +104,11 @@
             <button data-mode-link="writing" class="home-card group">
                 <span class="home-icon bg-indigo-50 text-indigo-600"><i class="fa-solid fa-feather-pointed"></i></span>
                 <span class="min-w-0"><span class="home-title">Viết đoạn văn</span><span class="home-desc">AI chấm điểm và sửa lỗi</span></span>
+                <i class="fa-solid fa-chevron-right home-arrow"></i>
+            </button>
+            <button data-mode-link="speaking" class="home-card group">
+                <span class="home-icon bg-rose-50 text-rose-600"><i class="fa-solid fa-microphone"></i></span>
+                <span class="min-w-0"><span class="home-title">Luyện nói</span><span class="home-desc">Part 1–2 · gợi ý câu từ dễ đến điểm cao</span></span>
                 <i class="fa-solid fa-chevron-right home-arrow"></i>
             </button>
         </div>
@@ -198,6 +205,26 @@
                 <div id="t-list" class="flex flex-col gap-3"></div>
             </aside>
             <div id="t-main" class="flex flex-col gap-6 min-w-0 scroll-mt-24"></div>
+        </div>
+    </section>
+
+    <!-- Speaking -->
+    <section id="speaking-view" class="hidden flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 scroll-mt-20">
+        <div class="flex flex-wrap items-end justify-between gap-3 mb-6">
+            <div>
+                <h2 class="text-2xl font-bold tracking-tight text-slate-900">Luyện nói A1–A2</h2>
+                <p class="text-sm text-slate-500 mt-1">Part 1 trả lời câu hỏi · Part 2 miêu tả tranh. Gợi ý câu từ dễ đến mức điểm cao hơn (không dùng AI).</p>
+            </div>
+            <button type="button" id="spk-random" class="btn-secondary">
+                <i class="fa-solid fa-shuffle"></i> Bài ngẫu nhiên
+            </button>
+        </div>
+        <div class="grid gap-6 lg:grid-cols-[280px_minmax(0,1fr)] items-start">
+            <aside class="card p-4 lg:sticky lg:top-[5.25rem] lg:max-h-[calc(100vh-6.5rem)] lg:overflow-y-auto custom-scrollbar">
+                <h3 class="eyebrow mb-3">Chọn bài</h3>
+                <div id="spk-list" class="flex flex-col gap-0.5"></div>
+            </aside>
+            <div id="spk-main" class="flex flex-col gap-6 min-w-0 scroll-mt-24"></div>
         </div>
     </section>
 
@@ -531,6 +558,8 @@
     <script src="js/writingView.js?v=20261016d"></script>
     <script src="js/tenseService.js?v=20261016d"></script>
     <script src="js/tenseView.js?v=20261016d"></script>
-    <script src="js/app.js?v=20261016d"></script>
+    <script src="js/speakingService.js?v=20261016e"></script>
+    <script src="js/speakingView.js?v=20261016e"></script>
+    <script src="js/app.js?v=20261016e"></script>
 </body>
 </html>

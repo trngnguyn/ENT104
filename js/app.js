@@ -5,8 +5,8 @@
     const Stats = StatisticsService;
     const Storage = AppStorage;
     const SKILL_BY_KEY = Object.fromEntries(SKILLS.map(s => [s.key, s]));
-    const MODES = ['home', 'practice', 'exam', 'builder', 'writing', 'tenses'];
-    const PANEL_MODES = ['home', 'builder', 'writing', 'tenses'];
+    const MODES = ['home', 'practice', 'exam', 'builder', 'writing', 'tenses', 'speaking'];
+    const PANEL_MODES = ['home', 'builder', 'writing', 'tenses', 'speaking'];
     const DIFFICULTY_LABELS = { easy: 'Dễ', medium: 'Vừa', hard: 'Khó' };
     const EXAM_SIZES = [20, 40, 50];
     const EXAM_TIMES = [0, 15, 30, 45, 60, 90];
@@ -40,6 +40,7 @@
     let builderView = null;
     let writingView = null;
     let tenseView = null;
+    let speakingView = null;
 
     const state = {
         mode: 'home',
@@ -165,12 +166,13 @@
 
     function render() {
         renderHeader();
-        const panels = { home: homeView, builder: builderView, writing: writingView, tenses: tenseView };
+        const panels = { home: homeView, builder: builderView, writing: writingView, tenses: tenseView, speaking: speakingView };
         show('quiz-workspace', !panels[state.mode]);
         show('home-view', state.mode === 'home');
         show('builder-view', state.mode === 'builder');
         show('writing-view', state.mode === 'writing');
         show('tenses-view', state.mode === 'tenses');
+        show('speaking-view', state.mode === 'speaking');
         if (panels[state.mode]) {
             $('progress-bar-fill').style.width = '0%';
             panels[state.mode].render();
@@ -744,6 +746,7 @@
     function setMode(mode) {
         if (!MODES.includes(mode) || (mode === state.mode && !(mode === 'practice' && state.review))) return;
         if (state.mode === 'writing') writingView.saveDraft();
+        if (state.mode === 'speaking' && speakingView) speakingView.saveNotes();
         state.mode = mode;
         state.review = null;
         state.examFilter = 'all';
@@ -1150,6 +1153,7 @@
                 review.logActivity(1);
             },
         });
+        speakingView = SpeakingView.create({ service: new SpeakingService() });
         restoreUi();
         $('data-source').textContent = `Dữ liệu: ${qs.source === 'json' ? 'data/questions.json' : 'data/question-bank.bundle.js'}`
             + (qs.skipped.length ? ` (bỏ qua ${qs.skipped.length} câu không hợp lệ)` : '') + '.';

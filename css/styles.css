@@ -452,3 +452,9 @@ html.dark ::selection {
     background-color: rgb(var(--c-blue-300));
     color: rgb(var(--c-blue-950));
 }
+
+/* Speaking: gợi ý câu trả lời */
+.spk-hints > summary::-webkit-details-marker { display: none; }
+.spk-hints > summary { list-style: none; }
+.spk-hints[open] .spk-chevron { transform: rotate(180deg); }
+.spk-hints .spk-chevron { transition: transform 0.15s ease; }

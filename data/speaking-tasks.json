@@ -1,0 +1,617 @@
+{
+  "version": 1,
+  "level": "A1–A2",
+  "pictureQuestions": [
+    "How many people are there in the picture?",
+    "Who are they?",
+    "What are they doing?",
+    "What else can you see?"
+  ],
+  "hintLevels": [
+    { "key": "basic", "label": "Dễ · đạt yêu cầu", "vi": "Câu ngắn, đủ ý cơ bản" },
+    { "key": "better", "label": "Khá · rõ ràng hơn", "vi": "Thêm lý do / chi tiết" },
+    { "key": "strong", "label": "Giỏi · điểm cao hơn", "vi": "Liên kết ý, từ vựng phong phú hơn" }
+  ],
+  "tests": [
+    {
+      "id": "spk-01",
+      "title": "Daily routines",
+      "titleVi": "Thói quen hàng ngày",
+      "topic": "Family having breakfast",
+      "topicVi": "Gia đình ăn sáng",
+      "img": "https://images.pexels.com/photos/4259708/pexels-photo-4259708.jpeg?auto=compress&cs=tinysrgb&w=1500",
+      "credit": "Photo: August de Richelieu / Pexels",
+      "vocab": "family, breakfast, table, kitchen, eating, talking, food, morning, together, happy",
+      "questions": [
+        {
+          "q": "What time do you usually get up?",
+          "hints": {
+            "basic": "I get up at 6 o'clock.",
+            "better": "I usually get up at 6 a.m. because I have an early class.",
+            "strong": "I usually get up around 6 a.m. on weekdays so I can have breakfast and get ready for school. At the weekend I often sleep until 8."
+          }
+        },
+        {
+          "q": "What do you usually have for breakfast?",
+          "hints": {
+            "basic": "I have bread and milk.",
+            "better": "I usually have bread, eggs and a glass of milk.",
+            "strong": "I usually have a simple breakfast — bread with eggs and milk. Sometimes I eat noodles if I have more time."
+          }
+        },
+        {
+          "q": "Do you go to school in the morning or in the afternoon?",
+          "hints": {
+            "basic": "I go to school in the morning.",
+            "better": "I go to school in the morning, from 7 to 11.",
+            "strong": "I usually go to school in the morning, from about 7 to 11. On some days I also have afternoon classes."
+          }
+        },
+        {
+          "q": "What do you do after school?",
+          "hints": {
+            "basic": "I do my homework.",
+            "better": "After school I do my homework and then I play football.",
+            "strong": "After school I usually do my homework first. Then I play football with my friends or watch a short video to relax."
+          }
+        },
+        {
+          "q": "What time do you usually go to bed?",
+          "hints": {
+            "basic": "I go to bed at 10 o'clock.",
+            "better": "I usually go to bed at about 10 p.m.",
+            "strong": "I usually go to bed at about 10 p.m. on weekdays, but at the weekend I sometimes stay up later."
+          }
+        }
+      ],
+      "picture": {
+        "vocabTip": "Start with “In this picture, I can see…”, then say who the people are, what they are doing, and one or two more details.",
+        "hints": {
+          "basic": "In this picture, I can see four people. They are a family. They are having breakfast. I can also see a table and some food.",
+          "better": "In this picture, I can see four people. They are a family in the kitchen. They are having breakfast and talking together. I can also see a table, cups and some food. They look happy.",
+          "strong": "In this picture, I can see a family of four sitting around a table in the kitchen. They are having breakfast together and chatting. There is food and drinks on the table, and the atmosphere looks warm and happy. It seems like a normal morning at home."
+        }
+      }
+    },
+    {
+      "id": "spk-02",
+      "title": "At school",
+      "titleVi": "Ở trường",
+      "topic": "Students in a classroom",
+      "topicVi": "Học sinh trong lớp",
+      "img": "https://images.pexels.com/photos/8613089/pexels-photo-8613089.jpeg?auto=compress&cs=tinysrgb&w=1500",
+      "credit": "Photo: Max Fischer / Pexels",
+      "vocab": "students, teacher, classroom, desk, book, writing, listening, board, subject, break",
+      "questions": [
+        {
+          "q": "What is your favourite subject?",
+          "hints": {
+            "basic": "My favourite subject is English.",
+            "better": "My favourite subject is English because it is useful.",
+            "strong": "My favourite subject is English because I enjoy speaking and learning new words. It also helps me for my future job."
+          }
+        },
+        {
+          "q": "Who is your favourite teacher?",
+          "hints": {
+            "basic": "My favourite teacher is Ms. Hoa.",
+            "better": "My favourite teacher is Ms. Hoa. She is kind and funny.",
+            "strong": "My favourite teacher is Ms. Hoa. She explains things clearly and always encourages us, so I feel more confident in class."
+          }
+        },
+        {
+          "q": "How do you go to school?",
+          "hints": {
+            "basic": "I go to school by bike.",
+            "better": "I usually go to school by bike with my friend.",
+            "strong": "I usually go to school by bike because my house is not far. When it rains, my parents take me by motorbike."
+          }
+        },
+        {
+          "q": "Do you like studying English? Why?",
+          "hints": {
+            "basic": "Yes, I like English.",
+            "better": "Yes, I like studying English because it is interesting.",
+            "strong": "Yes, I like studying English because I can watch films and talk to people from other countries. It is hard sometimes, but it is fun."
+          }
+        },
+        {
+          "q": "What do you usually do during break time?",
+          "hints": {
+            "basic": "I talk with my friends.",
+            "better": "During break time I talk with my friends and eat a snack.",
+            "strong": "During break time I usually chat with my classmates, buy a snack, and sometimes play a short game in the yard."
+          }
+        }
+      ],
+      "picture": {
+        "vocabTip": "Say how many students you see, where they are, what they are doing, and mention the teacher or the board.",
+        "hints": {
+          "basic": "In this picture, I can see many people. They are students. They are studying in a classroom. I can also see desks and books.",
+          "better": "In this picture, I can see many students and a teacher in a classroom. The students are sitting at their desks and studying. I can also see books, desks and a board.",
+          "strong": "In this picture, I can see a classroom with many students and a teacher. The students are sitting at their desks, listening and taking notes. There are books on the desks and a board at the front. It looks like a normal lesson at school."
+        }
+      }
+    },
+    {
+      "id": "spk-03",
+      "title": "Free time",
+      "titleVi": "Thời gian rảnh",
+      "topic": "Friends in the park",
+      "topicVi": "Bạn bè trong công viên",
+      "img": "https://images.pexels.com/photos/1181414/pexels-photo-1181414.jpeg?auto=compress&cs=tinysrgb&w=1500",
+      "credit": "Photo: Helena Lopes / Pexels",
+      "vocab": "friends, park, grass, sitting, talking, smiling, tree, sunny, relax, free time",
+      "questions": [
+        {
+          "q": "What do you like doing in your free time?",
+          "hints": {
+            "basic": "I like listening to music.",
+            "better": "In my free time I like listening to music and playing games.",
+            "strong": "In my free time I like listening to music, playing football with friends, and watching short videos online."
+          }
+        },
+        {
+          "q": "Do you often go out with friends?",
+          "hints": {
+            "basic": "Yes, I do.",
+            "better": "Yes, I often go out with my friends at the weekend.",
+            "strong": "Yes, I often go out with my friends at the weekend. We usually go to a café or walk in the park."
+          }
+        },
+        {
+          "q": "What do you do on Sundays?",
+          "hints": {
+            "basic": "I stay at home.",
+            "better": "On Sundays I stay at home and watch TV.",
+            "strong": "On Sundays I usually stay at home in the morning, then I meet my friends or help my parents in the afternoon."
+          }
+        },
+        {
+          "q": "Do you like music?",
+          "hints": {
+            "basic": "Yes, I like music.",
+            "better": "Yes, I like pop music very much.",
+            "strong": "Yes, I like music a lot, especially pop and soft songs. I often listen when I study or travel."
+          }
+        },
+        {
+          "q": "What is your favourite place to relax?",
+          "hints": {
+            "basic": "My favourite place is my room.",
+            "better": "My favourite place to relax is the park near my house.",
+            "strong": "My favourite place to relax is the park near my house. It is quiet, green, and I can sit under a tree with my friends."
+          }
+        }
+      ],
+      "picture": {
+        "vocabTip": "Describe the people, the place, their feelings, and the weather if you can.",
+        "hints": {
+          "basic": "In this picture, I can see three people. They are friends. They are sitting in the park. I can also see grass and trees.",
+          "better": "In this picture, I can see three friends sitting on the grass in the park. They are talking and smiling. I can also see trees and a green area. They look relaxed.",
+          "strong": "In this picture, I can see three friends sitting together on the grass in a sunny park. They are chatting and smiling, so they look very relaxed and happy. Around them there are trees and a green open space — a nice place to spend free time."
+        }
+      }
+    },
+    {
+      "id": "spk-04",
+      "title": "Shopping",
+      "titleVi": "Mua sắm",
+      "topic": "People at a supermarket",
+      "topicVi": "Người mua ở siêu thị",
+      "img": "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1500",
+      "credit": "Photo: fauxels / Pexels",
+      "vocab": "supermarket, shoppers, trolley, food, shelves, buying, choosing, store, weekly, near",
+      "questions": [
+        {
+          "q": "How often do you go shopping?",
+          "hints": {
+            "basic": "I go shopping once a week.",
+            "better": "I usually go shopping once or twice a week.",
+            "strong": "I usually go shopping once or twice a week, mostly at the weekend with my family."
+          }
+        },
+        {
+          "q": "What do you usually buy at the supermarket?",
+          "hints": {
+            "basic": "I buy rice and vegetables.",
+            "better": "I usually buy rice, vegetables, milk and fruit.",
+            "strong": "I usually buy rice, vegetables, milk and fruit for the week. Sometimes I also buy snacks or drinks."
+          }
+        },
+        {
+          "q": "Do you like shopping with family or friends?",
+          "hints": {
+            "basic": "I like shopping with my family.",
+            "better": "I like shopping with my family because it is fun.",
+            "strong": "I like shopping with my family because we can choose food together. With friends it is more fun, but we buy fewer useful things."
+          }
+        },
+        {
+          "q": "What food do you buy every week?",
+          "hints": {
+            "basic": "I buy rice every week.",
+            "better": "Every week I buy rice, eggs and vegetables.",
+            "strong": "Every week I buy rice, eggs, vegetables and milk because we need them for daily meals."
+          }
+        },
+        {
+          "q": "Is there a supermarket near your home?",
+          "hints": {
+            "basic": "Yes, there is.",
+            "better": "Yes, there is a supermarket near my home.",
+            "strong": "Yes, there is a supermarket about five minutes from my home, so it is very convenient."
+          }
+        }
+      ],
+      "picture": {
+        "vocabTip": "Mention shoppers, trolleys, shelves and what people are choosing.",
+        "hints": {
+          "basic": "In this picture, I can see some people. They are in a supermarket. They are buying things. I can also see shelves.",
+          "better": "In this picture, I can see some shoppers in a supermarket. They are walking and buying food. I can also see shelves, food and shopping trolleys.",
+          "strong": "In this picture, I can see several shoppers in a supermarket. They are walking between the shelves and choosing food. There are shopping trolleys and many products on the shelves. It looks busy and normal for a shopping day."
+        }
+      }
+    },
+    {
+      "id": "spk-05",
+      "title": "Food and drink",
+      "titleVi": "Đồ ăn & thức uống",
+      "topic": "People eating in a restaurant",
+      "topicVi": "Ăn ở nhà hàng",
+      "img": "https://images.pexels.com/photos/3184183/pexels-photo-3184183.jpeg?auto=compress&cs=tinysrgb&w=1500",
+      "credit": "Photo: fauxels / Pexels",
+      "vocab": "restaurant, customers, table, meal, eating, talking, plates, drinks, favourite, spicy",
+      "questions": [
+        {
+          "q": "What is your favourite food?",
+          "hints": {
+            "basic": "My favourite food is phở.",
+            "better": "My favourite food is phở because it is delicious.",
+            "strong": "My favourite food is phở. I love the hot soup and fresh herbs, especially on a cool morning."
+          }
+        },
+        {
+          "q": "What do you usually drink at lunch?",
+          "hints": {
+            "basic": "I drink water.",
+            "better": "At lunch I usually drink water or iced tea.",
+            "strong": "At lunch I usually drink water or iced tea. I try not to drink too many soft drinks."
+          }
+        },
+        {
+          "q": "How often do you eat out?",
+          "hints": {
+            "basic": "I eat out once a week.",
+            "better": "I eat out about once or twice a week.",
+            "strong": "I eat out about once or twice a week, usually with my family at the weekend."
+          }
+        },
+        {
+          "q": "Can you cook? What can you cook?",
+          "hints": {
+            "basic": "Yes, I can cook eggs.",
+            "better": "Yes, I can cook simple food like fried eggs and noodles.",
+            "strong": "Yes, I can cook simple dishes like fried eggs, noodles and rice. I am learning to cook better from my mother."
+          }
+        },
+        {
+          "q": "Do you like spicy food?",
+          "hints": {
+            "basic": "Yes, a little.",
+            "better": "Yes, I like spicy food a little, but not too hot.",
+            "strong": "Yes, I like spicy food a little, but not very hot. I usually add a small amount of chilli to my meals."
+          }
+        }
+      ],
+      "picture": {
+        "vocabTip": "Talk about the customers, the meal, and the atmosphere at the table.",
+        "hints": {
+          "basic": "In this picture, I can see some people. They are in a restaurant. They are eating. I can also see plates and glasses.",
+          "better": "In this picture, I can see several people in a restaurant. They are customers and friends. They are eating and talking together. I can also see plates, glasses and a table with food.",
+          "strong": "In this picture, I can see a group of friends or colleagues sitting around a table in a restaurant. They are sharing a meal, eating and chatting happily. There are plates, glasses and food on the table, and the mood looks friendly and relaxed."
+        }
+      }
+    },
+    {
+      "id": "spk-06",
+      "title": "Sports and health",
+      "titleVi": "Thể thao & sức khỏe",
+      "topic": "People exercising outdoors",
+      "topicVi": "Tập thể dục ngoài trời",
+      "img": "https://images.pexels.com/photos/868483/pexels-photo-868483.jpeg?auto=compress&cs=tinysrgb&w=1500",
+      "credit": "Photo: Andrea Piacquadio / Pexels",
+      "vocab": "people, exercise, sports clothes, park, running, stretching, healthy, outdoor, active, team",
+      "questions": [
+        {
+          "q": "Do you play any sports?",
+          "hints": {
+            "basic": "Yes, I play football.",
+            "better": "Yes, I play football with my friends after school.",
+            "strong": "Yes, I play football two or three times a week with my friends. It helps me stay fit and have fun."
+          }
+        },
+        {
+          "q": "How often do you exercise?",
+          "hints": {
+            "basic": "I exercise twice a week.",
+            "better": "I usually exercise two or three times a week.",
+            "strong": "I usually exercise two or three times a week — for example jogging in the park or playing football."
+          }
+        },
+        {
+          "q": "What do you do to stay healthy?",
+          "hints": {
+            "basic": "I eat vegetables and sleep early.",
+            "better": "To stay healthy I eat vegetables, drink water and sleep early.",
+            "strong": "To stay healthy I try to eat more vegetables, drink enough water, sleep early, and do some exercise every week."
+          }
+        },
+        {
+          "q": "Do you prefer indoor or outdoor activities?",
+          "hints": {
+            "basic": "I prefer outdoor activities.",
+            "better": "I prefer outdoor activities because I like fresh air.",
+            "strong": "I prefer outdoor activities because I like fresh air and sunshine. Indoor sports are fine when it rains."
+          }
+        },
+        {
+          "q": "Who do you like doing sports with?",
+          "hints": {
+            "basic": "I like doing sports with my friends.",
+            "better": "I like doing sports with my classmates after school.",
+            "strong": "I like doing sports with my classmates after school. Playing in a team is more fun than exercising alone."
+          }
+        }
+      ],
+      "picture": {
+        "vocabTip": "Describe the activity, clothes, place, and how the people look (active, healthy).",
+        "hints": {
+          "basic": "In this picture, I can see some people. They are doing exercise. They are outdoors. I can also see sports clothes.",
+          "better": "In this picture, I can see a group of people doing exercise outdoors. Some are stretching and some are moving together. I can also see sports clothes and an open space. They look active.",
+          "strong": "In this picture, I can see a group of people exercising outdoors in an open space, maybe a park. They are wearing sports clothes; some are stretching while others are moving together. They look active and healthy, and the activity seems good for fitness."
+        }
+      }
+    },
+    {
+      "id": "spk-07",
+      "title": "Travel and transport",
+      "titleVi": "Đi lại & phương tiện",
+      "topic": "People waiting at a bus stop",
+      "topicVi": "Đợi xe buýt",
+      "img": "https://images.pexels.com/photos/8106772/pexels-photo-8106772.jpeg?auto=compress&cs=tinysrgb&w=1500",
+      "credit": "Photo: Ono Kosuki / Pexels",
+      "vocab": "bus stop, passengers, bus, waiting, bag, road, street, travelling, city, transport",
+      "questions": [
+        {
+          "q": "How do you usually travel to school or work?",
+          "hints": {
+            "basic": "I go by bike.",
+            "better": "I usually go to school by bike.",
+            "strong": "I usually go to school by bike because it is cheap and good exercise. When I am late, I take a bus."
+          }
+        },
+        {
+          "q": "Do you often take the bus?",
+          "hints": {
+            "basic": "Yes, sometimes.",
+            "better": "Yes, I sometimes take the bus to the city centre.",
+            "strong": "Yes, I sometimes take the bus to the city centre, especially when the weather is bad or I need to travel far."
+          }
+        },
+        {
+          "q": "What transport do you like best?",
+          "hints": {
+            "basic": "I like the bike best.",
+            "better": "I like the bike best because it is free and healthy.",
+            "strong": "I like the bike best because it is free, healthy and flexible. For long trips I prefer the train."
+          }
+        },
+        {
+          "q": "Do you want to visit another city?",
+          "hints": {
+            "basic": "Yes, I do.",
+            "better": "Yes, I want to visit Da Nang.",
+            "strong": "Yes, I want to visit Da Nang because I have never been there. I would like to see the beach and try local food."
+          }
+        },
+        {
+          "q": "Who do you usually travel with?",
+          "hints": {
+            "basic": "I travel with my family.",
+            "better": "I usually travel with my family or my friends.",
+            "strong": "I usually travel with my family on holidays, and with my friends for short trips at the weekend."
+          }
+        }
+      ],
+      "picture": {
+        "vocabTip": "Say who is waiting, what they are carrying, and what you can see on the road.",
+        "hints": {
+          "basic": "In this picture, I can see some people. They are at a bus stop. They are waiting for the bus. I can also see the road.",
+          "better": "In this picture, I can see some passengers at a bus stop. They are waiting for the bus. I can also see the road, a bus and some bags. It looks like a normal day.",
+          "strong": "In this picture, I can see several passengers waiting at a bus stop by the road. Some are holding bags and looking towards the street. There is a bus nearby, so it seems like a normal weekday morning when people travel to school or work."
+        }
+      }
+    },
+    {
+      "id": "spk-08",
+      "title": "Holidays",
+      "titleVi": "Kỳ nghỉ",
+      "topic": "Family at the beach",
+      "topicVi": "Gia đình ở biển",
+      "img": "https://images.pexels.com/photos/3933881/pexels-photo-3933881.jpeg?auto=compress&cs=tinysrgb&w=1500",
+      "credit": "Photo: Kampus Production / Pexels",
+      "vocab": "family, beach, sea, sand, children, playing, holiday, sunny, mountains, travel",
+      "questions": [
+        {
+          "q": "Where do you like going on holiday?",
+          "hints": {
+            "basic": "I like going to the beach.",
+            "better": "I like going to the beach with my family.",
+            "strong": "I like going to the beach on holiday because I can swim, walk on the sand and eat seafood."
+          }
+        },
+        {
+          "q": "Do you like the beach or the mountains?",
+          "hints": {
+            "basic": "I like the beach.",
+            "better": "I like the beach more than the mountains.",
+            "strong": "I like the beach more than the mountains because I enjoy swimming and the sea air. The mountains are nice too, but cooler."
+          }
+        },
+        {
+          "q": "What do you usually do on holiday?",
+          "hints": {
+            "basic": "I swim and take photos.",
+            "better": "On holiday I usually swim, eat local food and take photos.",
+            "strong": "On holiday I usually swim, try local food, take photos and spend time with my family without thinking about homework."
+          }
+        },
+        {
+          "q": "Who do you like travelling with?",
+          "hints": {
+            "basic": "I like travelling with my family.",
+            "better": "I like travelling with my family because it is safe and fun.",
+            "strong": "I like travelling with my family because we can share meals and visit new places together. Sometimes I also travel with close friends."
+          }
+        },
+        {
+          "q": "What do you take to the beach?",
+          "hints": {
+            "basic": "I take a towel and water.",
+            "better": "I take a towel, water, sunscreen and a hat.",
+            "strong": "I usually take a towel, water, sunscreen, a hat and my phone to take photos. Sometimes I also take snacks."
+          }
+        }
+      ],
+      "picture": {
+        "vocabTip": "Describe the family, the sea and sand, and what the children are doing.",
+        "hints": {
+          "basic": "In this picture, I can see a family. They are at the beach. They are playing. I can also see the sea and sand.",
+          "better": "In this picture, I can see a family with adults and children. They are spending time at the beach and playing together. I can also see the sea, the sand and sunshine.",
+          "strong": "In this picture, I can see a family enjoying a holiday at the beach. The adults and children are playing together on the sand near the sea. The weather looks sunny, and everyone seems relaxed and happy — a typical summer holiday scene."
+        }
+      }
+    },
+    {
+      "id": "spk-09",
+      "title": "Special days",
+      "titleVi": "Ngày đặc biệt",
+      "topic": "Birthday party with friends",
+      "topicVi": "Tiệc sinh nhật với bạn",
+      "img": "https://images.pexels.com/photos/7180619/pexels-photo-7180619.jpeg?auto=compress&cs=tinysrgb&w=1500",
+      "credit": "Photo: Pavel Danilyuk / Pexels",
+      "vocab": "birthday, friends, cake, candles, party, smiling, celebration, balloons, present, invite",
+      "questions": [
+        {
+          "q": "When is your birthday?",
+          "hints": {
+            "basic": "My birthday is in May.",
+            "better": "My birthday is on the 12th of May.",
+            "strong": "My birthday is on the 12th of May. I usually celebrate it with my family and a few close friends."
+          }
+        },
+        {
+          "q": "How do you celebrate your birthday?",
+          "hints": {
+            "basic": "I have a small party.",
+            "better": "I have a small party at home with cake and friends.",
+            "strong": "I usually have a small party at home. We eat cake, take photos and sometimes sing karaoke together."
+          }
+        },
+        {
+          "q": "Do you like parties?",
+          "hints": {
+            "basic": "Yes, I do.",
+            "better": "Yes, I like small parties with my friends.",
+            "strong": "Yes, I like small parties with close friends more than big noisy ones. I enjoy chatting and sharing food."
+          }
+        },
+        {
+          "q": "What present do you want on your birthday?",
+          "hints": {
+            "basic": "I want a new book.",
+            "better": "I want a new book or a pair of headphones.",
+            "strong": "I would love a new book or a pair of headphones. I don’t need expensive gifts — something useful is enough."
+          }
+        },
+        {
+          "q": "Who do you invite to your birthday party?",
+          "hints": {
+            "basic": "I invite my family and friends.",
+            "better": "I invite my family and a few close friends.",
+            "strong": "I invite my family and a few close friends from school. I prefer a small group so we can talk more."
+          }
+        }
+      ],
+      "picture": {
+        "vocabTip": "Mention the cake, candles, decorations and how people feel.",
+        "hints": {
+          "basic": "In this picture, I can see some people. They are at a birthday party. They are looking at a cake. I can also see candles.",
+          "better": "In this picture, I can see several friends at a birthday party. They are celebrating and looking at a birthday cake. I can also see candles and party decorations. They look excited.",
+          "strong": "In this picture, I can see a group of friends celebrating a birthday. They are gathered around a cake with candles, smiling and looking excited. There are party decorations, maybe balloons, and the mood feels joyful and warm."
+        }
+      }
+    },
+    {
+      "id": "spk-10",
+      "title": "Jobs",
+      "titleVi": "Công việc",
+      "topic": "People working in an office",
+      "topicVi": "Làm việc ở văn phòng",
+      "img": "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1500",
+      "credit": "Photo: fauxels / Pexels",
+      "vocab": "office, workers, meeting, laptop, table, discussing, team, business, skill, future",
+      "questions": [
+        {
+          "q": "What job would you like in the future?",
+          "hints": {
+            "basic": "I would like to be a teacher.",
+            "better": "In the future I would like to be an English teacher.",
+            "strong": "In the future I would like to be an English teacher or work in an international company, because I enjoy languages and meeting people."
+          }
+        },
+        {
+          "q": "What does your father or mother do?",
+          "hints": {
+            "basic": "My mother is a teacher.",
+            "better": "My mother is a teacher and my father works in an office.",
+            "strong": "My mother is a primary school teacher, and my father works in an office. They both work hard every day."
+          }
+        },
+        {
+          "q": "Do you want to work in an office?",
+          "hints": {
+            "basic": "Yes, maybe.",
+            "better": "Yes, I want to work in an office if the job is interesting.",
+            "strong": "Yes, I would like to work in an office if the job is interesting and I can learn new skills. I also like jobs that are not always indoors."
+          }
+        },
+        {
+          "q": "Do you like working alone or in a team?",
+          "hints": {
+            "basic": "I like working in a team.",
+            "better": "I like working in a team because we can help each other.",
+            "strong": "I like working in a team because we can share ideas and help each other. Sometimes I also need quiet time to work alone."
+          }
+        },
+        {
+          "q": "What is an important skill for a job?",
+          "hints": {
+            "basic": "English is important.",
+            "better": "English and teamwork are important skills for a job.",
+            "strong": "I think English, teamwork and problem-solving are important skills for many jobs today, especially in an office."
+          }
+        }
+      ],
+      "picture": {
+        "vocabTip": "Describe the meeting, the laptop/table, and whether people look busy or focused.",
+        "hints": {
+          "basic": "In this picture, I can see five people. They are in an office. They are talking. I can also see a laptop and a table.",
+          "better": "In this picture, I can see five office workers. They are having a meeting and talking together. I can also see a laptop, a table and bright windows. They look busy.",
+          "strong": "In this picture, I can see five office workers sitting around a table in a bright office. They are having a meeting, discussing something and looking at a laptop. The atmosphere looks professional and busy — a typical workday scene."
+        }
+      }
+    }
+  ]
+}
