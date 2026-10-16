@@ -4,8 +4,114 @@ const { BLANK, mc, cap } = require('../lib/builders');
 const E = require('../lib/english');
 
 const items = [];
+const contextIndex = Object.create(null);
+const CONTEXTS = {
+    'Verb BE': [
+        'Mai is checking the details in a class profile.',
+        'Two classmates are correcting a notice before they print it.',
+        'A visitor asks whether the information below is accurate.',
+    ],
+    'Pronouns & Possessives': [
+        'Two students are trying to identify the correct owner or person.',
+        'Read the second sentence carefully; repeating the noun would sound unnatural.',
+        'The speaker wants to avoid confusing the subject, object, and possessive forms.',
+    ],
+    'Simple Present': [
+        'The first part describes a regular habit, not an action happening only now.',
+        'A student is describing a timetable or a fact that is normally true.',
+        'Compare the subject with the base verb before choosing the complete form.',
+    ],
+    'Adverbs of Frequency': [
+        'The speaker is describing how regularly something happens.',
+        'Pay attention to whether the main verb is an ordinary verb or a form of “be”.',
+        'A class survey reports a repeated habit, not one event.',
+    ],
+    'Present Continuous': [
+        'The speaker contrasts what normally happens with what is happening around now.',
+        'A phone conversation describes the situation at this exact moment.',
+        'Use both the subject and the time expression to choose the complete verb phrase.',
+    ],
+    'Simple Past': [
+        'The event is part of a finished story about an earlier time.',
+        'A friend is asking about a completed event, not a present result.',
+        'Notice the past-time marker before choosing between the base and past forms.',
+    ],
+    'Future': [
+        'Two friends are discussing a plan, prediction, or decision about the future.',
+        'Decide whether the speaker planned this earlier or is deciding at this moment.',
+        'The time is in the future, but the form depends on the speaker’s meaning.',
+    ],
+    'Modal Verbs': [
+        'Choose the modal that matches the meaning: ability, advice, permission, or necessity.',
+        'Two similar modals are possible grammatically, but only one fits the situation.',
+        'Read the reason in the second sentence before deciding how strong the meaning is.',
+    ],
+    'Quantifiers & Nouns': [
+        'Someone is checking supplies and needs an exact grammatical description.',
+        'Decide first whether the noun is countable and whether the sentence is positive, negative, or a question.',
+        'The situation contrasts a small useful amount with little or none.',
+    ],
+    'Articles': [
+        'A learner is editing a short description and must choose the article by sound and meaning.',
+        'The noun may be new, already identified, or unique in the situation.',
+        'Do not choose from spelling alone; consider the first sound of the following word.',
+    ],
+    'Prepositions': [
+        'A visitor is following directions and wants the location or time phrase to sound natural.',
+        'Several prepositions look possible, but only one matches this fixed use.',
+        'Use the size of the place, the surface, or the exact time expression as your clue.',
+    ],
+    'Would Like': [
+        'A customer and a server are having a polite conversation.',
+        'Choose the polite request or response, not the form used for general preferences.',
+        'The speaker is making an offer or stating a present wish.',
+    ],
+    'Comparatives': [
+        'A report compares exactly two people, places, or things.',
+        'The sentence needs a comparative form; check both spelling and the word “than”.',
+        'Choose the complete form that makes the contrast natural.',
+    ],
+    'Superlatives': [
+        'The speaker selects one member from an entire group.',
+        'Look for the group expression before deciding between comparative and superlative forms.',
+        'The meaning is “more than all the others”, so the article is part of the answer.',
+    ],
+    'Questions & Negatives': [
+        'Read the answer first, then choose the question word that asks for exactly that information.',
+        'Two question words may seem related, but the reply identifies only one type of information.',
+        'Complete this short information-checking dialogue.',
+    ],
+    'Mixed Tenses': [
+        'The sentence deliberately contrasts two time references.',
+        'A speaker moves between a routine, a current event, and a finished or planned action.',
+        'Use all the time markers; choosing from only the nearest one may lead to a near-miss answer.',
+    ],
+};
+
+function harderStem(category, question) {
+    const choices = CONTEXTS[category] || ['Use the whole context, not only the nearest time word.'];
+    const n = contextIndex[category] || 0;
+    contextIndex[category] = n + 1;
+    return `${choices[n % choices.length]}<br>${question}`;
+}
+
+function harderDifficulty(level, difficulty, category) {
+    if (difficulty !== 'easy') return difficulty;
+    const n = contextIndex[category] || 0;
+    // A small number of contextualised A1 items remain easy; A2 items move to medium.
+    return level === 'A1' && n % 5 === 0 ? 'easy' : 'medium';
+}
+
 const add = (category, level, difficulty, tags, q) =>
-    items.push({ skill: 'grammar', category, level, difficulty, tags: ['grammar', ...tags], ...q });
+    items.push({
+        skill: 'grammar',
+        category,
+        level,
+        difficulty: harderDifficulty(level, difficulty, category),
+        tags: ['grammar', ...tags],
+        ...q,
+        question: harderStem(category, q.question),
+    });
 const choice = (category, level, difficulty, tags, question, [correct, ...distractors], explanation) =>
     add(category, level, difficulty, tags, mc({ question, correct, distractors, explanation }));
 

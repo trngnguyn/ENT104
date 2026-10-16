@@ -4,16 +4,17 @@ const { mc, U, X, findError } = require('../lib/builders');
 
 // Trình độ B1.
 const items = [];
+const harder = difficulty => difficulty === 'easy' ? 'medium' : difficulty === 'medium' ? 'hard' : difficulty;
 const err = (category, difficulty, tags, segs, explanation) =>
-    items.push({ skill: 'completion_error', category, level: 'B1', difficulty, tags: ['error', ...tags], ...findError({ segs, explanation }) });
+    items.push({ skill: 'completion_error', category, level: 'B1', difficulty: harder(difficulty), tags: ['error', ...tags], ...findError({ segs, explanation }) });
 const fill = (category, difficulty, tags, question, [correct, ...distractors], explanation) =>
-    items.push({ skill: 'completion_error', category, level: 'B1', difficulty, tags: ['completion', ...tags], ...mc({ question, correct, distractors, explanation }) });
+    items.push({ skill: 'completion_error', category, level: 'B1', difficulty: harder(difficulty), tags: ['completion', ...tags], ...mc({ question, correct, distractors, explanation }) });
 
 // ---------------------------------------------------------------- Tìm lỗi sai
 // Present Perfect
 err('Present Perfect', 'easy', ['present-perfect'],
-    ['I', X('have lived', 'live'), 'in Can Tho', U('since'), 'I was', U('ten'), 'years old, so I', U('know'), 'the city well.'],
-    "Sai ở ({L}) 'live'. Với 'since' + mốc thời gian, hành động kéo dài đến nay → hiện tại hoàn thành: 'have lived'.");
+    ['I', X('have lived', 'lived'), 'in Can Tho', U('since'), 'I was', U('ten'), 'and still', U('know'), 'the city well.'],
+    "Sai ở ({L}) 'lived'. 'Since I was ten' và ý vẫn còn đúng ở hiện tại → hiện tại hoàn thành 'have lived', không dùng quá khứ đơn.");
 err('Present Perfect', 'medium', ['present-perfect'],
     ['She', U('has'), X('already', 'yet'), U('finished'), 'her report, so she', U('can'), 'go home early today.'],
     "Sai ở ({L}) 'yet'. Câu khẳng định dùng 'already' (đã... rồi) đứng giữa 'has' và V3. 'yet' dùng trong câu phủ định/câu hỏi và đứng cuối câu.");
@@ -23,13 +24,13 @@ err('Present Perfect', 'medium', ['past-simple', 'present-perfect'],
 
 // Past Perfect
 err('Past Perfect', 'medium', ['past-perfect'],
-    ['When I', U('got'), 'to the station, the train', X('had', 'has'), U('already'), 'left, so I', U('took'), 'a taxi.'],
-    "Sai ở ({L}) 'has'. Tàu rời đi TRƯỚC khi tôi đến (quá khứ) → quá khứ hoàn thành 'had already left'.");
+    ['By the time I', U('got'), 'to the station, the train', X('had already left', 'already left'), U('and'), 'the next one', U('was not due'), 'for an hour.'],
+    "Sai ở ({L}) 'already left'. Việc tàu rời đi hoàn tất trước mốc quá khứ 'got' → quá khứ hoàn thành 'had already left'.");
 
 // Passive Voice
 err('Passive Voice', 'easy', ['passive'],
-    ['This pagoda', X('was built', 'built'), U('more than'), '200 years ago and', U('is visited'), 'by thousands of tourists', U('every'), 'year.'],
-    "Sai ở ({L}) 'built'. Ngôi chùa 'được xây' (bị động) trong quá khứ → 'was built'.");
+    ['This pagoda, which', U('stands'), 'beside the river,', X('was built', 'has built'), U('more than'), '200 years ago and', U('is still visited'), 'daily.'],
+    "Sai ở ({L}) 'has built'. Ngôi chùa nhận hành động xây và có mốc quá khứ '200 years ago' → bị động quá khứ 'was built'.");
 err('Passive Voice', 'medium', ['passive'],
     ['The exam results', X('will be announced', 'will announce'), U('on'), 'the school website', U('next'), 'Monday, so', U('please'), 'check it then.'],
     "Sai ở ({L}) 'will announce'. Kết quả thi 'được công bố' (bị động) trong tương lai → 'will be announced'.");
@@ -39,8 +40,8 @@ err('Passive Voice', 'medium', ['passive'],
 
 // Conditionals
 err('Conditionals', 'easy', ['conditional'],
-    ['If it', X('rains', 'will rain'), 'tomorrow, we', U('will'), U('stay'), 'at home and', U('watch'), 'a film.'],
-    "Sai ở ({L}) 'will rain'. Câu điều kiện loại 1: mệnh đề 'if' dùng hiện tại đơn, không dùng 'will' → 'rains'.");
+    ['Unless the weather', X('improves', "doesn't improve"), 'by noon, we', U('will'), U('cancel'), 'the picnic and', U('stay'), 'home.'],
+    "Sai ở ({L}) 'doesn't improve'. 'Unless' đã mang nghĩa 'if...not', nên mệnh đề sau dùng dạng khẳng định 'improves', không thêm phủ định lần nữa.");
 err('Conditionals', 'medium', ['conditional'],
     ['If I', X('had', 'have'), 'more money, I', U('would'), 'buy', U('a'), 'new laptop', U('for'), 'my studies.'],
     "Sai ở ({L}) 'have'. Mệnh đề chính có 'would' → câu điều kiện loại 2: If + quá khứ đơn → 'had'.");
@@ -53,8 +54,8 @@ err('Relative Clauses', 'medium', ['relative-clause'],
     ['I have a friend', X('whose', 'who'), U('father'), 'is a pilot, and she', U('has traveled'), 'to', U('many'), 'countries.'],
     "Sai ở ({L}) 'who'. Chỉ sự sở hữu (bố của người bạn), có danh từ 'father' theo sau → 'whose'.");
 err('Relative Clauses', 'medium', ['relative-clause'],
-    ['This is the café', X('where', 'which'), 'we', U('first'), 'met', U('three'), 'years', U('ago'), '.'],
-    "Sai ở ({L}) 'which'. Thay cho nơi chốn ('the café'), sau đó là mệnh đề đầy đủ 'we first met' → 'where' (= in which).");
+    ['This is the café', X('where', 'which'), 'we', U('first'), 'met each other', U('three years ago'), 'and', U('still visit'), 'regularly.'],
+    "Sai ở ({L}) 'which'. Sau chỗ trống là mệnh đề đầy đủ 'we first met each other', nên cần trạng từ quan hệ chỉ nơi chốn 'where' (= at which).");
 
 // Reported Speech
 err('Reported Speech', 'medium', ['reported-speech'],
@@ -108,11 +109,11 @@ err('Word Form', 'medium', ['word-form'],
 
 // ---------------------------------------------------------------- Hoàn thành câu
 fill('Conjunctions', 'medium', ['conjunction'], "______ she was very tired, she finished all her homework.",
-    ['Although', 'Because', 'Despite', 'So'],
-    "Hai vế trái ngược (mệt nhưng vẫn làm xong bài) và theo sau là mệnh đề → 'Although'. 'Despite' + danh từ/V-ing.");
+    ['Although', 'Despite', 'In spite', 'Because of'],
+    "Sau chỗ trống là mệnh đề 'she was very tired' và hai vế tương phản → 'Although'. 'Despite/Because of' cần cụm danh từ; 'in spite' phải có 'of'.");
 fill('Conjunctions', 'medium', ['conjunction'], "The flight was delayed ______ the bad weather.",
-    ['because of', 'because', 'although', 'so that'],
-    "Theo sau là cụm danh từ ('the bad weather') → 'because of'. 'because' + mệnh đề.");
+    ['because of', 'because', 'although', 'despite of'],
+    "Theo sau là cụm danh từ 'the bad weather' → 'because of'. 'Because/although' cần mệnh đề; dạng đúng là 'despite', không có 'of'.");
 fill('Word Form', 'medium', ['word-form', 'adjective'], "We were ______ by the beautiful view from the top of the mountain.",
     ['amazed', 'amazing', 'amaze', 'amazement'],
     "Diễn tả cảm xúc của người ('We were...') → tính từ đuôi -ed: 'amazed' (kinh ngạc, thích thú).");
@@ -123,7 +124,7 @@ fill('Gerunds & Infinitives', 'medium', ['gerund'], "Have you ever thought about
     ['studying', 'study', 'to study', 'studied'],
     "Sau giới từ 'about' động từ ở dạng V-ing → 'thought about studying'.");
 fill('Present Perfect', 'easy', ['present-perfect'], "I haven't seen my cousins ______ last Lunar New Year.",
-    ['since', 'for', 'ago', 'during'],
-    "'since' + mốc thời gian ('last Lunar New Year') trong thì hiện tại hoàn thành.");
+    ['since', 'for', 'from', 'during'],
+    "'Since' + mốc bắt đầu ('last Lunar New Year') đi với hiện tại hoàn thành. 'For' cần khoảng thời gian; 'during' chỉ khoảng sự kiện.");
 
 module.exports = items;

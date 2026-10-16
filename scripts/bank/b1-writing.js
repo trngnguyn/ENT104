@@ -4,33 +4,34 @@ const { mc, orderWords, orderLines } = require('../lib/builders');
 
 // Trình độ B1.
 const items = [];
+const harder = difficulty => difficulty === 'easy' ? 'medium' : difficulty === 'medium' ? 'hard' : difficulty;
 const push = (category, difficulty, tags, q) =>
-    items.push({ skill: 'writing', category, level: 'B1', difficulty, tags: ['writing', ...tags], ...q });
+    items.push({ skill: 'writing', category, level: 'B1', difficulty: harder(difficulty), tags: ['writing', ...tags], ...q });
 
 // ---------------------------------------------------------------- Sắp xếp từ thành câu
 // [difficulty, tags, chunks, các hoán vị chắc chắn sai ngữ pháp, giải thích, dấu kết câu?]
 const WORDS = [
-    ['medium', ['passive'], ['this temple', 'was built', 'by the local people', 'over 200 years ago'],
-        [[1, 0, 2, 3], [2, 1, 0, 3], [1, 2, 0, 3]],
-        "Câu bị động: Chủ ngữ + was/were + V3 + by + tác nhân + thời gian."],
-    ['medium', ['relative-clause'], ['the girl', 'who sits next to me', 'comes', 'from Soc Trang'],
+    ['hard', ['passive'], ['the final decision', 'will not be announced', 'by the committee', 'until every application has been reviewed'],
+        [[1, 0, 2, 3], [2, 1, 0, 3], [0, 1, 3, 2]],
+        "Câu bị động: chủ ngữ nhận hành động + will not be + V3; cụm thời gian 'until...' đứng cuối."],
+    ['hard', ['relative-clause'], ['the girl', 'whose presentation won first prize', 'comes', 'from Soc Trang'],
         [[0, 2, 1, 3], [1, 0, 2, 3], [2, 0, 1, 3]],
-        "Mệnh đề quan hệ đứng ngay sau danh từ nó bổ nghĩa ('the girl who sits next to me'), sau đó mới đến động từ chính 'comes'."],
+        "Mệnh đề quan hệ sở hữu đứng ngay sau danh từ nó bổ nghĩa ('the girl whose presentation...'), sau đó mới đến động từ chính 'comes'."],
     ['medium', ['indirect-question'], ['could you tell me', 'where', 'the post office', 'is'],
         [[0, 1, 3, 2], [1, 3, 2, 0], [0, 2, 1, 3]],
         "Câu hỏi gián tiếp: Could you tell me + từ để hỏi + chủ ngữ + động từ (không đảo 'is' lên trước chủ ngữ).", '?'],
     ['hard', ['conditional'], ['I would', 'learn Japanese', 'if I', 'had', 'more free time'],
         [[0, 1, 2, 4, 3], [2, 3, 0, 1, 4], [0, 3, 2, 1, 4]],
         "Câu điều kiện loại 2: S + would + V + if + S + quá khứ đơn + ..."],
-    ['medium', ['present-perfect'], ['I', 'have', 'never', 'been', 'to Hanoi'],
+    ['hard', ['present-perfect'], ['I', 'have', 'never', 'been asked to speak', 'in front of such a large audience'],
         [[0, 1, 3, 2, 4], [2, 0, 1, 3, 4], [0, 3, 1, 2, 4]],
-        "Hiện tại hoàn thành với 'never': S + have + never + V3. 'never' đứng giữa 'have' và V3."],
+        "Hiện tại hoàn thành bị động với 'never': S + have + never + been + V3."],
     ['medium', ['used-to'], ['my grandfather', 'used to', 'work', 'on a farm', 'when he was young'],
         [[0, 2, 1, 3, 4], [1, 0, 2, 3, 4], [0, 1, 3, 2, 4]],
         "'used to + V nguyên mẫu' đứng ngay sau chủ ngữ: S + used to + V + nơi chốn + thời gian."],
-    ['medium', ['reported-speech'], ['she', 'asked me', 'if', 'I', 'was free'],
+    ['hard', ['reported-speech'], ['she', 'asked me', 'whether', 'I', 'would be free the following day'],
         [[0, 1, 2, 4, 3], [0, 1, 4, 2, 3], [0, 2, 3, 4, 1]],
-        "Tường thuật câu hỏi Yes/No: S + asked + O + if + S + V (trật tự trần thuật)."],
+        "Tường thuật câu hỏi Yes/No: S + asked + O + whether + S + V; 'tomorrow' lùi thành 'the following day'."],
     ['medium', ['too-enough'], ['this coffee', 'is', 'too hot', 'for me', 'to drink'],
         [[0, 1, 3, 2, 4], [0, 2, 1, 3, 4], [0, 1, 4, 2, 3]],
         "Cấu trúc: S + be + too + tính từ + for + O + to V (quá... để ai làm gì)."],
@@ -100,7 +101,7 @@ choice('Sentence Transformation', 'medium', ['present-perfect'],
     "'haven't seen... for two months' (đã 2 tháng không gặp) ⇔ 'The last time I saw Lan was two months ago' (lần cuối gặp là 2 tháng trước).");
 choice('Sentence Transformation', 'medium', ['reported-speech'],
     "Choose the sentence with the same meaning: <br><i>\"I'm going to visit my grandparents,\" said Hoa.</i>",
-    ['Hoa said that she was going to visit her grandparents.', 'Hoa said that I was going to visit my grandparents.', 'Hoa said that she is going to visit my grandparents.', 'Hoa told that she was going to visit her grandparents.'],
+    ['Hoa said that she was going to visit her grandparents.', 'Hoa told that she was going to visit her grandparents.', 'Hoa said me that she would visit my grandparents.', 'Hoa said that I had been going to visit her grandparents.'],
     "Tường thuật: đổi ngôi 'I' → 'she', 'my' → 'her'; lùi thì 'am going to' → 'was going to'. 'told' phải có tân ngữ (told me), nên 'Hoa told that...' sai.");
 choice('Sentence Transformation', 'hard', ['conditional'],
     "Choose the sentence with the same meaning: <br><i>I don't have a car, so I can't drive you to the airport.</i>",
@@ -112,7 +113,7 @@ choice('Sentence Transformation', 'hard', ['present-perfect'],
     "'This is the first time I have eaten...' (lần đầu tiên ăn) ⇔ 'I have never eaten... before' (trước đây chưa từng ăn).");
 choice('Sentence Transformation', 'hard', ['too-enough'],
     "Choose the sentence with the same meaning: <br><i>The bag was so heavy that I couldn't lift it.</i>",
-    ['The bag was too heavy for me to lift.', 'The bag was heavy enough for me to lift.', 'The bag was so heavy for me to lift.', 'The bag was too heavy for me to lift it.'],
+    ['The bag was too heavy for me to lift.', 'The bag was not heavy enough for me to lift.', 'The bag was too heavy that I could not lift.', 'The bag was so heavy for me not to lift it.'],
     "'so... that... couldn't' ⇔ 'too + adj + for sb + to V'. Không lặp lại tân ngữ 'it' sau 'to lift' vì chủ ngữ 'The bag' chính là vật được nhấc.");
 choice('Sentence Transformation', 'hard', ['conjunction'],
     "Choose the sentence with the same meaning: <br><i>Although it rained heavily, we went to the beach.</i>",
@@ -121,7 +122,7 @@ choice('Sentence Transformation', 'hard', ['conjunction'],
 
 choice('Sentence Combining', 'medium', ['relative-clause'],
     "Choose the best way to combine the sentences: <br><i>I met a man. He can speak five languages.</i>",
-    ['I met a man who can speak five languages.', 'I met a man which can speak five languages.', 'I met a man who he can speak five languages.', 'I met a man whose can speak five languages.'],
+    ['I met a man who can speak five languages.', 'I met a man whom can speak five languages.', 'I met a man who he can speak five languages.', 'The man who I met him can speak five languages.'],
     "Thay 'He' (chỉ người) bằng đại từ quan hệ 'who'; không giữ lại 'he' trong mệnh đề quan hệ.");
 choice('Sentence Combining', 'medium', ['conjunction'],
     "Choose the best way to combine the sentences: <br><i>He was very tired. He kept working until midnight.</i>",

@@ -191,6 +191,53 @@ It may seem that staying up late gives you more time to study. In fact, a good n
     },
 ];
 
+// Giữ nguyên passage/id nhưng thay các câu hỏi có thể chép nguyên văn bằng câu
+// suy luận, quy chiếu và từ vựng trong ngữ cảnh với phương án nhiễu gần nghĩa.
+const HARDER_QUESTIONS = {
+    RP31: [
+        [1, ['inference', 'hard', 'Which group is presented as benefiting most directly from the apps?', ['Busy students and young office workers', 'Environmental groups', 'Owners who lose 25% per order', 'People who make plastic cutlery'], "Đoạn 2 gắn sự phổ biến với sinh viên và nhân viên trẻ bận rộn vì ứng dụng tiết kiệm thời gian."]],
+        [3, ['vocabulary', 'hard', "In the final sentence, “the industry” refers to ______.", ['food delivery apps and related restaurants', 'plastic manufacturers only', 'university survey groups', 'all young office workers'], "Các biện pháp ngay trước đó do ứng dụng và nhà hàng thực hiện, nên 'the industry' quy chiếu ngành giao đồ ăn."]],
+    ],
+    RP32: [
+        [1, ['inference', 'hard', 'Which previous experience best supports Khoa’s application?', ['Guiding visitors and solving unexpected problems', 'Studying tourism for three years', 'Reading the company website', 'Being free during the summer'], "Công việc hướng dẫn trực tiếp chứng minh kỹ năng giao tiếp và xử lý tình huống cần cho thực tập du lịch."]],
+        [3, ['vocabulary', 'hard', "What is the purpose of the “reference letter”?", ["To provide another person's opinion of Khoa's abilities", 'To list the prices of eco-tours', 'To replace his CV completely', 'To confirm his summer accommodation'], "Thư giới thiệu từ giáo viên cung cấp nhận xét độc lập về năng lực/phẩm chất của ứng viên."]],
+    ],
+    RP33: [
+        [1, ['inference', 'hard', 'Why were real conversations difficult although Ha My had studied online?', ['People spoke faster than the speakers in her learning videos.', 'She had learned only English online.', 'The subway had no signs.', 'She stopped studying after arriving.'], "Bài đối chiếu hội thoại thật nhanh hơn các video cô từng xem; đây là nguyên nhân khó hiểu."]],
+        [2, ['inference', 'hard', 'What probably helped Ha My improve most after the difficult first weeks?', ['Regular social contact and language exchange', 'Avoiding Korean classmates', 'Cooking Vietnamese food alone', 'Watching the same online videos'], "Câu lạc bộ tạo bạn bè và Jiwoo trao đổi ngôn ngữ hai lần mỗi tuần, tức cơ hội giao tiếp đều đặn."]],
+    ],
+    RP34: [
+        [1, ['inference', 'hard', 'Why is the training held two days before the camp?', ['To prepare accepted volunteers for their tasks', 'To test the children’s English level', 'To replace the first two camp days', 'To select applicants after the camp starts'], "Buổi tập huấn trước ngày 6/7 nhằm chuẩn bị tình nguyện viên cho các hoạt động sẽ phụ trách."]],
+        [2, ['vocabulary', 'hard', "In “experience with children is an advantage”, “advantage” means ______.", ['something helpful but not required', 'a condition every applicant must meet', 'a payment for previous work', 'a disadvantage that reduces your chance'], "Vế sau nói 'but not necessary', nên 'advantage' là điểm có lợi nhưng không bắt buộc."]],
+    ],
+    RP35: [
+        [1, ['inference', 'hard', 'Which detail best supports Lucy’s description of the hosts as treating guests like family?', ['They cooked, taught a recipe and ate together with the guests.', 'The house was ten minutes from town.', 'A bicycle was included in the price.', 'The room had only a fan.'], "Cùng nấu và ăn tối là bằng chứng trực tiếp cho sự tiếp đón thân tình như người nhà."]],
+        [3, ['vocabulary', 'hard', "In “it might not suit travelers”, “suit” is closest in meaning to ______.", ['be suitable for', 'provide clothes for', 'surprise', 'cost less for'], "Trong ngữ cảnh nhu cầu tiện nghi, 'suit' nghĩa là phù hợp với."]],
+    ],
+    RP36: [
+        [1, ['inference', 'hard', 'Why does the writer compare the money with Phuc’s monthly earnings?', ['To show how strong the temptation could have been', 'To prove Phuc had stolen it', 'To explain the amount of the reward', 'To show that his job paid well'], "So sánh nhấn mạnh số tiền rất lớn đối với Phúc, làm lựa chọn trả lại ví đáng chú ý hơn."]],
+        [2, ['inference', 'hard', 'What role did the neighbor play in returning the wallet?', ["The neighbor connected the ID card's address to Mrs. Thu's workplace.", 'The neighbor paid the school fees.', 'The neighbor found the wallet first.', 'The neighbor accepted the reward for Phuc.'], "Địa chỉ chỉ đưa Phúc đến nhà; người hàng xóm cung cấp thông tin quyết định về hiệu thuốc."]],
+    ],
+    RP37: [
+        [1, ['inference', 'hard', 'What probably caused the number of lost cups to fall?', ['Customers became familiar with the system and reminded one another.', 'The café returned to single-use plastic.', 'The bank bought replacement cups.', 'Hoang Anh stopped offering takeaway drinks.'], "Hoàng Anh nói khách thích ý tưởng và khách quen nhắc nhau, ngay sau khi nêu số cốc mất giảm."]],
+        [2, ['vocabulary', 'hard', "In “focused on drinks”, “focused on” means ______.", ['gave most attention to', 'stopped selling', 'borrowed money for', 'charged more for'], "Sau khi bánh không bán được, cô tập trung nguồn lực/chú ý vào đồ uống."]],
+    ],
+    RP38: [
+        [1, ['inference', 'hard', 'What does the growth from a few neighbors to 400 online members suggest?', ['The group has gained strong community interest.', 'All 400 members clean every month.', 'Local businesses created the group.', 'The canals no longer contain rubbish.'], "Sự tăng trưởng cho thấy sự quan tâm cộng đồng; văn bản không nói cả 400 người đều tham gia trực tiếp."]],
+        [2, ['vocabulary', 'hard', "In “Cleaning is only half of the job”, Thao means that ______.", ['preventing future litter is as important as removing existing rubbish', 'volunteers should clean for half a day', 'only half the canal contains rubbish', 'schools should do all the cleaning'], "Các câu sau nói nếu người dân tiếp tục xả rác thì việc dọn không bao giờ xong, nên cần phòng ngừa bằng giáo dục."]],
+    ],
+    RP39: [
+        [1, ['inference', 'hard', 'Why does the text mention memory and catching colds together?', ['To show that too little sleep affects both learning and physical health', 'To claim that studying causes every cold', 'To compare two reasons for drinking coffee', 'To explain why weekends are longer'], "Trí nhớ liên quan học tập, cảm lạnh liên quan sức khỏe; hai ví dụ cho thấy tác hại rộng của thiếu ngủ."]],
+        [3, ['vocabulary', 'hard', "In “your body has less time to repair itself”, “repair itself” means ______.", ['recover and stay healthy', 'remember class notes', 'remain awake longer', 'produce screen light'], "Trong ngữ cảnh dễ bị cảm, cụm này nói cơ thể phục hồi và duy trì sức khỏe khi ngủ."]],
+    ],
+};
+
+for (const passage of PASSAGES) {
+    for (const [index, question] of HARDER_QUESTIONS[passage.id] || []) {
+        passage.questions[index] = question;
+    }
+}
+
 const FOCUS_CATEGORY = {
     main_idea: 'Main Idea',
     detail: 'Detail',

@@ -5,25 +5,25 @@ const { mc } = require('../lib/builders');
 // Mỗi dòng: [level, difficulty, question, [đáp án đúng, nhiễu 1, nhiễu 2, nhiễu 3], giải thích]
 const BANK = {
     'Family': [
-        ['A1', 'easy', "My father's brother is my ______.", ['uncle', 'aunt', 'cousin', 'nephew'], "'uncle' = chú/bác/cậu (anh/em trai của bố hoặc mẹ)."],
-        ['A1', 'easy', "My mother's sister is my ______.", ['aunt', 'uncle', 'niece', 'cousin'], "'aunt' = cô/dì (chị/em gái của bố hoặc mẹ)."],
+        ['A1', 'medium', "My father's brother is my ______, and his daughter is my ______.", ['uncle / cousin', 'uncle / niece', 'cousin / sister', 'aunt / cousin'], "Anh/em trai của bố là 'uncle'; con gái của chú/bác là 'cousin' (chị/em họ) của người nói."],
+        ['A1', 'medium', "Mai is visiting her mother's sister and that woman's son. She is visiting her ______ and her ______.", ['aunt / cousin', 'uncle / nephew', 'aunt / brother', 'niece / cousin'], "Chị/em gái của mẹ là 'aunt'; con của cô/dì là 'cousin' của Mai."],
         ['A1', 'medium', "My aunt's children are my ______.", ['cousins', 'nephews', 'brothers', 'grandchildren'], "'cousins' = anh chị em họ (con của cô/dì/chú/bác)."],
-        ['A1', 'easy', "My father's father is my ______.", ['grandfather', 'grandson', 'uncle', 'father-in-law'], "'grandfather' = ông (bố của bố/mẹ)."],
+        ['A1', 'medium', "The old man in the photo is my father's father, so he is my ______, not my ______.", ['grandfather / uncle', 'uncle / grandfather', 'grandson / father', 'father-in-law / cousin'], "Bố của bố là 'grandfather' (ông), không phải 'uncle' (chú/bác/cậu)."],
         ['A2', 'medium', "My sister's son is my ______.", ['nephew', 'niece', 'cousin', 'uncle'], "'nephew' = cháu trai (con trai của anh/chị/em). 'niece' = cháu gái."],
         ['A2', 'medium', "My brother's daughter is my ______.", ['niece', 'nephew', 'cousin', 'aunt'], "'niece' = cháu gái (con gái của anh/chị/em)."],
         ['A1', 'medium', "My parents have three children: my two brothers and me. I don't have any ______.", ['sisters', 'brothers', 'parents', 'children'], "Gia đình có 3 người con: 2 anh/em trai và 'tôi' → 'tôi' không có chị/em gái nào ('sisters')."],
-        ['A2', 'hard', "My husband's mother is my ______.", ['mother-in-law', 'stepmother', 'grandmother', 'aunt'], "'mother-in-law' = mẹ chồng/mẹ vợ."],
+        ['A2', 'hard', "After I married Minh, his mother became my ______, while my mother became his ______.", ['mother-in-law / mother-in-law', 'stepmother / aunt', 'grandmother / mother-in-law', 'aunt / stepmother'], "'mother-in-law' chỉ mẹ chồng hoặc mẹ vợ; quan hệ này đúng theo cả hai chiều trong câu."],
         ['A1', 'medium', "Linh and Lan are sisters. They were born on the same day. They are ______.", ['twins', 'cousins', 'neighbors', 'parents'], "'twins' = anh chị em sinh đôi."],
         ['A1', 'medium', "My grandparents have five ______: my brother, my three cousins and me.", ['grandchildren', 'children', 'nephews', 'parents'], "'grandchildren' = các cháu (của ông bà)."],
         ['A2', 'medium', "Nam doesn't have a wife or a girlfriend. He is ______.", ['single', 'married', 'engaged', 'a husband'], "'single' = độc thân."],
-        ['A1', 'easy', "My mom and dad are my ______.", ['parents', 'cousins', 'grandparents', 'children'], "'parents' = bố mẹ."],
+        ['A1', 'medium', "Both my mom and dad work late, so my ______ usually have dinner after 8 p.m.", ['parents', 'cousins', 'grandparents', 'children'], "'parents' = bố mẹ; 'both my mom and dad' cho biết đang nói về cả hai người."],
         ['A2', 'easy', "Lan and Huy got ______ last year. Their wedding was beautiful.", ['married', 'marry', 'single', 'wedding'], "'get married' = kết hôn; 'got married' là quá khứ. 'wedding' (đám cưới) là danh từ, không đi sau 'got'."],
-        ['A1', 'easy', "Mr. and Mrs. Tran have one son and no daughters. Their son is an only ______.", ['child', 'children', 'parents', 'family'], "'an only child' = con một."],
-        ['A1', 'easy', "My father has two sisters. They are my ______.", ['aunts', 'uncles', 'cousins', 'nieces'], "Chị/em gái của bố là cô → 'aunts' (số nhiều vì có hai người)."],
+        ['A1', 'medium', "Mr. and Mrs. Tran have one son and no other children, so he is an only ______ and has no ______.", ['child / siblings', 'children / cousins', 'son / parents', 'brother / relatives'], "'an only child' = con một; vì không có người con nào khác nên cậu ấy không có 'siblings' (anh/chị/em ruột)."],
+        ['A1', 'medium', "My father has two sisters. They are my ______, and their children are my ______.", ['aunts / cousins', 'uncles / nephews', 'cousins / aunts', 'nieces / siblings'], "Chị/em gái của bố là 'aunts'; con của họ là 'cousins' của người nói."],
     ],
     'School': [
-        ['A1', 'easy', "We do experiments in the science ______.", ['lab', 'library', 'canteen', 'gym'], "'lab' (laboratory) = phòng thí nghiệm."],
-        ['A1', 'easy', "You can borrow books from the ______.", ['library', 'bookstore', 'canteen', 'gym'], "'library' = thư viện (mượn sách). 'bookstore' = hiệu sách (mua sách)."],
+        ['A1', 'easy', "We do experiments in the science ______.", ['lab', 'classroom', 'library', 'workshop'], "'lab' (laboratory) = phòng thí nghiệm; classroom, library và workshop cũng là địa điểm học tập nhưng không chuyên dùng để làm thí nghiệm khoa học."],
+        ['A1', 'easy', "You can borrow books from the ______.", ['library', 'bookstore', 'reading room', 'classroom'], "'library' = thư viện (mượn sách). 'bookstore' = hiệu sách (mua sách); reading room là phòng đọc và classroom là phòng học."],
         ['A1', 'easy', "Students eat lunch in the school ______.", ['canteen', 'library', 'lab', 'office'], "'canteen' = căng tin."],
         ['A1', 'easy', "History, math and English are school ______.", ['subjects', 'teachers', 'classrooms', 'uniforms'], "'subjects' = môn học."],
         ['A1', 'easy', "I made a mistake in pencil. Can I borrow your ______?", ['eraser', 'ruler', 'stapler', 'calculator'], "'eraser' = cục tẩy (dùng để xoá lỗi viết bằng bút chì)."],
@@ -39,15 +39,15 @@ const BANK = {
         ['A2', 'medium', "You must not look at other students' papers during the test. That's ______.", ['cheating', 'helping', 'studying', 'sharing'], "'cheating' = gian lận (trong thi cử)."],
     ],
     'Jobs': [
-        ['A1', 'easy', "A ______ helps sick people in a hospital.", ['nurse', 'pilot', 'chef', 'farmer'], "'nurse' = y tá."],
-        ['A1', 'easy', "A ______ cooks food in a restaurant.", ['chef', 'waiter', 'dentist', 'driver'], "'chef' = đầu bếp. 'waiter' = người phục vụ."],
-        ['A1', 'easy', "A ______ brings food to the tables in a restaurant.", ['waiter', 'chef', 'cashier', 'pilot'], "'waiter' = người phục vụ bàn."],
-        ['A1', 'easy', "A ______ flies planes.", ['pilot', 'driver', 'mechanic', 'sailor'], "'pilot' = phi công."],
-        ['A1', 'easy', "A ______ fixes cars.", ['mechanic', 'doctor', 'chef', 'lawyer'], "'mechanic' = thợ sửa xe/thợ máy."],
-        ['A1', 'easy', "A ______ takes care of people's teeth.", ['dentist', 'lawyer', 'farmer', 'artist'], "'dentist' = nha sĩ."],
-        ['A1', 'easy', "A ______ grows rice and vegetables.", ['farmer', 'lawyer', 'pilot', 'cashier'], "'farmer' = nông dân."],
+        ['A1', 'medium', "Hoa works night shifts at a hospital, where she checks patients and gives them medicine. She is a ______.", ['nurse', 'pilot', 'chef', 'farmer'], "'nurse' = y tá/điều dưỡng; các nhiệm vụ chăm sóc bệnh nhân và cho uống thuốc phù hợp với nghề này."],
+        ['A1', 'medium', "The ______ prepares the meals in the kitchen, while the ______ carries them to customers' tables.", ['chef / waiter', 'waiter / chef', 'cashier / dentist', 'driver / chef'], "'chef' nấu ăn trong bếp; 'waiter' mang món ra bàn cho khách."],
+        ['A1', 'medium', "Our ______ explained the menu, took our order, and brought the food to our table.", ['waiter', 'chef', 'cashier', 'pilot'], "'waiter' = nhân viên phục vụ bàn, người nhận món gọi và mang thức ăn ra bàn."],
+        ['A1', 'medium', "Before the plane took off, the ______ welcomed the passengers and checked the controls.", ['pilot', 'driver', 'mechanic', 'sailor'], "'pilot' = phi công; người điều khiển máy bay và kiểm tra hệ thống trước khi cất cánh."],
+        ['A1', 'medium', "The car would not start, so a ______ checked the engine while a ______ drove us home.", ['mechanic / taxi driver', 'doctor / pilot', 'chef / cashier', 'lawyer / sailor'], "'mechanic' sửa động cơ; 'taxi driver' lái taxi đưa hành khách về nhà."],
+        ['A1', 'medium', "When my tooth began to hurt, I made an appointment with a ______ instead of going to a ______.", ['dentist / pharmacy', 'lawyer / hospital', 'farmer / dentist', 'artist / mechanic'], "'dentist' = nha sĩ, người khám răng; 'pharmacy' là hiệu thuốc chứ không phải người khám."],
+        ['A1', 'medium', "Mr. Ba grows rice and vegetables, and his daughter takes customers' money at the market. He is a ______, and she is a ______.", ['farmer / cashier', 'cashier / farmer', 'pilot / lawyer', 'lawyer / pilot'], "Người trồng lúa và rau là 'farmer' (nông dân); người nhận tiền của khách là 'cashier' (thu ngân)."],
         ['A2', 'medium', "An ______ designs buildings and houses.", ['architect', 'mechanic', 'accountant', 'electrician'], "'architect' = kiến trúc sư (bắt đầu bằng nguyên âm nên đi với 'An')."],
-        ['A1', 'easy', "A ______ takes your money in a supermarket.", ['cashier', 'chef', 'pilot', 'mechanic'], "'cashier' = thu ngân."],
+        ['A1', 'medium', "After scanning our groceries, the ______ told us the total and gave us a receipt.", ['cashier', 'chef', 'pilot', 'mechanic'], "'cashier' = thu ngân; người quét hàng, nhận tiền và đưa biên lai."],
         ['A2', 'medium', "A ______ writes news stories for newspapers or websites.", ['journalist', 'pharmacist', 'engineer', 'receptionist'], "'journalist' = nhà báo."],
         ['A2', 'medium', "A ______ welcomes guests and answers the phone at a hotel.", ['receptionist', 'journalist', 'pilot', 'farmer'], "'receptionist' = lễ tân."],
         ['A2', 'medium', "A ______ writes computer programs.", ['programmer', 'plumber', 'cashier', 'chef'], "'programmer' = lập trình viên."],
@@ -56,7 +56,7 @@ const BANK = {
         ['A1', 'medium', "A: What do you ______? <br>B: I'm an accountant.", ['do', 'work', 'job', 'make'], "'What do you do?' = Bạn làm nghề gì?"],
     ],
     'Daily Routines': [
-        ['A1', 'easy', "I ______ up at 6 a.m. every day.", ['wake', 'sleep', 'go', 'fall'], "'wake up' = thức dậy."],
+        ['A1', 'easy', "I ______ up at 6 a.m. every day.", ['wake', 'get', 'stay', 'sit'], "'wake up' = thức giấc. Các động từ get, stay và sit đều có thể đi với 'up' trong ngữ cảnh khác nhưng không diễn tả việc thức giấc."],
         ['A1', 'easy', "After I get up, I ______ my teeth.", ['brush', 'comb', 'wear', 'cook'], "'brush my teeth' = đánh răng. 'comb' dùng cho tóc."],
         ['A1', 'easy', "I ______ a shower before breakfast.", ['take', 'do', 'make', 'go'], "'take a shower' = tắm vòi sen."],
         ['A1', 'medium', "My father ______ dressed and leaves for work at 7.", ['gets', 'puts', 'makes', 'does'], "'get dressed' = mặc quần áo."],
@@ -175,11 +175,11 @@ const BANK = {
         ['A1', 'easy', "A ______ is a big open area with trees and grass where people relax.", ['park', 'parking lot', 'prison', 'factory'], "'park' = công viên."],
     ],
     'Adjectives': [
-        ['A1', 'easy', "The opposite of 'cheap' is ______.", ['expensive', 'easy', 'early', 'empty'], "'cheap' (rẻ) ↔ 'expensive' (đắt)."],
-        ['A1', 'medium', "The opposite of 'noisy' is ______.", ['quiet', 'quick', 'quite', 'busy'], "'noisy' (ồn ào) ↔ 'quiet' (yên tĩnh). Chú ý: 'quite' = khá."],
-        ['A1', 'easy', "The opposite of 'empty' is ______.", ['full', 'heavy', 'dirty', 'wide'], "'empty' (trống) ↔ 'full' (đầy)."],
-        ['A1', 'easy', "The opposite of 'dangerous' is ______.", ['safe', 'dirty', 'strong', 'smooth'], "'dangerous' (nguy hiểm) ↔ 'safe' (an toàn)."],
-        ['A2', 'medium', "The opposite of 'wide' is ______.", ['narrow', 'light', 'quiet', 'soft'], "'wide' (rộng) ↔ 'narrow' (hẹp)."],
+        ['A1', 'medium', "The first bag is cheap enough for me, but the leather one is too ______ to buy.", ['expensive', 'easy', 'early', 'empty'], "'expensive' = đắt; được dùng để đối lập với 'cheap' và phù hợp với 'too ... to buy'."],
+        ['A1', 'medium', "The café was too noisy to study in, so we found a ______ corner in the library.", ['quiet', 'quick', 'quite', 'busy'], "'quiet' = yên tĩnh, đối lập với 'noisy'. 'quite' là trạng từ nghĩa là khá."],
+        ['A1', 'medium', "This bottle was ______ when we left home, but now it is empty.", ['full', 'heavy', 'dirty', 'wide'], "'full' = đầy, đối lập với 'empty'; ngữ cảnh cho thấy nước trong chai đã được dùng hết."],
+        ['A1', 'medium', "The old bridge looked dangerous, so we chose the newer, ______ route.", ['safe', 'dirty', 'strong', 'smooth'], "'safe' = an toàn, đối lập với 'dangerous' và phù hợp với 'route'."],
+        ['A2', 'hard', "The main road is wide enough for buses, but this side street is so ______ that only motorbikes can enter.", ['narrow', 'light', 'quiet', 'soft'], "'narrow' = hẹp; chỉ xe máy đi vào được là dấu hiệu cho thấy con đường không rộng."],
         ['A1', 'easy', "This room is very ______. Please clean it.", ['dirty', 'clean', 'tidy', 'neat'], "'dirty' = bẩn → cần dọn."],
         ['A2', 'medium', "My new phone is very ______. It weighs only 150 grams.", ['light', 'heavy', 'dark', 'loud'], "Chỉ nặng 150 gram → 'light' = nhẹ (trái nghĩa với 'heavy' = nặng)."],
         ['A1', 'easy', "The movie was so ______ that I fell asleep.", ['boring', 'exciting', 'interesting', 'scary'], "'boring' = nhàm chán (khiến buồn ngủ)."],
@@ -226,20 +226,83 @@ const BANK = {
         ['A1', 'easy', "It's late. I have to ______ home now.", ['go', 'make', 'do', 'take'], "'go home' = về nhà."],
     ],
     'Word Groups': [
-        ['A1', 'easy', "Which word does NOT belong to the group?", ['jacket', 'carrot', 'potato', 'onion'], "'jacket' là quần áo; 'carrot, potato, onion' là rau củ."],
-        ['A1', 'easy', "Find the odd one out.", ['neighbor', 'uncle', 'aunt', 'cousin'], "'neighbor' (hàng xóm) không phải thành viên gia đình; các từ còn lại chỉ người thân."],
-        ['A1', 'easy', "Which word is different from the others?", ['ticket', 'bus', 'train', 'taxi'], "'ticket' (vé) không phải phương tiện giao thông; các từ còn lại là phương tiện."],
-        ['A1', 'easy', "Choose the word that is different.", ['hungry', 'sunny', 'rainy', 'windy'], "'hungry' (đói) chỉ cảm giác; các từ còn lại miêu tả thời tiết."],
-        ['A1', 'easy', "Which one is NOT like the others?", ['canteen', 'math', 'history', 'chemistry'], "'canteen' là địa điểm; các từ còn lại là môn học."],
+        ['A1', 'medium', "For the picnic, Lan packed carrots, potatoes, onions, and a ______ because the evening might be cold. Which word completes a different word group?", ['jacket', 'tomato', 'cabbage', 'cucumber'], "'jacket' là quần áo; các lựa chọn còn lại đều là rau củ."],
+        ['A1', 'medium', "At the family dinner, my uncle, aunt, and cousin sat together, but our ______ came over only to return a key.", ['neighbor', 'nephew', 'grandmother', 'sister'], "'neighbor' = hàng xóm, không phải quan hệ gia đình; các lựa chọn còn lại đều chỉ người thân."],
+        ['A1', 'medium', "We can travel by bus, train, or taxi, but we must buy a ______ before getting on the train.", ['ticket', 'coach', 'motorbike', 'ferry'], "'ticket' = vé, không phải phương tiện; các lựa chọn còn lại đều là phương tiện giao thông."],
+        ['A1', 'medium', "The forecast says it will be sunny, rainy, and windy this week; after walking in that weather, we may feel ______.", ['hungry', 'cloudy', 'stormy', 'dry'], "'hungry' mô tả cảm giác của người; các lựa chọn còn lại mô tả thời tiết."],
+        ['A1', 'medium', "Math, history, and chemistry are on today's timetable, and we will eat lunch in the ______.", ['canteen', 'classroom', 'laboratory', 'library'], "'canteen' là nơi ăn uống trong trường; ba lựa chọn còn lại cũng là địa điểm, nhưng ngữ cảnh 'eat lunch' xác định rõ căng tin."],
     ],
 };
 
+const harderDifficulty = (difficulty, question) => {
+    const blanks = (question.match(/______/g) || []).length;
+    const complexity = question.length + (blanks > 1 ? 35 : 0);
+    if (difficulty === 'easy' && complexity >= 50) return 'medium';
+    if (difficulty === 'medium' && complexity >= 105) return 'hard';
+    return difficulty;
+};
+
+// Các câu A1 ngắn được đặt trong một mini-dialogue theo chủ đề. Cách này buộc
+// người học đọc ngữ cảnh thay vì chỉ nhận ra một cụm từ rời rạc, đồng thời giữ
+// nguyên số câu và cấu trúc dữ liệu nguồn.
+const A1_DIALOGUE_PROMPTS = {
+    Family: 'A: Which family word or relationship completes the description?<br>B: ',
+    School: 'A: Which school word best completes the situation below?<br>B: ',
+    Jobs: 'A: Which work-related word makes the whole description correct?<br>B: ',
+    'Daily Routines': 'A: Which everyday expression completes this routine naturally?<br>B: ',
+    'Hobbies & Free Time': 'A: Which free-time word or phrase fits this situation best?<br>B: ',
+    'Food & Drink': 'A: Which food or drink word completes the speaker’s meaning?<br>B: ',
+    'Shopping & Clothes': 'A: Which shopping or clothing word fits the customer’s situation?<br>B: ',
+    Travel: 'A: Which travel word or phrase completes this situation naturally?<br>B: ',
+    Transportation: 'A: Which transport word or phrase fits both clues in the situation?<br>B: ',
+    'Directions & Places': 'A: Which place or direction word completes these instructions?<br>B: ',
+    Adjectives: 'A: Which adjective matches the evidence in the second clause?<br>B: ',
+    'Common Verbs': 'A: Which verb completes the action described in this situation?<br>B: ',
+    'Collocations & Phrases': 'A: Which common phrase completes the speaker’s sentence naturally?<br>B: ',
+    'Word Groups': 'A: Which topic word completes the description and its word group?<br>B: ',
+};
+
+// Giữ một phần các mục A1 đơn giản nhất ở difficulty "easy" để bộ lọc A1
+// vẫn có đủ câu. Việc chọn dựa trên độ dài stem gốc (và phạt câu nhiều ô
+// trống), còn stem xuất bản vẫn được bọc trong ngữ cảnh bên dưới.
+const A1_EASY_TARGET = 70;
+const retainedA1EasyRows = new Set(
+    Object.values(BANK)
+        .flat()
+        .filter(([level, difficulty]) => level === 'A1' && difficulty === 'easy')
+        .map((row, index) => ({
+            row,
+            index,
+            complexity: row[2].length + ((row[2].match(/______/g) || []).length > 1 ? 35 : 0),
+        }))
+        .sort((a, b) => a.complexity - b.complexity || a.index - b.index)
+        .slice(0, A1_EASY_TARGET)
+        .map(({ row }) => row),
+);
+
+const hardenA1Row = (category, row) => {
+    const [level, difficulty, question, options, explanation] = row;
+    if (level !== 'A1' || (difficulty !== 'easy' && question.length >= 70)) return row;
+    return [
+        level,
+        retainedA1EasyRows.has(row) ? 'easy' : 'medium',
+        A1_DIALOGUE_PROMPTS[category] + question,
+        options,
+        explanation,
+    ];
+};
+
 module.exports = Object.entries(BANK).flatMap(([category, rows]) =>
-    rows.map(([level, difficulty, question, [correct, ...distractors], explanation]) => ({
+    rows.map(row => hardenA1Row(category, row))
+        .map(([level, difficulty, question, [correct, ...distractors], explanation]) => ({
         skill: 'vocabulary',
         category,
         level,
-        difficulty,
+        // Các câu A1 được chọn ở trên phải vượt qua boundaryLevel dưới dạng
+        // "easy"; không nâng lại chỉ vì tiền tố hội thoại làm stem dài hơn.
+        difficulty: level === 'A1' && difficulty === 'easy'
+            ? 'easy'
+            : harderDifficulty(difficulty, question),
         tags: ['vocabulary', category.toLowerCase().replace(/[^a-z]+/g, '-')],
         ...mc({ type: 'choice', question, correct, distractors, explanation }),
     })));

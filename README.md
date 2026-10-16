@@ -1,6 +1,6 @@
 # English A1–B1 Practice – Ngân hàng câu hỏi
 
-Ứng dụng web tĩnh để luyện tập và thi thử tiếng Anh trình độ A1–B1, kèm ngân hàng **1.344 câu hỏi** lưu ở dạng JSON (A1–A2 + B1; đã bổ sung thêm câu medium/hard).
+Ứng dụng web tĩnh để luyện tập và thi thử tiếng Anh trình độ A1–B1, kèm ngân hàng **1.300 câu hỏi** đã được viết lại khó hơn trong band A1–B1 (ngữ cảnh dài hơn, nhiễu gần đúng hơn).
 
 > **Lưu ý về ENT104:** toàn bộ câu hỏi là nội dung tiếng Anh tổng quát – A1–A2 (`source: "general_a1_a2"`) và B1 (`source: "general_b1"`), đều có `unit: null`.
 > Nội dung **chưa được đối chiếu** với đề cương chính thức của học phần ENT104 – Trường Đại học FPT. Không có câu nào được gán unit, bài học, giáo trình hay tỷ trọng đề thi.
@@ -238,17 +238,17 @@ Cảnh báo: gần trùng 70–85%, giải thích ngắn không nhắc tới đ�
 
 | | A1–A2 | B1 | Tổng |
 |---|---|---|---|
-| Tổng | 1.022 (30 bài đọc) | 322 (9 bài đọc) | 1.344 (39 bài đọc) |
-| Grammar | 314 | 103 | 417 |
-| Vocabulary | 205 | 66 | 271 |
-| Communication | 153 | 48 | 201 |
+| Tổng | 1.000 (30 bài đọc) | 300 (9 bài đọc) | 1.300 (39 bài đọc) |
+| Grammar | 300 | 90 | 390 |
+| Vocabulary | 200 | 60 | 260 |
+| Communication | 150 | 45 | 195 |
 | Reading | 150 | 45 | 195 |
 | Completion & Error | 100 | 30 | 130 |
 | Ordering & Writing | 100 | 30 | 130 |
 
-- Theo trình độ: A1 / A2 / A1-A2 / B1 = 468 / 357 / 197 / 322.
-- Độ khó: easy / medium / hard ≈ 607 / 606 / 131 (đã nâng một phần câu easy và thêm câu medium/hard).
-- `ai_reviewed` / `auto_validated` / `needs_review`: 1.275 / 57 / 12. Câu mới hoặc vừa nâng cấp ghi `auto_validated` cho tới khi được rà soát kỹ hơn.
-- Nội dung tổng quát theo CEFR, **không** tuyên bố là đề chính thức ENT104.
+- Theo trình độ: A1 / A2 / A1-A2 / B1 ≈ 377 / 335 / 288 / 300.
+- Độ khó sau khi viết lại: easy / medium / hard ≈ 231 / 799 / 270 (trước đây easy ~600+).
+- Toàn bộ câu hiện ghi `auto_validated` sau đợt viết lại hàng loạt; **chưa** khẳng định đã đối chiếu đề cương ENT104.
+- Sinh lại từ nguồn: sửa `scripts/bank/*` rồi `node scripts/publish-hardened-bank.js`.
 
-Có thể áp dụng thêm gói khó hơn bằng `node scripts/apply-harder-pack.js` (xem `scripts/bank/harder-pack.js`).
+**Lưu ý:** Sau đợt viết lại, ID câu hỏi được gán lại. Nên bấm **Xoá tiến độ luyện tập** một lần để tránh đáp án cũ lệch với phương án mới.

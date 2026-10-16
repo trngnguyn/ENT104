@@ -3,8 +3,9 @@
 const { mc, orderWords, orderLines } = require('../lib/builders');
 
 const items = [];
+const harder = difficulty => difficulty === 'easy' ? 'medium' : difficulty;
 const push = (category, level, difficulty, tags, q) =>
-    items.push({ skill: 'writing', category, level, difficulty, tags: ['writing', ...tags], ...q });
+    items.push({ skill: 'writing', category, level, difficulty: harder(difficulty), tags: ['writing', ...tags], ...q });
 
 // ---------------------------------------------------------------- Sắp xếp từ thành câu
 // Mỗi mẫu câu đi kèm các hoán vị (theo chỉ số cụm từ) chắc chắn sai ngữ pháp.
@@ -35,8 +36,8 @@ const PATTERNS = {
 };
 
 const WORDS = [
-    ['freq', 'A1', 'medium', ['my father', 'always', 'drinks', 'coffee', 'in the morning']],
-    ['freq', 'A1', 'medium', ['she', 'never', 'eats', 'fast food', 'for lunch']],
+    ['freq', 'A1', 'medium', ['my father', 'almost always', 'drinks', 'coffee without sugar', 'before work']],
+    ['freq', 'A1', 'medium', ['she', 'hardly ever', 'eats', 'fast food', 'during the week']],
     ['freq', 'A1', 'medium', ['we', 'usually', 'play', 'badminton', 'after school']],
     ['freq', 'A1', 'medium', ['Lan', 'often', 'walks', 'to school', 'with her friends']],
     ['freq', 'A1', 'medium', ['my brother', 'sometimes', 'cooks', 'dinner', 'for the family']],
@@ -44,8 +45,8 @@ const WORDS = [
     ['freq', 'A2', 'medium', ['they', 'seldom', 'watch', 'TV', 'on weekdays']],
     ['freqBe', 'A1', 'medium', ['he', 'is', 'always', 'late', 'for class']],
 
-    ['svo', 'A2', 'easy', ['I', 'visited', 'my grandparents', 'last weekend']],
-    ['svo', 'A2', 'easy', ['she', 'bought', 'a new dress', 'yesterday']],
+    ['svo', 'A2', 'medium', ['I', 'unexpectedly met', 'my former teacher', 'at the market yesterday']],
+    ['svo', 'A2', 'medium', ['she', 'carefully chose', 'a less expensive dress', 'for the interview']],
     ['svo', 'A1', 'easy', ['we', 'have', 'English class', 'on Monday mornings']],
     ['svo', 'A1', 'easy', ['my mother', 'cooks', 'dinner', 'every evening']],
     ['svo', 'A2', 'easy', ['the students', 'cleaned', 'the classroom', 'after the lesson']],
@@ -54,8 +55,8 @@ const WORDS = [
     ['svo', 'A1', 'easy', ['he', 'reads', 'the newspaper', 'every morning']],
 
     ['wh', 'A1', 'easy', ['where', 'do', 'you', 'live']],
-    ['wh', 'A1', 'easy', ['what time', 'does', 'the bus', 'leave']],
-    ['wh', 'A1', 'easy', ['why', 'are', 'you', 'crying']],
+    ['wh', 'A1', 'medium', ['what time', 'does', 'the last bus', 'leave for Can Tho']],
+    ['wh', 'A1', 'medium', ['why', 'is', 'your little brother', 'crying outside']],
     ['wh', 'A1', 'easy', ['how often', 'do', 'you', 'go swimming']],
     ['wh', 'A2', 'medium', ['what', 'did', 'you', 'buy at the market']],
     ['wh3', 'A1', 'easy', ['who', 'is', 'your English teacher']],
@@ -64,7 +65,7 @@ const WORDS = [
     ['wh', 'A1', 'easy', ['what', 'are', 'you', 'doing now']],
     ['wh', 'A2', 'medium', ['when', 'will', 'the concert', 'start']],
 
-    ['cont', 'A1', 'medium', ['my sister', 'is', 'reading', 'a book', 'in her room']],
+    ['cont', 'A1', 'medium', ['my sister', 'is', 'still reading', 'the book I lent her', 'in her room']],
     ['cont', 'A1', 'medium', ['the children', 'are', 'playing', 'football', 'in the park']],
     ['cont', 'A1', 'medium', ['I', 'am', 'waiting', 'for the bus', 'now']],
     ['cont', 'A1', 'medium', ['we', 'are', 'having', 'dinner', 'at the moment']],
@@ -180,7 +181,7 @@ const choice = (category, level, difficulty, tags, question, [correct, ...distra
 
 choice('Sentence Combining', 'A1', 'medium', ['conjunction'],
     "Choose the best way to combine the sentences: <br><i>It was raining. We stayed at home.</i>",
-    ['It was raining, so we stayed at home.', 'It was raining, because we stayed at home.', 'It was raining, but we stayed at home.', 'Because it was raining, so we stayed at home.'],
+    ['It was raining, so we stayed at home.', 'It was raining because we stayed at home.', 'Although it was raining, we stayed at home.', 'Because it was raining, so we stayed at home.'],
     "Vế sau là kết quả → 'so'. Không dùng 'because' và 'so' cùng lúc trong một câu.");
 choice('Sentence Combining', 'A1', 'medium', ['conjunction'],
     "Choose the best way to combine the sentences: <br><i>Nam is tired. He worked late last night.</i>",
@@ -205,7 +206,7 @@ choice('Sentence Transformation', 'A2', 'medium', ['time'],
     "Từ 8 giờ đến 10 giờ tối → bộ phim kéo dài 2 tiếng.");
 choice('Sentence Transformation', 'A2', 'medium', ['superlative'],
     "Choose the sentence with the same meaning: <br><i>Nobody in my class is taller than Huy.</i>",
-    ['Huy is the tallest student in my class.', 'Huy is the shortest student in my class.', 'Huy is taller than nobody.', 'Everyone in my class is taller than Huy.'],
+    ['Huy is the tallest student in my class.', 'Huy is taller than every student outside my class.', 'Huy is not as tall as anyone in my class.', 'Only one student in my class is taller than Huy.'],
     "Không ai cao hơn Huy → Huy cao nhất lớp: 'the tallest'.");
 choice('Sentence Transformation', 'A2', 'medium', ['should'],
     "Choose the sentence with the same meaning: <br><i>It's not a good idea to stay up late.</i>",
@@ -230,7 +231,7 @@ choice('Question Formation', 'A1', 'easy', ['wh-question'],
     "Hỏi nơi ở → 'Where' + trợ động từ 'do' + chủ ngữ + V: 'Where do you live?'");
 choice('Question Formation', 'A1', 'medium', ['wh-question'],
     "Choose the correct question for this answer: <br><i>She goes to work by bus.</i>",
-    ['How does she go to work?', 'How does she goes to work?', 'How she goes to work?', 'What does she go to work?'],
+    ['How does she go to work?', 'How is she going to work every day?', 'How she usually goes to work?', 'By what does she go to work?'],
     "Hỏi phương tiện → 'How'. Chủ ngữ 'she' → 'does' + V nguyên mẫu: 'How does she go...?'");
 choice('Question Formation', 'A2', 'medium', ['wh-question', 'past-simple'],
     "Choose the correct question for this answer: <br><i>I bought it last Saturday.</i>",

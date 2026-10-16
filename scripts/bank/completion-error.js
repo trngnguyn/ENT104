@@ -3,19 +3,20 @@
 const { BLANK, mc, U, X, findError } = require('../lib/builders');
 
 const items = [];
+const harder = difficulty => difficulty === 'easy' ? 'medium' : difficulty;
 const err = (category, level, difficulty, tags, segs, explanation) =>
-    items.push({ skill: 'completion_error', category, level, difficulty, tags: ['error', ...tags], ...findError({ segs, explanation }) });
+    items.push({ skill: 'completion_error', category, level, difficulty: harder(difficulty), tags: ['error', ...tags], ...findError({ segs, explanation }) });
 const fill = (category, level, difficulty, tags, question, [correct, ...distractors], explanation) =>
-    items.push({ skill: 'completion_error', category, level, difficulty, tags: ['completion', ...tags], ...mc({ question, correct, distractors, explanation }) });
+    items.push({ skill: 'completion_error', category, level, difficulty: harder(difficulty), tags: ['completion', ...tags], ...mc({ question, correct, distractors, explanation }) });
 
 // ---------------------------------------------------------------- Tìm lỗi sai
 // Verb BE
 err('Verb BE', 'A1', 'easy', ['be'],
-    ['My sister', X('is', 'are'), 'a nurse, and she', U('works'), U('at'), 'a hospital', U('near'), 'our house.'],
-    "Sai ở ({L}) 'are'. Chủ ngữ 'My sister' là số ít → 'is'.");
+    ['My sister, together with her two friends,', X('is', 'are'), U('responsible'), U('for'), 'the book club', U('this term'), '.'],
+    "Sai ở ({L}) 'are'. Chủ ngữ chính là 'My sister' (số ít); cụm 'together with...' không làm chủ ngữ thành số nhiều → 'is'.");
 err('Verb BE', 'A1', 'easy', ['be', 'there-be'],
-    ['There', X('are', 'is'), U('three'), 'students', U('in'), 'the classroom', U('now'), '.'],
-    "Sai ở ({L}) 'is'. 'three students' là số nhiều → 'There are'.");
+    ['There', X('is', 'are'), U('a notebook and two pens'), U('on'), 'the teacher’s desk', U('near the window'), '.'],
+    "Sai ở ({L}) 'are'. Trong cấu trúc 'There be', động từ thường hòa hợp với danh từ gần nhất; 'a notebook' số ít → 'There is'.");
 err('Verb BE', 'A1', 'easy', ['be'],
     ['I', U('am'), 'from Can Tho, and my friends', X('are', 'is'), U('from'), 'Vinh Long. We', U('are'), 'classmates.'],
     "Sai ở ({L}) 'is'. Chủ ngữ 'my friends' số nhiều → 'are'.");
@@ -39,8 +40,8 @@ err('Pronouns & Possessives', 'A1', 'easy', ['object-pronoun'],
 
 // Simple Present
 err('Simple Present', 'A1', 'easy', ['present-simple'],
-    ['My brother', X('watches', 'watch'), U('TV'), U('every'), 'evening', U('after'), 'dinner.'],
-    "Sai ở ({L}) 'watch'. Chủ ngữ 'My brother' số ít → động từ thêm -es: 'watches'.");
+    ['Neither my brother nor my sister', X('watches', 'watch'), U('TV'), U('before'), 'they', U('finish'), 'their homework.'],
+    "Sai ở ({L}) 'watch'. Với 'neither...nor', động từ hòa hợp với chủ ngữ gần nhất 'my sister' (số ít) → 'watches'.");
 err('Simple Present', 'A1', 'medium', ['present-simple', 'question'],
     [U('Does'), 'your mother', X('like', 'likes'), U('spicy'), 'food', U('or'), 'sweet food?'],
     "Sai ở ({L}) 'likes'. Trong câu hỏi có 'Does', động từ chính ở dạng nguyên mẫu: 'like'.");
@@ -51,8 +52,8 @@ err('Simple Present', 'A1', 'easy', ['present-simple'],
     ['We', U('usually'), X('go', 'goes'), 'to the market', U('on'), U('Sunday'), 'mornings.'],
     "Sai ở ({L}) 'goes'. Chủ ngữ 'We' → động từ giữ nguyên mẫu 'go'.");
 err('Simple Present', 'A1', 'easy', ['present-simple'],
-    ['The shop', X('opens', 'open'), U('at'), '8 a.m. and', U('closes'), 'at 9 p.m.', U('every day'), '.'],
-    "Sai ở ({L}) 'open'. Chủ ngữ 'The shop' số ít → 'opens' (giống 'closes' phía sau).");
+    ['The list of items we need', X('is', 'are'), U('on'), 'the kitchen table, but', U('the keys'), U('are'), U('beside'), 'the door.'],
+    "Sai ở ({L}) 'are'. Chủ ngữ chính là 'The list' (số ít), không phải 'items' → 'is'.");
 err('Simple Present', 'A1', 'medium', ['present-simple', 'negative'],
     ['My father', U("doesn't"), X('work', 'works'), U('on'), 'Saturdays, so he', U('often'), 'plays tennis.'],
     "Sai ở ({L}) 'works'. Sau 'doesn't', động từ ở dạng nguyên mẫu: 'doesn't work'.");
@@ -87,8 +88,8 @@ err('Present Continuous', 'A1', 'medium', ['present-continuous', 'spelling'],
 
 // Simple Past
 err('Simple Past', 'A2', 'easy', ['past-simple', 'irregular'],
-    ['Last summer, we', X('went', 'goed'), U('to'), 'Phu Quoc and', U('stayed'), U('in'), 'a small hotel.'],
-    "Sai ở ({L}) 'goed'. 'go' là động từ bất quy tắc, quá khứ là 'went'.");
+    ['While we', U('were waiting'), 'for the bus, it', X('started', 'was starting'), U('to rain'), U('without'), 'warning.'],
+    "Sai ở ({L}) 'was starting'. Hành động ngắn xen vào hành động đang diễn ra dùng quá khứ đơn: 'started'; 'were waiting' là hành động nền.");
 err('Simple Past', 'A2', 'medium', ['past-simple', 'question'],
     [U('Did'), 'you', X('see', 'saw'), U('the'), 'football match', U('last night'), '?'],
     "Sai ở ({L}) 'saw'. Sau 'Did', động từ trở về nguyên mẫu: 'Did you see...?'");
@@ -164,14 +165,14 @@ err('Quantifiers & Nouns', 'A2', 'medium', ['a-few-a-little'],
 
 // Articles
 err('Articles', 'A1', 'easy', ['article'],
-    ['Her mother', U('works'), U('as'), X('an', 'a'), 'accountant', U('in'), 'Can Tho.'],
-    "Sai ở ({L}) 'a'. 'accountant' bắt đầu bằng nguyên âm /ə/ → 'an accountant'.");
+    ['Her mother', U('works'), U('as'), X('a', 'an'), 'university librarian', U('in'), 'Can Tho.'],
+    "Sai ở ({L}) 'an'. 'University' bắt đầu bằng âm /j/ như 'you', là phụ âm → 'a university librarian'.");
 err('Articles', 'A1', 'medium', ['article'],
     ['In the morning,', X('the', 'a'), 'sun', U('rises'), U('in'), U('the'), 'east.'],
     "Sai ở ({L}) 'a'. Vật duy nhất (mặt trời) dùng mạo từ 'the': 'the sun'.");
 err('Articles', 'A1', 'easy', ['article'],
-    ['I', U('have'), X('an', 'a'), U('old'), 'bike, but it', U('works'), 'well.'],
-    "Sai ở ({L}) 'a'. 'old' bắt đầu bằng nguyên âm /əʊ/ → 'an old bike'.");
+    ['We', U('waited'), 'for', X('an', 'a'), U('hour'), 'before the doctor', U('called'), 'our name.'],
+    "Sai ở ({L}) 'a'. Chữ 'h' trong 'hour' không được phát âm nên từ bắt đầu bằng nguyên âm /aʊ/ → 'an hour'.");
 
 // Prepositions
 err('Prepositions', 'A1', 'easy', ['preposition', 'time'],
@@ -238,10 +239,10 @@ err('Mixed Tenses', 'A1-A2', 'hard', ['present-simple', 'past-simple'],
 // ---------------------------------------------------------------- Hoàn thành câu
 const CONJ = 'Conjunctions';
 [
-    ["I wanted to buy the jacket, ______ it was too expensive.", ['but', 'so', 'because', 'or'], "Hai vế trái ngược nhau (muốn mua – quá đắt) → 'but'."],
-    ["It was raining, ______ we stayed at home.", ['so', 'because', 'but', 'or'], "Vế sau là kết quả của vế trước (trời mưa → ở nhà) → 'so'."],
-    ["Lan is tired ______ she worked late last night.", ['because', 'so', 'but', 'or'], "Vế sau là nguyên nhân (làm việc khuya → mệt) → 'because'."],
-    ["Would you like tea ______ coffee?", ['or', 'but', 'so', 'because'], "Đưa ra lựa chọn giữa hai thứ → 'or'."],
+    ["I wanted to buy the jacket, ______ I left it because it was too expensive.", ['but', 'so', 'because', 'although'], "Hai ý trái ngược: muốn mua nhưng cuối cùng không mua → 'but'. 'Although' cần mở đầu một mệnh đề phụ."],
+    ["It was raining heavily, ______ the match continued as planned.", ['but', 'so', 'because', 'therefore'], "Mưa lớn nhưng trận đấu vẫn tiếp tục → quan hệ tương phản, dùng 'but'."],
+    ["Lan went to bed early ______ she had worked late the night before.", ['because', 'so', 'although', 'but'], "Mệnh đề sau nêu nguyên nhân Lan đi ngủ sớm → 'because'."],
+    ["You can take the early bus ______ wait for the cheaper one at noon.", ['or', 'but', 'so', 'because'], "Hai khả năng loại trừ nhau → dùng 'or'."],
     ["My brother likes football, ______ he doesn't like basketball.", ['but', 'so', 'or', 'because'], "Hai ý trái ngược (thích – không thích) → 'but'."],
     ["She can speak English ______ French. She learned both at school.", ['and', 'but', 'or', 'so'], "'She learned both' → cả hai ngôn ngữ → 'and'."],
     ["We didn't go to the beach ______ the weather was bad.", ['because', 'so', 'and', 'or'], "Vế sau là lý do không đi biển → 'because'."],
@@ -249,9 +250,9 @@ const CONJ = 'Conjunctions';
 
 const GI = 'Gerunds & Infinitives';
 [
-    ["I enjoy ______ to music in the evening.", ['listening', 'to listen', 'listen', 'listened'], "'enjoy + V-ing' → 'enjoy listening'."],
-    ["She decided ______ a new laptop.", ['to buy', 'buying', 'buy', 'bought'], "'decide + to V' → 'decided to buy'."],
-    ["Do you want ______ to the cinema tonight?", ['to go', 'going', 'go', 'went'], "'want + to V' → 'want to go'."],
+    ["I enjoy ______ to music while I am doing housework.", ['listening', 'to listen', 'listen', 'to listening'], "'enjoy + V-ing' → 'enjoy listening'; 'to listening' chỉ đúng khi 'to' là giới từ trong một cụm khác."],
+    ["She decided ______ a new laptop after comparing several models.", ['to buy', 'buying', 'buy', 'to buying'], "'decide + to V' → 'decided to buy'."],
+    ["Do you want ______ to the cinema, or would you rather stay home?", ['to go', 'going', 'go', 'to going'], "'want + to V' → 'want to go'; không nhầm với 'would rather + V' ở vế sau."],
     ["I'm good at ______ pictures.", ['drawing', 'draw', 'to draw', 'drew'], "Sau giới từ 'at' dùng V-ing → 'good at drawing'."],
     ["We hope ______ you again soon.", ['to see', 'seeing', 'see', 'saw'], "'hope + to V' → 'hope to see'."],
     ["Thank you for ______ me with my homework.", ['helping', 'help', 'to help', 'helped'], "Sau giới từ 'for' dùng V-ing → 'Thank you for helping'."],

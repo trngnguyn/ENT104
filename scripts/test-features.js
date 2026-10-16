@@ -321,26 +321,19 @@ test('9. Điểm và thống kê phản ánh đúng câu trả lời; hết gi�
 });
 
 // ---------------------------------------------------------------- 10. Whole bank
-test('10. Hoạt động với ngân hàng A1–A2 + B1 (≥ 1.300 câu), không ảnh hưởng chức năng cũ', () => {
-    assert.ok(qs.questions.length >= 1300, `cần ≥ 1300 câu, hiện có ${qs.questions.length}`);
+test('10. Hoạt động với ngân hàng 1.300 câu (A1–A2 + B1), không ảnh hưởng chức năng cũ', () => {
+    assert.strictEqual(qs.questions.length, 1300);
     assert.strictEqual(qs.skipped.length, 0);
     const builder = new ExamBuilderService(qs, { rand: seeded(10) });
     const bySkill = list => Stats.countBy(list, q => q.skill);
     const a12 = qs.questions.filter(q => q.level !== 'B1');
     const b1 = qs.questions.filter(q => q.level === 'B1');
-    const a12Skills = bySkill(a12);
-    const b1Skills = bySkill(b1);
-    // Cơ cấu tối thiểu từ ngân hàng gốc 1.000 + 300; được phép thêm câu khó hơn sau này.
-    for (const [k, n] of Object.entries({ grammar: 300, vocabulary: 200, communication: 150, reading: 150, completion_error: 100, writing: 100 })) {
-        assert.ok(a12Skills[k] >= n, `A1–A2 ${k}: ${a12Skills[k]} < ${n}`);
-    }
-    for (const [k, n] of Object.entries({ grammar: 90, vocabulary: 60, communication: 45, reading: 45, completion_error: 30, writing: 30 })) {
-        assert.ok(b1Skills[k] >= n, `B1 ${k}: ${b1Skills[k]} < ${n}`);
-    }
+    assert.deepStrictEqual(bySkill(a12), { grammar: 300, vocabulary: 200, communication: 150, reading: 150, completion_error: 100, writing: 100 });
+    assert.deepStrictEqual(bySkill(b1), { grammar: 90, vocabulary: 60, communication: 45, reading: 45, completion_error: 30, writing: 30 });
     assert.ok(b1.every(q => q.source === 'general_b1' && q.unit === null && /-B1-\d{4}$/.test(q.id)));
     assert.ok(a12.every(q => q.source === 'general_a1_a2'));
     assert.ok(QuestionService.LEVELS.includes('B1') && ExamBuilderService.LEVELS.includes('B1'));
-    assert.ok(qs.filter({ level: 'B1' }).length >= 300);
+    assert.strictEqual(qs.filter({ level: 'B1' }).length, 300);
     const b1Paper = builder.generate({ ...builder.defaultConfig(), total: 40, levels: ['B1'] });
     assert.ok(b1Paper.ok && b1Paper.ids.length === 40 && b1Paper.ids.every(id => qs.byId.get(id).level === 'B1'));
     for (const id of b1Paper.ids) {

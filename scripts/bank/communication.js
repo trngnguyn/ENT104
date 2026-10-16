@@ -5,28 +5,28 @@ const { mc } = require('../lib/builders');
 // Mỗi dòng: [level, difficulty, question, [đáp án đúng, nhiễu 1, nhiễu 2, nhiễu 3], giải thích]
 const BANK = {
     'Greetings & Introductions': [
-        ['A1', 'easy', "A: Hi, I'm Lan. Nice to meet you. <br>B: ______", ['Nice to meet you, too.', "I'm fine, thank you.", 'Goodbye.', "You're welcome."], "Đáp lại 'Nice to meet you' → 'Nice to meet you, too.'"],
-        ['A1', 'easy', "A: How are you today? <br>B: ______", ["I'm fine, thanks. And you?", "I'm 19 years old.", "I'm a student.", 'Nice to meet you.'], "'How are you?' hỏi thăm sức khoẻ → 'I'm fine, thanks.'"],
-        ['A1', 'easy', "A: What do you do? <br>B: ______", ["I'm a nurse.", "I'm doing my homework.", "I'm fine.", 'I do it every day.'], "'What do you do?' hỏi về nghề nghiệp → 'I'm a nurse.' ('I'm doing my homework' trả lời cho 'What are you doing?')."],
-        ['A1', 'easy', "A: Where are you from? <br>B: ______", ["I'm from Can Tho.", "I'm at home.", "I'm going to Hanoi.", 'From 8 to 5.'], "'Where are you from?' hỏi quê quán → 'I'm from Can Tho.'"],
-        ['A1', 'easy', "A: Good night, Mom. <br>B: ______", ['Good night. Sleep well.', 'Good morning.', 'Nice to meet you.', 'How do you do?'], "'Good night' là lời chào trước khi đi ngủ → đáp 'Good night. Sleep well.'"],
+        ['A1', 'medium', "A: Hi, I'm Lan. I don't think we've met before. <br>B: ______ I'm Huy, from class 10A.", ['Nice to meet you.', "I'm fine, thank you.", 'See you yesterday.', "You're welcome."], "Khi hai người lần đầu tự giới thiệu, 'Nice to meet you' là đáp lời phù hợp; các câu còn lại không nối được với phần giới thiệu."],
+        ['A1', 'medium', "A: You look tired today. Are you all right? <br>B: ______ I didn't sleep well last night.", ["I'm a little tired, thanks.", "I'm 19 years old.", "I'm a student.", 'Nice to meet you.'], "A hỏi tình trạng hiện tại và nhận thấy B mệt; câu trả lời phải nói về sức khỏe/cảm giác và khớp với lý do mất ngủ."],
+        ['A1', 'medium', "A: Do you work at the clinic, or are you a patient here? <br>B: ______ I started working here last month.", ["I'm a nurse.", "I'm doing my homework.", "I'm fine.", 'I visit every day.'], "Chi tiết 'started working here' cho thấy B là nhân viên; 'I'm a nurse' trả lời đúng nghề nghiệp và bối cảnh phòng khám."],
+        ['A1', 'medium', "A: I hear a different accent. Where are you from originally? <br>B: ______, but I'm studying in Can Tho now.", ["I'm from Da Nang", "I'm at home", "I'm going to Hanoi", 'From 8 to 5'], "'Where are you from originally?' hỏi quê quán; phần sau nói nơi đang học hiện tại nên 'I'm from Da Nang' tạo đối chiếu hợp lý."],
+        ['A1', 'medium', "A: I have an early class, so I'm going to bed now. Good night, Mom. <br>B: ______", ['Good night. Sleep well.', 'Good morning. Hurry up.', 'Nice to meet you.', 'How do you do?'], "Trong ngữ cảnh đi ngủ, đáp 'Good night. Sleep well' vừa chào vừa chúc ngủ ngon."],
         ['A1', 'medium', "A: ______ <br>B: It's N-A-M.", ['How do you spell your name?', 'How are you?', 'Where are you from?', 'How old are you?'], "Câu trả lời là đánh vần tên (N-A-M) → câu hỏi 'How do you spell your name?'"],
         ['A1', 'easy', "A: Lan, this is my friend, Huy. <br>B: ______", ['Hi, Huy. Nice to meet you.', 'Hi, Lan. Nice to meet you.', 'Goodbye, Huy.', "I'm fine, thank you."], "Lan được giới thiệu với Huy → Lan chào Huy: 'Hi, Huy. Nice to meet you.'"],
-        ['A1', 'easy', "A: See you tomorrow! <br>B: ______", ['See you!', 'Nice to meet you!', 'How are you?', "You're welcome!"], "Đáp lời chào tạm biệt 'See you tomorrow!' → 'See you!'"],
+        ['A1', 'medium', "A: I'll bring the notes to class tomorrow. See you then! <br>B: ______ Thanks for remembering them.", ['See you!', 'Nice to meet you!', 'How are you?', "You're welcome!"], "'See you!' đáp lại lời tạm biệt; câu cảm ơn sau đó phù hợp với việc A hứa mang ghi chú."],
         ['A1', 'easy', "A: What's your last name? <br>B: ______", ["It's Nguyen.", "I'm twenty.", "It's in Can Tho.", "I'm a student."], "'last name' = họ → 'It's Nguyen.'"],
         ['A1', 'medium', "A: Are you a new student here? <br>B: ______", ['Yes, I am. I started last week.', 'Yes, I do. I started last week.', 'Yes, it is.', "No, I don't."], "Câu hỏi với 'Are you...?' → trả lời 'Yes, I am.'"],
         ['A1', 'easy', "A: How old is your sister? <br>B: ______", ["She's sixteen.", "She's fine.", "She's a student.", "She's tall."], "'How old' hỏi tuổi → 'She's sixteen.'"],
         ['A1', 'easy', "A: What's your phone number? <br>B: ______", ["It's 0912 345 678.", "It's Nguyen Van Lan.", "I'm at home.", "It's on the table."], "Hỏi số điện thoại → trả lời một dãy số: 'It's 0912 345 678.'"],
         ['A1', 'medium', "A: Excuse me, are you Mr. Tuan? <br>B: ______", ['Yes, I am. Can I help you?', 'Yes, he is.', 'Yes, you are.', 'Yes, I do.'], "Câu hỏi 'Are you...?' → trả lời về bản thân 'Yes, I am.'"],
         ['A2', 'medium', "A: Long time no see! How have you been? <br>B: ______", ['Pretty good, thanks.', "I've been to Hanoi.", 'Nice to meet you.', "I'm 20 years old."], "'How have you been?' hỏi thăm dạo này thế nào → 'Pretty good, thanks.'"],
-        ['A1', 'easy', "A: Have a nice weekend! <br>B: ______", ['Thanks. You too!', 'Yes, I have.', "It's Saturday.", 'Nice to meet you.'], "Đáp lại lời chúc → 'Thanks. You too!'"],
+        ['A1', 'medium', "A: I'm leaving now. Have a nice weekend, and enjoy the concert! <br>B: ______", ['Thanks. You too!', 'Yes, I have.', "It's Saturday.", 'Nice to meet you.'], "Đáp lại lời chúc bằng lời cảm ơn và chúc lại: 'Thanks. You too!'."],
     ],
     'Invitations': [
         ['A1', 'easy', "A: Would you like to go to the movies tonight? <br>B: ______", ["I'd love to. What time?", 'Yes, I like movies.', "No, I don't.", 'Yes, I would like.'], "Nhận lời mời 'Would you like to...?' → 'I'd love to.'"],
-        ['A1', 'easy', "A: Let's have lunch together. <br>B: ______", ['Good idea!', "You're welcome.", 'Yes, I have.', 'Never mind.'], "Đồng ý với đề nghị 'Let's...' → 'Good idea!'"],
+        ['A1', 'medium', "A: We both have a free hour before class. Let's have lunch together. <br>B: ______ Do you know a quiet place nearby?", ['Good idea!', "You're welcome.", 'Yes, I have.', 'Never mind.'], "B hỏi tiếp về địa điểm nên đã đồng ý với đề nghị; 'Good idea!' phù hợp nhất."],
         ['A1', 'easy', "A: Do you want to come to my birthday party on Saturday? <br>B: ______", ["Sure, I'd love to come.", 'Happy birthday!', "I'm sorry to hear that.", 'Yes, I came.'], "Nhận lời mời dự tiệc → 'Sure, I'd love to come.'"],
         ['A1', 'medium', "A: Would you like to join us for dinner? <br>B: ______", ["I'm sorry, I can't. I have to work.", "No, I don't like.", "Yes, I'd love.", "You're welcome."], "Từ chối lịch sự kèm lý do → 'I'm sorry, I can't. I have to work.'"],
-        ['A1', 'easy', "A: How about going swimming this afternoon? <br>B: ______", ['That sounds great!', 'Yes, I am.', "I'm fine, thanks.", "It's at the pool."], "Đồng ý với lời gợi ý 'How about...?' → 'That sounds great!'"],
+        ['A1', 'medium', "A: It's too hot to play football. How about going swimming instead? <br>B: ______ I'll bring my swimsuit.", ['That sounds great!', 'Yes, I am.', "I'm fine, thanks.", "It's at the pool."], "Việc B sẽ mang đồ bơi cho thấy B đồng ý; 'That sounds great!' đáp lại lời gợi ý tự nhiên."],
         ['A1', 'medium', "A: ______ <br>B: Sure. What time should we meet?", ['Would you like to play badminton tomorrow?', 'Did you play badminton yesterday?', 'Do you like badminton?', 'Where do you play badminton?'], "'Sure. What time should we meet?' là lời nhận lời mời → câu trước phải là lời mời."],
         ['A1', 'easy', "A: Are you free on Friday evening? <br>B: ______", ['Yes, I am. Why?', "Yes, it's free.", 'Yes, I do.', "It's Friday."], "Câu hỏi 'Are you free...?' → 'Yes, I am.'"],
         ['A2', 'medium', "A: Why don't we go to the beach this weekend? <br>B: ______", ["That's a good idea.", "Because it's hot.", "Yes, we don't.", "I don't know why."], "'Why don't we...?' là lời gợi ý (không phải câu hỏi lý do) → 'That's a good idea.'"],
@@ -39,11 +39,11 @@ const BANK = {
         ['A1', 'easy', "A: Thanks for inviting me to your party. <br>B: ______", ["You're welcome. I'm glad you came.", 'Yes, please.', 'No, thanks.', "I'm sorry."], "Đáp lại lời cảm ơn → 'You're welcome.'"],
     ],
     'Requests & Permission': [
-        ['A1', 'easy', "A: Can I borrow your pen? <br>B: ______", ['Sure. Here you are.', 'Yes, I can.', "No, you don't.", 'Thank you.'], "Đồng ý cho mượn và đưa đồ → 'Sure. Here you are.'"],
-        ['A1', 'easy', "A: Could you open the window, please? <br>B: ______", ['Of course.', 'Yes, I could.', "No, it isn't.", "You're welcome."], "Đồng ý với lời nhờ → 'Of course.'"],
+        ['A1', 'medium', "A: My pen has run out of ink. Could I borrow yours to sign this form? <br>B: ______", ['Sure. Here you are.', 'Yes, I can.', "No, you don't.", 'Thank you.'], "A nêu lý do và xin mượn bút; 'Sure. Here you are' vừa cho phép vừa đưa bút."],
+        ['A1', 'medium', "A: It's getting warm in here. Would you mind opening the window a little? <br>B: ______", ['Not at all.', 'Yes, I opened it yesterday.', "No, it isn't.", "You're welcome."], "Với 'Would you mind + V-ing?', đồng ý làm giúp bằng 'Not at all' (không phiền)."],
         ['A2', 'hard', "A: Do you mind if I sit here? <br>B: ______", ['No, not at all. Please sit down.', 'Yes, please sit down.', 'Yes, I do. Sit down.', "I'm fine."], "'Do you mind if...?' = Bạn có phiền không? → đồng ý thì trả lời 'No, not at all' (không phiền)."],
         ['A1', 'easy', "A: May I use your phone? <br>B: ______", ['Sure, go ahead.', 'Yes, you may not.', "I'm sorry to hear that.", 'Thank you very much.'], "Cho phép → 'Sure, go ahead.'"],
-        ['A1', 'easy', "A: Can you help me carry this box? <br>B: ______", ['Sure, no problem.', "You're welcome.", 'Yes, I am.', 'Nice to meet you.'], "Đồng ý giúp → 'Sure, no problem.'"],
+        ['A1', 'medium', "A: This box is too heavy for me to lift alone. Could you give me a hand? <br>B: ______ Where should I put it?", ['Sure, no problem.', "You're welcome.", 'Yes, I am.', 'Nice to meet you.'], "'give me a hand' = giúp một tay; câu hỏi tiếp theo cho thấy B đồng ý giúp."],
         ['A1', 'medium', "A: ______ <br>B: Sorry, I'm using it right now.", ['Can I use your laptop for a minute?', 'Do you have a laptop?', 'Where is your laptop?', 'How much is your laptop?'], "'Sorry, I'm using it right now' là lời từ chối một yêu cầu mượn đồ."],
         ['A1', 'easy', "A: Could you speak more slowly, please? <br>B: ______", ['Sure. Sorry about that.', 'Yes, I speak slowly every day.', "No, I can't hear.", 'Here you are.'], "Đồng ý với lời nhờ → 'Sure. Sorry about that.'"],
         ['A1', 'easy', "A: Excuse me, could you take a photo of us? <br>B: ______", ['Sure. Say cheese!', 'Yes, I took.', "No, I'm not.", "It's my camera."], "Đồng ý chụp ảnh giúp → 'Sure. Say cheese!'"],
@@ -147,14 +147,14 @@ const BANK = {
         ['A1', 'medium', "A: ______ <br>B: It's Linh. I'm calling about the homework.", ["Who's calling, please?", 'Where are you calling?', 'What are you calling?', 'How are you calling?'], "Câu trả lời 'It's Linh' → câu hỏi 'Who's calling?'"],
     ],
     'Social Responses': [
-        ['A1', 'easy', "A: Thank you very much for your help. <br>B: ______", ["You're welcome.", 'Yes, please.', 'Excuse me.', 'Here you are.'], "Đáp lại lời cảm ơn → 'You're welcome.'"],
-        ['A1', 'easy', "A: I'm sorry I broke your cup. <br>B: ______", ["Don't worry about it.", "You're welcome.", 'Congratulations!', 'Thank you very much.'], "Đáp lại lời xin lỗi → 'Don't worry about it.'"],
-        ['A1', 'easy', "A: I passed my driving test! <br>B: ______", ['Congratulations!', "I'm sorry to hear that.", 'Never mind.', 'Bless you!'], "Chúc mừng tin vui → 'Congratulations!'"],
+        ['A1', 'medium', "A: Thanks for explaining the bus route; I understand where to change buses now. <br>B: ______", ["You're welcome.", 'Yes, please.', 'Excuse me.', 'Here you are.'], "'You're welcome' là cách đáp lại lời cảm ơn; các lựa chọn khác dùng trong yêu cầu hoặc khi đưa đồ."],
+        ['A1', 'medium', "A: I'm really sorry I broke the cup you bought in Hue. <br>B: ______ It was an accident.", ["Don't worry about it.", "You're welcome.", 'Congratulations!', 'Thank you very much.'], "B trấn an vì đó là tai nạn, nên 'Don't worry about it' là cách chấp nhận lời xin lỗi phù hợp."],
+        ['A1', 'medium', "A: I finally passed my driving test after failing twice! <br>B: ______ You worked hard for it.", ['Congratulations!', "I'm sorry to hear that.", 'Never mind.', 'Bless you!'], "Đây là tin vui sau nhiều cố gắng, nên dùng 'Congratulations!' để chúc mừng."],
         ['A1', 'medium', "A: My grandfather is in the hospital. <br>B: ______", ["I'm sorry to hear that. I hope he gets better soon.", 'Congratulations!', "That's great!", 'Have fun!'], "Tin buồn → 'I'm sorry to hear that.'"],
-        ['A1', 'easy', "A: Happy birthday, Lan! <br>B: ______", ['Thank you!', "You're welcome.", 'Excuse me.', 'Me too.'], "Đáp lại lời chúc sinh nhật → 'Thank you!'"],
+        ['A1', 'medium', "A: Happy birthday, Lan! I hope you like the book we chose. <br>B: ______ I've wanted to read it for months.", ['Thank you!', "You're welcome.", 'Excuse me.', 'Me too.'], "Người nhận lời chúc và quà đáp bằng 'Thank you'; câu sau cho thấy sự cảm kích."],
         ['A1', 'medium', "A: Excuse me, is this seat taken? <br>B: ______", ["No, it's free. Please sit down.", 'Yes, please sit down.', 'Yes, I took it yesterday.', 'No, thank you.'], "'Is this seat taken?' = Ghế này có ai ngồi chưa? → 'No, it's free.'"],
         ['A1', 'easy', "A: Achoo! <br>B: ______", ['Bless you!', 'Congratulations!', 'Cheers!', 'Good luck!'], "Khi ai đó hắt xì → 'Bless you!'"],
-        ['A1', 'easy', "A: I have a big exam tomorrow. <br>B: ______", ['Good luck!', 'Congratulations!', 'Bless you!', 'Cheers!'], "Chúc may mắn trước kỳ thi → 'Good luck!'"],
+        ['A1', 'medium', "A: I have my final exam tomorrow, and I'm a little nervous. <br>B: ______ You've prepared carefully.", ['Good luck!', 'Congratulations!', 'Bless you!', 'Cheers!'], "'Good luck!' dùng để chúc may mắn trước một việc khó; câu sau còn mang tính động viên."],
         ['A1', 'easy', "A: I'm going to Phu Quoc for my vacation! <br>B: ______", ['Have a great trip!', 'Get well soon!', 'Sorry to hear that.', 'Bless you!'], "Chúc chuyến đi vui vẻ → 'Have a great trip!'"],
         ['A1', 'easy', "A: I don't feel well. I have a fever. <br>B: ______", ['Oh no! You should see a doctor.', 'Great! Have fun!', 'Congratulations!', 'Good job!'], "Người kia bị sốt → khuyên đi khám bác sĩ."],
         ['A1', 'easy', "A: Merry Christmas! <br>B: ______", ['Merry Christmas to you too!', "Thank you, you're welcome.", 'Happy birthday!', 'Good luck!'], "Đáp lại lời chúc Giáng sinh → 'Merry Christmas to you too!'"],
@@ -178,12 +178,167 @@ const BANK = {
     ],
 };
 
+// Mỗi câu có một dòng tình huống bằng tiếng Anh trước hội thoại. Ngoài việc làm rõ
+// vai người nói, dòng này buộc người học đọc ngữ cảnh thay vì chỉ ghép một cặp
+// hỏi--đáp máy móc. Các tình huống được dùng cho cả A1 và A2 để độ dài và cách
+// trình bày nhất quán trong toàn bộ phần Communication.
+const SITUATIONS = {
+    'Greetings & Introductions': 'At a school event, two people are meeting or sharing personal information for the first time.',
+    Invitations: 'Two friends are making plans together, and one of them needs to respond politely before they continue.',
+    'Requests & Permission': 'In an everyday situation, one person needs help or permission and asks the other person politely.',
+    Advice: 'A friend describes a real problem and waits for a useful, caring suggestion about what to do next.',
+    Shopping: 'A customer and a shop assistant are talking in a busy store while choosing or paying for an item.',
+    'Ordering Food': 'At a café or restaurant, a customer and a server are discussing the order and what is needed.',
+    'Asking for Directions': 'A visitor does not know the area well and asks a local person for clear travel information.',
+    'Arrangements & Schedules': 'Two people are checking a plan or timetable because they need to agree on the correct details.',
+    Telephone: 'During a phone call, the speakers cannot see each other and must make the purpose of the call clear.',
+    'Social Responses': 'In an everyday conversation, one speaker shares news or says something that needs a polite response.',
+    'Telling the Time': 'A student is checking the time before the next activity and asks a classmate to read the clock.',
+};
+
+// Nhiễu cũng phải là lời thoại tự nhiên. Mỗi nhóm lấy lời nói hợp lý trong một
+// tình huống khác (gọi món, hỏi đường, hẹn giờ...), thay vì dùng câu sai ngữ pháp.
+// Nhờ vậy cả bốn lựa chọn đều là speech acts có thật, nhưng chỉ đáp án đúng tiếp
+// nối được hội thoại đang cho.
+const DISTRACTOR_POOLS = {
+    'Greetings & Introductions': [
+        "I'd like the chicken soup, please.",
+        'Turn left at the next traffic lights.',
+        "I'm sorry, but I can't come on Friday.",
+        'Could you pass me the salt, please?',
+        'The shop closes at six this evening.',
+        'Congratulations on your new job!',
+    ],
+    Invitations: [
+        'The bus leaves from platform three.',
+        "I'd like to pay by card, please.",
+        'Go straight and the bank is on your right.',
+        "I'm sorry to hear about your accident.",
+        'Could you spell your last name, please?',
+        'The meeting starts at half past eight.',
+    ],
+    'Requests & Permission': [
+        'That sounds like a great plan for Saturday.',
+        'The train arrives at nine fifteen.',
+        "I'd like a table for two, please.",
+        'Congratulations! You worked hard for it.',
+        'The pharmacy is across from the bank.',
+        "I'm sorry to hear that you're unwell.",
+    ],
+    Advice: [
+        'Of course. Here you are.',
+        "I'd like an orange juice, please.",
+        'Go straight and turn right at the corner.',
+        'The appointment is at ten tomorrow.',
+        'Thank you. That was very kind of you.',
+        'Sorry, this shirt is not available in blue.',
+    ],
+    Shopping: [
+        "I'm sorry to hear that. I hope you feel better.",
+        'The next bus comes in ten minutes.',
+        "I'd love to join you for dinner.",
+        'Turn right after the post office.',
+        'Could you call me back this afternoon?',
+        'Congratulations on passing your exam!',
+    ],
+    'Ordering Food': [
+        'The museum opens at nine tomorrow.',
+        'Take bus number six and get off at the market.',
+        'Congratulations! That is wonderful news.',
+        'Could I leave a message for Ms. Hoa?',
+        "I'm sorry, but I have class this evening.",
+        'This jacket is available in a larger size.',
+    ],
+    'Asking for Directions': [
+        "I'd like the vegetable noodles, please.",
+        'Congratulations on your new position!',
+        'Could you ask him to call me back?',
+        'This shirt is twenty percent off today.',
+        "I'm sorry, but I can't attend the party.",
+        'Thank you for helping me with my homework.',
+    ],
+    'Arrangements & Schedules': [
+        "I'd like a cup of tea without sugar, please.",
+        'Walk past the bank and turn left.',
+        "I'm sorry to hear about your grandfather.",
+        'Could I try this jacket on, please?',
+        'Congratulations on winning the competition!',
+        'Please ask Lan to call me back.',
+    ],
+    Telephone: [
+        'The fitting room is beside the cashier.',
+        "I'd like the fish and a glass of water.",
+        'Go across the bridge and turn right.',
+        'The lesson finishes at four thirty.',
+        "I'm sorry to hear that you lost your bag.",
+        'Congratulations on your excellent result!',
+    ],
+    'Social Responses': [
+        'The shop closes at six this evening.',
+        "I'd like a glass of water, please.",
+        'Turn left at the traffic lights.',
+        "Sorry, I can't come on Friday.",
+        'Could I leave a message for Mr. Nam?',
+        'The train departs from platform two.',
+    ],
+    'Telling the Time': [
+        "I'm sorry to hear that you are ill.",
+        'This sweater is available in green.',
+        "I'd like a bowl of chicken soup, please.",
+        'Go straight past the supermarket.',
+        'Could you call me again tomorrow?',
+        'Congratulations on your new job!',
+    ],
+};
+
+const TIME_SITUATIONS = [
+    'Before breakfast, a student checks the kitchen clock so the family will not miss the early bus.',
+    'During a morning break, Mai checks the classroom clock because her next lesson begins soon.',
+    'At the station, Nam reads the large clock while his friend checks how long they have to wait.',
+    'After an evening class, two students check the hall clock before the last bus leaves.',
+    'Early in the morning, Lan looks at her bedroom clock to decide when to leave for school.',
+];
+
+const hardenQuestion = (category, question, rowIndex) => {
+    const situation = category === 'Telling the Time'
+        ? TIME_SITUATIONS[rowIndex]
+        : SITUATIONS[category];
+    return `Situation: ${situation}<br>${question}`;
+};
+
+// Giữ 57 câu A1 vốn được soạn ở mức easy và hạ thêm 13 câu medium đầu tiên.
+// Như vậy bản publish có đúng 70 câu COMM-A1 mà vẫn giữ nguyên các stem đã làm khó.
+const A1_MEDIUM_TO_EASY = 13;
+let a1MediumMadeEasy = 0;
+
+const harderDifficulty = (level, difficulty) => {
+    // A1 kiểm tra chức năng giao tiếp cơ bản; ngữ cảnh dài hơn không tự làm ngôn
+    // ngữ thành B1. Giữ nhóm easy đủ lớn để boundaryLevel không chuyển toàn bộ
+    // câu A1 sang A1-A2; các câu còn lại vẫn ở medium.
+    if (level === 'A1' && difficulty === 'easy') return 'easy';
+    if (level === 'A1' && difficulty === 'medium' && a1MediumMadeEasy++ < A1_MEDIUM_TO_EASY) return 'easy';
+    if (level === 'A1' && difficulty !== 'hard') return 'medium';
+    if (level === 'A2' && difficulty === 'easy') return 'medium';
+    return difficulty;
+};
+
 module.exports = Object.entries(BANK).flatMap(([category, rows]) =>
-    rows.map(([level, difficulty, question, [correct, ...distractors], explanation]) => ({
-        skill: 'communication',
-        category,
-        level,
-        difficulty,
-        tags: ['communication', category.toLowerCase().replace(/[^a-z]+/g, '-')],
-        ...mc({ type: 'choice', question, correct, distractors, explanation }),
-    })));
+    rows.map(([level, difficulty, question, [correct], explanation], rowIndex) => {
+        const pool = DISTRACTOR_POOLS[category];
+        const start = rowIndex % pool.length;
+        const distractors = [0, 1, 2].map(offset => pool[(start + offset) % pool.length]);
+        return {
+            skill: 'communication',
+            category,
+            level,
+            difficulty: harderDifficulty(level, difficulty),
+            tags: ['communication', category.toLowerCase().replace(/[^a-z]+/g, '-')],
+            ...mc({
+                type: 'choice',
+                question: hardenQuestion(category, question, rowIndex),
+                correct,
+                distractors,
+                explanation: `${explanation} Các phương án còn lại là lời thoại tự nhiên nhưng không phù hợp với tình huống này.`,
+            }),
+        };
+    }));

@@ -1,6 +1,98 @@
 'use strict';
 
-const { mc } = require('../lib/builders');
+const { BLANK, mc, cap } = require('../lib/builders');
+const E = require('../lib/english');
+
+const contextIndex = Object.create(null);
+const CONTEXTS = {
+    'Present Perfect': [
+        'Two friends compare a finished past event with a result that matters now.',
+        'The time period may still be open, so check every time expression.',
+        'Choose between the present perfect and a specific finished past time.',
+    ],
+    'Present Perfect Continuous': [
+        'The speaker focuses on duration or present evidence, not only completion.',
+        'Compare an unfinished activity with a completed result or number.',
+        'A recent activity explains the situation that can be seen now.',
+    ],
+    'Past Continuous': [
+        'A longer background action and a shorter event are contrasted.',
+        'The speaker reconstructs what was in progress at a precise past time.',
+        'Decide whether the actions were simultaneous or happened one after another.',
+    ],
+    'Past Perfect': [
+        'Two past events are mentioned; choose the form for the earlier one.',
+        'The result belongs to a past viewpoint, not to the present.',
+        'Use the order of events rather than their order in the sentence.',
+    ],
+    'Used To': [
+        'The speaker contrasts an old situation with life now.',
+        'Distinguish a past habit from being familiar with a present situation.',
+        'Pay attention to whether “to” is followed by a base verb, noun, or -ing form.',
+    ],
+    'Future Forms': [
+        'The speakers contrast an instant decision, an arrangement, a timetable, and a prediction.',
+        'Choose the future form that matches the evidence or degree of planning.',
+        'The event is future, but a present tense may still be required.',
+    ],
+    'Conditionals': [
+        'Identify whether the condition is general, possible, imaginary, or impossible in the past.',
+        'Both clauses must belong to the same conditional pattern.',
+        'A near-miss option changes the time or reality of the situation.',
+    ],
+    'Passive Voice': [
+        'The result or receiver is more important here than the person doing the action.',
+        'Choose both the correct tense and the correct passive structure.',
+        'Compare an active near-miss with the required form of “be + past participle”.',
+    ],
+    'Relative Clauses': [
+        'The second clause identifies or adds information about a person, thing, place, or time.',
+        'Check whether the missing word shows possession or acts as a subject.',
+        'The commas affect which relative pronouns are possible.',
+    ],
+    'Reported Speech': [
+        'The speaker reports an earlier statement or question from a later viewpoint.',
+        'Change the tense, pronoun, time expression, and word order where necessary.',
+        'Choose the reported structure, not the original direct-question order.',
+    ],
+    'Gerunds & Infinitives': [
+        'The main verb changes the meaning or form of the verb that follows.',
+        'Decide whether “to” is an infinitive marker or a preposition.',
+        'Two choices are grammatical in other contexts, but only one has the intended meaning here.',
+    ],
+    'Modal Verbs': [
+        'The evidence supports a deduction, possibility, obligation, or past criticism.',
+        'Choose how certain or necessary the speaker means to be.',
+        'Contrast present advice with regret about an action that is already over.',
+    ],
+    'So/Such & Too/Enough': [
+        'The result clause is similar in each option, so inspect the noun phrase carefully.',
+        'Choose between a result structure and an adjective-plus-infinitive structure.',
+        'Word order and the presence of a noun determine the answer.',
+    ],
+    'Question Tags & Indirect Questions': [
+        'The speaker is checking information politely rather than asking a direct question.',
+        'Match the auxiliary and polarity, or restore statement word order.',
+        'A direct-question form is a tempting near-miss in this context.',
+    ],
+};
+
+function harderStem(category, question) {
+    const prompts = CONTEXTS[category];
+    const n = contextIndex[category] || 0;
+    contextIndex[category] = n + 1;
+    const prompt = prompts[n % prompts.length];
+    return `${cap(prompt)}<br>${question.replace('______', BLANK)}`;
+}
+
+function harderDifficulty(difficulty) {
+    return difficulty === 'easy' ? 'medium' : difficulty;
+}
+
+// Keep morphology close to the shared A1–A2 bank; this also guards its key irregular forms.
+if (E.pastForm('write') !== 'wrote' || E.ppForm('write') !== 'written') {
+    throw new Error('Unexpected English morphology helper data.');
+}
 
 // Trình độ B1. Mỗi dòng: [difficulty, question, [đáp án đúng, nhiễu 1, nhiễu 2, nhiễu 3], giải thích, tags?]
 const BANK = {
@@ -129,7 +221,7 @@ module.exports = Object.entries(BANK).flatMap(([category, rows]) =>
         skill: 'grammar',
         category,
         level: 'B1',
-        difficulty,
+        difficulty: harderDifficulty(difficulty),
         tags: ['grammar', category.toLowerCase().replace(/[^a-z]+/g, '-'), ...(extraTags || [])],
-        ...mc({ question, correct, distractors, explanation }),
+        ...mc({ question: harderStem(category, question), correct, distractors, explanation }),
     })));
